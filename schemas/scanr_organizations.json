@@ -1,0 +1,187 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Main PID of the organizations. For now can be either an RNSR, SIREN, or GRID (should change to RoR)."
+    },
+    "startDate": {
+      "type": "string",
+      "description": "Start date"
+    },
+    "creationYear": {
+      "type": "string",
+      "description": "Creation year"
+    },
+    "level": {
+      "type": "string",
+      "description": "Level"
+    },
+    "nature": {
+      "type": "string",
+      "description": "Nature"
+    },
+    "web_content": {
+      "type": "string",
+      "description": "Crawl of the web pages"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "description": "Status"
+    },
+    "externalIds": {
+      "type": "array",
+      "description": "Lists the known external identifiers",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "idref",
+              "rnsr",
+              "sirene",
+              "siret",
+              "grid",
+              "wikidata"
+            ],
+            "description": "other known PID"
+          },
+          "id": {
+            "type": "string",
+            "description": "Corresponding PID"
+          }
+        },
+        "required": [
+          "type",
+          "id"
+        ]
+      }
+    },
+    "links": {
+      "type": "array",
+      "description": "Lists the known links",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "type"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL"
+          }
+        }
+      }
+    },
+    "leaders": {
+      "type": "array",
+      "description": "Lists the known leaders (data from RNSR)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "person": {
+            "type": "string",
+            "description": "Main PID of the person"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "First Name of the person"
+          },
+          "role": {
+            "type": "string",
+            "description": "Role"
+          },
+          "fromDate": {
+            "type": "string",
+            "description": "Start date"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last Name of the person"
+          }
+        }
+      }
+    },
+    "institutions": {
+      "type": "array",
+      "description": "Lists the known relationships",
+      "items": {
+        "type": "object",
+        "properties": {
+          "structure": {
+            "type": "string",
+            "description": "Main PID of the structure"
+          },
+          "relationType": {
+            "type": "string",
+            "description": "Type of relation"
+          },
+          "fromDate": {
+            "type": "string",
+            "description": "start date"
+          },
+          "label": {
+            "type": "object",
+            "description": "Label of the organization",
+            "properties": {
+              "fr": {
+                "type": "string",
+                "description": "Label in French"
+              },
+              "en": {
+                "type": "string",
+                "description": "Label in English"
+              },
+              "default": {
+                "type": "string",
+                "description": "Default Label"
+              }
+            }
+          },
+          "acronym": {
+            "type": "object",
+            "description": "Acronym of the organization",
+            "properties": {
+              "fr": {
+                "type": "string",
+                "description": "Acronym in French"
+              },
+              "en": {
+                "type": "string",
+                "description": "Acronym in English"
+              },
+              "default": {
+                "type": "string",
+                "description": "Default acronym"
+              }
+            }
+          },
+          "denormalized": {
+            "type": "object",
+            "description": "Denormalized object of the structure"
+          },
+          "autocompleted": {
+            "type": "array",
+            "description": "array of strings used for autocompletion",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "structure"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

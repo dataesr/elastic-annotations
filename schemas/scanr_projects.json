@@ -1,0 +1,347 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the project."
+    },
+    "label": {
+      "$ref": "#/definitions/langField",
+      "description": "The label of the project in multiple languages."
+    },
+    "keywords": {
+      "$ref": "#/definitions/langField",
+      "description": "Keywords related to the project in multiple languages."
+    },
+    "action": {
+      "$ref": "#/definitions/action",
+      "description": "The action associated with the project."
+    },
+    "call": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the call."
+        },
+        "label": {
+          "type": "string",
+          "description": "The label of the call."
+        }
+      },
+      "required": [
+        "id",
+        "label"
+      ],
+      "description": "Details of the call associated with the project."
+    },
+    "publications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The identifier of the publication."
+          },
+          "title": {
+            "$ref": "#/definitions/langField",
+            "description": "The title of the publication in multiple languages."
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "The title of the source."
+              },
+              "volume": {
+                "type": "string",
+                "description": "The volume of the source."
+              },
+              "issue": {
+                "type": "string",
+                "description": "The issue of the source."
+              },
+              "publisher": {
+                "type": "string",
+                "description": "The publisher of the source."
+              },
+              "journalIssns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "The ISSNs of the journal."
+              }
+            },
+            "required": [
+              "title"
+            ],
+            "description": "Details of the publication source."
+          },
+          "isOa": {
+            "type": "boolean",
+            "description": "Whether the publication is open access."
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of publication."
+          },
+          "year": {
+            "type": "number",
+            "description": "The year of publication."
+          },
+          "authors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fullName": {
+                  "type": "string",
+                  "description": "The full name of the author."
+                },
+                "person": {
+                  "type": "string",
+                  "description": "The identifier of the author."
+                },
+                "role": {
+                  "type": "string",
+                  "description": "The role of the author."
+                }
+              },
+              "required": [
+                "fullName",
+                "person"
+              ],
+              "description": "Details of the publication authors."
+            }
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "source",
+          "isOa",
+          "type",
+          "year",
+          "authors"
+        ],
+        "description": "Details of the publications associated with the project."
+      }
+    },
+    "domains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of domain."
+          },
+          "label": {
+            "$ref": "#/definitions/langField",
+            "description": "The label of the domain in multiple languages."
+          }
+        },
+        "required": [
+          "type",
+          "label"
+        ],
+        "description": "Details of the domains associated with the project."
+      }
+    },
+    "participants": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/participant"
+      },
+      "description": "Details of the participants involved in the project."
+    },
+    "year": {
+      "type": "number",
+      "description": "The year of the project."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of the project."
+    },
+    "endDate": {
+      "type": "string",
+      "description": "The end date of the project."
+    },
+    "startDate": {
+      "type": "string",
+      "description": "The start date of the project."
+    },
+    "budgetTotal": {
+      "type": "number",
+      "description": "The total budget of the project."
+    },
+    "budgetFinanced": {
+      "type": "number",
+      "description": "The financed budget of the project."
+    },
+    "acronym": {
+      "$ref": "#/definitions/langField",
+      "description": "The acronym of the project in multiple languages."
+    },
+    "description": {
+      "$ref": "#/definitions/langField",
+      "description": "The description of the project in multiple languages."
+    },
+    "duration": {
+      "type": "number",
+      "description": "The duration of the project."
+    },
+    "url": {
+      "type": "string",
+      "description": "The URL of the project."
+    }
+  },
+  "required": [
+    "id",
+    "label",
+    "keywords",
+    "action",
+    "publications",
+    "domains",
+    "participants",
+    "year",
+    "type",
+    "acronym",
+    "description"
+  ],
+  "definitions": {
+    "langField": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string",
+          "description": "The default value of the field."
+        },
+        "en": {
+          "type": "string",
+          "description": "The value of the field in English."
+        },
+        "fr": {
+          "type": "string",
+          "description": "The value of the field in French."
+        }
+      },
+      "required": [
+        "default"
+      ],
+      "description": "A multilingual field."
+    },
+    "action": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the action."
+        },
+        "label": {
+          "$ref": "#/definitions/langField",
+          "description": "The label of the action in multiple languages."
+        },
+        "level": {
+          "type": "string",
+          "description": "The level of the action."
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "level"
+      ],
+      "description": "Details of an action."
+    },
+    "participant": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "The role of the participant."
+        },
+        "funding": {
+          "type": "string",
+          "description": "The funding of the participant."
+        },
+        "label": {
+          "$ref": "#/definitions/langField",
+          "description": "The label of the participant in multiple languages."
+        },
+        "structure": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The identifier of the participant's structure."
+            },
+            "label": {
+              "$ref": "#/definitions/langField",
+              "description": "The label of the participant's structure in multiple languages."
+            },
+            "mainAddress": {
+              "type": "object",
+              "properties": {
+                "main": {
+                  "type": "boolean",
+                  "description": "Indicates if this is the main address of the participant."
+                },
+                "city": {
+                  "type": "string",
+                  "description": "The city of the main address."
+                },
+                "address": {
+                  "type": "string",
+                  "description": "The address of the main address."
+                },
+                "postcode": {
+                  "type": "string",
+                  "description": "The postcode of the main address."
+                },
+                "country": {
+                  "type": "string",
+                  "description": "The country of the main address."
+                },
+                "gps": {
+                  "type": "object",
+                  "properties": {
+                    "lat": {
+                      "type": "number",
+                      "description": "The latitude coordinate of the main address."
+                    },
+                    "lon": {
+                      "type": "number",
+                      "description": "The longitude coordinate of the main address."
+                    }
+                  },
+                  "required": [
+                    "lat",
+                    "lon"
+                  ],
+                  "description": "The GPS coordinates of the main address."
+                }
+              },
+              "description": "Details of the main address of the participant."
+            }
+          },
+          "required": [
+            "id",
+            "label"
+          ],
+          "description": "Details of the structure of the participant."
+        }
+      },
+      "required": [
+        "role",
+        "label",
+        "structure"
+      ],
+      "description": "Details of a participant."
+    }
+  }
+}

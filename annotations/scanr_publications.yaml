@@ -1,0 +1,2326 @@
+_meta:
+  index: scanr-publications
+  total_fields: 333
+  approved: 51
+  draft: 282
+fields:
+  acknowledgments:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Contains funding or gratitude statements related to the publication.
+      notes: May include grant numbers, institution names, or personal acknowledgments.
+  acknowledgments.acknowledgments:
+    status: draft
+    type: text
+    description: ''
+    analyzer: light
+    ai_suggestion:
+      description: Text of the acknowledgment statement in the specified language.
+  acknowledgments.lang:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Language code (ISO 639-1) of the acknowledgment text.
+      notes: Use to filter or display acknowledgments in the correct language.
+  affiliations:
+    status: approved
+    type: array
+    description: Lists all detected affiliations
+  affiliations.acronym:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Acronyms of the affiliation in multiple languages.
+      notes: Present only if the affiliation is mapped in the organization index.
+  affiliations.acronym.default:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Default acronym of the affiliation if no language-specific version
+        exists.
+  affiliations.acronym.en:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: English acronym of the affiliation.
+  affiliations.acronym.fr:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: French acronym of the affiliation.
+  affiliations.country:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: ISO 3166-1 alpha-2 country code where the affiliation is located.
+      notes: Useful for filtering or aggregating by country.
+  affiliations.id:
+    status: approved
+    type: text
+    description: 'PID of an affiliation. Can be the only field of the object if this
+      affiliation is not mapped in the organization index.Otherwise, if present, some
+      fields are denormalized: `mainAddress`, `label`, `acronym`, `kind`, `level`,
+      `status`, `isFrench`, `id_name`. See the documention of the organization index
+      for more details on these fields.'
+    has_keyword: true
+    required: true
+  affiliations.id_name:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Normalized name of the affiliation for display or search purposes.
+      notes: Derived from the PID or raw affiliation string.
+  affiliations.isFrench:
+    status: draft
+    type: boolean
+    description: ''
+    ai_suggestion:
+      description: Indicates whether the affiliation is based in France (true/false).
+      notes: Use for filtering French institutions or compliance checks.
+  affiliations.kind:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Type of the affiliation (e.g., laboratory, university, research
+        institute).
+      notes: Common values include 'laboratory', 'department', or 'institution'; may
+        be null if unknown.
+  affiliations.label:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Multilingual labels for the affiliation, keyed by language code.
+  affiliations.label.default:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    analyzer: light
+    ai_suggestion:
+      description: Default name of the affiliation if no language-specific label is
+        available.
+  affiliations.label.en:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: English name of the affiliation.
+  affiliations.label.fr:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: French name of the affiliation.
+  affiliations.level:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Hierarchical level of the affiliation (e.g., department, faculty).
+      notes: Values like '1' (top-level) or '2' (sub-unit) indicate nesting; may be
+        omitted.
+  affiliations.mainAddress:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Primary physical address details for the affiliation.
+  affiliations.mainAddress.address:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Full formatted address of the affiliation's main location.
+  affiliations.mainAddress.city:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: City of the affiliation's main address.
+  affiliations.mainAddress.country:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Country of the affiliation's main address.
+      notes: Use ISO 3166-1 alpha-2 codes (e.g., 'FR', 'US') when available.
+  affiliations.mainAddress.gps:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Geographic coordinates of the affiliation's main address, if available.
+      notes: Use for mapping or distance-based queries; may be absent for virtual
+        or undisclosed locations.
+  affiliations.mainAddress.gps.lat:
+    status: draft
+    type: float
+    description: ''
+    ai_suggestion:
+      description: Latitude component of the affiliation's main address GPS coordinates.
+      notes: 'Value range: -90 to 90; verify existence of parent `gps` object before
+        use.'
+  affiliations.mainAddress.gps.lon:
+    status: draft
+    type: float
+    description: ''
+    ai_suggestion:
+      description: Longitude component of the affiliation's main address GPS coordinates.
+      notes: 'Value range: -180 to 180; verify existence of parent `gps` object before
+        use.'
+  affiliations.mainAddress.postcode:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Postal code of the affiliation's main address, if applicable.
+      notes: Format varies by country; may include letters or special characters.
+  affiliations.status:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Operational status of the affiliation (e.g., active, closed).
+      notes: Use to filter or contextualize historical vs. current affiliations.
+  authors:
+    status: approved
+    type: array
+    description: ' List the authors / contributor'
+  authors.affiliations:
+    status: approved
+    type: array
+    description: List of objects object describing the authors's affiliations
+  authors.affiliations.BNF:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Biblioth�que Nationale de France identifier for the author's
+        affiliation.
+      notes: Use for disambiguation when `id` is missing or ambiguous.
+  authors.affiliations.ISNI:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: International Standard Name Identifier for the author's affiliation.
+      notes: Standardized ID for organizations; prioritize over raw strings for matching.
+  authors.affiliations.acronym:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Short form or abbreviation of the author's affiliation name.
+      notes: May differ from official name; useful for display or fuzzy matching.
+  authors.affiliations.address:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Full physical address of the author's affiliation, if available.
+      notes: Unstructured; prefer parsed fields (e.g., `address-line`) for analysis.
+  authors.affiliations.address-line:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Parsed line(s) of the author's affiliation address (e.g., street,
+        city).
+      notes: Structured alternative to raw `address`; may contain partial data.
+  authors.affiliations.addresses:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Physical addresses associated with the author's affiliation.
+      notes: May include partial or full addresses; use for geographical context or
+        mailing purposes.
+  authors.affiliations.alias_idref:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the affiliation from the IdRef authority
+        database.
+      notes: Useful for disambiguating affiliations with similar names or linking
+        to IdRef records.
+  authors.affiliations.aliases:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Alternative names or variants of the affiliation's official name.
+      notes: Helps match affiliations across different naming conventions or languages.
+  authors.affiliations.city:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: City where the author's affiliation is located.
+      notes: May be normalized; use for regional analysis or filtering.
+  authors.affiliations.comments:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Human-readable notes about the affiliation, often from the data
+        source.
+      notes: Can include context like 'former name' or 'merged with X'; not standardized.
+  authors.affiliations.country:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Country where the author's affiliation is located.
+      notes: Normalized to ISO country codes when possible; use for international
+        scope analysis.
+  authors.affiliations.datasource:
+    status: approved
+    type: text
+    description: Source of the raw affiliation string
+    has_keyword: true
+    required: true
+  authors.affiliations.department:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Specific department, lab, or sub-unit within the affiliation.
+      notes: May be nested (e.g., 'Department of Biology, Lab of Genetics'); not always
+        present.
+  authors.affiliations.detected_countries:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Countries detected in the raw affiliation string, even if not validated.
+      notes: Useful for fuzzy matching or identifying ambiguous affiliations.
+  authors.affiliations.docid:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Internal document identifier for the affiliation record.
+      notes: Used for internal tracking; not a persistent or external identifier.
+  authors.affiliations.ed:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Editorial or publisher-specific code for the affiliation.
+      notes: Format varies by source; may be deprecated or source-specific.
+  authors.affiliations.external_ids:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: External identifiers for the author's affiliation, grouped by type.
+      notes: Useful for cross-referencing with external databases or organization
+        registries.
+  authors.affiliations.external_ids.id_type:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Type of external identifier (e.g., GRID, ROR, ISNI).
+      notes: Determines how to interpret `id_value`; may include custom or proprietary
+        types.
+  authors.affiliations.external_ids.id_value:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Value of the external identifier for the affiliation.
+      notes: Format depends on `id_type`; validate against the type before use.
+  authors.affiliations.grid:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: GRID identifier for the author's affiliation.
+      notes: Deprecated in favor of ROR; included for backward compatibility.
+  authors.affiliations.hal_docid:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: HAL document ID linking to the affiliation record.
+      notes: Only present if the affiliation was sourced from HAL.
+  authors.affiliations.id:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Persistent identifiers for the affiliation, with provenance metadata.
+      notes: Prefer this over standalone fields like `grid` or `hal_docid` for consistency.
+  authors.affiliations.id.asserted-by:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Source asserting the affiliation ID (e.g., publisher, aggregator).
+      notes: Helps assess trustworthiness; values may include 'author', 'publisher',
+        or 'system'.
+  authors.affiliations.id.id:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the affiliation, scoped by `id-type`.
+      notes: Format varies by `id-type`; may be a URL, UUID, or opaque string.
+  authors.affiliations.id.id-type:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Type of the affiliation ID (e.g., ROR, GRID, HAL).
+      notes: Determines how to resolve or validate the `id` field.
+  authors.affiliations.id_name_author_labo:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Normalized name of the affiliation as used by the author in the
+        lab context.
+      notes: May differ from official names; useful for disambiguation or fuzzy matching.
+  authors.affiliations.idref:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: IdRef identifier for the author's affiliation, linking to the IdRef
+        authority database.
+      notes: Use this field to resolve or validate the affiliation against the IdRef
+        system.
+  authors.affiliations.ids:
+    status: approved
+    type: object
+    description: List of automatic match PIDS (object with field `id` and `type`)
+    required: true
+  authors.affiliations.ids.id:
+    status: approved
+    type: text
+    description: PID of the affiliation
+    has_keyword: true
+    required: true
+  authors.affiliations.ids.source:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Indicates the source of the affiliation identifier in the 'ids'
+        object.
+      notes: Helps determine the reliability or origin of the identifier for disambiguation.
+  authors.affiliations.ids.type:
+    status: approved
+    type: text
+    description: Type of the affiliation
+    has_keyword: true
+    required: true
+  authors.affiliations.name:
+    status: approved
+    type: text
+    description: Raw affiliation string
+    has_keyword: true
+    analyzer: light
+    required: true
+  authors.affiliations.orgs:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Lists organizations associated with the author's affiliation.
+      notes: May contain nested fields like 'name' or 'id' for detailed organization
+        data.
+  authors.affiliations.orgs.name:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the organization within the author's affiliation.
+      notes: Useful for display or matching against known organization names.
+  authors.affiliations.place:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Geographic or institutional place associated with the affiliation.
+      notes: Often a city, campus, or department; may be used for geographic filtering.
+  authors.affiliations.postal-code:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Postal code of the affiliation's location for geographic identification.
+      notes: Useful for mapping or regional analysis; may be missing for non-physical
+        affiliations.
+  authors.affiliations.rnsr:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: RNSR identifier for the affiliation, linking to the French research
+        organization registry.
+      notes: Primarily relevant for French institutions; use to cross-reference with
+        RNSR data.
+  authors.affiliations.ror:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: ROR identifier for the affiliation, linking to the Research Organization
+        Registry.
+      notes: Globally unique; use to resolve or validate the organization across datasets.
+  authors.affiliations.structId:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Internal structural identifier for the affiliation within a specific
+        system.
+      notes: System-specific; may not be portable across different data sources.
+  authors.affiliations.toIdentify2:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Flag indicating if the affiliation requires further identification
+        or disambiguation.
+      notes: When 'true', the affiliation may need manual review or additional context.
+  authors.affiliations.viaf:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: VIAF identifier for the author's affiliation, linking to the Virtual
+        International Authority File.
+      notes: Use this field to disambiguate affiliations or link to external authority
+        records.
+  authors.affiliations.websites:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: URLs of websites associated with the author's affiliation.
+      notes: May include institutional homepages or departmental pages; verify availability
+        before use.
+  authors.affiliations.zipcode:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Postal zip code of the author's affiliation address.
+      notes: Format varies by country; not always numeric or present.
+  authors.denormalized:
+    status: approved
+    type: object
+    description: PID of the author (`id` (with idref prefix), `id_hal`, `orcid`)
+  authors.denormalized.id:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Unique internal identifier for the denormalized author record.
+      notes: Used for internal linking; prefer persistent IDs (e.g., ORCID) for external
+        use.
+  authors.denormalized.id_hal:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: HAL author identifier for the denormalized author record.
+      notes: Specific to the HAL repository; may be absent for non-HAL sources.
+  authors.denormalized.idref:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: IdRef identifier for the denormalized author record, from the French
+        authority file.
+      notes: Primarily used in French academic contexts; may overlap with other IDs.
+  authors.denormalized.orcid:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: ORCID identifier for the denormalized author record.
+      notes: Persistent, globally unique ID; prioritize this for author disambiguation.
+  authors.firstName:
+    status: approved
+    type: text
+    description: first name
+    has_keyword: true
+    analyzer: light
+    required: true
+  authors.fullName:
+    status: approved
+    type: text
+    description: full name
+    has_keyword: true
+    analyzer: light
+    primary: true
+    required: true
+  authors.id_name:
+    status: approved
+    type: text
+    description: Concatenation of the `id` and `fullName` separated by `###`.
+    has_keyword: true
+  authors.lastName:
+    status: approved
+    type: text
+    description: last name
+    has_keyword: true
+    analyzer: light
+    required: true
+  authors.person:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Full name of the author as a single string, formatted for display.
+      notes: May include honorifics or suffixes; not normalized for sorting or matching.
+  authors.role:
+    status: approved
+    type: text
+    description: Role of the contributor. Default value is `author`. A different value
+      only if present in source (theses.fr or HAL).
+    has_keyword: true
+    primary: true
+  authors.tags:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: User-defined or system-generated labels for the author (e.g., 'corresponding').
+      notes: Tags are source-dependent; validate meaning before use.
+  authors.toIdentify:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Flag indicating if the author's identity requires manual verification.
+      notes: Set to 'true' when automatic matching fails; prioritize resolution for
+        accuracy.
+  authorsCount:
+    status: approved
+    type: long
+    description: Number of authors.
+    required: true
+  autocompleted:
+    status: approved
+    type: text
+    description: array of strings used for autocompletion
+    analyzer: autocomplete
+  autocompletedJournal:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Normalized journal name for autocomplete suggestions, derived from
+        raw journal metadata.
+  autocompletedPublisher:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Normalized publisher name for autocomplete suggestions, derived
+        from raw publisher metadata.
+  bso_local_affiliations:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Affiliations identified as French research organizations (BSO-compliant).
+      notes: Use this field to filter or highlight French institutional contributions.
+  cited_by_counts_by_year:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Annual citation counts for this publication, keyed by year.
+  cited_by_counts_by_year.2012:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by this publication in 2012.
+  cited_by_counts_by_year.2013:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by this publication in 2013.
+  cited_by_counts_by_year.2014:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by this publication in 2014.
+  cited_by_counts_by_year.2015:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by this publication in 2015.
+  cited_by_counts_by_year.2016:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by this publication in 2016.
+  cited_by_counts_by_year.2017:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by this publication in 2017.
+  cited_by_counts_by_year.2018:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by the publication in 2018.
+      notes: Value may be zero or missing if no citation data is available for that
+        year.
+  cited_by_counts_by_year.2019:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by the publication in 2019.
+      notes: Value may be zero or missing if no citation data is available for that
+        year.
+  cited_by_counts_by_year.2020:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by the publication in 2020.
+      notes: Value may be zero or missing if no citation data is available for that
+        year.
+  cited_by_counts_by_year.2021:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by the publication in 2021.
+      notes: Value may be zero or missing if no citation data is available for that
+        year.
+  cited_by_counts_by_year.2022:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by the publication in 2022.
+      notes: Value may be zero or missing if no citation data is available for that
+        year.
+  cited_by_counts_by_year.2023:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by the publication in 2023.
+      notes: Value may be zero or missing if no citation data is available for that
+        year.
+  cited_by_counts_by_year.2024:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by the publication in 2024.
+      notes: Value may be zero or missing if citation data is incomplete or unavailable.
+  cited_by_counts_by_year.2025:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Number of citations received by the publication in 2025.
+      notes: Value is likely zero or missing as citation data is typically not yet
+        available.
+  co_authors:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: List of unique co-author names associated with the publication.
+  co_countries:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: List of unique countries derived from co-author affiliations.
+      notes: Countries are normalized to ISO 3166-1 alpha-2 codes where possible.
+  co_domains:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: List of scientific domains co-associated with the publication.
+      notes: Used for cross-domain analysis; may overlap with primary domains.
+  co_institutions:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Identifiers of institutions collaborating on or funding the publication.
+  co_projects:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Identifiers of research projects linked to the publication.
+  co_software:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Names or identifiers of software tools or platforms cited in the
+        publication.
+  co_structures:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Identifiers of research structures (e.g., labs) involved in the
+        publication.
+  doiUrl:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Resolvable URL for the publication's DOI, if available.
+  domains:
+    status: approved
+    type: array
+    description: Lists detected scientific domains
+    primary: true
+  domains.code:
+    status: approved
+    type: text
+    description: Code ID of this domain, if any (depends on `type`)
+    has_keyword: true
+  domains.count:
+    status: approved
+    type: long
+    description: Number of times this code has been detected within the title, abstract
+      and keywords.
+  domains.id_name:
+    status: approved
+    type: text
+    description: Concatenation of code and label, separated by `##`
+    has_keyword: true
+    example: wikidata##Q13442896
+  domains.key_name:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Machine-readable key for the domain (e.g., 'info.info-ai' for AI).
+  domains.label:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Human-readable name of the domain in multiple languages.
+      notes: Keys are ISO 639-1 language codes (e.g., 'en', 'fr').
+  domains.label.default:
+    status: approved
+    type: text
+    description: Label of the scientific domain
+    has_keyword: true
+    analyzer: light
+    required: true
+  domains.naturalKey:
+    status: approved
+    type: text
+    description: Normalized version of the label string (no accent, no space ...)
+    has_keyword: true
+  domains.type:
+    status: approved
+    type: text
+    description: 'Type of label. Possible values: `wikidata`, `keyword`, `sudoc`.
+      Wikidata domains are automatically detected within the title, abstract and keywords.
+      Keywords domain are exactly the free-text keywords that have been harvested
+      (not normalized).'
+    has_keyword: true
+    required: true
+  externalIds:
+    status: approved
+    type: array
+    description: Lists the known external identifiers
+  externalIds.id:
+    status: approved
+    type: text
+    description: Corresponding PID
+    has_keyword: true
+    primary: true
+    required: true
+  externalIds.type:
+    status: approved
+    type: text
+    description: '`nnt` (for French thesis, ''nnt'' stands for ''Numéro National
+      de Thèse''), `doi` (Digital Object Identifier), `hal` (if present in HAL) or
+      ''pmid'' (if present in PubMed)'
+    has_keyword: true
+    primary: true
+    enum:
+    - doi
+    - hal
+    - pmid
+    - nnt
+    required: true
+  id:
+    status: approved
+    type: text
+    description: Main PID of the production. This id is a concatenation of the id
+      type (e.g `doi` and the id itself).
+    has_keyword: true
+    primary: true
+    required: true
+  isOa:
+    status: approved
+    type: boolean
+    description: Is Open Access? Computed with Unpaywall data if DOI crossref, with
+      HAL and theses.fr otherwise.
+    primary: true
+  ix:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Internal index identifier for the publication record.
+  keywords:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: List of objects describing keywords associated with the publication.
+      notes: May include language-specific labels and controlled vocabularies.
+  keywords.default:
+    status: approved
+    type: text
+    description: List of string. Keywords (not normalized) chosen by the authors.
+      These keywords are also present in the `domains` with type=`keyword`.
+    has_keyword: true
+    analyzer: light
+  landingPage:
+    status: approved
+    type: text
+    description: URL of the landing page
+    has_keyword: true
+  oaEvidence:
+    status: approved
+    type: object
+    description: Describes the open access version (if any)
+  oaEvidence.hostType:
+    status: approved
+    type: text
+    description: Only one hostType is given, with a priority to the publisher, just
+      like in the Unpaywall data. More complete data on open access routes can be
+      found in the French Open Science Monitor data (Baromètre de la Science Ouverte).
+    has_keyword: true
+    enum:
+    - publisher
+    - repository
+    required: true
+  oaEvidence.landingPageUrl:
+    status: approved
+    type: text
+    description: Landing page URL (from Unpaywall data)
+    has_keyword: true
+  oaEvidence.license:
+    status: approved
+    type: text
+    description: Open Access license (from Unpaywall data or HAL)
+    has_keyword: true
+  oaEvidence.pdfUrl:
+    status: approved
+    type: text
+    description: PDF URL (from Unpaywall data)
+    has_keyword: true
+  oaEvidence.url:
+    status: approved
+    type: text
+    description: Open Access URL (from Unpaywall data or HAL)
+    has_keyword: true
+  oaEvidence.version:
+    status: approved
+    type: text
+    description: Open Access version (from Unpaywall data)
+    has_keyword: true
+  pdfUrl:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: URL to the full-text PDF of the publication if openly available.
+  predict_teds:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Predicted TEI Document Type (TEDS) classifications with confidence
+        scores.
+      notes: Use this for filtering or ranking publications by predicted document
+        types like 'journal-article' or 'thesis'.
+  predict_teds.label:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Predicted TEI Document Type (TED) label, e.g., 'journal-article'
+        or 'thesis'.
+  predict_teds.probability:
+    status: draft
+    type: float
+    description: ''
+    ai_suggestion:
+      description: Confidence score (0.0 to 1.0) for the predicted TEI Document Type
+        label.
+      notes: Higher values indicate greater confidence; threshold at 0.7 for reliable
+        predictions.
+  productionType:
+    status: approved
+    type: text
+    description: 'String for type of production. Possible values: `publications`,
+      `thesis`.'
+    has_keyword: true
+    enum:
+    - publication
+    - thesis
+    required: true
+  project:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Funding project associated with the publication, if any.
+      notes: May include nested fields like `label` or `acronym` for project identification.
+  project.label:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Localized labels for the funding project, keyed by language code.
+      notes: Use `default` for the primary label if no language preference is specified.
+  project.label.default:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    analyzer: light
+    ai_suggestion:
+      description: Default label for the funding project in its primary language.
+  projects:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: List of funding projects associated with the publication.
+      notes: Each project may include fields like `label` or `acronym` for identification.
+  projects.acronym:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Localized acronyms for the funding project, keyed by language code.
+      notes: Use `default` for the primary acronym if no language preference is specified.
+  projects.acronym.default:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Default acronym for the funding project in its primary language.
+  projects.id:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Persistent identifier (PID) of a research project associated with
+        the publication.
+  projects.id_name:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Human-readable name of the project, derived from its PID.
+      notes: Use this for display purposes when the PID alone is insufficient.
+  projects.label:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Multilingual labels for the project, keyed by language code.
+  projects.label.en:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: English label for the project, if available.
+  projects.label.fr:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: French label for the project, if available.
+  projects.type:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Categorization of the project (e.g., grant, initiative, consortium).
+      notes: Values may include 'EU-FP', 'ANR', or other funding program codes.
+  projects.year:
+    status: draft
+    type: long
+    description: ''
+    ai_suggestion:
+      description: Year the project was officially recognized or funded.
+      notes: May differ from publication year; use for temporal filtering of projects.
+  publicationDate:
+    status: approved
+    type: date
+    description: 'Formatted as YYYY-MM-DDT00:00:00. When available, the `published_date`
+      from Unpaywall is used. When not avaiable (no DOI Crossref), if data comes from
+      HAL, these fields from HAL are used, in this priority order: `publicationDate_s`,
+      `ePublicationDate_s`, `defenseDate_s`, `producedDate_s`.'
+    required: true
+    example: '2020-01-01T00:00:00'
+  software:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: List of software artifacts (e.g., tools, libraries) referenced
+        or described in the publication.
+  software.contexts:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Descriptive tags or categories for the software's application domain.
+      notes: Values are free-text; may include terms like 'bioinformatics' or 'machine-learning'.
+  software.id_name:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Human-readable identifier for the software, combining name and
+        version if applicable.
+      notes: Format varies by source (e.g., 'numpy-1.21' or 'TensorFlow').
+  software.softwareName:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the software mentioned in the publication.
+      notes: May include version or variant details if provided in the source.
+  software.wikidata:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Wikidata identifier for the software, linking to its entry in Wikidata.
+      notes: Use this to disambiguate software names or fetch additional metadata.
+  source:
+    status: approved
+    type: object
+    description: Describes the source (generally journal) of the production
+  source.isInDOAJ:
+    status: approved
+    type: unknown
+    description: Is it indexed in DOAJ?
+  source.isInDoaj:
+    status: draft
+    type: boolean
+    description: ''
+    ai_suggestion:
+      description: Indicates if the publication's source journal is listed in the
+        DOAJ.
+      notes: DOAJ-listed journals are typically open-access and peer-reviewed.
+  source.isOa:
+    status: approved
+    type: boolean
+    description: Is it an open access journal? (source Unpaywall)
+  source.journalIssns:
+    status: approved
+    type: text
+    description: Arrays of ISSNs (print, electronic ...)
+    has_keyword: true
+  source.publisher:
+    status: approved
+    type: text
+    description: Normalized version of the publisher.
+    has_keyword: true
+  source.title:
+    status: approved
+    type: text
+    description: Title of the source
+    has_keyword: true
+    analyzer: light
+    primary: true
+  structured_acknowledgments:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Structured breakdown of acknowledgments in the publication.
+      notes: Includes funders, infrastructures, and other contributions.
+  structured_acknowledgments.funders:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: List of funding organizations acknowledged in the publication.
+  structured_acknowledgments.funders.entity:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    analyzer: light
+    ai_suggestion:
+      description: Name or identifier of the funding organization.
+      notes: May include hierarchical details (e.g., agency > department).
+  structured_acknowledgments.funders.grant_id:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Grant or award identifier associated with the funding.
+      notes: Use this to link to specific funding records or databases.
+  structured_acknowledgments.funders.program:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the funding program under which the grant was awarded.
+      notes: Helps contextualize the scope or focus of the funding.
+  structured_acknowledgments.funders.type:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Type of funding entity (e.g., government, private, non-profit).
+  structured_acknowledgments.infrastructures:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: List of research infrastructures (e.g., facilities, equipment)
+        acknowledged.
+  structured_acknowledgments.infrastructures.entity:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    analyzer: light
+    ai_suggestion:
+      description: Name or identifier of the infrastructure entity acknowledged in
+        the publication.
+      notes: May include research facilities, labs, or equipment providers. Use for
+        funding or resource attribution.
+  structured_acknowledgments.infrastructures.grant_id:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Grant or project identifier associated with the acknowledged infrastructure.
+      notes: Often a funder-specific code (e.g., EU Horizon 2020 grant number).
+  structured_acknowledgments.infrastructures.program:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the funding program supporting the acknowledged infrastructure.
+      notes: Useful for grouping related grants or tracking program-specific contributions.
+  structured_acknowledgments.infrastructures.type:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Categorization of the acknowledged infrastructure (e.g., 'research
+        lab', 'supercomputer').
+      notes: Helps distinguish between types of resources (e.g., physical vs. computational).
+  structured_acknowledgments.private_companies:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Lists private companies acknowledged for contributions to the publication.
+      notes: Each object may include entity name, grant details, or program information.
+  structured_acknowledgments.private_companies.entity:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    analyzer: light
+    ai_suggestion:
+      description: Name or identifier of the private company acknowledged in the publication.
+      notes: May include corporate sponsors, collaborators, or industry partners.
+  structured_acknowledgments.private_companies.grant_id:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Grant or contract identifier associated with the private company's
+        contribution.
+      notes: Often a company-specific code or internal project reference.
+  structured_acknowledgments.private_companies.program:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the program or initiative under which the private company
+        contributed.
+      notes: Useful for tracking industry-academia collaborations or sponsored research.
+  structured_acknowledgments.private_companies.type:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Categorization of the private company's contribution (e.g., 'funding',
+        'data provider').
+      notes: Helps clarify the nature of the company's involvement.
+  structured_acknowledgments.publication_id:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Unique identifier linking acknowledgments to the specific publication.
+      notes: Used to cross-reference acknowledgments with the parent document.
+  structured_acknowledgments.raw_md:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Raw markdown-formatted acknowledgments extracted from the publication.
+      notes: May contain unstructured or malformed markdown; use `text` for plain-text
+        version.
+  structured_acknowledgments.text:
+    status: draft
+    type: text
+    description: ''
+    analyzer: heavy
+    ai_suggestion:
+      description: Plain-text version of acknowledgments, normalized for readability.
+  summary:
+    status: approved
+    type: object
+    description: summary / abstract by language (with `default` only if unknown)
+  summary.default:
+    status: draft
+    type: text
+    description: ''
+    analyzer: light
+    ai_suggestion:
+      description: Default language summary of the publication's content.
+      notes: Falls back to English or another available language if no explicit default
+        is provided.
+  summary.en:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: English-language summary of the publication's content.
+  summary.fr:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: French-language summary of the publication's content.
+  tags:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Lists thematic or administrative tags associated with the publication.
+  tags.id:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Persistent identifier for a tag, unique within the index.
+  tags.label:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Human-readable label(s) for the tag in one or more languages.
+  tags.label.default:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Default language label for the tag.
+      notes: Falls back to English or another available language if no explicit default
+        exists.
+  tags.label.en:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: English-language label for the tag.
+  tags.label.fr:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: French label for a user-defined or system-generated tag associated
+        with the publication.
+  title:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Container for the publication's title in multiple languages or
+        formats.
+  title.af:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.am:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.an:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ar:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.az:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ba:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.be:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.bg:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.bh:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.bn:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.bo:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.br:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.bs:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ca:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.co:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.cs:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.cy:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.da:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.de:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.default:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    analyzer: light
+    primary: true
+    ai_suggestion:
+      description: Default or fallback title of the publication when no language-specific
+        version exists.
+  title.el:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.en:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: English-language title of the publication, if available.
+  title.eo:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.es:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.et:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.eu:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.fa:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.fi:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.fr:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: French-language title of the publication, if available.
+  title.fy:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ga:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.gb:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.gd:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.gl:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.gu:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.he:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.hi:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.hr:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ht:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.hu:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.hy:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ia:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.id:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ie:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.io:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.is:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.it:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ja:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.jv:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ka:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.kk:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.km:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.kn:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ko:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ku:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.kv:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.kw:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ky:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.la:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.lb:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.lo:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.lt:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+    ai_suggestion:
+      description: Title of the work in Lithuanian.
+      primary: false
+  title.lv:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.mg:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.mk:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ml:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.mn:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.mr:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ms:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.mt:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.my:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.nb:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ne:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.nl:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.nn:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.no:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.oc:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.pa:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.pl:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ps:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.pt:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.qu:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.rm:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ro:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ru:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.sa:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.sc:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.sd:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.sh:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.si:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.sk:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.sl:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.so:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.sq:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.sr:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.su:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.sv:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.sw:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ta:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.te:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.tg:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.th:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.tk:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.tl:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.tr:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.tt:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ug:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.uk:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.ur:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.uz:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.vi:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.vo:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.wa:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.yi:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.yo:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title.zh:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    exclude: true
+  title_abs_text:
+    status: draft
+    type: text
+    description: ''
+    analyzer: heavy
+    ai_suggestion:
+      description: Concatenated plain-text representation of all title variants for
+        full-text search.
+  topics:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: List of thematic topics or keywords associated with the publication.
+  topics.display_name:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Human-readable name of a topic, suitable for display or filtering.
+  topics.domain:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Hierarchical domain classification for a topic, grouping related
+        subjects.
+  topics.domain.display_name:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Human-readable name of the domain to which a topic belongs.
+  topics.domain.id:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Persistent identifier for the scientific domain assigned to the
+        publication.
+  topics.field:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Hierarchical field classification object for the publication's
+        scientific topic.
+  topics.field.display_name:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Human-readable name of the scientific field associated with the
+        publication.
+  topics.field.id:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Persistent identifier for the scientific field assigned to the
+        publication.
+  topics.id:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Persistent identifier for the scientific topic assigned to the
+        publication.
+  topics.score:
+    status: draft
+    type: float
+    description: ''
+    ai_suggestion:
+      description: Confidence score (0-1) indicating relevance of the topic to the
+        publication.
+      notes: Higher scores denote stronger relevance; may be absent if topic assignment
+        is deterministic.
+  topics.subfield:
+    status: draft
+    type: object
+    description: ''
+    ai_suggestion:
+      description: Hierarchical subfield classification object for the publication's
+        scientific topic.
+  topics.subfield.display_name:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Human-readable name of the scientific subfield associated with
+        the publication.
+  topics.subfield.id:
+    status: draft
+    type: text
+    description: ''
+    has_keyword: true
+    ai_suggestion:
+      description: Persistent identifier for the scientific subfield assigned to the
+        publication.
+  type:
+    status: approved
+    type: text
+    description: String for more fine-grained type.
+    has_keyword: true
+    primary: true
+    enum:
+    - journal-article
+    - book
+    - book-chapter
+    - proceedings
+    - preprint
+    - thesis
+    - other
+    required: true
+  urlPdf:
+    status: approved
+    type: unknown
+    description: URL of the PDF if any
+  vector_text:
+    status: approved
+    type: unknown
+    description: Embeddings of the `domains` labels with the `distiluse-base-multilingual-cased-v1`
+      model (dim 512)
+  year:
+    status: approved
+    type: long
+    description: Year part of the publication Date
+    primary: true
+    required: true

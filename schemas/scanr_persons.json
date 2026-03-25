@@ -1,0 +1,255 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Main PID of the person. For now, the idref id is used. Concatenation of the string `idref` and the idref id itself."
+    },
+    "externalIds": {
+      "type": "array",
+      "description": "Lists the known external identifiers",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "idref",
+              "orcid",
+              "id_hal"
+            ],
+            "type": "string",
+            "description": "other known PID"
+          },
+          "id": {
+            "type": "string",
+            "description": "Corresponding PID"
+          },
+          "url": {
+            "type": "string",
+            "description": "Corresponding URL"
+          }
+        },
+        "required": [
+          "type",
+          "id"
+        ]
+      }
+    },
+    "awards": {
+      "type": "array",
+      "description": "Lists the known awards",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Award label"
+          },
+          "date": {
+            "type": "string",
+            "description": "Award date"
+          },
+          "url": {
+            "type": "string",
+            "description": "Award URL"
+          }
+        }
+      }
+    },
+    "coContributors": {
+      "type": "array",
+      "description": "Lists the known cocontributors. Co-authors only are listed, not jury members.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "person": {
+            "type": "string",
+            "description": "Main PID of the cocontributor"
+          },
+          "fullName": {
+            "type": "string",
+            "description": "Full Name of the cocontributor"
+          }
+        }
+      }
+    },
+    "publications": {
+      "type": "array",
+      "description": "Lists the known publications of the author",
+      "items": {
+        "type": "object",
+        "properties": {
+          "publication": {
+            "type": "string",
+            "description": "Main PID of the publication"
+          },
+          "role": {
+            "type": "string",
+            "description": "Role of the person"
+          },
+          "title": {
+            "type": "object",
+            "description": "Title of the publication",
+            "properties": {
+              "default": {
+                "type": "string",
+                "description": "Default title"
+              }
+            }
+          },
+          "year": {
+            "type": "integer",
+            "description": "Year part of the publication Date"
+          },
+          "source": {
+            "type": "object",
+            "description": "Describes the source (generally journal) of the production",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Title of the source"
+              },
+              "publisher": {
+                "type": "string",
+                "description": "Normalized version of the publisher."
+              },
+              "journalIssns": {
+                "type": "array",
+                "description": "Arrays of ISSNs (print, electronic ...)",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "isOa": {
+                "type": "boolean",
+                "description": "Is it an open access journal? (source Unpaywall)"
+              },
+              "isInDOAJ": {
+                "type": "boolean",
+                "description": "Is it indexed in DOAJ?"
+              }
+            }
+          }
+        }
+      }
+    },
+    "domains": {
+      "type": "array",
+      "description": "Lists detected scientific domains - detected and aggregated from the publications",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Label of the scientific domain"
+          },
+          "code": {
+            "type": "string",
+            "description": "Code ID of this domain, if any (depends on `type`)"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of label. Possible values: `wikidata`, `keyword`, `sudoc`. Wikidata domains are automatically detected within the title, abstract and keywords. Keywords domain are exactly the free-text keywords that have been harvested (not normalized)."
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of times this code has been detected"
+          }
+        },
+        "required": [
+          "label",
+          "type"
+        ]
+      }
+    },
+    "topDomains": {
+      "type": "array",
+      "description": "Top 20 of the domains"
+    },
+    "affiliations": {
+      "type": "array",
+      "description": "Lists all detected affiliations",
+      "items": {
+        "type": "object",
+        "properties": {
+          "structure": {
+            "type": "string",
+            "description": "PID of an affiliation. Can be the only field of the object if this affiliation is not mapped in the organization index.Otherwise, if present, some fields are denormalized: `mainAddress`, `label`, `acronym`, `kind`, `level`, `status`, `isFrench`, `id_name`. See the documentation of the organization index for more details on these fields."
+          },
+          "startDate": {
+            "type": "string",
+            "description": "First publication year found with this affiliation"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Last publication year found with this affiliation"
+          },
+          "sources": {
+            "type": "array",
+            "description": "List the publications of the author with the current affiliation",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Main PID of the publication"
+                },
+                "year": {
+                  "type": "integer",
+                  "description": "Publication year"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "structure"
+        ]
+      }
+    },
+    "recentAffiliations": {
+      "type": "array",
+      "description": "Lists all detected affiliations, recents only (still active in the last 3 years)"
+    },
+    "publicationsCount": {
+      "type": "integer",
+      "description": "Number of publications"
+    },
+    "orcid": {
+      "type": "string",
+      "description": "ORCID"
+    },
+    "id_hal": {
+      "type": "string",
+      "description": "idHAL (string)"
+    },
+    "idref": {
+      "type": "string",
+      "description": "idref"
+    },
+    "firstName": {
+      "type": "string",
+      "description": "First Name"
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Last Name (family name)"
+    },
+    "fullName": {
+      "type": "string",
+      "description": "Full Name (concatenation of the first name and last name)"
+    },
+    "autocompleted": {
+      "type": "array",
+      "description": "array of strings used for autocompletion",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "fullName"
+  ]
+}
