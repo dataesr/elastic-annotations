@@ -7,11 +7,10 @@ Usage:
     python export.py -i scanr-publications --include-ai-suggestion    # include ai descriptions for missing descriptions in the schema
 """
 
-import json
 import argparse
 from pathlib import Path
 
-from src.utils import load_annotations, get_config
+from src.utils import load_annotations, save_schema, get_config
 
 TYPE_MAP = {
     "text": "string",
@@ -127,11 +126,6 @@ def build_json_schema(index, annotations: dict, include_draft: bool = False, inc
     }
 
     return schema
-
-
-def save_schema(schema: dict, path: Path):
-    with open(path, "w") as f:
-        json.dump(schema, f, indent=2, ensure_ascii=False)
 
 
 def main():

@@ -10,8 +10,13 @@ def load_schema(path: str, missing_ok: bool = False) -> dict:
         if missing_ok:
             return {}
         raise FileNotFoundError(f"Schema file not found: {path}")
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         return json.load(f)
+
+
+def save_schema(schema: dict, path: Path):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(schema, f, indent=2, ensure_ascii=False)
 
 
 def load_annotations(path: str, missing_ok: bool = False) -> dict:
@@ -20,13 +25,13 @@ def load_annotations(path: str, missing_ok: bool = False) -> dict:
         if missing_ok:
             return {}
         raise FileNotFoundError(f"Annotations file not found: {path}")
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         return yaml.safe_load(f) or {}
 
 
 def save_annotations(data: dict, path: str):
     """Save annotations to a YAML file."""
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         yaml.dump(data, f, allow_unicode=True, sort_keys=False, default_flow_style=False)
 
 
@@ -43,7 +48,7 @@ def get_config(index: str) -> dict:
     if not config_path.exists():
         raise FileNotFoundError(f"Configuration file not found: {config_path}")
 
-    with open(config_path) as f:
+    with open(config_path, encoding="utf-8") as f:
         data = yaml.safe_load(f)
         if index not in data:
             raise ValueError(f"Index '{index}' not found in configuration file: {config_path}")
