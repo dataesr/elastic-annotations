@@ -7,11 +7,10 @@ Usage:
     python merge.py --index scanr-publications --schema my_schema.json --out custom_annotations.yaml
 """
 
-import json
 import argparse
 
 from src.elastic import es_get_flat_mapping
-from src.utils import load_annotations, save_annotations, match_patterns, get_config
+from src.utils import load_annotations, save_annotations, load_schema, match_patterns, get_config
 
 
 def flatten_json_schema(schema: dict, prefix: str = "") -> dict:
@@ -153,16 +152,21 @@ def main():
     print(f"[merge] {len(es_fields)} fields from ES mapping")
 
     # 2. Load JSON schema
-    with open(schema_path) as f:
-        schema = json.load(f)
-    schema_fields = flatten_json_schema(schema)
-    print(f"[merge] {len(schema_fields)} fields with descriptions in JSON schema")
+    schema = load_schema(schema_path, missing_ok=True)
+    if schema:
+        schema_fields = flatten_json_schema(schema)
+        print(f"[merge] {len(schema_fields)} fields with descriptions in JSON schema")
+    else:
+        schema_fields = {}
+        print(f"[merge] No default JSON schema found on path {schema_path}")
 
     # 3. Load existing annotations (if any)
     annotations = load_annotations(annotations_path, missing_ok=True)
     existing = annotations.get("fields", {})
     if existing:
         print(f"[merge] {len(existing)} existing annotations loaded (approved entries preserved)")
+    else:
+        print(f"[merge] No existing annotations found on path {annotations_path}")
 
     # 4. Merge and save
     fields = build_annotations(index, es_fields, schema_fields, existing)

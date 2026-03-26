@@ -1,6 +1,17 @@
 from pathlib import Path
 from fnmatch import fnmatch
 import yaml
+import json
+
+
+def load_schema(path: str, missing_ok: bool = False) -> dict:
+    """Load JSON schema from a file."""
+    if not Path(path).exists():
+        if missing_ok:
+            return {}
+        raise FileNotFoundError(f"Schema file not found: {path}")
+    with open(path) as f:
+        return json.load(f)
 
 
 def load_annotations(path: str, missing_ok: bool = False) -> dict:
