@@ -31,7 +31,6 @@ def es_get_flat_mapping(index: str) -> dict:
     actual_index = list(raw_mapping.keys())[0]
     properties = raw_mapping[actual_index]["mappings"].get("properties", {})
     excludes = raw_mapping[actual_index]["mappings"].get("_source", {}).get("excludes", [])
-    print("EXCLUDES", excludes)
     return _flatten_properties(properties, excludes)
 
 

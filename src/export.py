@@ -12,6 +12,23 @@ from pathlib import Path
 
 from src.utils import load_annotations, get_config
 
+TYPE_MAP = {
+    "text": "string",
+    "keyword": "string",
+    "long": "integer",
+    "integer": "integer",
+    "short": "integer",
+    "byte": "integer",
+    "double": "number",
+    "float": "number",
+    "boolean": "boolean",
+    "date": "string",
+    "object": "object",
+    "array": "array",
+    "nested": "array",
+    "ip": "string",
+    "geo_point": "object",
+}
 
 def _build_nested_properties(properties: dict, keys: list[str], infos: dict) -> dict:
     """
@@ -65,25 +82,7 @@ def _build_nested_properties(properties: dict, keys: list[str], infos: dict) -> 
 def infos_to_schema(info: dict) -> dict:
     type = info.get("type", "object")
     description = info.get("description", "")
-
-    type_map = {
-        "text": "string",
-        "keyword": "string",
-        "long": "integer",
-        "integer": "integer",
-        "short": "integer",
-        "byte": "integer",
-        "double": "number",
-        "float": "number",
-        "boolean": "boolean",
-        "date": "string",
-        "object": "object",
-        "array": "array",
-        "nested": "array",
-        "ip": "string",
-        "geo_point": "object",
-    }
-    json_type = type_map.get(type, "object")
+    json_type = TYPE_MAP.get(type, "object")
 
     schema = {"type": json_type}
     if description:
@@ -139,6 +138,7 @@ def main():
     parser.add_argument("--index", "-i", required=True, help="Index to export")
     parser.add_argument("--include-draft", action="store_true", help="Include draft fields with empty description")
     parser.add_argument("--include-ai-suggestion", action="store_true", help="Include AI suggestions in the schema")
+    parser.add_argument("--output", "-o", help="Override output filename (default: <index>.json)")
     args = parser.parse_args()
 
     index = args.index
@@ -155,19 +155,13 @@ def main():
     draft = meta.get("draft", 0)
     print(f"[export] {approved} approved fields, {draft} draft {'(skipped)' if not args.include_draft else ''}")
 
-    # 1. API schema (clean JSON Schema, no extensions)
+    # API schema (clean JSON Schema, no extensions)
     api_schema = build_json_schema(
         index, annotations, include_draft=args.include_draft, include_ai_suggestion=args.include_ai_suggestion
     )
-    api_path = out_dir.joinpath(config["schema"])
+    api_path = out_dir.joinpath(args.output or config["schema"])
     save_schema(api_schema, api_path)
     print(f"[export] API schema → {api_path}")
-
-    # 2. Summary stats
-    fields = annotations.get("fields", {})
-    primary_count = sum(1 for f in fields.values() if f.get("primary") and f.get("status") == "approved")
-    crossref_count = sum(1 for f in fields.values() if f.get("cross_ref") and f.get("status") == "approved")
-    print(f"[export] {primary_count} primary fields, {crossref_count} cross-referenced fields")
 
     if draft > 0:
         print(f"[export] NOTE: {draft} fields still need enrichment — run enrich.py + review.py")
