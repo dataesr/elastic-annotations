@@ -1,0 +1,438 @@
+_meta:
+  index: scanr-participations
+  description: Projects participations by organizations. One document is one project
+    participation by an organization.
+  total_fields: 107
+  approved: 0
+  draft: 107
+fields:
+  acronym:
+    status: draft
+    type: object
+  acronym.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  acronym.en:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  acronym.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  address:
+    status: draft
+    type: object
+  address.address:
+    status: draft
+    type: text
+    analyzer: light
+  address.city:
+    status: draft
+    type: text
+    analyzer: light
+  address.country:
+    status: draft
+    type: text
+    analyzer: light
+  address.gps:
+    status: draft
+    type: object
+  address.gps.lat:
+    status: draft
+    type: float
+  address.gps.lon:
+    status: draft
+    type: float
+  address.gps_id_name:
+    status: draft
+    type: text
+    has_keyword: true
+  address.postcode:
+    status: draft
+    type: text
+    has_keyword: true
+  address.region:
+    status: draft
+    type: text
+    has_keyword: true
+  ai_description:
+    status: draft
+    type: object
+  ai_description.description:
+    status: draft
+    type: object
+  ai_description.description.default:
+    status: draft
+    type: text
+    analyzer: light
+  ai_description.description.en:
+    status: draft
+    type: text
+    analyzer: light
+  ai_description.description.fr:
+    status: draft
+    type: text
+    analyzer: light
+  alias:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  applicants:
+    status: draft
+    type: object
+  applicants.name:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  autocompleted:
+    status: draft
+    type: text
+    analyzer: autocomplete
+  autocompletedText:
+    status: draft
+    type: text
+    analyzer: light
+  co_partners_foreign_inst:
+    status: draft
+    type: text
+    has_keyword: true
+  co_partners_fr_inst:
+    status: draft
+    type: text
+    has_keyword: true
+  co_partners_fr_labs:
+    status: draft
+    type: text
+    has_keyword: true
+  description:
+    status: draft
+    type: object
+  description.default:
+    status: draft
+    type: text
+    analyzer: light
+  description.en:
+    status: draft
+    type: text
+    analyzer: light
+  description.fr:
+    status: draft
+    type: text
+    analyzer: light
+  domains:
+    status: draft
+    type: object
+  domains.label:
+    status: draft
+    type: object
+  domains.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  firstName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  fullName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  institutions:
+    status: draft
+    type: object
+  institutions.label:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  inventors:
+    status: draft
+    type: object
+  inventors.name:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  isFrench:
+    status: draft
+    type: boolean
+  keywords:
+    status: draft
+    type: object
+  keywords.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  keywords.en:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  keywords.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  label:
+    status: draft
+    type: object
+  label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  label.en:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  label.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  lastName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  leaders:
+    status: draft
+    type: object
+  leaders.firstName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  leaders.lastName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  participant_acronym:
+    status: draft
+    type: object
+  participant_acronym.default:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  participant_acronym.en:
+    status: draft
+    type: text
+    has_keyword: true
+  participant_acronym.fr:
+    status: draft
+    type: text
+    has_keyword: true
+  participant_encoded_key:
+    status: draft
+    type: keyword
+  participant_id:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+    cross_ref:
+      index: scanr-organizations
+      join_field: id
+  participant_id_name:
+    status: draft
+    type: text
+    has_keyword: true
+  participant_id_name_default:
+    status: draft
+    type: text
+    has_keyword: true
+  participant_institutions:
+    status: draft
+    type: object
+  participant_institutions.endDate:
+    status: draft
+    type: date
+  participant_institutions.label:
+    status: draft
+    type: text
+    has_keyword: true
+  participant_institutions.natural_id:
+    status: draft
+    type: text
+    has_keyword: true
+  participant_institutions.relationType:
+    status: draft
+    type: text
+    has_keyword: true
+  participant_institutions.rnsr_key:
+    status: draft
+    type: text
+    has_keyword: true
+  participant_institutions.startDate:
+    status: draft
+    type: date
+  participant_institutions.structure:
+    status: draft
+    type: text
+    has_keyword: true
+  participant_isFrench:
+    status: draft
+    type: boolean
+  participant_is_main_parent:
+    status: draft
+    type: long
+  participant_key_id:
+    status: draft
+    type: text
+    has_keyword: true
+  participant_kind:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  participant_label:
+    status: draft
+    type: object
+  participant_label.default:
+    status: draft
+    type: text
+    has_keyword: true
+  participant_label.en:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  participant_label.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  participant_main_category:
+    status: draft
+    type: text
+    has_keyword: true
+  participant_status:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  participant_type:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  participant_typologie_1:
+    status: draft
+    type: text
+    has_keyword: true
+  participant_typologie_2:
+    status: draft
+    type: text
+    has_keyword: true
+  participants:
+    status: draft
+    type: object
+  participants.funding:
+    status: draft
+    type: float
+  participants.label:
+    status: draft
+    type: object
+  participants.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  participation_funding:
+    status: draft
+    type: float
+  participation_id:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  participation_is_coordinator:
+    status: draft
+    type: boolean
+  participation_structure_accueil:
+    status: draft
+    type: boolean
+  project_action:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  project_budgetFinanced:
+    status: draft
+    type: float
+  project_budgetTotal:
+    status: draft
+    type: float
+  project_classification:
+    status: draft
+    type: object
+  project_classification.confidence:
+    status: draft
+    type: text
+    has_keyword: true
+  project_classification.justification:
+    status: draft
+    type: text
+    has_keyword: true
+  project_classification.primary_field:
+    status: draft
+    type: text
+    has_keyword: true
+  project_id:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+    cross_ref:
+      index: scanr-projects
+      join_field: id
+  project_ignore_total_budget:
+    status: draft
+    type: boolean
+  project_instrument:
+    status: draft
+    type: text
+    has_keyword: true
+  project_label:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  project_pilier_global_name:
+    status: draft
+    type: text
+    has_keyword: true
+  project_type:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  project_year:
+    status: draft
+    type: long
+    primary: true
+  startDate:
+    status: draft
+    type: date
+  title_abs_text:
+    status: draft
+    type: text
+    analyzer: heavy
+  web_content:
+    status: draft
+    type: text
+    analyzer: heavy

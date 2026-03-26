@@ -2,9 +2,8 @@
 review.py — interactive CLI to approve/reject AI suggestions in annotations.yaml.
 
 Usage:
-    python review.py                    # review all pending suggestions
-    python review.py --field authors.fullName
-    python review.py --status draft     # also review fields with no suggestion yet
+    python review.py --index scanr-publications         # review all pending suggestions
+    python review.py -i scanr-publications -f authors.fullName             # review a single field
 
 For each field:
     [a] accept suggestion as-is

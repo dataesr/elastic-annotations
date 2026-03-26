@@ -1,12 +1,10 @@
 """
-enrich.py — send draft fields to Claude, write suggestions back to annotations.yaml.
-Never overwrites approved or rejected entries.
+enrich.py — send draft fields to Mistral, write suggestions back to annotations.yaml for draft fields.
 
 Usage:
-    python enrich.py                          # enrich all draft fields
-    python enrich.py --dry-run                # print prompts, don't call API
-    python enrich.py --field authors.fullName # enrich a single field
-    python enrich.py --re-draft               # re-suggest even approved fields
+    python enrich.py --index scanr-publications     # enrich all draft fields
+    python enrich.py -i scanr-publications -f authors.fullName # enrich a single field
+    python enrich.py -i scanr-publications --force                  # re-suggest ai suggestions
 """
 
 from src.mistral import mistral_completion

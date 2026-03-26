@@ -1,9 +1,7 @@
 _meta:
   index: scanr-publications
-  description: This index stores scientific publications (journal articles, theses,
-    conference papers, preprints) aggregated from HAL, PubMed, and Crossref. Each
-    document represents one production with its bibliographic metadata, authors, affiliations,
-    and more.
+  description: Scientific publications (articles, theses, conference papers). One
+    document is one publication.
   total_fields: 330
   approved: 48
   draft: 282
@@ -72,7 +70,11 @@ fields:
       `status`, `isFrench`, `id_name`. See the documention of the organization index
       for more details on these fields.'
     has_keyword: true
+    primary: true
     required: true
+    cross_ref:
+      index: scanr-organizations
+      join_field: id
   affiliations.id_name:
     status: draft
     type: text
@@ -356,6 +358,9 @@ fields:
     ai_suggestion:
       description: Persistent identifiers for the affiliation, with provenance metadata.
       notes: Prefer this over standalone fields like `grid` or `hal_docid` for consistency.
+    cross_ref:
+      index: scanr-organizations
+      join_field: id
   authors.affiliations.id.asserted-by:
     status: draft
     type: text
@@ -578,16 +583,19 @@ fields:
     status: draft
     type: text
     has_keyword: true
+    primary: true
     ai_suggestion:
       description: Full name of the author as a single string, formatted for display.
       notes: May include honorifics or suffixes; not normalized for sorting or matching.
+    cross_ref:
+      index: scanr-persons
+      join_field: id
   authors.role:
     status: approved
     type: text
     description: Role of the contributor. Default value is `author`. A different value
       only if present in source (theses.fr or HAL).
     has_keyword: true
-    primary: true
   authors.tags:
     status: draft
     type: text
@@ -607,6 +615,7 @@ fields:
     status: approved
     type: long
     description: Number of authors.
+    primary: true
     required: true
   autocompleted:
     status: approved
@@ -780,7 +789,6 @@ fields:
     status: approved
     type: array
     description: Lists detected scientific domains
-    primary: true
   domains.code:
     status: approved
     type: text
@@ -815,6 +823,7 @@ fields:
     description: Label of the scientific domain
     has_keyword: true
     analyzer: light
+    primary: true
     required: true
   domains.naturalKey:
     status: approved
@@ -887,6 +896,7 @@ fields:
       These keywords are also present in the `domains` with type=`keyword`.
     has_keyword: true
     analyzer: light
+    primary: true
   landingPage:
     status: approved
     type: text
@@ -967,6 +977,7 @@ fields:
     description: 'String for type of production. Possible values: `publications`,
       `thesis`.'
     has_keyword: true
+    primary: true
     enum:
     - publication
     - thesis
@@ -1116,6 +1127,7 @@ fields:
     type: text
     description: Arrays of ISSNs (print, electronic ...)
     has_keyword: true
+    primary: true
   source.publisher:
     status: approved
     type: text
@@ -1272,6 +1284,7 @@ fields:
     status: draft
     type: text
     analyzer: light
+    primary: true
     ai_suggestion:
       description: Default language summary of the publication's content.
       notes: Falls back to English or another available language if no explicit default

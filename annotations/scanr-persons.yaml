@@ -1,0 +1,1184 @@
+_meta:
+  index: scanr-persons
+  description: Researchers and authors with their affiliations and identifiers (ORCID,
+    IdRef). One document is one person.
+  total_fields: 283
+  approved: 44
+  draft: 239
+fields:
+  acronym:
+    status: draft
+    type: object
+  acronym.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  acronym.en:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  acronym.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  address:
+    status: draft
+    type: object
+  address.address:
+    status: draft
+    type: text
+    analyzer: light
+  address.city:
+    status: draft
+    type: text
+    analyzer: light
+  address.country:
+    status: draft
+    type: text
+    analyzer: light
+  affiliations:
+    status: approved
+    type: array
+    description: Lists all detected affiliations
+  affiliations.endDate:
+    status: approved
+    type: string
+    description: Last publication year found with this affiliation
+  affiliations.publicationsCount:
+    status: draft
+    type: long
+  affiliations.sources:
+    status: approved
+    type: array
+    description: List the publications of the author with the current affiliation
+  affiliations.sources.id:
+    status: approved
+    type: string
+    description: Main PID of the publication
+    has_keyword: true
+  affiliations.sources.year:
+    status: approved
+    type: integer
+    description: Publication year
+    has_keyword: true
+  affiliations.startDate:
+    status: approved
+    type: string
+    description: First publication year found with this affiliation
+  affiliations.structure:
+    status: approved
+    type: string
+    description: 'PID of an affiliation. Can be the only field of the object if this
+      affiliation is not mapped in the organization index.Otherwise, if present, some
+      fields are denormalized: `mainAddress`, `label`, `acronym`, `kind`, `level`,
+      `status`, `isFrench`, `id_name`. See the documentation of the organization index
+      for more details on these fields.'
+    required: true
+  affiliations.structure.acronym:
+    status: draft
+    type: object
+  affiliations.structure.acronym.default:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.acronym.en:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.acronym.fr:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.id:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+    cross_ref:
+      index: scanr-organizations
+      join_field: id
+  affiliations.structure.id_name:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.institutions:
+    status: draft
+    type: object
+  affiliations.structure.institutions.fromDate:
+    status: draft
+    type: date
+  affiliations.structure.institutions.label:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.institutions.natural_id:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.institutions.relationType:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.institutions.structure:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.isFrench:
+    status: draft
+    type: boolean
+  affiliations.structure.kind:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.label:
+    status: draft
+    type: object
+  affiliations.structure.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.label.en:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.label.fr:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.mainAddress:
+    status: draft
+    type: object
+  affiliations.structure.mainAddress.address:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.mainAddress.city:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.mainAddress.country:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.mainAddress.gps:
+    status: draft
+    type: object
+  affiliations.structure.mainAddress.gps.lat:
+    status: draft
+    type: float
+  affiliations.structure.mainAddress.gps.lon:
+    status: draft
+    type: float
+  affiliations.structure.mainAddress.localisationSuggestions:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.mainAddress.postcode:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.parents:
+    status: draft
+    type: object
+  affiliations.structure.parents.fromDate:
+    status: draft
+    type: date
+  affiliations.structure.parents.natural_id:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.parents.relationType:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.parents.structure:
+    status: draft
+    type: text
+    has_keyword: true
+  affiliations.structure.status:
+    status: draft
+    type: text
+    has_keyword: true
+  ai_description:
+    status: draft
+    type: object
+  ai_description.description:
+    status: draft
+    type: object
+  ai_description.description.default:
+    status: draft
+    type: text
+    analyzer: light
+  ai_description.description.en:
+    status: draft
+    type: text
+    analyzer: light
+  ai_description.description.fr:
+    status: draft
+    type: text
+    analyzer: light
+  alias:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  applicants:
+    status: draft
+    type: object
+  applicants.name:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  autocompleted:
+    status: approved
+    type: array
+    description: array of strings used for autocompletion
+    analyzer: autocomplete
+    exclude: true
+  autocompletedText:
+    status: draft
+    type: text
+    analyzer: light
+    exclude: true
+  awards:
+    status: approved
+    type: array
+    description: Lists the known awards
+  awards.date:
+    status: approved
+    type: string
+    description: Award date
+  awards.label:
+    status: approved
+    type: string
+    description: Award label
+    has_keyword: true
+    primary: true
+  awards.url:
+    status: approved
+    type: string
+    description: Award URL
+    has_keyword: true
+  coContributors:
+    status: approved
+    type: array
+    description: Lists the known cocontributors. Co-authors only are listed, not jury
+      members.
+  coContributors.fullName:
+    status: approved
+    type: string
+    description: Full Name of the cocontributor
+    has_keyword: true
+  coContributors.person:
+    status: approved
+    type: string
+    description: Main PID of the cocontributor
+    has_keyword: true
+  description:
+    status: draft
+    type: object
+  description.default:
+    status: draft
+    type: text
+    analyzer: light
+  description.en:
+    status: draft
+    type: text
+    analyzer: light
+  description.fr:
+    status: draft
+    type: text
+    analyzer: light
+  domains:
+    status: approved
+    type: array
+    description: Lists detected scientific domains - detected and aggregated from
+      the publications
+    primary: true
+  domains.code:
+    status: approved
+    type: string
+    description: Code ID of this domain, if any (depends on `type`)
+    has_keyword: true
+  domains.count:
+    status: approved
+    type: integer
+    description: Number of times this code has been detected
+  domains.label:
+    status: approved
+    type: string
+    description: Label of the scientific domain
+    required: true
+  domains.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  domains.type:
+    status: approved
+    type: string
+    description: 'Type of label. Possible values: `wikidata`, `keyword`, `sudoc`.
+      Wikidata domains are automatically detected within the title, abstract and keywords.
+      Keywords domain are exactly the free-text keywords that have been harvested
+      (not normalized).'
+    has_keyword: true
+    required: true
+  externalIds:
+    status: approved
+    type: array
+    description: Lists the known external identifiers
+  externalIds.id:
+    status: approved
+    type: string
+    description: Corresponding PID
+    has_keyword: true
+    primary: true
+    required: true
+  externalIds.type:
+    status: approved
+    type: string
+    description: other known PID
+    has_keyword: true
+    primary: true
+    enum:
+    - idref
+    - orcid
+    - id_hal
+    required: true
+  externalIds.url:
+    status: approved
+    type: string
+    description: Corresponding URL
+    has_keyword: true
+  firstName:
+    status: approved
+    type: string
+    description: First Name
+    has_keyword: true
+    analyzer: light
+  fullName:
+    status: approved
+    type: string
+    description: Full Name (concatenation of the first name and last name)
+    has_keyword: true
+    analyzer: light
+    primary: true
+    required: true
+  gender:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  id:
+    status: approved
+    type: string
+    description: Main PID of the person. For now, the idref id is used. Concatenation
+      of the string `idref` and the idref id itself.
+    has_keyword: true
+    primary: true
+    required: true
+  id_hal:
+    status: approved
+    type: string
+    description: idHAL (string)
+    has_keyword: true
+  idref:
+    status: approved
+    type: string
+    description: idref
+    has_keyword: true
+    primary: true
+  institutions:
+    status: draft
+    type: object
+  institutions.label:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  inventors:
+    status: draft
+    type: object
+  inventors.name:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  keywords:
+    status: draft
+    type: object
+  keywords.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  keywords.en:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  keywords.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  label:
+    status: draft
+    type: object
+  label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  label.en:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  label.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  lastName:
+    status: approved
+    type: string
+    description: Last Name (family name)
+    has_keyword: true
+    analyzer: light
+  leaders:
+    status: draft
+    type: object
+  leaders.firstName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  leaders.lastName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  orcid:
+    status: approved
+    type: string
+    description: ORCID
+    has_keyword: true
+  participants:
+    status: draft
+    type: object
+  participants.label:
+    status: draft
+    type: object
+  participants.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  publications:
+    status: approved
+    type: array
+    description: Lists the known publications of the author
+  publications.publication:
+    status: approved
+    type: string
+    description: Main PID of the publication
+    has_keyword: true
+    primary: true
+    cross_ref:
+      index: scanr-publications
+      join_field: id
+  publications.role:
+    status: approved
+    type: string
+    description: Role of the person
+    has_keyword: true
+    primary: true
+  publications.source:
+    status: approved
+    type: object
+    description: Describes the source (generally journal) of the production
+  publications.source.isInDoaj:
+    status: draft
+    type: boolean
+  publications.source.isOa:
+    status: approved
+    type: boolean
+    description: Is it an open access journal? (source Unpaywall)
+  publications.source.journalIssns:
+    status: approved
+    type: array
+    description: Arrays of ISSNs (print, electronic ...)
+    has_keyword: true
+  publications.source.publisher:
+    status: approved
+    type: string
+    description: Normalized version of the publisher.
+    has_keyword: true
+  publications.source.title:
+    status: approved
+    type: string
+    description: Title of the source
+    has_keyword: true
+  publications.title:
+    status: approved
+    type: object
+    description: Title of the publication
+  publications.title.af:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.am:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.an:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ar:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.az:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ba:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.be:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.bg:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.bh:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.bn:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.bo:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.br:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.bs:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ca:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.co:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.cs:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.cy:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.da:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.de:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.default:
+    status: approved
+    type: string
+    description: Default title
+    has_keyword: true
+  publications.title.el:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.en:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.eo:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.es:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.et:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.eu:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.fa:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.fi:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.fr:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.fy:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ga:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.gb:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.gd:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.gl:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.gu:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.he:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.hi:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.hr:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ht:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.hu:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.hy:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ia:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.id:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ie:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.io:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.is:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.it:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ja:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.jv:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ka:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.kk:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.km:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.kn:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ko:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ku:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.kv:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.kw:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ky:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.la:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.lb:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.lo:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.lt:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.lv:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.mg:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.mk:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ml:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.mn:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.mr:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ms:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.mt:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.my:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.nb:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ne:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.nl:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.nn:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.no:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.oc:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.pa:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.pl:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ps:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.pt:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.qu:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.rm:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ro:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ru:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.sa:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.sc:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.sd:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.sh:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.si:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.sk:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.sl:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.so:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.sp:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.sq:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.sr:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.su:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.sv:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.sw:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ta:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.te:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.tg:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.th:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.tk:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.tl:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.tr:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.tt:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ug:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.uk:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.ur:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.uz:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.vi:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.vo:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.wa:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.yi:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.title.zh:
+    status: draft
+    type: text
+    has_keyword: true
+  publications.year:
+    status: approved
+    type: integer
+    description: Year part of the publication Date
+    primary: true
+  publicationsCount:
+    status: approved
+    type: integer
+    description: Number of publications
+    primary: true
+  recentAffiliations:
+    status: approved
+    type: array
+    description: Lists all detected affiliations, recents only (still active in the
+      last 3 years)
+  recentAffiliations.endDate:
+    status: draft
+    type: date
+  recentAffiliations.publicationsCount:
+    status: draft
+    type: long
+  recentAffiliations.sources:
+    status: draft
+    type: object
+  recentAffiliations.sources.id:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.sources.year:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.startDate:
+    status: draft
+    type: date
+  recentAffiliations.structure:
+    status: draft
+    type: object
+  recentAffiliations.structure.acronym:
+    status: draft
+    type: object
+  recentAffiliations.structure.acronym.default:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.acronym.en:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.acronym.fr:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.id:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.id_name:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.institutions:
+    status: draft
+    type: object
+  recentAffiliations.structure.institutions.fromDate:
+    status: draft
+    type: date
+  recentAffiliations.structure.institutions.label:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.institutions.natural_id:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.institutions.relationType:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.institutions.structure:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.isFrench:
+    status: draft
+    type: boolean
+  recentAffiliations.structure.kind:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.label:
+    status: draft
+    type: object
+  recentAffiliations.structure.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.label.en:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.label.fr:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.mainAddress:
+    status: draft
+    type: object
+  recentAffiliations.structure.mainAddress.address:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.mainAddress.city:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.mainAddress.country:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.mainAddress.gps:
+    status: draft
+    type: object
+  recentAffiliations.structure.mainAddress.gps.lat:
+    status: draft
+    type: float
+  recentAffiliations.structure.mainAddress.gps.lon:
+    status: draft
+    type: float
+  recentAffiliations.structure.mainAddress.localisationSuggestions:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.mainAddress.postcode:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.parents:
+    status: draft
+    type: object
+  recentAffiliations.structure.parents.fromDate:
+    status: draft
+    type: date
+  recentAffiliations.structure.parents.natural_id:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.parents.relationType:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.parents.structure:
+    status: draft
+    type: text
+    has_keyword: true
+  recentAffiliations.structure.status:
+    status: draft
+    type: text
+    has_keyword: true
+  title_abs_text:
+    status: draft
+    type: text
+    analyzer: heavy
+  top_domains:
+    status: draft
+    type: object
+  top_domains.code:
+    status: draft
+    type: text
+    has_keyword: true
+  top_domains.count:
+    status: draft
+    type: long
+  top_domains.label:
+    status: draft
+    type: object
+  top_domains.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  top_domains.type:
+    status: draft
+    type: text
+    has_keyword: true
+  web_content:
+    status: draft
+    type: text
+    analyzer: heavy

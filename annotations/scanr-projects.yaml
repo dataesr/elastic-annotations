@@ -1,0 +1,650 @@
+_meta:
+  index: scanr-projects
+  description: Funded research projects (ANR, EU, etc.) with budget and partners.
+    One document is one project.
+  total_fields: 157
+  approved: 17
+  draft: 140
+fields:
+  acronym:
+    status: approved
+    type: object
+    description: The acronym of the project in multiple languages.
+    required: true
+  acronym.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+    primary: true
+  acronym.en:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  acronym.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  action:
+    status: approved
+    type: object
+    description: The action associated with the project.
+    required: true
+  action.id:
+    status: draft
+    type: text
+    has_keyword: true
+  action.label:
+    status: draft
+    type: object
+  action.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+  action.level:
+    status: draft
+    type: text
+    has_keyword: true
+  address:
+    status: draft
+    type: object
+  address.address:
+    status: draft
+    type: text
+    analyzer: light
+  address.city:
+    status: draft
+    type: text
+    analyzer: light
+  address.country:
+    status: draft
+    type: text
+    analyzer: light
+  ai_description:
+    status: draft
+    type: object
+  ai_description.description:
+    status: draft
+    type: object
+  ai_description.description.default:
+    status: draft
+    type: text
+    analyzer: light
+  ai_description.description.en:
+    status: draft
+    type: text
+    analyzer: light
+  ai_description.description.fr:
+    status: draft
+    type: text
+    analyzer: light
+  alias:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  applicants:
+    status: draft
+    type: object
+  applicants.name:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  autocompleted:
+    status: draft
+    type: text
+    analyzer: autocomplete
+    exclude: true
+  autocompletedText:
+    status: draft
+    type: text
+    analyzer: light
+    exclude: true
+  budgetFinanced:
+    status: approved
+    type: number
+    description: The financed budget of the project.
+    primary: true
+  budgetTotal:
+    status: approved
+    type: number
+    description: The total budget of the project.
+    primary: true
+  budget_financed:
+    status: draft
+    type: long
+  budget_total:
+    status: draft
+    type: long
+  call:
+    status: approved
+    type: object
+    description: Details of the call associated with the project.
+  call.id:
+    status: approved
+    type: string
+    description: The identifier of the call.
+    has_keyword: true
+    primary: true
+    required: true
+  classification:
+    status: draft
+    type: object
+  classification.confidence:
+    status: draft
+    type: text
+    has_keyword: true
+  classification.justification:
+    status: draft
+    type: text
+    has_keyword: true
+  classification.primary_field:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  co_domains:
+    status: draft
+    type: text
+    has_keyword: true
+  co_institutions:
+    status: draft
+    type: text
+    has_keyword: true
+  co_structures:
+    status: draft
+    type: text
+    has_keyword: true
+  comite:
+    status: draft
+    type: text
+    has_keyword: true
+  description:
+    status: approved
+    type: object
+    description: The description of the project in multiple languages.
+    required: true
+  description.default:
+    status: draft
+    type: text
+    analyzer: light
+    primary: true
+  description.en:
+    status: draft
+    type: text
+    analyzer: light
+  description.fr:
+    status: draft
+    type: text
+    analyzer: light
+  domains:
+    status: draft
+    type: array
+    required: true
+  domains.label:
+    status: approved
+    type: object
+    description: The label of the domain in multiple languages.
+    required: true
+  domains.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  endDate:
+    status: approved
+    type: string
+    description: The end date of the project.
+  firstName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  fullName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  id:
+    status: approved
+    type: string
+    description: The unique identifier of the project.
+    has_keyword: true
+    primary: true
+    required: true
+  institutions:
+    status: draft
+    type: object
+  institutions.label:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  instrument:
+    status: draft
+    type: text
+    has_keyword: true
+  inventors:
+    status: draft
+    type: object
+  inventors.name:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  isFrench:
+    status: draft
+    type: boolean
+  keywords:
+    status: approved
+    type: object
+    description: Keywords related to the project in multiple languages.
+    required: true
+  keywords.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  keywords.en:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+    primary: true
+  keywords.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  label:
+    status: approved
+    type: object
+    description: The label of the project in multiple languages.
+    required: true
+  label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+    primary: true
+  label.en:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  label.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  lastName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  leaders:
+    status: draft
+    type: object
+  leaders.firstName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  leaders.lastName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  participantCount:
+    status: draft
+    type: long
+  participant_encoded_key:
+    status: draft
+    type: keyword
+  participants:
+    status: approved
+    type: array
+    description: Details of the participants involved in the project.
+    required: true
+  participants.address:
+    status: draft
+    type: object
+  participants.address.country:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.address.country_code:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.funding:
+    status: draft
+    type: float
+  participants.id:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.label:
+    status: draft
+    type: object
+  participants.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  participants.participant_id:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.participant_key:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.participant_to_identify:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.participates_as:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.role:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure:
+    status: draft
+    type: object
+  participants.structure.acronym:
+    status: draft
+    type: object
+  participants.structure.acronym.default:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.acronym.en:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.acronym.fr:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.categories:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.encoded_key:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.id:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+    cross_ref:
+      index: scanr-organizations
+      join_field: id
+  participants.structure.id_name:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.id_name_default:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.institutions:
+    status: draft
+    type: object
+  participants.structure.institutions.endDate:
+    status: draft
+    type: date
+  participants.structure.institutions.label:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.institutions.natural_id:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.institutions.relationType:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.institutions.rnsr_key:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.institutions.startDate:
+    status: draft
+    type: date
+  participants.structure.institutions.structure:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.isFrench:
+    status: draft
+    type: boolean
+  participants.structure.is_main_parent:
+    status: draft
+    type: long
+  participants.structure.kind:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.label:
+    status: draft
+    type: object
+  participants.structure.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.label.en:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.label.fr:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.mainAddress:
+    status: draft
+    type: object
+  participants.structure.mainAddress.address:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.mainAddress.address_detected:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.mainAddress.city:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.mainAddress.country:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.mainAddress.gps:
+    status: draft
+    type: object
+  participants.structure.mainAddress.gps.lat:
+    status: draft
+    type: float
+  participants.structure.mainAddress.gps.lon:
+    status: draft
+    type: float
+  participants.structure.mainAddress.iso2:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.mainAddress.iso3:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.mainAddress.postcode:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.mainAddress.region:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.main_category:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.parents:
+    status: draft
+    type: object
+  participants.structure.parents.endDate:
+    status: draft
+    type: date
+  participants.structure.parents.natural_id:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.parents.relationType:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.parents.startDate:
+    status: draft
+    type: date
+  participants.structure.parents.structure:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.status:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.typologie_1:
+    status: draft
+    type: text
+    has_keyword: true
+  participants.structure.typologie_2:
+    status: draft
+    type: text
+    has_keyword: true
+  participants_id_name_search:
+    status: draft
+    type: text
+    has_keyword: true
+  participants_id_search:
+    status: draft
+    type: text
+    has_keyword: true
+  persons:
+    status: draft
+    type: object
+  persons.firstName:
+    status: draft
+    type: text
+    has_keyword: true
+  persons.fullName:
+    status: draft
+    type: text
+    has_keyword: true
+  persons.lastName:
+    status: draft
+    type: text
+    has_keyword: true
+  persons.role:
+    status: draft
+    type: text
+    has_keyword: true
+  pilier_global_name:
+    status: draft
+    type: text
+    has_keyword: true
+  priorities:
+    status: draft
+    type: object
+  priorities.label:
+    status: draft
+    type: object
+  priorities.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+  priorities.type:
+    status: draft
+    type: text
+    has_keyword: true
+  project_domains:
+    status: draft
+    type: object
+  project_domains.code:
+    status: draft
+    type: text
+    has_keyword: true
+  project_domains.count:
+    status: draft
+    type: long
+  project_domains.id_name:
+    status: draft
+    type: text
+    has_keyword: true
+  project_domains.key_name:
+    status: draft
+    type: text
+    has_keyword: true
+  project_domains.label:
+    status: draft
+    type: object
+  project_domains.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  project_domains.naturalKey:
+    status: draft
+    type: text
+    has_keyword: true
+  project_domains.type:
+    status: draft
+    type: text
+    has_keyword: true
+  publicationsCount:
+    status: draft
+    type: long
+  signatureDate:
+    status: draft
+    type: date
+  startDate:
+    status: approved
+    type: string
+    description: The start date of the project.
+  title_abs_text:
+    status: draft
+    type: text
+    analyzer: heavy
+  type:
+    status: approved
+    type: string
+    description: The type of the project.
+    has_keyword: true
+    primary: true
+    required: true
+  url:
+    status: approved
+    type: string
+    description: The URL of the project.
+    has_keyword: true
+    primary: true
+  web_content:
+    status: draft
+    type: text
+    analyzer: heavy
+  year:
+    status: approved
+    type: number
+    description: The year of the project.
+    primary: true
+    required: true

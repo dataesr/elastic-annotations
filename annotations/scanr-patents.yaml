@@ -1,0 +1,584 @@
+_meta:
+  index: scanr-patents
+  description: Patents filed by French research institutions. One document is one
+    patent.
+  total_fields: 147
+  approved: 0
+  draft: 147
+fields:
+  acronym:
+    status: draft
+    type: object
+  acronym.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  acronym.en:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  acronym.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  address:
+    status: draft
+    type: object
+  address.address:
+    status: draft
+    type: text
+    analyzer: light
+  address.city:
+    status: draft
+    type: text
+    analyzer: light
+  address.country:
+    status: draft
+    type: text
+    analyzer: light
+  ai_description:
+    status: draft
+    type: object
+  ai_description.description:
+    status: draft
+    type: object
+  ai_description.description.default:
+    status: draft
+    type: text
+    analyzer: light
+  ai_description.description.en:
+    status: draft
+    type: text
+    analyzer: light
+  ai_description.description.fr:
+    status: draft
+    type: text
+    analyzer: light
+  alias:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  applicants:
+    status: draft
+    type: object
+  applicants.country:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  applicants.id_name:
+    status: draft
+    type: text
+    has_keyword: true
+  applicants.ids:
+    status: draft
+    type: object
+  applicants.ids.id:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+    cross_ref:
+      index: scanr-organizations
+      join_field: id
+  applicants.ids.type:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  applicants.name:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+    primary: true
+  applicants.type:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  applicationDate:
+    status: draft
+    type: date
+  autocompleted:
+    status: draft
+    type: text
+    analyzer: autocomplete
+  autocompletedText:
+    status: draft
+    type: text
+    analyzer: light
+  co_cpc_classe:
+    status: draft
+    type: text
+    has_keyword: true
+  co_cpc_section:
+    status: draft
+    type: text
+    has_keyword: true
+  co_cpc_ss_classe:
+    status: draft
+    type: text
+    has_keyword: true
+  co_organizations:
+    status: draft
+    type: text
+    has_keyword: true
+  co_persons:
+    status: draft
+    type: text
+    has_keyword: true
+  cpc:
+    status: draft
+    type: object
+  cpc.classe:
+    status: draft
+    type: object
+  cpc.classe.code:
+    status: draft
+    type: text
+    has_keyword: true
+  cpc.classe.id_name:
+    status: draft
+    type: text
+    has_keyword: true
+  cpc.classe.label:
+    status: draft
+    type: text
+    has_keyword: true
+  cpc.groupe:
+    status: draft
+    type: object
+  cpc.groupe.code:
+    status: draft
+    type: text
+    has_keyword: true
+  cpc.groupe.label:
+    status: draft
+    type: text
+    has_keyword: true
+  cpc.section:
+    status: draft
+    type: object
+  cpc.section.code:
+    status: draft
+    type: text
+    has_keyword: true
+  cpc.section.id_name:
+    status: draft
+    type: text
+    has_keyword: true
+  cpc.section.label:
+    status: draft
+    type: text
+    has_keyword: true
+  cpc.ss_classe:
+    status: draft
+    type: object
+  cpc.ss_classe.code:
+    status: draft
+    type: text
+    has_keyword: true
+  cpc.ss_classe.id_name:
+    status: draft
+    type: text
+    has_keyword: true
+  cpc.ss_classe.label:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures:
+    status: draft
+    type: object
+  denormalized_structures.acronym:
+    status: draft
+    type: object
+  denormalized_structures.acronym.default:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.acronym.en:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.acronym.fr:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.id:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.id_name:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.institutions:
+    status: draft
+    type: object
+  denormalized_structures.institutions.fromDate:
+    status: draft
+    type: date
+  denormalized_structures.institutions.label:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.institutions.natural_id:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.institutions.relationType:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.institutions.structure:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.isFrench:
+    status: draft
+    type: boolean
+  denormalized_structures.kind:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.label:
+    status: draft
+    type: object
+  denormalized_structures.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.label.en:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.label.fr:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.mainAddress:
+    status: draft
+    type: object
+  denormalized_structures.mainAddress.address:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.mainAddress.city:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.mainAddress.country:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.mainAddress.gps:
+    status: draft
+    type: object
+  denormalized_structures.mainAddress.gps.lat:
+    status: draft
+    type: float
+  denormalized_structures.mainAddress.gps.lon:
+    status: draft
+    type: float
+  denormalized_structures.mainAddress.localisationSuggestions:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.mainAddress.postcode:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.parents:
+    status: draft
+    type: object
+  denormalized_structures.parents.fromDate:
+    status: draft
+    type: date
+  denormalized_structures.parents.natural_id:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.parents.relationType:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.parents.structure:
+    status: draft
+    type: text
+    has_keyword: true
+  denormalized_structures.status:
+    status: draft
+    type: text
+    has_keyword: true
+  description:
+    status: draft
+    type: object
+  description.default:
+    status: draft
+    type: text
+    analyzer: light
+  description.en:
+    status: draft
+    type: text
+    analyzer: light
+  description.fr:
+    status: draft
+    type: text
+    analyzer: light
+  domains:
+    status: draft
+    type: object
+  domains.label:
+    status: draft
+    type: object
+  domains.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  firstName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  fullName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  grantedDate:
+    status: draft
+    type: date
+  id:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  inpadocFamily:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  institutions:
+    status: draft
+    type: object
+  institutions.label:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  inventionKind:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  inventors:
+    status: draft
+    type: object
+  inventors.country:
+    status: draft
+    type: text
+    has_keyword: true
+  inventors.ids:
+    status: draft
+    type: object
+  inventors.ids.id:
+    status: draft
+    type: text
+    has_keyword: true
+  inventors.ids.type:
+    status: draft
+    type: text
+    has_keyword: true
+  inventors.name:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  inventors.type:
+    status: draft
+    type: text
+    has_keyword: true
+  isInternational:
+    status: draft
+    type: boolean
+    primary: true
+  isOa:
+    status: draft
+    type: boolean
+    primary: true
+  isOeb:
+    status: draft
+    type: boolean
+    primary: true
+  keywords:
+    status: draft
+    type: object
+  keywords.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  keywords.en:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  keywords.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  label:
+    status: draft
+    type: object
+  label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  label.en:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  label.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: heavy
+  lastName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  leaders:
+    status: draft
+    type: object
+  leaders.firstName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  leaders.lastName:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  participants:
+    status: draft
+    type: object
+  participants.label:
+    status: draft
+    type: object
+  participants.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    analyzer: light
+  patents:
+    status: draft
+    type: object
+  patents.applicationDate:
+    status: draft
+    type: date
+  patents.applicationNumber:
+    status: draft
+    type: text
+    has_keyword: true
+  patents.espacenetUrl:
+    status: draft
+    type: text
+    has_keyword: true
+  patents.grantedDate:
+    status: draft
+    type: date
+  patents.id:
+    status: draft
+    type: text
+    has_keyword: true
+  patents.internatApplicationNumber:
+    status: draft
+    type: text
+    has_keyword: true
+  patents.ipType:
+    status: draft
+    type: text
+    has_keyword: true
+  patents.isGranted:
+    status: draft
+    type: boolean
+  patents.isPriority:
+    status: draft
+    type: boolean
+  patents.office:
+    status: draft
+    type: text
+    has_keyword: true
+  patents.publicationDate:
+    status: draft
+    type: date
+  patents.publicationNumber:
+    status: draft
+    type: text
+    has_keyword: true
+  patents.yearPublication:
+    status: draft
+    type: long
+  productionType:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  publicationDate:
+    status: draft
+    type: date
+  summary:
+    status: draft
+    type: object
+  summary.default:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  summary.en:
+    status: draft
+    type: text
+    has_keyword: true
+  summary.fr:
+    status: draft
+    type: text
+    has_keyword: true
+  title:
+    status: draft
+    type: object
+  title.default:
+    status: draft
+    type: text
+    has_keyword: true
+    primary: true
+  title.en:
+    status: draft
+    type: text
+    has_keyword: true
+  title.fr:
+    status: draft
+    type: text
+    has_keyword: true
+  title_abs_text:
+    status: draft
+    type: text
+    analyzer: heavy
+  web_content:
+    status: draft
+    type: text
+    analyzer: heavy
+  year:
+    status: draft
+    type: long
+    primary: true

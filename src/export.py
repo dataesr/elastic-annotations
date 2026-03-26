@@ -1,9 +1,10 @@
 """
-export.py — generate api/schema.json and mcp/schema.json from approved annotations.
+export.py — generate schemas/{index}.json from approved annotations.
 
 Usage:
-    python export.py
-    python export.py --include-draft    # include draft fields with empty description
+    python export.py -i scanr-publications
+    python export.py -i scanr-publications --include-draft    # include draft fields with empty description
+    python export.py -i scanr-publications --include-ai-suggestion    # include ai descriptions for missing descriptions in the schema
 """
 
 import json
