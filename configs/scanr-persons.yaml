@@ -1,11 +1,31 @@
 scanr-persons:
   schema: scanr-persons.json
   annotation: scanr-persons.yaml
-  content: This index stores scientific persons (researchers, authors, etc.) that
-    appear in the research ecosystem.
+  content: "Researchers and authors with their affiliations and identifiers (ORCID, IdRef). One document is one person."
   primary_fields:
     - id
     - fullName
-    - role
-    - email
+    - gender
+    - idref
     - domains
+    - externalIds.id
+    - externalIds.type
+    - publicationsCount
+    - publications.publication
+    - publications.role
+    - publications.year
+    - top_domains.label.default
+    - affiliations.structure.id
+    - awards.label
+  excludes:
+    - autocompleted
+    - autocompletedText
+    - encoded_key
+  cross_refs:
+    affiliations.structure.id:
+      index: scanr-organizations
+      join_field: id
+    publications.publication:
+      index: scanr-publications
+      join_field: id
+

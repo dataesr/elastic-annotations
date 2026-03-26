@@ -1,25 +1,38 @@
 scanr-publications:
   schema: scanr-publications.json
   annotation: scanr-publications.yaml
-  content: This index stores scientific publications (journal articles, theses, conference
-    papers, preprints) aggregated from HAL, PubMed, and Crossref. Each document represents
-    one production with its bibliographic metadata, authors, affiliations, and more.
+  content: Scientific publications (articles, theses, conference papers). One document is one publication.
   primary_fields:
     - id
     - title.default
+    - summary.default
     - year
     - type
+    - productionType
     - isOa
     - authors.fullName
-    - authors.role
+    - authors.person
+    - authorsCount
+    - affiliations.id
     - externalIds.type
     - externalIds.id
     - source.title
-    - source.issn
-    - domains
+    - source.journalIssns
+    - keywords.default
+    - domains.label.default
   excludes:
     - title.*
   includes:
     - title.default
     - title.en
     - title.fr
+  cross_refs:
+    authors.person:
+      index: scanr-persons
+      join_field: id
+    affiliations.id:
+      index: scanr-organizations
+      join_field: id
+    authors.affiliations.id:
+      index: scanr-organizations
+      join_field: id

@@ -1,12 +1,22 @@
 scanr-organizations:
   schema: scanr-organizations.json
   annotation: scanr-organizations.yaml
-  content: This index stores scientific organizations (universities, research institutions,
-    companies) that appear in the research ecosystem.
+  content: "Research organizations and laboratories (universities, CNRS units, etc.). One document is one organization."
   primary_fields:
     - id
-    - name
-    - type
-    - country
-    - city
-    - domains
+    - status
+    - label.default
+    - acronym.default
+    - description.default
+    - externalIds.id
+    - externalIds.type
+    - kind
+    - isFrench
+    - institutions.structure
+    - institutions.label.default
+    - institutions.relationType
+  excludes:
+    - autocompleted
+    - autocompletedText
+    - reasons_scanr
+    - encoded_key

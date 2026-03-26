@@ -1,20 +1,25 @@
 scanr-participations:
   schema: scanr-participations.json
   annotation: scanr-participations.yaml
-  content: This index stores scientific participations (journal articles, theses,
-    conference papers, preprints) aggregated from HAL, PubMed, and Crossref. Each
-    document represents one production with its bibliographic metadata, authors, affiliations,
-    and open-access status.
+  content: "Projects participations by organizations. One document is one project participation by an organization."
   primary_fields:
-    - id
-    - title
-    - year
-    - type
-    - isOa
-    - authors.fullName
-    - authors.role
-    - externalIds.type
-    - externalIds.id
-    - source.title
-    - source.issn
-    - domains
+    - participant_id
+    - participant_kind
+    - participant_type
+    - participant_label.fr
+    - participant_label.en
+    - participant_acronym.default
+    - participant_status
+    - participation_id
+    - project_id
+    - project_type
+    - project_year
+    - project_action
+    - project_label
+  cross_refs:
+    participant_id:
+      index: scanr-organizations
+      join_field: id
+    project_id:
+      index: scanr-projects
+      join_field: id

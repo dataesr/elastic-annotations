@@ -1,20 +1,29 @@
 scanr-projects:
   schema: scanr-projects.json
   annotation: scanr-projects.yaml
-  content: This index stores scientific projects (journal articles, theses, conference
-    papers, preprints) aggregated from HAL, PubMed, and Crossref. Each document represents
-    one production with its bibliographic metadata, authors, affiliations, and open-access
-    status.
+  content: "Funded research projects (ANR, EU, etc.) with budget and partners. One document is one project."
   primary_fields:
     - id
-    - title
+    - label.default
+    - acronym.default
+    - description.default
     - year
     - type
-    - isOa
-    - authors.fullName
-    - authors.role
-    - externalIds.type
-    - externalIds.id
-    - source.title
-    - source.issn
-    - domains
+    - budgetTotal
+    - budgetFinanced
+    - keywords.en
+    - actions.id
+    - actions.label.default
+    - call.id
+    - project_domains.label.default
+    - participants.structure.id
+    - classification.primary_field
+    - url
+  excludes:
+    - autocompleted
+    - autocompletedText
+    - encoded_key
+  cross_refs:
+    participants.structure.id:
+      index: scanr-organizations
+      join_field: id
