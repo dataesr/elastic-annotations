@@ -107,7 +107,8 @@ def build_annotations(index: str, es_fields: dict, schema_fields: dict, existing
         if ai_suggestion:
             entry["ai_suggestion"] = ai_suggestion
 
-        # TODO: add cross_ref
+        if path in config.get("cross_refs", {}):
+            entry["cross_ref"] = config["cross_refs"][path]
 
         fields[path] = entry
 
