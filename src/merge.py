@@ -10,9 +10,8 @@ Usage:
 import json
 import argparse
 
-from src.config import SCANR_INDEXES, ANNOTATIONS_FOLDER, SCHEMAS_FOLDER
 from src.elastic import es_get_flat_mapping
-from src.utils import load_annotations, save_annotations, match_patterns
+from src.utils import load_annotations, save_annotations, match_patterns, get_config
 
 
 def flatten_json_schema(schema: dict, prefix: str = "") -> dict:
@@ -29,8 +28,6 @@ def flatten_json_schema(schema: dict, prefix: str = "") -> dict:
         entry = {}
         if "type" in field_def:
             entry["type"] = field_def["type"]
-            # if field_def["type"] == "array" and "items" in field_def and "properties" not in field_def["items"]:
-            #     entry["items_type"] = field_def["items"].get("type", "unknown")
         if "description" in field_def:
             entry["description"] = field_def["description"]
         if "enum" in field_def:
@@ -56,13 +53,14 @@ def flatten_json_schema(schema: dict, prefix: str = "") -> dict:
 
 def build_annotations(index: str, es_fields: dict, schema_fields: dict, existing: dict) -> dict:
     """
-    Merge all three sources. Priority:
+    Merge all three sources on ES fields.
+    Priority:
       1. existing annotations (never overwrite approved/rejected)
       2. JSON schema descriptions
       3. blank → status: draft (needs enrichment)
     """
     fields = {}
-    all_paths = sorted(set(es_fields) | set(schema_fields) | set(existing))
+    all_paths = sorted(set(es_fields))
 
     for path in all_paths:
         ex = existing.get(path, {})
@@ -71,13 +69,12 @@ def build_annotations(index: str, es_fields: dict, schema_fields: dict, existing
 
         status = ex.get("status", "")
         type = ex.get("type", sc.get("type", es.get("type", "unknown")))
-        description = ex.get("description", sc.get("description", ""))
+        description = ex.get("description", sc.get("description"))
         status = "approved" if description else "draft"
-        entry = {
-            "status": status,
-            "type": type,
-            "description": description,
-        }
+        entry = {"status": status, "type": type}
+
+        if description:
+            entry["description"] = description
 
         if "keyword" in es.get("fields", {}):
             entry["has_keyword"] = True
@@ -85,13 +82,13 @@ def build_annotations(index: str, es_fields: dict, schema_fields: dict, existing
         if es.get("analyzer"):
             entry["analyzer"] = es["analyzer"]
 
+        config = get_config(index)
         if es.get("exclude", False) or (
-            (match_patterns(path, SCANR_INDEXES[index].get("excludes", [])))
-            and (path not in SCANR_INDEXES[index].get("includes", []))
+            (match_patterns(path, config.get("excludes", []))) and (path not in config.get("includes", []))
         ):
             entry["exclude"] = True
 
-        if path in SCANR_INDEXES[index]["primary_fields"]:
+        if path in config.get("primary_fields", []):
             entry["primary"] = True
 
         enum = ex.get("enum", sc.get("enum"))
@@ -110,37 +107,23 @@ def build_annotations(index: str, es_fields: dict, schema_fields: dict, existing
         if ai_suggestion:
             entry["ai_suggestion"] = ai_suggestion
 
-        # Attach cross_ref if configured
-        # cross_ref = _resolve_crossref(path)
-        # if cross_ref:
-        #     entry["cross_ref"] = cross_ref
+        # TODO: add cross_ref
 
         fields[path] = entry
 
     return fields
 
 
-# def _resolve_crossref(path: str) -> dict | None:
-#     """Check if this field path matches any entry in INDEX_CROSSREFS."""
-#     if path in config.INDEX_CROSSREFS:
-#         return config.INDEX_CROSSREFS[path]
-#     # Check prefix patterns ending with .*
-#     for pattern, ref in config.INDEX_CROSSREFS.items():
-#         if pattern.endswith(".*"):
-#             prefix = pattern[:-2]
-#             if path.startswith(prefix + "."):
-#                 return ref
-#     return None
-
-
 def merge_annotations(index, fields: dict, path: str):
     total = len(fields)
     approved = sum(1 for f in fields.values() if f.get("status") == "approved")
     draft = sum(1 for f in fields.values() if f.get("status") == "draft")
+    config = get_config(index)
 
     data = {
         "_meta": {
             "index": index,
+            "description": config["content"],
             "total_fields": total,
             "approved": approved,
             "draft": draft,
@@ -156,14 +139,12 @@ def main():
     parser = argparse.ArgumentParser(description="Merge ES mapping + JSON schema → annotations.yaml")
     parser.add_argument("--index", "-i", required=True, help="ES index name")
     parser.add_argument("--schema", "-s", help="Override default path to JSON schema file")
-    parser.add_argument("--out", "-o", help="Override default path to annotations file")
     args = parser.parse_args()
 
     index = args.index
-    if index not in SCANR_INDEXES:
-        raise ValueError(f"Index {index} not found in SCANR_INDEXES")
-    schema_path = args.schema or f"{SCHEMAS_FOLDER}/{SCANR_INDEXES[index]['schema']}"
-    annotations_path = args.out or f"{ANNOTATIONS_FOLDER}/{SCANR_INDEXES[index]['annotation']}"
+    config = get_config(index)
+    schema_path = args.schema or f"schemas/backup/{config['schema']}"
+    annotations_path = f"annotations/{config['annotation']}"
 
     # 1. Load ES fields
     print(f"[merge] Fetching mapping from {index}")

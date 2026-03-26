@@ -1,0 +1,20 @@
+scanr-patents:
+  schema: scanr-patents.json
+  annotation: scanr-patents.yaml
+  content: This index stores scientific patents (journal articles, theses, conference
+    papers, preprints) aggregated from HAL, PubMed, and Crossref. Each document represents
+    one production with its bibliographic metadata, authors, affiliations, and open-access
+    status.
+  primary_fields:
+    - id
+    - title
+    - year
+    - type
+    - isOa
+    - authors.fullName
+    - authors.role
+    - externalIds.type
+    - externalIds.id
+    - source.title
+    - source.issn
+    - domains

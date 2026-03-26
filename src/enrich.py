@@ -17,8 +17,7 @@ import sys
 import time
 from pathlib import Path
 
-from src.config import ANNOTATIONS_FOLDER, SCANR_INDEXES
-from src.utils import load_annotations, save_annotations
+from src.utils import load_annotations, save_annotations, get_config
 
 BATCH_SIZE = 10
 
@@ -96,16 +95,15 @@ def parse_response(text: str, batch: list[tuple]) -> list[dict | None]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="AI-enrich index draft fields in annotations")
+    parser = argparse.ArgumentParser(description="AI-enrich index draft fields in annotations.yaml")
     parser.add_argument("--index", "-i", required=True, help="Index to enrich")
     parser.add_argument("--field", "-f", default=None, help="Enrich a single field path")
     parser.add_argument("--force", action="store_true", help="Force re-enrichment of existing ai_suggestion")
     args = parser.parse_args()
 
     index = args.index
-    if index not in SCANR_INDEXES:
-        raise ValueError(f"Index {index} not found in SCANR_INDEXES")
-    annotations_path = f"{ANNOTATIONS_FOLDER}/{SCANR_INDEXES[index]['annotation']}"
+    config = get_config(index)
+    annotations_path = f"annotations/{config['annotation']}"
     single_field = args.field
 
     if not Path(annotations_path).exists():
@@ -153,14 +151,13 @@ def main():
             n_fields=len(batch),
             fields=format_fields_for_prompt(batch),
         )
-        system = SYSTEM_PROMPT.format(index_content=SCANR_INDEXES[index]["content"])
+        system = SYSTEM_PROMPT.format(index_content=config["content"])
         response_text = mistral_completion(system=system, user=prompt)
         parsed = parse_response(response_text, batch)
 
         for (path, info), suggestion in zip(batch, parsed):
             if suggestion is None:
                 continue
-            # Write suggestion but keep status=draft — human must approve
             fields[path]["ai_suggestion"] = {
                 "description": suggestion.get("description", ""),
             }

@@ -1,0 +1,12 @@
+scanr-organizations:
+  schema: scanr-organizations.json
+  annotation: scanr-organizations.yaml
+  content: This index stores scientific organizations (universities, research institutions,
+    companies) that appear in the research ecosystem.
+  primary_fields:
+    - id
+    - name
+    - type
+    - country
+    - city
+    - domains

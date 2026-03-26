@@ -18,8 +18,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from src.config import SCANR_INDEXES, ANNOTATIONS_FOLDER
-from src.utils import load_annotations, save_annotations
+from src.utils import load_annotations, save_annotations, get_config
 
 
 def print_field(path: str, info: dict):
@@ -27,13 +26,6 @@ def print_field(path: str, info: dict):
     print(f"  Field : {path}")
     print(f"  Type  : {info.get('type', '?')}")
     print(f"  Status: {info.get('status', '?')}")
-    if info.get("primary"):
-        print("  Primary: yes")
-    if info.get("cross_ref"):
-        cr = info["cross_ref"]
-        print(f"  Cross-ref → {cr['index']} (join on {cr.get('join_field','?')})")
-    if info.get("enum"):
-        print(f"  Enum  : {info['enum']}")
     print()
     if info.get("description"):
         print("  Current description:")
@@ -77,9 +69,8 @@ def main():
     args = parser.parse_args()
 
     index = args.index
-    if index not in SCANR_INDEXES:
-        raise ValueError(f"Index {index} not found in SCANR_INDEXES")
-    annotations_path = f"{ANNOTATIONS_FOLDER}/{SCANR_INDEXES[index]['annotation']}"
+    config = get_config(index)
+    annotations_path = f"annotations/{config['annotation']}"
     single_field = args.field
 
     if not Path(annotations_path).exists():
@@ -124,7 +115,6 @@ def main():
 
         if action == "a":
             fields[path]["description"] = sug["description"]
-            fields[path]["primary"] = sug.get("primary", info.get("primary", False))
             if sug.get("notes"):
                 fields[path]["notes"] = sug["notes"]
             fields[path]["status"] = "approved"
@@ -133,19 +123,12 @@ def main():
             approved_count += 1
 
         if action == "e":
-            base = sug.get("description") or info.get("description") or ""
-            new_desc = edit_description(base)
-            fields[path]["description"] = new_desc
-
-            # Also prompt for primary override
-            current_primary = sug.get("primary", info.get("primary", False))
-            flip = (
-                input(f"  Primary? (currently {'yes' if current_primary else 'no'}, blank to keep) [y/n] > ").strip().lower()
-            )
-            if flip == "y":
-                fields[path]["primary"] = True
-            elif flip == "n":
-                fields[path]["primary"] = False
+            current_desc = sug.get("description") or info.get("description") or ""
+            new_desc = edit_description(current_desc)
+            if not new_desc:
+                fields[path].pop("description", None)
+            else:
+                fields[path]["description"] = new_desc
 
             fields[path]["status"] = "approved"
             fields[path].pop("ai_suggestion", None)

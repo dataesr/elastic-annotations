@@ -10,11 +10,10 @@ import json
 import argparse
 from pathlib import Path
 
-from src.config import SCANR_INDEXES, SCHEMAS_FOLDER, ANNOTATIONS_FOLDER
-from src.utils import load_annotations
+from src.utils import load_annotations, get_config
 
 
-def _build_nested_properties(properties: dict, keys: list[str], infos: dict, include_mcp_extensions: bool) -> dict:
+def _build_nested_properties(properties: dict, keys: list[str], infos: dict) -> dict:
     """
     Helper to recursively build nested properties.
 
@@ -28,7 +27,12 @@ def _build_nested_properties(properties: dict, keys: list[str], infos: dict, inc
 
     if len(remaining_keys) == 0:
         # Leaf node: apply the schema info directly
-        props = infos_to_schema(infos, include_mcp_extensions)
+        if infos.get("type") == "array":
+            if "items" not in properties[current_key]:
+                properties[current_key]["items"] = {}
+            if infos.get("has_keyword", False):
+                properties[current_key]["items"].update({"type": "string"})
+        props = infos_to_schema(infos)
         properties[current_key].update(props)
     else:
         node = properties[current_key]
@@ -42,7 +46,7 @@ def _build_nested_properties(properties: dict, keys: list[str], infos: dict, inc
                 node["items"]["required"] = []
             if len(remaining_keys) == 1:
                 node["items"]["required"].append(remaining_keys[0])
-            _build_nested_properties(node["items"]["properties"], remaining_keys, infos, include_mcp_extensions)
+            _build_nested_properties(node["items"]["properties"], remaining_keys, infos)
         else:
             # Object type (default): children go into properties
             if "type" not in node:
@@ -53,12 +57,12 @@ def _build_nested_properties(properties: dict, keys: list[str], infos: dict, inc
                 node["required"] = []
             if len(remaining_keys) == 1:
                 node["required"].append(remaining_keys[0])
-            _build_nested_properties(node["properties"], remaining_keys, infos, include_mcp_extensions)
+            _build_nested_properties(node["properties"], remaining_keys, infos)
 
     return properties
 
 
-def infos_to_schema(info: dict, include_mcp_extensions: bool) -> dict:
+def infos_to_schema(info: dict) -> dict:
     type = info.get("type", "object")
     description = info.get("description", "")
 
@@ -88,19 +92,11 @@ def infos_to_schema(info: dict, include_mcp_extensions: bool) -> dict:
         schema["enum"] = info["enum"]
     if info.get("example"):
         schema["example"] = info["example"]
-    if info.get("notes") and include_mcp_extensions:
-        schema["description"] = (schema.get("description", "") + " " + info["notes"]).strip()
-
-    # MCP extensions
-    if include_mcp_extensions:
-        schema["x-primary"] = info.get("primary", False)
-        if info.get("cross_ref"):
-            schema["x-cross-ref"] = info["cross_ref"]
 
     return schema
 
 
-def build_schema(index, annotations: dict, include_mcp_extensions: bool = False, include_draft: bool = False) -> dict:
+def build_json_schema(index, annotations: dict, include_draft: bool = False, include_ai_suggestion: bool = False) -> dict:
     fields = annotations.get("fields", {})
 
     # Filter fields
@@ -110,16 +106,23 @@ def build_schema(index, annotations: dict, include_mcp_extensions: bool = False,
         if info.get("status") == "approved" or (include_draft and info.get("status") == "draft")
     }
 
+    # Add ai_suggestion to description if include_ai_suggestion is True
+    if include_ai_suggestion:
+        for path, info in selected.items():
+            if not info.get("description") and info.get("ai_suggestion", {}).get("description"):
+                info["description"] = info["ai_suggestion"]["description"]
+
     # Build top-level JSON Schema
     properties = {}
     for dotted_key, infos in sorted(selected.items()):
         keys = dotted_key.split(".")
-        properties.update(_build_nested_properties(properties, keys, infos, include_mcp_extensions))
+        properties.update(_build_nested_properties(properties, keys, infos))
 
+    config = get_config(index)
     schema = {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
-        "description": SCANR_INDEXES[index]["content"],
+        "description": config["content"],
         "properties": properties,
     }
 
@@ -135,14 +138,14 @@ def main():
     parser = argparse.ArgumentParser(description="Export annotations to JSON Schema files")
     parser.add_argument("--index", "-i", required=True, help="Index to export")
     parser.add_argument("--include-draft", action="store_true", help="Include draft fields with empty description")
+    parser.add_argument("--include-ai-suggestion", action="store_true", help="Include AI suggestions in the schema")
     args = parser.parse_args()
 
     index = args.index
-    if index not in SCANR_INDEXES:
-        raise ValueError(f"Index {index} not found in SCANR_INDEXES")
-    annotations_path = f"{ANNOTATIONS_FOLDER}/{SCANR_INDEXES[index]['annotation']}"
+    config = get_config(index)
+    annotations_path = f"annotations/{config['annotation']}"
 
-    out_dir = Path(SCHEMAS_FOLDER)
+    out_dir = Path("schemas")
     out_dir.mkdir(parents=True, exist_ok=True)
 
     annotations = load_annotations(annotations_path)
@@ -153,18 +156,14 @@ def main():
     print(f"[export] {approved} approved fields, {draft} draft {'(skipped)' if not args.include_draft else ''}")
 
     # 1. API schema (clean JSON Schema, no extensions)
-    api_schema = build_schema(index, annotations, include_mcp_extensions=False, include_draft=args.include_draft)
-    api_path = out_dir.joinpath("api", SCANR_INDEXES[index]["schema"])  # type: ignore
+    api_schema = build_json_schema(
+        index, annotations, include_draft=args.include_draft, include_ai_suggestion=args.include_ai_suggestion
+    )
+    api_path = out_dir.joinpath(config["schema"])
     save_schema(api_schema, api_path)
     print(f"[export] API schema → {api_path}")
 
-    # 2. MCP schema (JSON Schema + x-primary + x-cross-ref)
-    mcp_schema = build_schema(index, annotations, include_mcp_extensions=True, include_draft=args.include_draft)
-    mcp_path = out_dir.joinpath("mcp", SCANR_INDEXES[index]["schema"])  # type: ignore
-    save_schema(mcp_schema, mcp_path)
-    print(f"[export] MCP schema → {mcp_path}")
-
-    # 3. Summary stats
+    # 2. Summary stats
     fields = annotations.get("fields", {})
     primary_count = sum(1 for f in fields.values() if f.get("primary") and f.get("status") == "approved")
     crossref_count = sum(1 for f in fields.values() if f.get("cross_ref") and f.get("status") == "approved")

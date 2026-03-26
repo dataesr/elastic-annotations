@@ -1,0 +1,11 @@
+scanr-persons:
+  schema: scanr-persons.json
+  annotation: scanr-persons.yaml
+  content: This index stores scientific persons (researchers, authors, etc.) that
+    appear in the research ecosystem.
+  primary_fields:
+    - id
+    - fullName
+    - role
+    - email
+    - domains
