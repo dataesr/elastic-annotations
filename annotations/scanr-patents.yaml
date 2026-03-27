@@ -5,78 +5,133 @@ _meta:
   total_fields: 147
   approved: 0
   draft: 147
+  pending_review: 147
 fields:
   acronym:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for institution acronyms in multiple languages or formats.
+      notes: Use the most specific language subfield available for queries to ensure
+        precision.
   acronym.default:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Default or primary acronym of the research institution.
+      notes: Fallback when no language-specific acronym is available or preferred.
   acronym.en:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: English version of the institution's acronym.
+      notes: Prefer this field for English-language applications or queries.
   acronym.fr:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: French version of the institution's acronym.
+      notes: Primary field for French-language applications or queries.
   address:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for the physical address details of the institution.
+      notes: Useful for geospatial queries or mapping applications.
   address.address:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: Full street address of the research institution.
+      notes: May include postal code; combine with city/country for full context.
   address.city:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: City where the research institution is located.
+      notes: Normalize city names (e.g., 'Paris' instead of 'Paris Cedex') for consistency.
   address.country:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: Country where the research institution is located.
+      notes: Use ISO 3166-1 alpha-2 country codes (e.g., 'FR') if available.
   ai_description:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for AI-generated descriptions of the patent.
+      notes: Descriptions may vary in detail or accuracy; validate for critical use
+        cases.
   ai_description.description:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for multi-language AI-generated descriptions of the patent.
+      notes: Use language-specific subfields to retrieve the most relevant description.
   ai_description.description.default:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: Neutral-language summary of the patent's technical content and
+        purpose.
+      notes: Use for quick understanding without language barriers; prefer 'en' or
+        'fr' if available.
   ai_description.description.en:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: English-language summary of the patent's technical content and
+        purpose.
   ai_description.description.fr:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: French-language summary of the patent's technical content and purpose.
   alias:
     status: draft
     type: text
     has_keyword: true
     analyzer: heavy
+    ai_suggestion:
+      description: Alternative name(s) or shorthand commonly used to refer to this
+        patent.
   applicants:
     status: draft
     type: object
+    ai_suggestion:
+      description: Organizations or individuals who filed the patent application.
   applicants.country:
     status: draft
     type: text
     has_keyword: true
     primary: true
+    ai_suggestion:
+      description: Country where the applicant is legally registered or resides.
   applicants.id_name:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique identifier combining applicant's name and normalized identifier.
   applicants.ids:
     status: draft
     type: object
+    ai_suggestion:
+      description: Collection of external identifiers for the applicant, e.g., ROR,
+        SIREN.
   applicants.ids.id:
     status: draft
     type: text
@@ -85,500 +140,877 @@ fields:
     cross_ref:
       index: scanr-organizations
       join_field: id
+    ai_suggestion:
+      description: External identifier for the applicant, linking to the scanr-organizations
+        index.
+      notes: Use for cross-referencing applicant details or validating applicant data.
   applicants.ids.type:
     status: draft
     type: text
     has_keyword: true
     primary: true
+    ai_suggestion:
+      description: Type of external identifier (e.g., ROR, SIREN, VAT).
   applicants.name:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
     primary: true
+    ai_suggestion:
+      description: Full name of the entity or individual listed as a patent applicant.
+      notes: May include multiple entries; verify against 'applicants.type' for entity
+        classification.
   applicants.type:
     status: draft
     type: text
     has_keyword: true
     primary: true
+    ai_suggestion:
+      description: Classification of the applicant as 'person' or 'organization'.
+      notes: Use to filter or group applicants by type for analysis.
   applicationDate:
     status: draft
     type: date
+    ai_suggestion:
+      description: Official filing date of the patent application in YYYY-MM-DD format.
   autocompleted:
     status: draft
     type: text
     analyzer: autocomplete
+    ai_suggestion:
+      description: System-generated keywords or tags for search optimization.
+      notes: Not human-curated; may contain noise or irrelevant terms.
   autocompletedText:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: Human-readable text derived from 'autocompleted' for display purposes.
   co_cpc_classe:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Cooperative Patent Classification (CPC) class code for the patent.
+      notes: Use with 'co_cpc_section' and 'co_cpc_ss_classe' for precise classification.
   co_cpc_section:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Cooperative Patent Classification (CPC) section code for the patent.
   co_cpc_ss_classe:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Cooperative Patent Classification (CPC) subclass code for the patent.
+      notes: Subclass provides finer granularity than class or section.
   co_organizations:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Names of collaborating organizations listed on the patent.
+      notes: May overlap with 'applicants.name' if organizations are also applicants.
   co_persons:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Names of collaborating individuals listed on the patent.
+      notes: May include inventors or contributors not listed as applicants.
   cpc:
     status: draft
     type: object
+    ai_suggestion:
+      description: Cooperative Patent Classification (CPC) metadata for the patent.
+      notes: Use to analyze technological domains or compare patents by classification.
   cpc.classe:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for CPC class-level details of the patent.
+      notes: Classes represent broad technological categories within CPC.
   cpc.classe.code:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Alphanumeric code identifying the CPC class (e.g., 'A01B').
   cpc.classe.id_name:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique identifier combining class code and name for precise referencing.
+      notes: 'Format: ''code — name'' (e.g., ''A01B — Soil working'').'
   cpc.classe.label:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Human-readable label describing the CPC class (e.g., 'Soil working').
   cpc.groupe:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for CPC group-level details of the patent.
+      notes: Groups refine classes into specific technological subcategories.
   cpc.groupe.code:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Alphanumeric code identifying the CPC group (e.g., 'A01B1/00').
   cpc.groupe.label:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Human-readable label describing the CPC group (e.g., 'Hand tools').
   cpc.section:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for CPC section-level details of the patent.
+      notes: Sections are the highest-level CPC categories (e.g., 'A' for Human Necessities).
   cpc.section.code:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Single-letter code identifying the CPC section (e.g., 'A').
   cpc.section.id_name:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Top-level CPC section identifier and name (e.g., 'A Human Necessities').
+      notes: Use for broad categorization; combine with 'label' for display.
   cpc.section.label:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Human-readable label of the CPC section (e.g., 'Human Necessities').
   cpc.ss_classe:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for CPC subclass details, including code, ID, and label.
   cpc.ss_classe.code:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: CPC subclass code (e.g., 'A01B') for precise technical classification.
   cpc.ss_classe.id_name:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: CPC subclass identifier and name (e.g., 'A01B PLOUGHS OR PLOWING').
   cpc.ss_classe.label:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Human-readable label of the CPC subclass (e.g., 'PLOUGHS OR PLOWING').
   denormalized_structures:
     status: draft
     type: object
+    ai_suggestion:
+      description: Denormalized data about research institutions linked to the patent.
   denormalized_structures.acronym:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for acronyms of the institution in multiple languages.
   denormalized_structures.acronym.default:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Default language acronym of the research institution (e.g., 'CNRS').
   denormalized_structures.acronym.en:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: English translation of the institution's acronym, if available.
   denormalized_structures.acronym.fr:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: French acronym of the research structure associated with the patent.
+      notes: Use for display or filtering; may contain multiple acronyms if the structure
+        has evolved.
   denormalized_structures.id:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the research structure linked to the patent.
+      notes: Stable across name changes; prefer over name-based lookups for consistency.
   denormalized_structures.id_name:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Combined ID and name of the research structure for human-readable
+        identification.
   denormalized_structures.institutions:
     status: draft
     type: object
+    ai_suggestion:
+      description: Nested object containing historical and relational data about affiliated
+        institutions.
   denormalized_structures.institutions.fromDate:
     status: draft
     type: date
+    ai_suggestion:
+      description: Start date of the institution's affiliation with the research structure.
+      notes: Used to determine temporal relevance of the relationship.
   denormalized_structures.institutions.label:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Official name of the institution at the time of the patent filing.
+      notes: May differ from current name due to rebranding or mergers.
   denormalized_structures.institutions.natural_id:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Persistent identifier for the institution, independent of name
+        changes.
   denormalized_structures.institutions.relationType:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Type of relationship between the institution and the research structure
+        (e.g., 'parent', 'subsidiary').
   denormalized_structures.institutions.structure:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique identifier of the specific structure within the institution.
+      notes: Useful for disambiguating departments or labs with similar names.
   denormalized_structures.isFrench:
     status: draft
     type: boolean
+    ai_suggestion:
+      description: Flag indicating whether the research structure is based in France.
   denormalized_structures.kind:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Type of research structure (e.g., university, lab) associated with
+        the patent.
+      notes: Use this field to filter or categorize patents by institution type.
   denormalized_structures.label:
     status: draft
     type: object
+    ai_suggestion:
+      description: Multilingual labels for the research structure, keyed by language
+        code.
   denormalized_structures.label.default:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Default name of the research structure if no language-specific
+        label exists.
   denormalized_structures.label.en:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: English name of the research structure.
   denormalized_structures.label.fr:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: French name of the research structure.
   denormalized_structures.mainAddress:
     status: draft
     type: object
+    ai_suggestion:
+      description: Primary address details for the research structure.
   denormalized_structures.mainAddress.address:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Full street address of the research structure.
+      notes: May include postal code; prefer parsing city/country fields for structured
+        queries.
   denormalized_structures.mainAddress.city:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: City where the research structure is located.
   denormalized_structures.mainAddress.country:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Country where the research structure is located.
   denormalized_structures.mainAddress.gps:
     status: draft
     type: object
+    ai_suggestion:
+      description: Geographic coordinates (latitude/longitude) of the research structure.
+      notes: 'Useful for mapping or proximity-based queries; format: {"lat": float,
+        "lon": float}.'
   denormalized_structures.mainAddress.gps.lat:
     status: draft
     type: float
+    ai_suggestion:
+      description: Latitude coordinate of the patent applicant's main address in decimal
+        degrees.
+      notes: Use for geospatial queries or mapping; verify precision if used for exact
+        location matching.
   denormalized_structures.mainAddress.gps.lon:
     status: draft
     type: float
+    ai_suggestion:
+      description: Longitude coordinate of the patent applicant's main address in
+        decimal degrees.
+      notes: Use with 'lat' for geospatial queries; ensure both fields are present
+        for accurate results.
   denormalized_structures.mainAddress.localisationSuggestions:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Alternative address suggestions for the patent applicant's main
+        location.
+      notes: May contain multiple entries; prioritize structured fields (lat/lon/postcode)
+        when available.
   denormalized_structures.mainAddress.postcode:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Postal code of the patent applicant's main address in France.
+      notes: Format follows French postal standards (5 digits); may be used for regional
+        filtering.
   denormalized_structures.parents:
     status: draft
     type: object
+    ai_suggestion:
+      description: Hierarchical relationships of the patent applicant's parent organizations.
+      notes: Contains nested fields like 'fromDate' and 'relationType'; expand for
+        full organizational context.
   denormalized_structures.parents.fromDate:
     status: draft
     type: date
+    ai_suggestion:
+      description: Start date of the parent organization's relationship with the applicant.
+      notes: Use to track organizational changes over time; may be null if unknown.
   denormalized_structures.parents.natural_id:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the parent organization in external systems.
+      notes: Use for cross-referencing with other datasets; format may vary by source.
   denormalized_structures.parents.relationType:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Type of relationship between the applicant and parent organization
+        (e.g., 'subsidiary').
+      notes: Standardize values during queries (e.g., lowercase) to avoid mismatches.
   denormalized_structures.parents.structure:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Name of the parent organization associated with the patent applicant.
+      notes: May differ from official legal names; use 'natural_id' for precise identification.
   denormalized_structures.status:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Current operational status of the patent applicant (e.g., 'active',
+        'dissolved').
+      notes: Values may evolve; check for updates if status is critical to your use
+        case.
   description:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for multilingual descriptions of the patent's technical
+        content and claims.
+      notes: Use the language-specific subfields (e.g., 'en', 'fr') to retrieve or
+        display the description in the desired language.
   description.default:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: Fallback text describing the patent's technical content and claims
+        if no language-specific version exists.
   description.en:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: English version of the patent's technical description and claims.
   description.fr:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: French version of the patent's technical description and claims.
   domains:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for the scientific or technical domains associated with
+        the patent.
+      notes: Domains are typically hierarchical (e.g., 'Biology > Genetics') and may
+        include multiple entries.
   domains.label:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for multilingual labels of the patent's associated domains.
   domains.label.default:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Fallback label for the patent's domain if no language-specific
+        version exists.
   firstName:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: First name of the primary inventor or patent applicant.
   fullName:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Full name of the primary inventor or patent applicant, combining
+        first and last names.
   grantedDate:
     status: draft
     type: date
+    ai_suggestion:
+      description: Date when the patent was officially granted by the patent office.
+      notes: Use this field to filter or sort patents by their grant status or timeline.
   id:
     status: draft
     type: text
     has_keyword: true
     primary: true
+    ai_suggestion:
+      description: Unique identifier for the patent document, used for direct retrieval
+        and reference.
+      notes: Treat as opaque string; do not infer meaning from format or length.
   inpadocFamily:
     status: draft
     type: text
     has_keyword: true
     primary: true
+    ai_suggestion:
+      description: INPADOC family identifier grouping related patents across jurisdictions.
+      notes: Use to find equivalent patents in other countries or languages.
   institutions:
     status: draft
     type: object
+    ai_suggestion:
+      description: List of French research institutions that filed or co-filed the
+        patent.
   institutions.label:
     status: draft
     type: text
     has_keyword: true
     analyzer: heavy
+    ai_suggestion:
+      description: Official name of the research institution associated with the patent
+        filing.
   inventionKind:
     status: draft
     type: text
     has_keyword: true
     primary: true
+    ai_suggestion:
+      description: Classification of the invention type (e.g., device, method, composition).
   inventors:
     status: draft
     type: object
+    ai_suggestion:
+      description: List of individuals credited as inventors on the patent.
   inventors.country:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Country of residence or affiliation for the inventor at filing
+        time.
   inventors.ids:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for external identifiers associated with an inventor.
   inventors.ids.id:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: External identifier value (e.g., ORCID, internal researcher ID)
+        for the inventor.
   inventors.ids.type:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Type of external identifier (e.g., ORCID, internal) for the inventor's
+        ID.
   inventors.name:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Full name of each individual credited as an inventor on the patent.
+      notes: May include multiple entries; use for attributing contributions or identifying
+        collaborators.
   inventors.type:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Categorical role of the inventor (e.g., 'academic', 'industrial',
+        'student').
+      notes: Use to filter or analyze inventor demographics or collaboration patterns.
   isInternational:
     status: draft
     type: boolean
     primary: true
+    ai_suggestion:
+      description: Indicates if the patent was filed under the Patent Cooperation
+        Treaty (PCT).
+      notes: True for international filings; false for national-only (France).
   isOa:
     status: draft
     type: boolean
     primary: true
+    ai_suggestion:
+      description: Indicates if the patent is published under an open-access license.
+      notes: Use to identify patents with fewer restrictions on reuse or dissemination.
   isOeb:
     status: draft
     type: boolean
     primary: true
+    ai_suggestion:
+      description: Indicates if the patent was filed with the European Patent Office
+        (EPO).
+      notes: True for EPO filings; false for national or PCT-only filings.
   keywords:
     status: draft
     type: object
+    ai_suggestion:
+      description: Collection of keyword sets associated with the patent’s technical
+        or scientific focus.
   keywords.default:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Default language keywords describing the patent’s subject matter.
+      notes: Fallback when no language-specific keywords are available.
   keywords.en:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: English-language keywords for the patent’s technical or scientific
+        content.
   keywords.fr:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: French-language keywords for the patent’s technical or scientific
+        content.
   label:
     status: draft
     type: object
+    ai_suggestion:
+      description: Localized display names or titles for the patent in multiple languages.
   label.default:
     status: draft
     type: text
     has_keyword: true
     analyzer: heavy
+    ai_suggestion:
+      description: Primary name of the patent in a language-agnostic format for display.
+      notes: Use when no language-specific label is available or for fallback display.
   label.en:
     status: draft
     type: text
     has_keyword: true
     analyzer: heavy
+    ai_suggestion:
+      description: English translation of the patent's name for international accessibility.
   label.fr:
     status: draft
     type: text
     has_keyword: true
     analyzer: heavy
+    ai_suggestion:
+      description: French name of the patent as originally filed or officially translated.
   lastName:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Family name of the primary inventor or patent holder.
+      notes: May appear in multiple documents if the inventor holds multiple patents.
   leaders:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for individuals or entities leading the patent's development.
   leaders.firstName:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: First name of a leader associated with the patent's development.
   leaders.lastName:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Last name of a leader associated with the patent's development.
   participants:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for all contributors or entities involved in the patent.
   participants.label:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for display names of participants in multiple languages.
   participants.label.default:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Default display name for a participant when no language-specific
+        label exists.
+      notes: Use as a fallback when 'label.en' or 'label.fr' are unavailable.
   patents:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container object for all metadata related to a single patent document.
+      notes: Use this object to access all fields specific to an individual patent.
   patents.applicationDate:
     status: draft
     type: date
+    ai_suggestion:
+      description: Date when the patent application was officially filed with the
+        patent office.
   patents.applicationNumber:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique identifier assigned to the patent application by the filing
+        office.
   patents.espacenetUrl:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Direct URL to the patent's record on the Espacenet database for
+        public access.
   patents.grantedDate:
     status: draft
     type: date
+    ai_suggestion:
+      description: Date when the patent was officially granted by the patent office.
   patents.id:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the patent, often used for internal or external
+        references.
   patents.internatApplicationNumber:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: International application number if the patent was filed under
+        the PCT system.
   patents.ipType:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Type of intellectual property, such as patent, utility model, or
+        design.
   patents.isGranted:
     status: draft
     type: boolean
+    ai_suggestion:
+      description: Boolean flag indicating whether the patent has been granted or
+        is still pending.
   patents.isPriority:
     status: draft
     type: boolean
+    ai_suggestion:
+      description: Boolean flag indicating if this application claims priority from
+        an earlier filing.
   patents.office:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: National or regional patent office that granted the patent, e.g.,
+        INPI or EPO.
+      notes: Use this field to filter patents by jurisdiction or compare filing trends
+        across offices.
   patents.publicationDate:
     status: draft
     type: date
+    ai_suggestion:
+      description: Official date when the patent was published by the issuing office.
+      notes: Format is ISO-8601 (YYYY-MM-DD); may differ from filing date by months
+        or years.
   patents.publicationNumber:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique identifier assigned by the patent office upon publication,
+        e.g., FR3098765.
   patents.yearPublication:
     status: draft
     type: long
+    ai_suggestion:
+      description: Year extracted from the publication date for easier annual trend
+        analysis.
   productionType:
     status: draft
     type: text
     has_keyword: true
     primary: true
+    ai_suggestion:
+      description: Indicates whether the patent is a standard filing, provisional
+        application, or utility model.
   publicationDate:
     status: draft
     type: date
+    ai_suggestion:
+      description: Alias for patents.publicationDate; use for consistency with other
+        document types.
   summary:
     status: draft
     type: object
+    ai_suggestion:
+      description: Container for multilingual summaries of the patent’s technical
+        claims and innovations.
   summary.default:
     status: draft
     type: text
     has_keyword: true
     primary: true
+    ai_suggestion:
+      description: Fallback summary in English if no language-specific version is
+        available.
   summary.en:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Summary of the patent’s claims and innovations written in English.
   summary.fr:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Summary of the patent’s claims and innovations written in French.
   title:
     status: draft
     type: object
+    ai_suggestion:
+      description: Multilingual container for the patent's official title in different
+        languages.
+      notes: Use the language-specific subfields (e.g., 'title.en') for precise queries
+        or display.
   title.default:
     status: draft
     type: text
     has_keyword: true
     primary: true
+    ai_suggestion:
+      description: Fallback text field for the patent's title when no language preference
+        is specified.
   title.en:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: English version of the patent's official title for international
+        accessibility.
   title.fr:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: French version of the patent's official title, the primary language
+        of the document.
   title_abs_text:
     status: draft
     type: text
     analyzer: heavy
+    ai_suggestion:
+      description: Full-text abstract of the patent, optimized for search and semantic
+        analysis.
   web_content:
     status: draft
     type: text
     analyzer: heavy
+    ai_suggestion:
+      description: Unstructured text content scraped from web sources related to the
+        patent.
   year:
     status: draft
     type: long
     primary: true
+    ai_suggestion:
+      description: Year the patent was officially filed, used for temporal filtering
+        and analysis.

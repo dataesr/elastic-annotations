@@ -2,6 +2,7 @@
 
 Semi-automated pipeline to annotate Elasticsearch index fields for:
 - **API documentation** → `schemas/<index>.json` (clean JSON Schema draft-07)
+- **MCP server** → `annotations/<index>.yaml` (annoted fields)
 
 ## Install
 

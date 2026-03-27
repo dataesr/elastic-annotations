@@ -5,6 +5,7 @@ _meta:
   total_fields: 157
   approved: 17
   draft: 140
+  pending_review: 138
 fields:
   acronym:
     status: approved
@@ -17,16 +18,23 @@ fields:
     has_keyword: true
     analyzer: light
     primary: true
+    ai_suggestion:
+      description: The default acronym of the project when no language is specified.
+      notes: Use this field when the language context is unknown or irrelevant.
   acronym.en:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: The English version of the project's acronym.
   acronym.fr:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: The French version of the project's acronym.
   action:
     status: approved
     type: object
@@ -36,63 +44,107 @@ fields:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the action associated with the project.
+      notes: Use this for linking or referencing the action in queries.
   action.label:
     status: draft
     type: object
+    ai_suggestion:
+      description: The label of the action in multiple languages.
   action.label.default:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The default label of the action when no language is specified.
+      notes: Use this field when the language context is unknown or irrelevant.
   action.level:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The hierarchical level of the action (e.g., work package, task).
+      notes: May follow a standardized taxonomy like H2020 or ANR.
   address:
     status: draft
     type: object
+    ai_suggestion:
+      description: Physical address details of a project partner or coordinator.
   address.address:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: Full street address of the project partner or coordinator.
+      notes: May include street, building, and postal code.
   address.city:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: City of the project partner or coordinator's address.
   address.country:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: The country where the project's primary address is located.
+      notes: Use ISO 3166-1 alpha-2 or alpha-3 country codes if available for consistency.
   ai_description:
     status: draft
     type: object
+    ai_suggestion:
+      description: AI-generated descriptions of the project for various contexts.
+      notes: Intended for LLM agents to quickly grasp project scope without parsing
+        full metadata.
   ai_description.description:
     status: draft
     type: object
+    ai_suggestion:
+      description: Multilingual AI-generated descriptions of the project.
+      notes: Fallback to 'default' if no language-specific description exists.
   ai_description.description.default:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: Default AI-generated description of the project in plain text.
+      notes: Used when no language-specific description is available or requested.
   ai_description.description.en:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: AI-generated description of the project in English.
   ai_description.description.fr:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: AI-generated description of the project in French.
   alias:
     status: draft
     type: text
     has_keyword: true
     analyzer: heavy
+    ai_suggestion:
+      description: Alternative name(s) or shorthand for the project.
+      notes: May include historical names or common variations not captured in the
+        acronym.
   applicants:
     status: draft
     type: object
+    ai_suggestion:
+      description: Organizations or individuals who applied for the project funding.
+      notes: Not necessarily the same as project partners or coordinators.
   applicants.name:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Full name of the applicant organization or individual.
   autocompleted:
     status: draft
     type: text
@@ -116,9 +168,17 @@ fields:
   budget_financed:
     status: draft
     type: long
+    ai_suggestion:
+      description: The exact financed budget of the project in the smallest currency
+        unit.
+      notes: Use for precise calculations; avoid floating-point rounding errors.
   budget_total:
     status: draft
     type: long
+    ai_suggestion:
+      description: The total budget of the project in monetary units.
+      notes: Use this field for financial summaries; prefer 'budgetTotal' if available
+        for consistency.
   call:
     status: approved
     type: object
@@ -133,35 +193,60 @@ fields:
   classification:
     status: draft
     type: object
+    ai_suggestion:
+      description: Automated or manual categorization metadata for the project.
+      notes: LLM agents should use this to infer project scope or research domain.
   classification.confidence:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Confidence score (0-1) for the classification's accuracy.
+      notes: Values may be missing if classification was manual or unscored.
   classification.justification:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Text explaining the rationale behind the classification.
+      notes: Useful for LLM agents to validate or contextualize the classification.
   classification.primary_field:
     status: draft
     type: text
     has_keyword: true
     primary: true
+    ai_suggestion:
+      description: Primary research field or domain assigned to the project.
+      notes: May differ from 'co_domains' if multiple fields are relevant.
   co_domains:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Secondary research domains associated with the project.
+      notes: Often used for interdisciplinary projects; may be comma-separated.
   co_institutions:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Institutions involved in the project as partners or collaborators.
+      notes: May include universities, labs, or private entities; format varies by
+        source.
   co_structures:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Internal structures or departments contributing to the project.
+      notes: Typically refers to subdivisions within 'co_institutions'.
   comite:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Oversight committee or evaluation body for the project.
+      notes: Useful for identifying governance or funding program context.
   description:
     status: approved
     type: object
@@ -172,18 +257,34 @@ fields:
     type: text
     analyzer: light
     primary: true
+    ai_suggestion:
+      description: Default-language description of the project's objectives and scope.
+      notes: LLM agents should prioritize this for summarization or question-answering
+        tasks.
   description.en:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: The project description in English.
+      notes: Use this field for English-language queries or summaries about the project's
+        goals and scope.
   description.fr:
     status: draft
     type: text
     analyzer: light
+    ai_suggestion:
+      description: The project description in French.
+      notes: Use this field for French-language queries or summaries about the project's
+        goals and scope.
   domains:
     status: draft
     type: array
     required: true
+    ai_suggestion:
+      description: List of research domains or disciplines the project covers.
+      notes: Domains may overlap; prefer `domains.label.default` for filtering or
+        classification.
   domains.label:
     status: approved
     type: object
@@ -194,6 +295,9 @@ fields:
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Default label for a research domain in the project.
+      notes: Use this for consistent domain identification across projects.
   endDate:
     status: approved
     type: string
@@ -203,11 +307,16 @@ fields:
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: First name of a person associated with the project (e.g., coordinator).
   fullName:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Full name of a person associated with the project (e.g., coordinator).
+      notes: Prefer this over `firstName` for display or exact matching.
   id:
     status: approved
     type: string
@@ -218,26 +327,45 @@ fields:
   institutions:
     status: draft
     type: object
+    ai_suggestion:
+      description: Organizations or entities involved in the project as partners or
+        coordinators.
+      notes: Use `institutions.label` for human-readable names or filtering.
   institutions.label:
     status: draft
     type: text
     has_keyword: true
     analyzer: heavy
+    ai_suggestion:
+      description: Name of an institution involved in the project.
+      notes: Use this for display or filtering by institution name.
   instrument:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Funding instrument or scheme under which the project was granted.
+      notes: 'Examples: ''Horizon 2020'', ''ERC Starting Grant''.'
   inventors:
     status: draft
     type: object
+    ai_suggestion:
+      description: Individuals credited as inventors or key contributors to the project.
+      notes: May include structured sub-fields like `fullName` or `institution`.
   inventors.name:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Full name of each inventor associated with the project.
+      notes: Use for attribution or filtering projects by inventor identity.
   isFrench:
     status: draft
     type: boolean
+    ai_suggestion:
+      description: Indicates whether the project lead organization is French.
+      notes: Use to filter or analyze projects by national origin.
   keywords:
     status: approved
     type: object
@@ -248,17 +376,24 @@ fields:
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Default language keywords describing the project’s themes or scope.
+      notes: Fallback when no language-specific keywords are available.
   keywords.en:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
     primary: true
+    ai_suggestion:
+      description: English-language keywords describing the project’s themes or scope.
   keywords.fr:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: French-language keywords describing the project’s themes or scope.
   label:
     status: approved
     type: object
@@ -270,40 +405,64 @@ fields:
     has_keyword: true
     analyzer: heavy
     primary: true
+    ai_suggestion:
+      description: Default language title or short description of the project.
+      notes: Fallback when no language-specific label is provided.
   label.en:
     status: draft
     type: text
     has_keyword: true
     analyzer: heavy
+    ai_suggestion:
+      description: English-language title or short description of the project.
   label.fr:
     status: draft
     type: text
     has_keyword: true
     analyzer: heavy
+    ai_suggestion:
+      description: French-language title or short description of the project.
   lastName:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: Family name of an individual associated with the project.
+      notes: May appear in contexts like inventors, coordinators, or partners.
   leaders:
     status: draft
     type: object
+    ai_suggestion:
+      description: Organizations or individuals leading the project.
+      notes: Includes roles like coordinator or principal investigator.
   leaders.firstName:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: The first name of the project leader.
+      notes: May contain multiple entries if the project has co-leaders.
   leaders.lastName:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: The last name of the project leader.
+      notes: May contain multiple entries if the project has co-leaders.
   participantCount:
     status: draft
     type: long
+    ai_suggestion:
+      description: The total number of participants involved in the project.
   participant_encoded_key:
     status: draft
     type: keyword
+    ai_suggestion:
+      description: Unique encoded key identifying a participant in the project.
+      notes: Use this key for precise participant lookups or joins.
   participants:
     status: approved
     type: array
@@ -312,75 +471,127 @@ fields:
   participants.address:
     status: draft
     type: object
+    ai_suggestion:
+      description: The physical address details of a project participant.
   participants.address.country:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The full name of the country where the participant is located.
   participants.address.country_code:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The ISO country code (e.g., FR, DE) of the participant's address.
+      notes: Use for filtering or aggregating participants by country.
   participants.funding:
     status: draft
     type: float
+    ai_suggestion:
+      description: The amount of funding allocated to a specific participant.
+      notes: May be zero if the participant is unfunded or in-kind.
   participants.id:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for a project participant.
+      notes: Use for cross-referencing participants across datasets.
   participants.label:
     status: draft
     type: object
+    ai_suggestion:
+      description: The name or label of the participant in multiple languages.
   participants.label.default:
     status: draft
     type: text
     has_keyword: true
     analyzer: light
+    ai_suggestion:
+      description: The default label of the participant organization.
+      notes: Use this as the primary display name when no language preference is specified.
   participants.participant_id:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the participant within the project.
+      notes: This ID is project-specific and may not be globally unique across all
+        projects.
   participants.participant_key:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Globally unique key for the participant organization.
+      notes: Use this for cross-project participant identification and deduplication.
   participants.participant_to_identify:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Placeholder for a participant not yet identified or confirmed.
+      notes: May contain temporary values like 'TO_BE_ASSIGNED' or similar.
   participants.participates_as:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The type of participation (e.g., 'coordinator', 'partner').
+      notes: Standardized values expected; check API docs for allowed terms.
   participants.role:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The specific role of the participant in the project.
+      notes: Roles may vary by funding program; validate against project context.
   participants.structure:
     status: draft
     type: object
+    ai_suggestion:
+      description: Details about the organization participating in the project.
   participants.structure.acronym:
     status: draft
     type: object
+    ai_suggestion:
+      description: The acronym of the participant's organization in multiple languages.
   participants.structure.acronym.default:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The default acronym of the participant's organization.
+      notes: Fallback value when no language-specific acronym is available.
   participants.structure.acronym.en:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The English acronym of the participant's organization.
   participants.structure.acronym.fr:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: French acronym of the participant's organization.
+      notes: Use this for display when the user's locale is set to French.
   participants.structure.categories:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Classification tags describing the participant's organization type
+        or sector.
   participants.structure.encoded_key:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique internal identifier for the participant's organization.
+      notes: Use for internal linking or deduplication, not for display.
   participants.structure.id:
     status: draft
     type: text
@@ -389,234 +600,408 @@ fields:
     cross_ref:
       index: scanr-organizations
       join_field: id
+    ai_suggestion:
+      description: External identifier for the participant's organization in the scanr-organizations
+        index.
+      notes: Resolve this ID to fetch additional organization metadata.
   participants.structure.id_name:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Full name of the participant's organization with its identifier
+        in parentheses.
   participants.structure.id_name_default:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Default full name of the participant's organization with its identifier.
+      notes: Use when no locale-specific `id_name` is available.
   participants.structure.institutions:
     status: draft
     type: object
+    ai_suggestion:
+      description: Historical or parent institutions associated with the participant's
+        organization.
   participants.structure.institutions.endDate:
     status: draft
     type: date
+    ai_suggestion:
+      description: End date of the institution's association with the participant's
+        organization.
+      notes: Omit or set to null if the association is ongoing.
   participants.structure.institutions.label:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Display name of the institution associated with the participant's
+        organization.
   participants.structure.institutions.natural_id:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Persistent external identifier for the institution.
+      notes: Use for cross-referencing with external datasets.
   participants.structure.institutions.relationType:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Type of relationship between the participant and the institution.
+      notes: Common values include 'host', 'partner', or 'subcontractor'.
   participants.structure.institutions.rnsr_key:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique RNSR identifier for the institution in the French research
+        system.
   participants.structure.institutions.startDate:
     status: draft
     type: date
+    ai_suggestion:
+      description: Start date of the participant's affiliation with the institution.
   participants.structure.institutions.structure:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Name or identifier of the institution associated with the participant.
   participants.structure.isFrench:
     status: draft
     type: boolean
+    ai_suggestion:
+      description: Indicates whether the participant's structure is based in France.
   participants.structure.is_main_parent:
     status: draft
     type: long
+    ai_suggestion:
+      description: Flag marking the primary parent structure for the participant (1=true,
+        0=false).
   participants.structure.kind:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Categorization of the participant's structure (e.g., 'university',
+        'company').
   participants.structure.label:
     status: draft
     type: object
+    ai_suggestion:
+      description: Name of the participant's structure in multiple languages.
   participants.structure.label.default:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Default name of the participant's structure if no language-specific
+        label exists.
   participants.structure.label.en:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: English name of the participant's structure.
   participants.structure.label.fr:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: French label of the participant's organization or institution.
+      notes: Use for display or filtering when language context is French.
   participants.structure.mainAddress:
     status: draft
     type: object
+    ai_suggestion:
+      description: Primary address details of the participant's organization.
   participants.structure.mainAddress.address:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Full street address of the participant's organization.
+      notes: May include building number, street name, and postal code.
   participants.structure.mainAddress.address_detected:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Automatically detected or standardized version of the address.
+      notes: Use when original address formatting is inconsistent or unreliable.
   participants.structure.mainAddress.city:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: City where the participant's organization is located.
   participants.structure.mainAddress.country:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Country where the participant's organization is located.
   participants.structure.mainAddress.gps:
     status: draft
     type: object
+    ai_suggestion:
+      description: Geographic coordinates (latitude and longitude) of the participant's
+        address.
   participants.structure.mainAddress.gps.lat:
     status: draft
     type: float
+    ai_suggestion:
+      description: Latitude coordinate of the participant's organization address.
+      notes: Use for mapping or distance-based queries.
   participants.structure.mainAddress.gps.lon:
     status: draft
     type: float
+    ai_suggestion:
+      description: Longitude coordinate of the participant's organization address.
+      notes: Use for mapping or distance-based queries.
   participants.structure.mainAddress.iso2:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: ISO 3166-1 alpha-2 country code of the participant's address.
+      notes: Use for standardized country identification or filtering.
   participants.structure.mainAddress.iso3:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: ISO 3166-1 alpha-3 country code of the participant's main address.
+      notes: Use this for geographic filtering or aggregation by country.
   participants.structure.mainAddress.postcode:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Postal code of the participant's main address.
+      notes: Format varies by country; may include letters or spaces.
   participants.structure.mainAddress.region:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Administrative region (e.g., state, province) of the participant's
+        main address.
+      notes: Region names are localized and may not be standardized across countries.
   participants.structure.main_category:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Primary category classifying the participant's organization type.
+      notes: Common values include 'University', 'Research Institute', or 'Industry'.
   participants.structure.parents:
     status: draft
     type: object
+    ai_suggestion:
+      description: Hierarchical relationships between the participant and other organizations.
+      notes: Useful for mapping organizational dependencies or mergers.
   participants.structure.parents.endDate:
     status: draft
     type: date
+    ai_suggestion:
+      description: End date of the parent organization's relationship with the participant.
+      notes: Null or omitted if the relationship is ongoing.
   participants.structure.parents.natural_id:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the parent organization in external systems.
+      notes: May reference national or international organization registries.
   participants.structure.parents.relationType:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Type of relationship between the participant and its parent organization.
+      notes: 'Examples: ''Subsidiary'', ''Department'', or ''Consortium Member''.'
   participants.structure.parents.startDate:
     status: draft
     type: date
+    ai_suggestion:
+      description: Start date of the parent organization's relationship with the participant.
   participants.structure.parents.structure:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Name or identifier of the parent organization linked to the participant.
   participants.structure.status:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Legal or operational status of the participating organization (e.g.,
+        public, private).
+      notes: Use to filter or categorize partners by their institutional standing.
   participants.structure.typologie_1:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Primary classification of the participating organization (e.g.,
+        university, SME).
   participants.structure.typologie_2:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Secondary classification of the participating organization (e.g.,
+        research lab, NGO).
+      notes: May be empty if no secondary classification applies.
   participants_id_name_search:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Search-optimized field combining participant IDs and names for
+        autocomplete queries.
   participants_id_search:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Search-optimized field for participant IDs to enable exact or partial
+        matching.
   persons:
     status: draft
     type: object
+    ai_suggestion:
+      description: Details of individuals involved in the project, including roles
+        and affiliations.
   persons.firstName:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: First name of the person associated with the project.
   persons.fullName:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Full name of the person associated with the project, formatted
+        for display.
   persons.lastName:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Last name of the person associated with the project.
   persons.role:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: Role of the person in the project (e.g., coordinator, researcher).
+      notes: May include multiple roles if applicable.
   pilier_global_name:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The name of the global pillar under which the project is categorized.
   priorities:
     status: draft
     type: object
+    ai_suggestion:
+      description: Thematic or strategic priorities the project addresses.
+      notes: May contain nested labels and types for multi-level classification.
   priorities.label:
     status: draft
     type: object
+    ai_suggestion:
+      description: Human-readable labels for each priority in multiple languages.
   priorities.label.default:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The default label for the priority in the primary language.
   priorities.type:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The classification type of the priority (e.g., thematic, strategic).
   project_domains:
     status: draft
     type: object
+    ai_suggestion:
+      description: Scientific or technical domains associated with the project.
+      notes: Contains domain codes, names, and counts for aggregation.
   project_domains.code:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The standardized code identifying the project domain.
   project_domains.count:
     status: draft
     type: long
+    ai_suggestion:
+      description: The number of occurrences or weight of the domain in the project.
   project_domains.id_name:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The combined identifier and name of the project domain.
   project_domains.key_name:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The key name used for programmatic reference to the domain.
   project_domains.label:
     status: draft
     type: object
+    ai_suggestion:
+      description: Scientific or thematic domains of the project with labels in multiple
+        languages.
+      notes: Use the default label for primary display; naturalKey is a stable identifier
+        for programmatic use.
   project_domains.label.default:
     status: draft
     type: text
     has_keyword: true
     primary: true
+    ai_suggestion:
+      description: The default language label for the project's scientific or thematic
+        domain.
   project_domains.naturalKey:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: A unique, stable identifier for the project's scientific or thematic
+        domain.
   project_domains.type:
     status: draft
     type: text
     has_keyword: true
+    ai_suggestion:
+      description: The classification type of the project's scientific or thematic
+        domain.
   publicationsCount:
     status: draft
     type: long
+    ai_suggestion:
+      description: Total count of publications linked to the project.
   signatureDate:
     status: draft
     type: date
+    ai_suggestion:
+      description: The date when the project agreement was formally signed.
   startDate:
     status: approved
     type: string
@@ -625,6 +1010,9 @@ fields:
     status: draft
     type: text
     analyzer: heavy
+    ai_suggestion:
+      description: Abstract or summary of the project in plain text for full-text
+        search.
   type:
     status: approved
     type: string
@@ -642,6 +1030,8 @@ fields:
     status: draft
     type: text
     analyzer: heavy
+    ai_suggestion:
+      description: Public-facing web content or description of the project.
   year:
     status: approved
     type: number

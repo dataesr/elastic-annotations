@@ -21,6 +21,11 @@ scanr-persons:
     - autocompleted
     - autocompletedText
     - encoded_key
+    - publications.title.*
+  includes:
+    - publications.title.default
+    - publications.title.en
+    - publications.title.fr
   cross_refs:
     affiliations.structure.id:
       index: scanr-organizations
