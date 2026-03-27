@@ -1,0 +1,142 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Research organizations and laboratories (universities, CNRS units, etc.). One document is one organization.",
+  "properties": {
+    "creationYear": {
+      "type": "object",
+      "description": "Creation year"
+    },
+    "externalIds": {
+      "items": {
+        "properties": {
+          "id": {
+            "type": "object",
+            "description": "Corresponding PID"
+          },
+          "type": {
+            "type": "object",
+            "description": "other known PID",
+            "enum": [
+              "idref",
+              "rnsr",
+              "sirene",
+              "siret",
+              "grid",
+              "wikidata"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "type": "array",
+      "description": "Lists the known external identifiers"
+    },
+    "id": {
+      "type": "object",
+      "description": "Main PID of the organizations. For now can be either an RNSR, SIREN, or GRID (should change to RoR)."
+    },
+    "institutions": {
+      "items": {
+        "properties": {
+          "denormalized": {
+            "type": "object",
+            "description": "Denormalized object of the structure"
+          },
+          "label": {
+            "type": "object",
+            "description": "Label of the organization"
+          },
+          "relationType": {
+            "type": "object",
+            "description": "Type of relation"
+          },
+          "structure": {
+            "type": "object",
+            "description": "Main PID of the structure"
+          }
+        },
+        "required": [
+          "denormalized",
+          "label",
+          "relationType",
+          "structure"
+        ]
+      },
+      "type": "array",
+      "description": "Lists the known relationships"
+    },
+    "leaders": {
+      "items": {
+        "properties": {
+          "firstName": {
+            "type": "object",
+            "description": "First Name of the person"
+          },
+          "lastName": {
+            "type": "object",
+            "description": "Last Name of the person"
+          },
+          "person": {
+            "type": "object",
+            "description": "Main PID of the person"
+          },
+          "role": {
+            "type": "object",
+            "description": "Role"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "person",
+          "role"
+        ]
+      },
+      "type": "array",
+      "description": "Lists the known leaders (data from RNSR)"
+    },
+    "level": {
+      "type": "object",
+      "description": "Level"
+    },
+    "links": {
+      "items": {
+        "properties": {
+          "url": {
+            "type": "object",
+            "description": "URL"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "type": "array",
+      "description": "Lists the known links"
+    },
+    "nature": {
+      "type": "object",
+      "description": "Nature"
+    },
+    "startDate": {
+      "type": "object",
+      "description": "Start date"
+    },
+    "status": {
+      "type": "object",
+      "description": "Status",
+      "enum": [
+        "active",
+        "inactive"
+      ]
+    },
+    "web_content": {
+      "type": "object",
+      "description": "Crawl of the web pages"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Funded research projects (ANR, EU, etc.) with budget and partners. One document is one project.",
+  "properties": {
+    "acronym": {
+      "type": "object",
+      "description": "The acronym of the project in multiple languages."
+    },
+    "action": {
+      "type": "object",
+      "description": "The action associated with the project."
+    },
+    "budgetFinanced": {
+      "type": "object",
+      "description": "The financed budget of the project."
+    },
+    "budgetTotal": {
+      "type": "object",
+      "description": "The total budget of the project."
+    },
+    "call": {
+      "type": "object",
+      "description": "Details of the call associated with the project.",
+      "properties": {
+        "id": {
+          "type": "object",
+          "description": "The identifier of the call."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "description": {
+      "type": "object",
+      "description": "The description of the project in multiple languages."
+    },
+    "domains": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "object",
+          "description": "The label of the domain in multiple languages."
+        }
+      },
+      "required": [
+        "label"
+      ]
+    },
+    "endDate": {
+      "type": "object",
+      "description": "The end date of the project."
+    },
+    "id": {
+      "type": "object",
+      "description": "The unique identifier of the project."
+    },
+    "keywords": {
+      "type": "object",
+      "description": "Keywords related to the project in multiple languages."
+    },
+    "label": {
+      "type": "object",
+      "description": "The label of the project in multiple languages."
+    },
+    "participants": {
+      "items": {},
+      "type": "array",
+      "description": "Details of the participants involved in the project."
+    },
+    "startDate": {
+      "type": "object",
+      "description": "The start date of the project."
+    },
+    "type": {
+      "type": "object",
+      "description": "The type of the project."
+    },
+    "url": {
+      "type": "object",
+      "description": "The URL of the project."
+    },
+    "year": {
+      "type": "object",
+      "description": "The year of the project."
+    }
+  }
+}

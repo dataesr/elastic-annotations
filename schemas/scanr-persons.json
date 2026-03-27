@@ -1,0 +1,271 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Researchers and authors with their affiliations and identifiers (ORCID, IdRef). One document is one person.",
+  "properties": {
+    "affiliations": {
+      "items": {
+        "properties": {
+          "endDate": {
+            "type": "object",
+            "description": "Last publication year found with this affiliation"
+          },
+          "sources": {
+            "items": {
+              "properties": {
+                "id": {
+                  "type": "object",
+                  "description": "Main PID of the publication"
+                },
+                "year": {
+                  "type": "integer",
+                  "description": "Publication year"
+                }
+              },
+              "required": [
+                "id",
+                "year"
+              ]
+            },
+            "type": "array",
+            "description": "List the publications of the author with the current affiliation"
+          },
+          "startDate": {
+            "type": "object",
+            "description": "First publication year found with this affiliation"
+          },
+          "structure": {
+            "type": "object",
+            "description": "PID of an affiliation. Can be the only field of the object if this affiliation is not mapped in the organization index.Otherwise, if present, some fields are denormalized: `mainAddress`, `label`, `acronym`, `kind`, `level`, `status`, `isFrench`, `id_name`. See the documentation of the organization index for more details on these fields."
+          }
+        },
+        "required": [
+          "endDate",
+          "sources",
+          "startDate",
+          "structure"
+        ]
+      },
+      "type": "array",
+      "description": "Lists all detected affiliations"
+    },
+    "autocompleted": {
+      "items": {},
+      "type": "array",
+      "description": "array of strings used for autocompletion"
+    },
+    "awards": {
+      "items": {
+        "properties": {
+          "date": {
+            "type": "object",
+            "description": "Award date"
+          },
+          "label": {
+            "type": "object",
+            "description": "Award label"
+          },
+          "url": {
+            "type": "object",
+            "description": "Award URL"
+          }
+        },
+        "required": [
+          "date",
+          "label",
+          "url"
+        ]
+      },
+      "type": "array",
+      "description": "Lists the known awards"
+    },
+    "coContributors": {
+      "items": {
+        "properties": {
+          "fullName": {
+            "type": "object",
+            "description": "Full Name of the cocontributor"
+          },
+          "person": {
+            "type": "object",
+            "description": "Main PID of the cocontributor"
+          }
+        },
+        "required": [
+          "fullName",
+          "person"
+        ]
+      },
+      "type": "array",
+      "description": "Lists the known cocontributors. Co-authors only are listed, not jury members."
+    },
+    "domains": {
+      "items": {
+        "properties": {
+          "code": {
+            "type": "object",
+            "description": "Code ID of this domain, if any (depends on `type`)"
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of times this code has been detected"
+          },
+          "label": {
+            "type": "object",
+            "description": "Label of the scientific domain"
+          },
+          "type": {
+            "type": "object",
+            "description": "Type of label. Possible values: `wikidata`, `keyword`, `sudoc`. Wikidata domains are automatically detected within the title, abstract and keywords. Keywords domain are exactly the free-text keywords that have been harvested (not normalized)."
+          }
+        },
+        "required": [
+          "code",
+          "count",
+          "label",
+          "type"
+        ]
+      },
+      "type": "array",
+      "description": "Lists detected scientific domains - detected and aggregated from the publications"
+    },
+    "externalIds": {
+      "items": {
+        "properties": {
+          "id": {
+            "type": "object",
+            "description": "Corresponding PID"
+          },
+          "type": {
+            "type": "object",
+            "description": "other known PID",
+            "enum": [
+              "idref",
+              "orcid",
+              "id_hal"
+            ]
+          },
+          "url": {
+            "type": "object",
+            "description": "Corresponding URL"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "url"
+        ]
+      },
+      "type": "array",
+      "description": "Lists the known external identifiers"
+    },
+    "firstName": {
+      "type": "object",
+      "description": "First Name"
+    },
+    "fullName": {
+      "type": "object",
+      "description": "Full Name (concatenation of the first name and last name)"
+    },
+    "id": {
+      "type": "object",
+      "description": "Main PID of the person. For now, the idref id is used. Concatenation of the string `idref` and the idref id itself."
+    },
+    "id_hal": {
+      "type": "object",
+      "description": "idHAL (string)"
+    },
+    "idref": {
+      "type": "object",
+      "description": "idref"
+    },
+    "lastName": {
+      "type": "object",
+      "description": "Last Name (family name)"
+    },
+    "orcid": {
+      "type": "object",
+      "description": "ORCID"
+    },
+    "publications": {
+      "items": {
+        "properties": {
+          "publication": {
+            "type": "object",
+            "description": "Main PID of the publication"
+          },
+          "role": {
+            "type": "object",
+            "description": "Role of the person"
+          },
+          "source": {
+            "type": "object",
+            "description": "Describes the source (generally journal) of the production",
+            "properties": {
+              "isOa": {
+                "type": "boolean",
+                "description": "Is it an open access journal? (source Unpaywall)"
+              },
+              "journalIssns": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "description": "Arrays of ISSNs (print, electronic ...)"
+              },
+              "publisher": {
+                "type": "object",
+                "description": "Normalized version of the publisher."
+              },
+              "title": {
+                "type": "object",
+                "description": "Title of the source"
+              }
+            },
+            "required": [
+              "isOa",
+              "journalIssns",
+              "publisher",
+              "title"
+            ]
+          },
+          "title": {
+            "type": "object",
+            "description": "Title of the publication",
+            "properties": {
+              "default": {
+                "type": "object",
+                "description": "Default title"
+              }
+            },
+            "required": [
+              "default"
+            ]
+          },
+          "year": {
+            "type": "integer",
+            "description": "Year part of the publication Date"
+          }
+        },
+        "required": [
+          "publication",
+          "role",
+          "source",
+          "title",
+          "year"
+        ]
+      },
+      "type": "array",
+      "description": "Lists the known publications of the author"
+    },
+    "publicationsCount": {
+      "type": "integer",
+      "description": "Number of publications"
+    },
+    "recentAffiliations": {
+      "items": {},
+      "type": "array",
+      "description": "Lists all detected affiliations, recents only (still active in the last 3 years)"
+    }
+  }
+}
