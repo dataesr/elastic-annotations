@@ -20,3 +20,10 @@ scanr-organizations:
     - autocompletedText
     - reasons_scanr
     - encoded_key
+  resolve:
+    search_fields:
+      - label.*
+      - acronym.*
+    source_fields:
+      - label.default
+      - acronym.default

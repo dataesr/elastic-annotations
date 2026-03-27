@@ -120,16 +120,18 @@ def merge_annotations(index, fields: dict, path: str):
     draft = sum(1 for f in fields.values() if f.get("status") == "draft")
     config = get_config(index)
 
-    data = {
-        "_meta": {
-            "index": index,
-            "description": config["content"],
-            "total_fields": total,
-            "approved": approved,
-            "draft": draft,
-        },
-        "fields": fields,
+    data = {}
+    data["_meta"] = {
+        "index": index,
+        "description": config["content"],
+        "total_fields": total,
+        "approved": approved,
+        "draft": draft,
     }
+    data["fields"] = fields
+    if config.get("resolve"):
+        data["resolve"] = config["resolve"]
+
     save_annotations(data, path)
     print(f"[merge] {total} fields → {approved} approved, {draft} need enrichment")
     print(f"[merge] Saved to {path}")

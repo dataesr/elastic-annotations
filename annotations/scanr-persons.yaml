@@ -5,7 +5,6 @@ _meta:
   total_fields: 283
   approved: 44
   draft: 239
-  pending_review: 125
 fields:
   acronym:
     status: draft
@@ -134,14 +133,14 @@ fields:
     type: text
     has_keyword: true
     primary: true
-    cross_ref:
-      index: scanr-organizations
-      join_field: id
     ai_suggestion:
       description: Unique identifier for the affiliated organization in the scanr-organizations
         index
       notes: Resolve this ID to fetch full organization details from the scanr-organizations
         index.
+    cross_ref:
+      index: scanr-organizations
+      join_field: id
   affiliations.structure.id_name:
     status: draft
     type: text
@@ -1640,3 +1639,10 @@ fields:
     ai_suggestion:
       description: Raw HTML or text scraped from the author's public web profile
       notes: May contain unstructured data; use only for supplementary context.
+resolve:
+  search_fields:
+  - fullName
+  - firstName
+  - lastName
+  source_fields:
+  - fullName

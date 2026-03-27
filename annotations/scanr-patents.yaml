@@ -5,7 +5,6 @@ _meta:
   total_fields: 147
   approved: 0
   draft: 147
-  pending_review: 147
 fields:
   acronym:
     status: draft
@@ -137,13 +136,13 @@ fields:
     type: text
     has_keyword: true
     primary: true
-    cross_ref:
-      index: scanr-organizations
-      join_field: id
     ai_suggestion:
       description: External identifier for the applicant, linking to the scanr-organizations
         index.
       notes: Use for cross-referencing applicant details or validating applicant data.
+    cross_ref:
+      index: scanr-organizations
+      join_field: id
   applicants.ids.type:
     status: draft
     type: text
@@ -1014,3 +1013,8 @@ fields:
     ai_suggestion:
       description: Year the patent was officially filed, used for temporal filtering
         and analysis.
+resolve:
+  search_fields:
+  - title.*
+  source_fields:
+  - title.default

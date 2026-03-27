@@ -5,7 +5,6 @@ _meta:
   total_fields: 330
   approved: 48
   draft: 282
-  pending_review: 169
 fields:
   acknowledgments:
     status: draft
@@ -357,13 +356,13 @@ fields:
   authors.affiliations.id:
     status: draft
     type: object
-    cross_ref:
-      index: scanr-organizations
-      join_field: id
     ai_suggestion:
       description: Reference to the organization in the scanr-organizations index.
       notes: Contains denormalized fields if the organization is mapped; otherwise,
         only the ID is present.
+    cross_ref:
+      index: scanr-organizations
+      join_field: id
   authors.affiliations.id.asserted-by:
     status: draft
     type: text
@@ -574,13 +573,13 @@ fields:
     type: text
     has_keyword: true
     primary: true
-    cross_ref:
-      index: scanr-persons
-      join_field: id
     ai_suggestion:
       description: Reference to the author's detailed record in the scanr-persons
         index.
       notes: Use to fetch comprehensive biographical or professional data.
+    cross_ref:
+      index: scanr-persons
+      join_field: id
   authors.role:
     status: approved
     type: string
@@ -2022,3 +2021,8 @@ fields:
     description: Year part of the publication Date
     primary: true
     required: true
+resolve:
+  search_fields:
+  - title.*
+  source_fields:
+  - title.default

@@ -33,4 +33,11 @@ scanr-persons:
     publications.publication:
       index: scanr-publications
       join_field: id
+  resolve:
+    search_fields:
+      - fullName
+      - firstName
+      - lastName
+    source_fields:
+      - fullName
 

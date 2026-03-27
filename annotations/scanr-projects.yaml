@@ -5,7 +5,6 @@ _meta:
   total_fields: 157
   approved: 17
   draft: 140
-  pending_review: 138
 fields:
   acronym:
     status: approved
@@ -597,13 +596,13 @@ fields:
     type: text
     has_keyword: true
     primary: true
-    cross_ref:
-      index: scanr-organizations
-      join_field: id
     ai_suggestion:
       description: External identifier for the participant's organization in the scanr-organizations
         index.
       notes: Resolve this ID to fetch additional organization metadata.
+    cross_ref:
+      index: scanr-organizations
+      join_field: id
   participants.structure.id_name:
     status: draft
     type: text
@@ -1038,3 +1037,10 @@ fields:
     description: The year of the project.
     primary: true
     required: true
+resolve:
+  search_fields:
+  - label.*
+  - acronym.*
+  source_fields:
+  - label.default
+  - acronym.default

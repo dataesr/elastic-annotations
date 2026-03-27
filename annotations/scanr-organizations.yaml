@@ -5,7 +5,6 @@ _meta:
   total_fields: 581
   approved: 22
   draft: 559
-  pending_review: 555
 fields:
   acronym:
     status: draft
@@ -3729,3 +3728,10 @@ fields:
     type: string
     description: Crawl of the web pages
     analyzer: heavy
+resolve:
+  search_fields:
+  - label.*
+  - acronym.*
+  source_fields:
+  - label.default
+  - acronym.default

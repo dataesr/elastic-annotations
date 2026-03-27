@@ -23,3 +23,8 @@ scanr-patents:
     applicants.ids.id:
       index: scanr-organizations
       join_field: id
+  resolve:
+    search_fields:
+      - title.*
+    source_fields:
+      - title.default

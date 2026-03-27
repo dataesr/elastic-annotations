@@ -27,3 +27,10 @@ scanr-projects:
     participants.structure.id:
       index: scanr-organizations
       join_field: id
+  resolve:
+    search_fields:
+      - label.*
+      - acronym.*
+    source_fields:
+      - label.default
+      - acronym.default
