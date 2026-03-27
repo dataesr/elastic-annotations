@@ -5,7 +5,6 @@ _meta:
   total_fields: 107
   approved: 0
   draft: 107
-  pending_review: 107
 fields:
   acronym:
     status: draft
@@ -417,13 +416,13 @@ fields:
     type: text
     has_keyword: true
     primary: true
-    cross_ref:
-      index: scanr-organizations
-      join_field: id
     ai_suggestion:
       description: External identifier for the participating organization, references
         scanr-organizations index.
       notes: Query scanr-organizations for additional details using this ID.
+    cross_ref:
+      index: scanr-organizations
+      join_field: id
   participant_id_name:
     status: draft
     type: text
@@ -492,6 +491,7 @@ fields:
   participant_isFrench:
     status: draft
     type: boolean
+    primary: true
     ai_suggestion:
       description: Indicates whether the participating organization is based in France.
   participant_is_main_parent:
@@ -629,6 +629,7 @@ fields:
   participation_is_coordinator:
     status: draft
     type: boolean
+    primary: true
     ai_suggestion:
       description: Indicates if the participant is the project coordinator (true)
         or not (false).
@@ -695,12 +696,12 @@ fields:
     type: text
     has_keyword: true
     primary: true
-    cross_ref:
-      index: scanr-projects
-      join_field: id
     ai_suggestion:
       description: Unique identifier of the project in the scanr-projects index.
       notes: Use to join with project metadata or validate participation records.
+    cross_ref:
+      index: scanr-projects
+      join_field: id
   project_ignore_total_budget:
     status: draft
     type: boolean

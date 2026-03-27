@@ -10,6 +10,8 @@ scanr-participations:
     - participant_label.en
     - participant_acronym.default
     - participant_status
+    - participant_isFrench
+    - participation_is_coordinator
     - participation_id
     - project_id
     - project_type
