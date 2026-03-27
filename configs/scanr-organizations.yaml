@@ -6,6 +6,7 @@ scanr-organizations:
     - id
     - status
     - label.default
+    - label.fr
     - acronym.default
     - description.default
     - externalIds.id
@@ -25,5 +26,5 @@ scanr-organizations:
       - label.*
       - acronym.*
     source_fields:
-      - label.default
+      - label
       - acronym.default

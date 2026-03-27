@@ -1496,6 +1496,7 @@ fields:
     type: text
     has_keyword: true
     analyzer: heavy
+    primary: true
     ai_suggestion:
       description: French-language name of the organization.
   lastName:
@@ -3733,5 +3734,5 @@ resolve:
   - label.*
   - acronym.*
   source_fields:
-  - label.default
+  - label
   - acronym.default
