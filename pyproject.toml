@@ -4,4 +4,8 @@ version = "0.1.0"
 description = "Semi-automated pipeline to annotate Elasticsearch index fields for API documentation and MCP server."
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "dotenv>=0.9.9",
+    "httpx>=0.28.1",
+    "pyyaml>=6.0.3",
+]
