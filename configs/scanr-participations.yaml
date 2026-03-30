@@ -18,7 +18,7 @@ scanr-participations:
     - project_year
     - project_action
     - project_label
-  cross_refs:
+  cross_index:
     participant_id:
       index: scanr-organizations
       join_field: id

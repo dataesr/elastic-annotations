@@ -66,8 +66,8 @@ def format_fields_for_prompt(batch: list[tuple]) -> str:
         parts = [f'path: "{path}"', f'type: {info.get("type", "unknown")}']
         if info.get("enum"):
             parts.append(f'allowed values: {info["enum"]}')
-        if info.get("cross_ref"):
-            parts.append(f'references index: {info["cross_ref"]["index"]}')
+        if info.get("cross_index"):
+            parts.append(f'references index: {info["cross_index"]["index"]}')
         lines.append("  - " + ", ".join(parts))
     return "\n".join(lines)
 

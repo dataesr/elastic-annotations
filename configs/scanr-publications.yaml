@@ -26,7 +26,7 @@ scanr-publications:
     - title.default
     - title.en
     - title.fr
-  cross_refs:
+  cross_index:
     authors.person:
       index: scanr-persons
       join_field: id

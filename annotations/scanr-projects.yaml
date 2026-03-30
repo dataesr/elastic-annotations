@@ -600,7 +600,7 @@ fields:
       description: External identifier for the participant's organization in the scanr-organizations
         index.
       notes: Resolve this ID to fetch additional organization metadata.
-    cross_ref:
+    cross_index:
       index: scanr-organizations
       join_field: id
   participants.structure.id_name:

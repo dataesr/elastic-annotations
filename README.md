@@ -36,7 +36,7 @@ Create `configs/<index-name>.yaml`:
     - secret_field.*
   includes:
     - secret_field.public_part
-  cross_refs:
+  cross_index:
     organization_id:
       index: scanr-organizations
       join_field: id
@@ -141,7 +141,7 @@ fields:
     status: approved
     type: keyword
     description: "Internal identifier of the affiliated organization."
-    cross_ref:                # from configs/<index>.yaml
+    cross_index:                # from configs/<index>.yaml
       index: scanr-organizations
       join_field: id
 ```

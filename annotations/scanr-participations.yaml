@@ -420,7 +420,7 @@ fields:
       description: External identifier for the participating organization, references
         scanr-organizations index.
       notes: Query scanr-organizations for additional details using this ID.
-    cross_ref:
+    cross_index:
       index: scanr-organizations
       join_field: id
   participant_id_name:
@@ -699,7 +699,7 @@ fields:
     ai_suggestion:
       description: Unique identifier of the project in the scanr-projects index.
       notes: Use to join with project metadata or validate participation records.
-    cross_ref:
+    cross_index:
       index: scanr-projects
       join_field: id
   project_ignore_total_budget:

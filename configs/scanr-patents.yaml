@@ -19,7 +19,7 @@ scanr-patents:
     - applicants.country
     - applicants.ids.id
     - applicants.ids.type
-  cross_refs:
+  cross_index:
     applicants.ids.id:
       index: scanr-organizations
       join_field: id

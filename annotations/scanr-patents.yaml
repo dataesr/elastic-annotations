@@ -140,7 +140,7 @@ fields:
       description: External identifier for the applicant, linking to the scanr-organizations
         index.
       notes: Use for cross-referencing applicant details or validating applicant data.
-    cross_ref:
+    cross_index:
       index: scanr-organizations
       join_field: id
   applicants.ids.type:

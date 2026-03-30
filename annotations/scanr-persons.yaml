@@ -138,7 +138,7 @@ fields:
         index
       notes: Resolve this ID to fetch full organization details from the scanr-organizations
         index.
-    cross_ref:
+    cross_index:
       index: scanr-organizations
       join_field: id
   affiliations.structure.id_name:
@@ -699,7 +699,7 @@ fields:
     description: Main PID of the publication
     has_keyword: true
     primary: true
-    cross_ref:
+    cross_index:
       index: scanr-publications
       join_field: id
   publications.role:

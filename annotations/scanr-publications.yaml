@@ -74,7 +74,7 @@ fields:
     has_keyword: true
     primary: true
     required: true
-    cross_ref:
+    cross_index:
       index: scanr-organizations
       join_field: id
   affiliations.id_name:
@@ -360,7 +360,7 @@ fields:
       description: Reference to the organization in the scanr-organizations index.
       notes: Contains denormalized fields if the organization is mapped; otherwise,
         only the ID is present.
-    cross_ref:
+    cross_index:
       index: scanr-organizations
       join_field: id
   authors.affiliations.id.asserted-by:
@@ -577,7 +577,7 @@ fields:
       description: Reference to the author's detailed record in the scanr-persons
         index.
       notes: Use to fetch comprehensive biographical or professional data.
-    cross_ref:
+    cross_index:
       index: scanr-persons
       join_field: id
   authors.role:
