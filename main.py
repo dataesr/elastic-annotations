@@ -12,6 +12,30 @@ from src.merge import main as merge_main  # noqa: E402
 from src.enrich import main as enrich_main  # noqa: E402
 from src.export import main as export_main  # noqa: E402
 
+INDEXES_ALIASES = {
+    "scanr-all": [
+        "scanr-publications",
+        "scanr-organizations",
+        "scanr-persons",
+        "scanr-projects",
+        "scanr-participations",
+        "scanr-patents",
+    ]
+}
+
+
+def get_indexes(indexes: list[str] | str) -> list[str]:
+    """Resolve index aliases."""
+    if isinstance(indexes, str):
+        indexes = [indexes]
+    resolved_indexes = []
+    for index in indexes:
+        if index in INDEXES_ALIASES:
+            resolved_indexes.extend(INDEXES_ALIASES[index])
+        else:
+            resolved_indexes.append(index)
+    return list(set(resolved_indexes))
+
 
 def main(args=None):
     parser = argparse.ArgumentParser(description="Run the full elastic-annotation pipeline (merge -> enrich -> export)")
@@ -33,7 +57,10 @@ def main(args=None):
         print("Please provide at least one index with --index")
         sys.exit(1)
 
-    for index in parsed_args.index:
+    # Resolve aliases
+    indexes = get_indexes(parsed_args.index)
+
+    for index in indexes:
         print(f"\n{'='*60}")
         print(f"=== Processing Index: {index} ===")
         print(f"{'='*60}")

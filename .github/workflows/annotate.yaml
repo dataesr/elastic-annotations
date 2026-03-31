@@ -1,24 +1,21 @@
-name: Annotate Pipeline
-
 on:
+  schedule:
+    - cron: "0 8 * * 1"
   workflow_dispatch:
     inputs:
       index:
-        description: "Index to process (can be comma-separated for multiple)"
+        description: "Index(es) to process (comma-separated)"
         required: true
         type: string
       skip_enrich:
-        description: "Skip AI enrichment"
         required: false
         type: boolean
         default: false
       include_draft:
-        description: "Include draft fields with empty description in the exported JSON schema"
         required: false
         type: boolean
         default: false
       include_ai_suggestion:
-        description: "Include AI suggestions in the exported JSON schema"
         required: false
         type: boolean
         default: false
@@ -30,21 +27,29 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v3
+      - uses: astral-sh/setup-uv@v3
         with:
           version: "latest"
+      - run: uv sync
 
-      - name: Install dependencies
-        run: uv sync
+      - name: Resolve inputs
+        id: vars
+        run: |
+          if [ "${{ github.event_name }}" == "schedule" ]; then
+            echo "index=scanr-all"   >> $GITHUB_OUTPUT
+            echo "skip_enrich=false"           >> $GITHUB_OUTPUT
+            echo "include_draft=false"         >> $GITHUB_OUTPUT
+            echo "include_ai_suggestion=false" >> $GITHUB_OUTPUT
+          else
+            echo "index=${{ inputs.index }}"                         >> $GITHUB_OUTPUT
+            echo "skip_enrich=${{ inputs.skip_enrich }}"             >> $GITHUB_OUTPUT
+            echo "include_draft=${{ inputs.include_draft }}"         >> $GITHUB_OUTPUT
+            echo "include_ai_suggestion=${{ inputs.include_ai_suggestion }}" >> $GITHUB_OUTPUT
+          fi
 
       - name: Run pipeline
         env:
@@ -54,27 +59,14 @@ jobs:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
         run: |
           ARGS=""
+          [ "${{ steps.vars.outputs.skip_enrich }}"           == "true" ] && ARGS="$ARGS --skip-enrich"
+          [ "${{ steps.vars.outputs.include_draft }}"         == "true" ] && ARGS="$ARGS --include-draft"
+          [ "${{ steps.vars.outputs.include_ai_suggestion }}" == "true" ] && ARGS="$ARGS --include-ai-suggestion"
 
-          if [ "${{ inputs.skip_enrich }}" == "true" ]; then
-            ARGS="$ARGS --skip-enrich"
-          fi
-
-          if [ "${{ inputs.include_draft }}" == "true" ]; then
-            ARGS="$ARGS --include-draft"
-          fi
-
-          if [ "${{ inputs.include_ai_suggestion }}" == "true" ]; then
-            ARGS="$ARGS --include-ai-suggestion"
-          fi
-
-          # Parse comma-separated index input into multiple --index arguments
-          IFS=',' read -ra INDEXES <<< "${{ inputs.index }}"
+          IFS=',' read -ra INDEXES <<< "${{ steps.vars.outputs.index }}"
           for idx in "${INDEXES[@]}"; do
-            # Trim whitespace
             idx=$(echo "$idx" | xargs)
-            if [ -n "$idx" ]; then
-              ARGS="$ARGS --index $idx"
-            fi
+            [ -n "$idx" ] && ARGS="$ARGS --index $idx"
           done
 
           echo "Running: uv run python main.py $ARGS"
@@ -84,16 +76,12 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-
-          # Stage both annotations and schemas directories
           git add annotations/ schemas/
-
-          # Only commit if there are actual changes
           if ! git diff-index --quiet HEAD; then
             git commit -m "build(schema): update annotations and schemas automatically
-            
-            Triggered for indexes: ${{ inputs.index }}"
+
+            Triggered for indexes: ${{ steps.vars.outputs.index }}"
             git push
           else
-            echo "No changes to annotations or schemas detected. Nothing to commit."
+            echo "No changes detected. Nothing to commit."
           fi
