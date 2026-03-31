@@ -50,6 +50,7 @@ jobs:
         env:
           ES_URL: ${{ secrets.ES_URL }}
           ES_API_KEY: ${{ secrets.ES_API_KEY }}
+          MISTRAL_COMPLETION_URL: ${{ secrets.MISTRAL_COMPLETION_URL }}
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
         run: |
           ARGS=""
