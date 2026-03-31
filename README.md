@@ -145,3 +145,35 @@ fields:
       index: scanr-organizations
       join_field: id
 ```
+
+## Triggering Pipeline Externally
+
+Since the pipeline is exposed via a GitHub Actions `workflow_dispatch` event, you can trigger it programmatically from other repositories or scripts.
+
+### Using GitHub CLI
+If you have the `gh` CLI authenticated:
+```bash
+gh workflow run annotate.yaml \
+  --repo dataesr/elastic-annotation \
+  -f index="scanr-publications" \
+  -f skip_enrich="false" \
+  -f include_draft="false"
+```
+
+### Using cURL (REST API)
+You can invoke the GitHub Actions REST API using a Personal Access Token (PAT) with `repo` (or `actions:write`) permissions. This is useful for triggering the pipeline step automatically at the end of another CI/CD pipeline:
+
+```bash
+curl -X POST \
+  -H "Accept: application/vnd.github.v3+json" \
+  -H "Authorization: Bearer YOUR_GITHUB_PAT" \
+  https://api.github.com/repos/dataesr/elastic-annotation/actions/workflows/annotate.yaml/dispatches \
+  -d '{
+    "ref": "main",
+    "inputs": {
+      "index": "scanr-publications, scanr-organizations",
+      "skip_enrich": "false",
+      "include_draft": "false"
+    }
+  }'
+```

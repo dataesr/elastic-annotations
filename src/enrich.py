@@ -92,12 +92,12 @@ def parse_response(text: str, batch: list[tuple]) -> list[dict | None]:
     return results
 
 
-def main():
+def main(args=None):
     parser = argparse.ArgumentParser(description="AI-enrich index draft fields in annotations.yaml")
     parser.add_argument("--index", "-i", required=True, help="Index to enrich")
     parser.add_argument("--field", "-f", default=None, help="Enrich a single field path")
     parser.add_argument("--force", action="store_true", help="Force re-enrichment of existing ai_suggestion")
-    args = parser.parse_args()
+    args = parser.parse_args(args)
 
     index = args.index
     config = get_config(index)

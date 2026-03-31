@@ -60,12 +60,12 @@ def edit_description(current: str) -> str:
     return val if val else current
 
 
-def main():
+def main(args=None):
     parser = argparse.ArgumentParser(description="Interactive review of AI suggestions")
     parser.add_argument("--index", "-i", required=True, help="Index to review")
     parser.add_argument("--field", "-f", default=None, help="Review a single field")
 
-    args = parser.parse_args()
+    args = parser.parse_args(args)
 
     index = args.index
     config = get_config(index)

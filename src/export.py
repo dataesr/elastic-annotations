@@ -128,13 +128,13 @@ def build_json_schema(index, annotations: dict, include_draft: bool = False, inc
     return schema
 
 
-def main():
+def main(args=None):
     parser = argparse.ArgumentParser(description="Export annotations to JSON Schema files")
     parser.add_argument("--index", "-i", required=True, help="Index to export")
     parser.add_argument("--include-draft", action="store_true", help="Include draft fields with empty description")
     parser.add_argument("--include-ai-suggestion", action="store_true", help="Include AI suggestions in the schema")
     parser.add_argument("--output", "-o", help="Override output filename (default: <index>.json)")
-    args = parser.parse_args()
+    args = parser.parse_args(args)
 
     index = args.index
     config = get_config(index)

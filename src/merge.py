@@ -137,11 +137,11 @@ def merge_annotations(index, fields: dict, path: str):
     print(f"[merge] Saved to {path}")
 
 
-def main():
+def main(args=None):
     parser = argparse.ArgumentParser(description="Merge ES mapping + JSON schema → annotations.yaml")
     parser.add_argument("--index", "-i", required=True, help="ES index name")
     parser.add_argument("--schema", "-s", help="Override default path to JSON schema file")
-    args = parser.parse_args()
+    args = parser.parse_args(args)
 
     index = args.index
     config = get_config(index)

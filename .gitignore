@@ -11,3 +11,6 @@ wheels/
 
 # Env var
 .env
+
+# tests notebooks
+*test*.ipynb
