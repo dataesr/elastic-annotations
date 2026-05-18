@@ -5,6 +5,7 @@ _meta:
   total_fields: 581
   approved: 22
   draft: 559
+  pending_review: 555
 fields:
   acronym:
     status: draft
@@ -617,6 +618,27 @@ fields:
     ai_suggestion:
       description: Pre-computed, flattened representation of incubator data for faster
         queries.
+  incubateurs.denormalized.acronym:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Acronyms of incubators linked to the organization, denormalized
+        for quick access.
+      notes: Use this field to display or match incubator acronyms without resolving
+        nested references.
+  incubateurs.denormalized.acronym.default:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Default acronym of the incubator in unspecified or fallback language.
+      notes: Prefer this field when no language-specific acronym is available or required.
+  incubateurs.denormalized.acronym.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: French acronym of the incubator associated with the organization.
   incubateurs.denormalized.categories:
     status: draft
     type: text
@@ -704,12 +726,6 @@ fields:
     ai_suggestion:
       description: Localized names of the incubator in multiple languages.
       notes: Use the appropriate language key (e.g., 'en', 'fr') to retrieve the label.
-  incubateurs.denormalized.label.default:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Default label of the incubator associated with the organization.
   incubateurs.denormalized.label.fr:
     status: draft
     type: text
@@ -1745,12 +1761,6 @@ fields:
     ai_suggestion:
       description: Container for nested institutions under the child organization.
       notes: Only populated if the child itself has hierarchical sub-structures.
-  parentOf.denormalized.institutions.endDate:
-    status: draft
-    type: date
-    ai_suggestion:
-      description: End date of the parent-child institutional relationship
-      notes: Use to determine if the relationship is still active or historical.
   parentOf.denormalized.institutions.label:
     status: draft
     type: text
@@ -2379,12 +2389,6 @@ fields:
     ai_suggestion:
       description: Institutions linked to the predecessor organization.
       notes: Contains nested fields like 'endDate' and 'label' for detailed context.
-  predecessors.denormalized.institutions.endDate:
-    status: draft
-    type: date
-    ai_suggestion:
-      description: End date of the predecessor institution's association.
-      notes: 'Format: YYYY-MM-DD. May be null if the association is ongoing.'
   predecessors.denormalized.institutions.label:
     status: draft
     type: text
@@ -3458,6 +3462,15 @@ fields:
     ai_suggestion:
       description: Default acronym of the linked startup if no language-specific version
         exists.
+  startup_links.denormalized.acronym.en:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: English acronym of the linked startup, denormalized for direct
+        retrieval.
+      notes: Use this for English-language contexts or when language-specific data
+        is prioritized.
   startup_links.denormalized.acronym.fr:
     status: draft
     type: text
@@ -3503,12 +3516,6 @@ fields:
     type: object
     ai_suggestion:
       description: Collection of institutions associated with the linked startup.
-  startup_links.denormalized.institutions.endDate:
-    status: draft
-    type: date
-    ai_suggestion:
-      description: End date of the institution's association with the linked startup.
-      notes: Null if the association is ongoing or unknown.
   startup_links.denormalized.institutions.label:
     status: draft
     type: text

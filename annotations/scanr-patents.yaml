@@ -2,9 +2,10 @@ _meta:
   index: scanr-patents
   description: Patents filed by French research institutions. One document is one
     patent.
-  total_fields: 147
+  total_fields: 189
   approved: 0
-  draft: 147
+  draft: 189
+  pending_review: 189
 fields:
   acronym:
     status: draft
@@ -347,6 +348,24 @@ fields:
       description: French acronym of the research structure associated with the patent.
       notes: Use for display or filtering; may contain multiple acronyms if the structure
         has evolved.
+  denormalized_structures.categories:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Hierarchical classification tags (e.g., IPC/CPC codes) assigned
+        to the patent.
+      notes: Use for filtering or faceting patents by technical domain; may contain
+        multiple space-separated values.
+  denormalized_structures.encoded_key:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique hash identifier for the denormalized research structure
+        record.
+      notes: Stable key for joins or deduplication; format is SHA-256 of the structure’s
+        canonical fields.
   denormalized_structures.id:
     status: draft
     type: text
@@ -361,18 +380,21 @@ fields:
     ai_suggestion:
       description: Combined ID and name of the research structure for human-readable
         identification.
+  denormalized_structures.id_name_default:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Default display name and internal ID concatenated for the research
+        structure.
+      notes: Format is 'ID:Name'; prefer for user-facing labels unless localization
+        is required.
   denormalized_structures.institutions:
     status: draft
     type: object
     ai_suggestion:
       description: Nested object containing historical and relational data about affiliated
         institutions.
-  denormalized_structures.institutions.fromDate:
-    status: draft
-    type: date
-    ai_suggestion:
-      description: Start date of the institution's affiliation with the research structure.
-      notes: Used to determine temporal relevance of the relationship.
   denormalized_structures.institutions.label:
     status: draft
     type: text
@@ -394,6 +416,22 @@ fields:
     ai_suggestion:
       description: Type of relationship between the institution and the research structure
         (e.g., 'parent', 'subsidiary').
+  denormalized_structures.institutions.rnsr_key:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: RNSR (Répertoire National des Structures de Recherche) identifier
+        for the institution.
+      notes: Use to cross-reference with French national research registries; may
+        be missing for non-French entities.
+  denormalized_structures.institutions.startDate:
+    status: draft
+    type: date
+    ai_suggestion:
+      description: Official date when the institution was established or recognized.
+      notes: Use for temporal filtering; may be null if the institution’s founding
+        date is unknown.
   denormalized_structures.institutions.structure:
     status: draft
     type: text
@@ -406,6 +444,14 @@ fields:
     type: boolean
     ai_suggestion:
       description: Flag indicating whether the research structure is based in France.
+  denormalized_structures.is_main_parent:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: Binary flag (1/0) indicating if this is the primary parent structure
+        of the patent.
+      notes: Use to resolve ambiguity when a patent lists multiple affiliations; defaults
+        to 0 if unset.
   denormalized_structures.kind:
     status: draft
     type: text
@@ -452,6 +498,14 @@ fields:
       description: Full street address of the research structure.
       notes: May include postal code; prefer parsing city/country fields for structured
         queries.
+  denormalized_structures.mainAddress.address_detected:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Full raw address string extracted from the patent’s applicant data.
+      notes: May contain noise or formatting inconsistencies; use for display only,
+        not geocoding.
   denormalized_structures.mainAddress.city:
     status: draft
     type: text
@@ -487,15 +541,21 @@ fields:
         decimal degrees.
       notes: Use with 'lat' for geospatial queries; ensure both fields are present
         for accurate results.
-  denormalized_structures.mainAddress.localisationSuggestions:
+  denormalized_structures.mainAddress.iso2:
     status: draft
     type: text
     has_keyword: true
     ai_suggestion:
-      description: Alternative address suggestions for the patent applicant's main
-        location.
-      notes: May contain multiple entries; prioritize structured fields (lat/lon/postcode)
-        when available.
+      description: ISO 3166-1 alpha-2 country code of the institution’s main address.
+      notes: Prefer over iso3 for API queries; always uppercase (e.g., 'FR').
+  denormalized_structures.mainAddress.iso3:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: ISO 3166-1 alpha-3 country code of the institution’s main address.
+      notes: Use for compatibility with systems requiring 3-letter codes; always uppercase
+        (e.g., 'FRA').
   denormalized_structures.mainAddress.postcode:
     status: draft
     type: text
@@ -504,6 +564,21 @@ fields:
       description: Postal code of the patent applicant's main address in France.
       notes: Format follows French postal standards (5 digits); may be used for regional
         filtering.
+  denormalized_structures.mainAddress.region:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Administrative region (e.g., département) of the institution’s
+        main address.
+      notes: French regions only; format varies (e.g., 'Île-de-France' or '75').
+  denormalized_structures.main_category:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Primary classification category of the patent's research domain.
+      notes: Use to filter or group patents by broad scientific or technical areas.
   denormalized_structures.parents:
     status: draft
     type: object
@@ -511,12 +586,13 @@ fields:
       description: Hierarchical relationships of the patent applicant's parent organizations.
       notes: Contains nested fields like 'fromDate' and 'relationType'; expand for
         full organizational context.
-  denormalized_structures.parents.fromDate:
+  denormalized_structures.parents.endDate:
     status: draft
     type: date
     ai_suggestion:
-      description: Start date of the parent organization's relationship with the applicant.
-      notes: Use to track organizational changes over time; may be null if unknown.
+      description: End date of the parent project or structure associated with the
+        patent.
+      notes: May be null if the parent structure is ongoing or unknown.
   denormalized_structures.parents.natural_id:
     status: draft
     type: text
@@ -532,6 +608,13 @@ fields:
       description: Type of relationship between the applicant and parent organization
         (e.g., 'subsidiary').
       notes: Standardize values during queries (e.g., lowercase) to avoid mismatches.
+  denormalized_structures.parents.startDate:
+    status: draft
+    type: date
+    ai_suggestion:
+      description: Start date of the parent project or structure associated with the
+        patent.
+      notes: Use with endDate to determine the parent structure's active period.
   denormalized_structures.parents.structure:
     status: draft
     type: text
@@ -548,6 +631,19 @@ fields:
         'dissolved').
       notes: Values may evolve; check for updates if status is critical to your use
         case.
+  denormalized_structures.typologie_1:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Primary typology classification of the patent (e.g., 'Brevet',
+        'Demande').
+  denormalized_structures.typologie_2:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Secondary typology classification of the patent, if applicable.
   description:
     status: draft
     type: object
@@ -703,6 +799,12 @@ fields:
       description: Categorical role of the inventor (e.g., 'academic', 'industrial',
         'student').
       notes: Use to filter or analyze inventor demographics or collaboration patterns.
+  isFrench:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates whether the patent is filed under French jurisdiction
+        (true/false).
   isInternational:
     status: draft
     type: boolean
@@ -810,11 +912,23 @@ fields:
     analyzer: light
     ai_suggestion:
       description: Last name of a leader associated with the patent's development.
+  participant_encoded_key:
+    status: draft
+    type: keyword
+    ai_suggestion:
+      description: Unique encoded identifier for a participant in the patent filing.
+      notes: Use for exact matching or linking participants across patents.
   participants:
     status: draft
     type: object
     ai_suggestion:
       description: Container for all contributors or entities involved in the patent.
+  participants.funding:
+    status: draft
+    type: float
+    ai_suggestion:
+      description: Funding amount (in EUR) allocated to a participant for the patent.
+      notes: May be zero or null if funding details are undisclosed.
   participants.label:
     status: draft
     type: object
@@ -936,6 +1050,187 @@ fields:
     ai_suggestion:
       description: Alias for patents.publicationDate; use for consistency with other
         document types.
+  publications:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Container for all publication records linked to the patent.
+      notes: Includes metadata like publication dates, titles, and identifiers.
+  publications.authors:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: List of authors associated with a linked publication.
+      notes: Each author may include name, affiliation, and role in the publication.
+  publications.authors.affiliations:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: List of organizations associated with an author for a patent publication.
+      notes: May include multiple affiliations per author; prioritize the first entry
+        if only one is needed.
+  publications.authors.affiliations.country:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Country where the author's affiliated institution is located.
+      notes: Use ISO 3166-1 alpha-2 country codes (e.g., 'FR' for France) when available.
+  publications.authors.affiliations.ids:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Collection of unique identifiers for the author's affiliated institution.
+      notes: Useful for disambiguating institutions with similar names.
+  publications.authors.affiliations.ids.id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the author's affiliated institution.
+      notes: Format varies by 'type' (e.g., ROR, GRID, or internal IDs).
+  publications.authors.affiliations.ids.type:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Type of identifier used for the affiliated institution (e.g., ROR,
+        GRID).
+  publications.authors.affiliations.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Official name of the author's affiliated institution.
+      notes: May include abbreviations or localized variants.
+  publications.authors.affiliations.typeIns:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Type of institution (e.g., university, research lab, corporation).
+  publications.authors.ids:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Collection of unique identifiers for an author of the patent.
+      notes: Useful for linking authors across patents or external databases.
+  publications.authors.ids.id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for an author (e.g., ORCID, internal ID).
+      notes: Format varies by 'type'; ORCID is preferred if available.
+  publications.authors.ids.type:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Type of identifier used for the author (e.g., ORCID, internal ID).
+  publications.authors.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Full name of each author listed on the patent publication.
+      notes: May include multiple entries; normalize case for consistent filtering.
+  publications.doi:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Digital Object Identifier (DOI) assigned to the patent publication.
+      notes: Use for linking or fetching additional metadata; may be absent for older
+        patents.
+  publications.hostOrganizationName:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the organization hosting or publishing the patent.
+      notes: Often a research institution, university, or patent office.
+  publications.isOa:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Boolean flag indicating if the publication is open access (true/false).
+      notes: Stored as text; convert to boolean for filtering (e.g., 'true' → true).
+  publications.journals:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Container object for metadata about journals associated with the
+        publication.
+  publications.journals.ids:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Container object for unique identifiers of the journal.
+      notes: May include multiple ID types (e.g., ISSN, DOI).
+  publications.journals.ids.id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Value of the journal identifier (e.g., ISSN number).
+      notes: Format varies by type; validate against the associated 'type' field.
+  publications.journals.ids.type:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Type of journal identifier (e.g., 'issn', 'doi', 'publisher_id').
+  publications.journals.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the journal where the patent publication appeared.
+      notes: May differ from hostOrganizationName if published in a third-party journal.
+  publications.language:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Primary language of the patent publication as an ISO 639-1 code.
+      notes: Use for filtering or language-specific processing; defaults to 'fr' if
+        unspecified.
+  publications.pdfUrl:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: URL linking to the PDF version of the patent publication.
+      notes: Verify URL accessibility before use; may require institutional access.
+  publications.publicationYear:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Year when the patent publication was officially released.
+      notes: Format as YYYY; may differ from filing or grant year.
+  publications.title:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Official title of the patent publication as registered.
+      notes: Titles may include technical terms or abbreviations specific to the field.
+  publications.type:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Type of patent publication (e.g., application, granted patent).
+      notes: Common values include 'application', 'granted', or 'priority document'.
+  startDate:
+    status: draft
+    type: date
+    ai_suggestion:
+      description: Date when the patent application process was initiated.
+      notes: Format as YYYY-MM-DD; may precede publication or grant date.
   summary:
     status: draft
     type: object

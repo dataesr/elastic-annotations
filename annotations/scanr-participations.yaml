@@ -2,9 +2,10 @@ _meta:
   index: scanr-participations
   description: Projects participations by organizations. One document is one project
     participation by an organization.
-  total_fields: 107
+  total_fields: 113
   approved: 0
-  draft: 107
+  draft: 113
+  pending_review: 113
 fields:
   acronym:
     status: draft
@@ -193,6 +194,22 @@ fields:
     ai_suggestion:
       description: Names of French laboratories collaborating as co-partners in the
         project.
+  co_partners_fr_labs_all:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: French lab names of all co-partners involved in the project participation.
+      notes: Use for filtering or displaying collaborations; may contain multiple
+        entries separated by delimiters.
+  co_partners_fr_labs_region:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: French lab names of co-partners within the participant's region.
+      notes: Use to analyze regional collaborations; empty if no regional co-partners
+        exist.
   description:
     status: draft
     type: object
@@ -438,6 +455,14 @@ fields:
       description: Default display name of the participating organization in this
         project.
       notes: Use this for user-facing labels; prefer natural_id for programmatic references.
+  participant_ignore_total_budget:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Flag indicating whether the participant's total budget should be
+        excluded from aggregations.
+      notes: Set to true for participants with non-standard or undisclosed budget
+        contributions.
   participant_institutions:
     status: draft
     type: object
@@ -551,6 +576,20 @@ fields:
     ai_suggestion:
       description: High-level category classifying the participant's role or sector
         (e.g., 'academia', 'industry').
+  participant_region:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Primary geographic region of the participating organization.
+      notes: Standardized region name; use for regional analysis or filtering.
+  participant_region_with_labs:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Participant's region including associated labs, if applicable.
+      notes: May differ from 'participant_region' if labs span multiple regions.
   participant_status:
     status: draft
     type: text
@@ -702,13 +741,6 @@ fields:
     cross_index:
       index: scanr-projects
       join_field: id
-  project_ignore_total_budget:
-    status: draft
-    type: boolean
-    ai_suggestion:
-      description: Flag indicating if the project's total budget should be excluded
-        from aggregations.
-      notes: Set to true when budget data is unreliable or missing.
   project_instrument:
     status: draft
     type: text
@@ -753,6 +785,20 @@ fields:
     ai_suggestion:
       description: Year when the project was initiated or officially recognized in
         the system.
+  region_ignore_funding:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Flag indicating whether funding data for the region should be excluded
+        from calculations.
+      notes: Set to true for regions with partial or confidential funding records.
+  region_ignore_total_budget:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Flag indicating whether the region's total budget should be excluded
+        from aggregations.
+      notes: Set to true for regions with non-standard or aggregated budget reporting.
   startDate:
     status: draft
     type: date
