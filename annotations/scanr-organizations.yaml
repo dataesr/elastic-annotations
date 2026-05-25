@@ -2,10 +2,9 @@ _meta:
   index: scanr-organizations
   description: Research organizations and laboratories (universities, CNRS units,
     etc.). One document is one organization.
-  total_fields: 581
+  total_fields: 571
   approved: 22
-  draft: 559
-  pending_review: 555
+  draft: 549
 fields:
   acronym:
     status: draft
@@ -3320,13 +3319,6 @@ fields:
     ai_suggestion:
       description: Multilingual labels for the linked startup
       notes: Contains localized names; default language is English if unspecified.
-  startup_linkOf.denormalized.label.default:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Default name of the linked startup
-      notes: Fallback label when no language-specific version exists.
   startup_linkOf.denormalized.label.fr:
     status: draft
     type: text
@@ -3511,49 +3503,6 @@ fields:
       description: Default display name for linked startups when no specific name
         exists.
       notes: Falls back to a standardized format if 'id_name' is missing or incomplete.
-  startup_links.denormalized.institutions:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Collection of institutions associated with the linked startup.
-  startup_links.denormalized.institutions.label:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Human-readable name of the institution linked to the startup.
-  startup_links.denormalized.institutions.natural_id:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Unique natural identifier for the institution within the startup
-        context.
-  startup_links.denormalized.institutions.relationType:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Type of relationship between the institution and the linked startup.
-      notes: 'Examples: ''founder'', ''investor'', or ''partner''.'
-  startup_links.denormalized.institutions.rnsr_key:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: RNSR key of the institution if available and applicable.
-  startup_links.denormalized.institutions.startDate:
-    status: draft
-    type: date
-    ai_suggestion:
-      description: Start date of the institution's association with the linked startup.
-  startup_links.denormalized.institutions.structure:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Structural classification of the institution (e.g., 'university',
-        'lab').
   startup_links.denormalized.isFrench:
     status: draft
     type: boolean
@@ -3579,12 +3528,6 @@ fields:
     type: object
     ai_suggestion:
       description: Multilingual display name of the linked startup or organization.
-  startup_links.denormalized.label.default:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Default (fallback) name of the linked startup or organization.
   startup_links.denormalized.label.fr:
     status: draft
     type: text
@@ -3602,12 +3545,6 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Full formatted address string of the linked startup or organization.
-  startup_links.denormalized.mainAddress.address_detected:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Machine-detected address components from the raw address field.
   startup_links.denormalized.mainAddress.city:
     status: draft
     type: text
