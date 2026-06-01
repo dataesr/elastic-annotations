@@ -2,9 +2,10 @@ _meta:
   index: scanr-participations
   description: Projects participations by organizations. One document is one project
     participation by an organization.
-  total_fields: 113
+  total_fields: 114
   approved: 0
-  draft: 113
+  draft: 114
+  pending_review: 114
 fields:
   acronym:
     status: draft
@@ -201,14 +202,6 @@ fields:
       description: French lab names of all co-partners involved in the project participation.
       notes: Use for filtering or displaying collaborations; may contain multiple
         entries separated by delimiters.
-  co_partners_fr_labs_region:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: French lab names of co-partners within the participant's region.
-      notes: Use to analyze regional collaborations; empty if no regional co-partners
-        exist.
   description:
     status: draft
     type: object
@@ -395,6 +388,14 @@ fields:
     ai_suggestion:
       description: Last name of a project leader associated with the participating
         organization.
+  nb_regions:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: Number of distinct geographic regions the organization operates
+        in for this project participation.
+      notes: Used to assess geographic diversity; zero or null implies unknown or
+        not applicable.
   participant_acronym:
     status: draft
     type: object
@@ -454,6 +455,13 @@ fields:
       description: Default display name of the participating organization in this
         project.
       notes: Use this for user-facing labels; prefer natural_id for programmatic references.
+  participant_ignore_funding:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Flag indicating whether funding data for this participation should
+        be excluded from calculations.
+      notes: When true, ignore this record in any funding-related queries or aggregations.
   participant_ignore_total_budget:
     status: draft
     type: boolean
