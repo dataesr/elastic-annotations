@@ -2,9 +2,10 @@ _meta:
   index: scanr-persons
   description: Researchers and authors with their affiliations and identifiers (ORCID,
     IdRef). One document is one person.
-  total_fields: 283
+  total_fields: 185
   approved: 44
-  draft: 239
+  draft: 141
+  pending_review: 140
 fields:
   acronym:
     status: draft
@@ -114,13 +115,6 @@ fields:
       description: Default acronym of the affiliated organization, if available
       notes: Fallback when no language-specific acronym is present or preferred language
         is unknown.
-  affiliations.structure.acronym.en:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: English acronym of the affiliated organization
-      notes: Use when the agent's context or user preference is English.
   affiliations.structure.acronym.fr:
     status: draft
     type: text
@@ -128,6 +122,20 @@ fields:
     ai_suggestion:
       description: French acronym of the affiliated organization
       notes: Use when the agent's context or user preference is French.
+  affiliations.structure.categories:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Research domain labels assigned to the affiliated organization
+      notes: Categories may be hierarchical (e.g., 'Biology > Genetics') and are language-agnostic.
+  affiliations.structure.encoded_key:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique internal identifier for the organizational structure
+      notes: Used for deduplication and linking across datasets; not a public PID.
   affiliations.structure.id:
     status: draft
     type: text
@@ -149,6 +157,13 @@ fields:
       description: Human-readable name associated with the organization's identifier
       notes: May differ from the label in 'institutions' due to historical or administrative
         changes.
+  affiliations.structure.id_name_default:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Preferred display name of the affiliated organization
+      notes: Fallback to this value if localized names are unavailable.
   affiliations.structure.institutions:
     status: draft
     type: object
@@ -157,13 +172,12 @@ fields:
         data for the affiliation
       notes: Use to explore parent/child relationships or temporal changes in the
         organization.
-  affiliations.structure.institutions.fromDate:
+  affiliations.structure.institutions.endDate:
     status: draft
     type: date
     ai_suggestion:
-      description: Start date when the institution's relationship with the structure
-        became active
-      notes: Compare with 'endDate' in affiliations to determine active periods.
+      description: Last year the institution was referenced in publications
+      notes: Null if the institution is still active or no end date detected.
   affiliations.structure.institutions.label:
     status: draft
     type: text
@@ -187,6 +201,19 @@ fields:
       description: Type of relationship between the institution and the structure
         (e.g., 'parent', 'child')
       notes: Helps determine hierarchy or collaboration roles in the organization.
+  affiliations.structure.institutions.rnsr_key:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: French RNSR identifier for the research institution
+      notes: Only present for institutions registered in the French RNSR system.
+  affiliations.structure.institutions.startDate:
+    status: draft
+    type: date
+    ai_suggestion:
+      description: First year the institution was referenced in publications
+      notes: May differ from legal creation date if publications predate indexing.
   affiliations.structure.institutions.structure:
     status: draft
     type: text
@@ -200,6 +227,12 @@ fields:
     type: boolean
     ai_suggestion:
       description: Indicates if the affiliation is with a French institution
+  affiliations.structure.is_main_parent:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: Flag indicating if this structure is the primary parent organization
+      notes: 1 for true, 0 for false; used to resolve ambiguous hierarchies.
   affiliations.structure.kind:
     status: draft
     type: text
@@ -217,12 +250,6 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Default name of the institution if no language preference is set
-  affiliations.structure.label.en:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: English name of the institution
   affiliations.structure.label.fr:
     status: draft
     type: text
@@ -240,6 +267,13 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Full formatted address of the institution
+  affiliations.structure.mainAddress.address_detected:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Raw address string extracted from publication metadata
+      notes: Unnormalized; may contain typos or incomplete data.
   affiliations.structure.mainAddress.city:
     status: draft
     type: text
@@ -272,13 +306,6 @@ fields:
     ai_suggestion:
       description: Longitude coordinate of the affiliation's main address for mapping
         purposes
-  affiliations.structure.mainAddress.localisationSuggestions:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Alternative address suggestions when exact location is ambiguous
-        or unverified
   affiliations.structure.mainAddress.postcode:
     status: draft
     type: text
@@ -286,18 +313,25 @@ fields:
     ai_suggestion:
       description: Postal code of the affiliation's main address for precise location
         filtering
+  affiliations.structure.mainAddress.region:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Administrative region of the organization's main address
+      notes: Normalized to ISO 3166-2 codes where possible (e.g., 'FR-IDF').
   affiliations.structure.parents:
     status: draft
     type: object
     ai_suggestion:
       description: Hierarchical parent organizations of the current affiliation with
         temporal context
-  affiliations.structure.parents.fromDate:
+  affiliations.structure.parents.endDate:
     status: draft
     type: date
     ai_suggestion:
-      description: Start date when the parent organization relationship became active
-      notes: Compare with affiliation dates to validate temporal consistency.
+      description: Last year the parent organization was referenced in publications
+      notes: Null if the parent is still active or no end date detected.
   affiliations.structure.parents.natural_id:
     status: draft
     type: text
@@ -313,6 +347,12 @@ fields:
       description: Type of relationship between the affiliation and its parent (e.g.,
         department, faculty)
       notes: Helps distinguish structural hierarchy levels.
+  affiliations.structure.parents.startDate:
+    status: draft
+    type: date
+    ai_suggestion:
+      description: Earliest date when the parent organization relationship began
+      notes: Use to determine historical context of organizational hierarchy.
   affiliations.structure.parents.structure:
     status: draft
     type: text
@@ -328,6 +368,21 @@ fields:
       description: Current operational status of the affiliated structure (e.g., active,
         closed)
       notes: Use to filter or contextualize historical vs. current affiliations.
+  affiliations.structure.typologie_1:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Primary classification of the affiliated organization
+      notes: Typically broad categories like 'University' or 'Research Institute'.
+  affiliations.structure.typologie_2:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Secondary classification of the affiliated organization
+      notes: More specific than typologie_1, e.g., 'Public University' or 'Private
+        Lab'.
   ai_description:
     status: draft
     type: object
@@ -580,6 +635,12 @@ fields:
     analyzer: light
     ai_suggestion:
       description: Full name of the person as recorded in inventor documents
+  isFrench:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the person has at least one French affiliation
+      notes: Useful for filtering researchers with French institutional ties.
   keywords:
     status: draft
     type: object
@@ -670,12 +731,23 @@ fields:
     type: string
     description: ORCID
     has_keyword: true
+  participant_encoded_key:
+    status: draft
+    type: keyword
+    ai_suggestion:
+      description: Unique encoded identifier for a participant in a project or publication
   participants:
     status: draft
     type: object
     ai_suggestion:
       description: Nested object containing all project or team participants associated
         with the author
+  participants.funding:
+    status: draft
+    type: float
+    ai_suggestion:
+      description: Total funding amount associated with the participant in a project
+      notes: May be zero if no funding data is available.
   participants.label:
     status: draft
     type: object
@@ -741,111 +813,11 @@ fields:
     status: approved
     type: object
     description: Title of the publication
-  publications.title.af:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.am:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.an:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ar:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.az:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ba:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.be:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.bg:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.bh:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.bn:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.bo:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.br:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.bs:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ca:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.co:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.cs:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.cy:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.da:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.de:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
   publications.title.default:
     status: approved
     type: string
     description: Default title
     has_keyword: true
-  publications.title.el:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
   publications.title.en:
     status: draft
     type: text
@@ -853,36 +825,6 @@ fields:
     ai_suggestion:
       description: English title of the publication
       notes: May be machine-translated if original is non-English.
-  publications.title.eo:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.es:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.et:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.eu:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.fa:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.fi:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
   publications.title.fr:
     status: draft
     type: text
@@ -890,441 +832,6 @@ fields:
     ai_suggestion:
       description: French title of the publication
       notes: May be machine-translated if original is non-French.
-  publications.title.fy:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ga:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.gb:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.gd:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.gl:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.gu:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.he:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.hi:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.hr:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ht:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.hu:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.hy:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ia:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.id:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ie:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.io:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.is:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.it:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ja:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.jv:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ka:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.kk:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.km:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.kn:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ko:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ku:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.kv:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.kw:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ky:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.la:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.lb:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.lo:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.lt:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.lv:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.mg:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.mk:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ml:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.mn:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.mr:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ms:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.mt:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.my:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.nb:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ne:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.nl:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.nn:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.no:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.oc:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.pa:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.pl:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ps:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.pt:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.qu:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.rm:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ro:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ru:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.sa:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.sc:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.sd:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.sh:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.si:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.sk:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.sl:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.so:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.sp:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.sq:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.sr:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.su:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.sv:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.sw:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ta:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.te:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.tg:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.th:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.tk:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.tl:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.tr:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.tt:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ug:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.uk:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.ur:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.uz:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.vi:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.vo:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.wa:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.yi:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
-  publications.title.zh:
-    status: draft
-    type: text
-    has_keyword: true
-    exclude: true
   publications.year:
     status: approved
     type: integer
@@ -1394,18 +901,26 @@ fields:
     ai_suggestion:
       description: Default acronym of the affiliated structure if no language preference
         is specified
-  recentAffiliations.structure.acronym.en:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: English acronym of the affiliated structure
   recentAffiliations.structure.acronym.fr:
     status: draft
     type: text
     has_keyword: true
     ai_suggestion:
       description: French acronym of the affiliated structure
+  recentAffiliations.structure.categories:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Categorical tags for the recent affiliation's organizational type
+      notes: Use to infer the nature of the institution (e.g., 'Hospital', 'NGO').
+  recentAffiliations.structure.encoded_key:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique encoded key for the recent affiliation's organizational
+        record
   recentAffiliations.structure.id:
     status: draft
     type: text
@@ -1420,17 +935,25 @@ fields:
     ai_suggestion:
       description: Human-readable name of the identifier for the affiliated structure
       notes: Helps distinguish between different identifier types (e.g., ROR, GRID).
+  recentAffiliations.structure.id_name_default:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Default display name and identifier for the recent affiliation
+      notes: Combines ID and name for human-readable identification.
   recentAffiliations.structure.institutions:
     status: draft
     type: object
     ai_suggestion:
       description: Hierarchical institutions linked to the author's recent affiliation
       notes: Use to map nested organizational structures like universities and departments.
-  recentAffiliations.structure.institutions.fromDate:
+  recentAffiliations.structure.institutions.endDate:
     status: draft
     type: date
     ai_suggestion:
-      description: Earliest date the author was associated with this institution
+      description: Last date of association with an institution under the recent affiliation
+      notes: May be null if the relationship is ongoing.
   recentAffiliations.structure.institutions.label:
     status: draft
     type: text
@@ -1451,6 +974,19 @@ fields:
     ai_suggestion:
       description: Type of relationship between the author and institution (e.g.,
         'employee')
+  recentAffiliations.structure.institutions.rnsr_key:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: RNSR identifier for the institution in the affiliation structure
+      notes: Use to cross-reference with French research institution registries.
+  recentAffiliations.structure.institutions.startDate:
+    status: draft
+    type: date
+    ai_suggestion:
+      description: Earliest date the author was affiliated with this institution
+      notes: May be null if only end date is known.
   recentAffiliations.structure.institutions.structure:
     status: draft
     type: text
@@ -1479,13 +1015,6 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Default display name for the affiliation structure
-  recentAffiliations.structure.label.en:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: English label of the affiliated organization or research structure
-      notes: Use this for display or filtering when the user's locale is English.
   recentAffiliations.structure.label.fr:
     status: draft
     type: text
@@ -1504,42 +1033,19 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Full street address of the affiliated organization's main location
+  recentAffiliations.structure.mainAddress.address_detected:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Detected full address of the main institution location
+      notes: Unstructured text; may contain inconsistencies or missing data.
   recentAffiliations.structure.mainAddress.city:
     status: draft
     type: text
     has_keyword: true
     ai_suggestion:
       description: City of the affiliated organization's main address
-  recentAffiliations.structure.mainAddress.country:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Country of the affiliated organization's main address
-  recentAffiliations.structure.mainAddress.gps:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Geographic coordinates (latitude/longitude) of the main address
-  recentAffiliations.structure.mainAddress.gps.lat:
-    status: draft
-    type: float
-    ai_suggestion:
-      description: Latitude coordinate of the affiliated organization's main address
-      notes: Use for mapping or distance-based queries.
-  recentAffiliations.structure.mainAddress.gps.lon:
-    status: draft
-    type: float
-    ai_suggestion:
-      description: Longitude coordinate of the affiliated organization's main address
-      notes: Use for mapping or distance-based queries.
-  recentAffiliations.structure.mainAddress.localisationSuggestions:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Alternative address suggestions for the affiliated organization
-      notes: May contain unstructured or ambiguous location data for disambiguation.
   recentAffiliations.structure.mainAddress.postcode:
     status: draft
     type: text
@@ -1547,18 +1053,25 @@ fields:
     ai_suggestion:
       description: Postal code of the primary address for the affiliated institution
       notes: May be missing or incomplete for non-standard addresses.
+  recentAffiliations.structure.mainAddress.region:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Administrative region of the main institution address
+      notes: Format varies by country; normalize before comparison.
   recentAffiliations.structure.parents:
     status: draft
     type: object
     ai_suggestion:
       description: Hierarchical parent organizations of the affiliated structure
       notes: Use to trace institutional lineage (e.g., university → department).
-  recentAffiliations.structure.parents.fromDate:
+  recentAffiliations.structure.parents.endDate:
     status: draft
     type: date
     ai_suggestion:
-      description: Start date when the parent organization relationship became active
-      notes: 'Format: YYYY-MM-DD; may be null if unknown.'
+      description: Last date the parent structure was part of the affiliation
+      notes: Used to track organizational hierarchy changes over time.
   recentAffiliations.structure.parents.natural_id:
     status: draft
     type: text
@@ -1573,6 +1086,12 @@ fields:
     ai_suggestion:
       description: Type of relationship between the structure and its parent (e.g.,
         'department')
+  recentAffiliations.structure.parents.startDate:
+    status: draft
+    type: date
+    ai_suggestion:
+      description: Earliest date the parent structure was part of the affiliation
+      notes: May differ from institution startDate if parent joined later.
   recentAffiliations.structure.parents.structure:
     status: draft
     type: text
@@ -1586,6 +1105,26 @@ fields:
     ai_suggestion:
       description: Current operational status of the affiliated structure (e.g., 'active')
       notes: Use to filter defunct or inactive institutions.
+  recentAffiliations.structure.typologie_1:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Primary classification type of the affiliation structure
+      notes: Standardized values (e.g., 'University', 'Research Institute').
+  recentAffiliations.structure.typologie_2:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Secondary classification type of the affiliation structure
+      notes: More specific than typologie_1; may be null.
+  startDate:
+    status: draft
+    type: date
+    ai_suggestion:
+      description: Earliest detected publication year for this author
+      notes: Used to estimate career start; may not reflect first affiliation.
   title_abs_text:
     status: draft
     type: text

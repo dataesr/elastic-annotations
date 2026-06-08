@@ -2,9 +2,10 @@ _meta:
   index: scanr-patents
   description: Patents filed by French research institutions. One document is one
     patent.
-  total_fields: 189
+  total_fields: 201
   approved: 0
-  draft: 189
+  draft: 201
+  pending_review: 201
 fields:
   acronym:
     status: draft
@@ -1108,6 +1109,13 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Type of institution (e.g., university, research lab, corporation).
+  publications.authors.fullName:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Full name of the author as it appears in the patent publication.
+      notes: May include middle names or initials; use for display or author identification.
   publications.authors.ids:
     status: draft
     type: object
@@ -1127,13 +1135,14 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Type of identifier used for the author (e.g., ORCID, internal ID).
-  publications.authors.name:
+  publications.authors.person:
     status: draft
     type: text
     has_keyword: true
     ai_suggestion:
-      description: Full name of each author listed on the patent publication.
-      notes: May include multiple entries; normalize case for consistent filtering.
+      description: Unique identifier or normalized name for the author, linking to
+        a person record.
+      notes: Use for deduplication or linking authors across multiple patents.
   publications.doi:
     status: draft
     type: text
@@ -1149,6 +1158,14 @@ fields:
     ai_suggestion:
       description: Name of the organization hosting or publishing the patent.
       notes: Often a research institution, university, or patent office.
+  publications.id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the patent publication within the index.
+      notes: Typically a patent number or application ID; primary key for referencing
+        this document.
   publications.isOa:
     status: draft
     type: text
@@ -1181,13 +1198,18 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Type of journal identifier (e.g., 'issn', 'doi', 'publisher_id').
-  publications.journals.name:
+  publications.journals.source:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Metadata about the journal where the patent was published, if applicable.
+  publications.journals.source.volume:
     status: draft
     type: text
     has_keyword: true
     ai_suggestion:
-      description: Name of the journal where the patent publication appeared.
-      notes: May differ from hostOrganizationName if published in a third-party journal.
+      description: Volume number of the journal where the patent was published.
+      notes: May be missing if the patent was not published in a journal volume.
   publications.language:
     status: draft
     type: text
@@ -1203,20 +1225,81 @@ fields:
     ai_suggestion:
       description: URL linking to the PDF version of the patent publication.
       notes: Verify URL accessibility before use; may require institutional access.
-  publications.publicationYear:
+  publications.source:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Metadata about the source of the patent publication.
+      notes: Includes journal, publisher, or other publication details.
+  publications.source.isOa:
     status: draft
     type: text
     has_keyword: true
     ai_suggestion:
-      description: Year when the patent publication was officially released.
-      notes: Format as YYYY; may differ from filing or grant year.
+      description: Boolean flag indicating if the publication source is open access.
+      notes: Values may be 'true', 'false', or missing if unknown.
+  publications.source.issue:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Issue number of the journal where the patent was published.
+      notes: May be missing if the patent was not published in a journal issue.
+  publications.source.journalIssns:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: ISSN identifiers for the journal where the patent was published.
+      notes: May include multiple ISSNs (e.g., print and electronic) separated by
+        commas.
+  publications.source.publisher:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the publisher responsible for the patent publication.
+      notes: Use for filtering or grouping patents by publishing organization.
+  publications.source.title:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Title of the journal, conference, or publication venue where the
+        patent was published.
+      notes: Use for citation generation or identifying publication sources; may contain
+        abbreviations or full names.
+  publications.source.volume:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Volume number of the publication source where the patent details
+        appear.
+      notes: Often numeric but stored as text to accommodate special formats (e.g.,
+        '1A').
+  publications.source.year:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: Year the publication source (e.g., journal or conference proceedings)
+        was published.
+      notes: Not necessarily the patent filing or grant year; use for temporal context
+        of the publication.
   publications.title:
     status: draft
     type: text
-    has_keyword: true
     ai_suggestion:
       description: Official title of the patent publication as registered.
       notes: Titles may include technical terms or abbreviations specific to the field.
+  publications.title.default:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Default title of the patent as published in the source, in its
+        original language.
+      notes: Prefer this field for display unless language-specific titles are available.
   publications.type:
     status: draft
     type: text
@@ -1224,6 +1307,12 @@ fields:
     ai_suggestion:
       description: Type of patent publication (e.g., application, granted patent).
       notes: Common values include 'application', 'granted', or 'priority document'.
+  publications.year:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: Year the patent was officially published or made publicly available.
+      notes: May differ from filing or grant year; critical for timeline-based queries.
   startDate:
     status: draft
     type: date
