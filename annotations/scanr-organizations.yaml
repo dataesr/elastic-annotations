@@ -2,9 +2,10 @@ _meta:
   index: scanr-organizations
   description: Research organizations and laboratories (universities, CNRS units,
     etc.). One document is one organization.
-  total_fields: 571
+  total_fields: 597
   approved: 22
-  draft: 549
+  draft: 575
+  pending_review: 571
 fields:
   acronym:
     status: draft
@@ -3186,6 +3187,162 @@ fields:
     ai_suggestion:
       description: Thematic research areas assigned to the organization in the RNSR
         registry.
+  ror_infos:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Structured ROR (Research Organization Registry) metadata for the
+        organization.
+  ror_infos.address:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Physical address details from ROR.
+      notes: May contain multiple addresses; use 'main' flag to identify primary location.
+  ror_infos.address.city:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: City name from the ROR address record.
+  ror_infos.address.country:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Country name from the ROR address record.
+  ror_infos.address.gps:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Geographic coordinates for the ROR address.
+      notes: Coordinates may be approximate for privacy or historical reasons.
+  ror_infos.address.gps.lat:
+    status: draft
+    type: float
+    ai_suggestion:
+      description: Latitude coordinate of the ROR address location.
+  ror_infos.address.gps.lon:
+    status: draft
+    type: float
+    ai_suggestion:
+      description: Longitude coordinate of the ROR address location.
+  ror_infos.address.iso2:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: ISO 3166-1 alpha-2 country code from ROR.
+  ror_infos.address.main:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if this is the primary address in ROR.
+  ror_infos.creationYear:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: Year the organization was established according to ROR.
+      notes: May differ from local records; prefer this for cross-border consistency.
+  ror_infos.externalIds:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: External identifiers associated with the ROR record.
+      notes: Use these to cross-reference with other authority databases like GRID
+        or ISNI.
+  ror_infos.externalIds.id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Identifier value for the external ID in the ROR record.
+  ror_infos.externalIds.type:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Type of external identifier (e.g., GRID, ISNI).
+  ror_infos.id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique ROR identifier for the organization.
+  ror_infos.isFrench:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the organization is based in France.
+  ror_infos.kind:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Classification of the organization (e.g., education, healthcare).
+  ror_infos.label:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Localized name(s) of the organization in the ROR record.
+  ror_infos.label.default:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Default name of the organization if no language preference is specified.
+  ror_infos.label.en:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: English name of the organization.
+  ror_infos.label.fr:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: French name of the organization.
+  ror_infos.links:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Collection of related links for the organization from ROR data.
+      notes: Use to fetch additional context or official resources about the organization.
+  ror_infos.links.type:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Categorizes the type of link (e.g., website, social media, parent
+        organization).
+  ror_infos.links.url:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: URL pointing to the resource described by the link.
+  ror_infos.links.value:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Human-readable label or description for the link.
+      notes: May be empty if the URL is self-explanatory.
+  ror_infos.startDate:
+    status: draft
+    type: date
+    ai_suggestion:
+      description: Date when the organization's ROR record became active or was established.
+      notes: 'Format: YYYY-MM-DD. May differ from the organization''s actual creation
+        date.'
+  ror_infos.status:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Current operational status of the organization in ROR (e.g., active,
+        inactive).
   sites:
     status: draft
     type: object
