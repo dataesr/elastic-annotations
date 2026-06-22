@@ -5,7 +5,6 @@ _meta:
   total_fields: 597
   approved: 22
   draft: 575
-  pending_review: 571
 fields:
   acronym:
     status: draft
@@ -58,12 +57,14 @@ fields:
   address.city:
     status: draft
     type: text
+    has_keyword: true
     analyzer: light
     ai_suggestion:
       description: City where the organization is located.
   address.country:
     status: draft
     type: text
+    has_keyword: true
     analyzer: light
     ai_suggestion:
       description: Country where the organization is located.

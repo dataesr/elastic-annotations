@@ -80,12 +80,14 @@ fields:
   address.city:
     status: draft
     type: text
+    has_keyword: true
     analyzer: light
     ai_suggestion:
       description: City of the project partner or coordinator's address.
   address.country:
     status: draft
     type: text
+    has_keyword: true
     analyzer: light
     ai_suggestion:
       description: The country where the project's primary address is located.

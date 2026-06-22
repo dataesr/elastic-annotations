@@ -51,12 +51,14 @@ fields:
   address.city:
     status: draft
     type: text
+    has_keyword: true
     analyzer: light
     ai_suggestion:
       description: City of the organization's address during the project participation.
   address.country:
     status: draft
     type: text
+    has_keyword: true
     analyzer: light
     ai_suggestion:
       description: Country of the organization's address during the project participation.
