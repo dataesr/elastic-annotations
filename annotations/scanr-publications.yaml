@@ -2,9 +2,10 @@ _meta:
   index: scanr-publications
   description: Scientific publications (articles, theses, conference papers). One
     document is one publication.
-  total_fields: 271
+  total_fields: 273
   approved: 48
-  draft: 223
+  draft: 225
+  pending_review: 225
 fields:
   acknowledgments:
     status: draft
@@ -798,6 +799,14 @@ fields:
     ai_suggestion:
       description: Institutions that collaborated on the publication, listed as free
         text.
+  co_projects:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Names of collaborative projects associated with the publication.
+      notes: May include acronyms or full project titles; use for filtering or linking
+        to project databases.
   co_software:
     status: draft
     type: text
@@ -1242,6 +1251,15 @@ fields:
       description: Unique identifier for a research project associated with the publication.
       notes: May reference external project databases or internal IDs; verify source
         context if linking.
+  projects.id_name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Normalized identifier combining project ID and name for consistent
+        referencing.
+      notes: 'Format: ''ID_NAME''; useful for exact matching or cross-referencing
+        with external project registries.'
   projects.label:
     status: draft
     type: object
