@@ -4,7 +4,7 @@ _meta:
     participation by an organization.
   total_fields: 124
   approved: 0
-  draft: 114
+  draft: 124
 fields:
   acronym:
     status: draft
@@ -884,8 +884,8 @@ fields:
     ai_suggestion:
       description: Official start date of the organization's participation in the
         project.
-      notes: "Format: strict ISO-8601 (YYYY-MM-DD); may differ from the project's
-        overall start date."
+      notes: 'Format: strict ISO-8601 (YYYY-MM-DD); may differ from the project''s
+        overall start date.'
   title_abs_text:
     status: draft
     type: text
