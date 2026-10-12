@@ -2,5 +2,933 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "description": "Patents filed by French research institutions. One document is one patent.",
-  "properties": {}
+  "properties": {
+    "acronym": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "address",
+        "city",
+        "country"
+      ]
+    },
+    "ai_description": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "en",
+            "fr"
+          ]
+        }
+      },
+      "required": [
+        "description"
+      ]
+    },
+    "alias": {
+      "type": "string"
+    },
+    "applicants": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "id_name": {
+          "type": "string"
+        },
+        "ids": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "type"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "country",
+        "id_name",
+        "ids",
+        "name",
+        "type"
+      ]
+    },
+    "applicationDate": {
+      "type": "string"
+    },
+    "autocompleted": {
+      "type": "string"
+    },
+    "autocompletedText": {
+      "type": "string"
+    },
+    "co_cpc_classe": {
+      "type": "string"
+    },
+    "co_cpc_section": {
+      "type": "string"
+    },
+    "co_cpc_ss_classe": {
+      "type": "string"
+    },
+    "co_organizations": {
+      "type": "string"
+    },
+    "co_persons": {
+      "type": "string"
+    },
+    "cpc": {
+      "type": "object",
+      "properties": {
+        "classe": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "id_name": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "code",
+            "id_name",
+            "label"
+          ]
+        },
+        "groupe": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "code",
+            "label"
+          ]
+        },
+        "section": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "id_name": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "code",
+            "id_name",
+            "label"
+          ]
+        },
+        "ss_classe": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "id_name": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "code",
+            "id_name",
+            "label"
+          ]
+        }
+      },
+      "required": [
+        "classe",
+        "groupe",
+        "section",
+        "ss_classe"
+      ]
+    },
+    "denormalized_structures": {
+      "type": "object",
+      "properties": {
+        "acronym": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "en",
+            "fr"
+          ]
+        },
+        "categories": {
+          "type": "string"
+        },
+        "encoded_key": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "id_name": {
+          "type": "string"
+        },
+        "id_name_default": {
+          "type": "string"
+        },
+        "institutions": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "natural_id": {
+              "type": "string"
+            },
+            "relationType": {
+              "type": "string"
+            },
+            "rnsr_key": {
+              "type": "string"
+            },
+            "startDate": {
+              "type": "string"
+            },
+            "structure": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "label",
+            "natural_id",
+            "relationType",
+            "rnsr_key",
+            "startDate",
+            "structure"
+          ]
+        },
+        "isFrench": {
+          "type": "boolean"
+        },
+        "is_main_parent": {
+          "type": "integer"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "en",
+            "fr"
+          ]
+        },
+        "mainAddress": {
+          "type": "object",
+          "properties": {
+            "address": {
+              "type": "string"
+            },
+            "address_detected": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "gps": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number"
+                },
+                "lon": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "lat",
+                "lon"
+              ]
+            },
+            "iso2": {
+              "type": "string"
+            },
+            "iso3": {
+              "type": "string"
+            },
+            "postcode": {
+              "type": "string"
+            },
+            "region": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "address",
+            "address_detected",
+            "city",
+            "country",
+            "gps",
+            "iso2",
+            "iso3",
+            "postcode",
+            "region"
+          ]
+        },
+        "main_category": {
+          "type": "string"
+        },
+        "parents": {
+          "type": "object",
+          "properties": {
+            "endDate": {
+              "type": "string"
+            },
+            "natural_id": {
+              "type": "string"
+            },
+            "relationType": {
+              "type": "string"
+            },
+            "startDate": {
+              "type": "string"
+            },
+            "structure": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "endDate",
+            "natural_id",
+            "relationType",
+            "startDate",
+            "structure"
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "typologie_1": {
+          "type": "string"
+        },
+        "typologie_2": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "acronym",
+        "categories",
+        "encoded_key",
+        "id",
+        "id_name",
+        "id_name_default",
+        "institutions",
+        "isFrench",
+        "is_main_parent",
+        "kind",
+        "label",
+        "mainAddress",
+        "main_category",
+        "parents",
+        "status",
+        "typologie_1",
+        "typologie_2"
+      ]
+    },
+    "description": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "domains": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default"
+          ]
+        }
+      },
+      "required": [
+        "label"
+      ]
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "fullName": {
+      "type": "string"
+    },
+    "grantedDate": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "inpadocFamily": {
+      "type": "string"
+    },
+    "institutions": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "label"
+      ]
+    },
+    "inventionKind": {
+      "type": "string"
+    },
+    "inventors": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "ids": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "type"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "country",
+        "ids",
+        "name",
+        "type"
+      ]
+    },
+    "isFrench": {
+      "type": "boolean"
+    },
+    "isInternational": {
+      "type": "boolean"
+    },
+    "isOa": {
+      "type": "boolean"
+    },
+    "isOeb": {
+      "type": "boolean"
+    },
+    "keywords": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "label": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "leaders": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName"
+      ]
+    },
+    "participant_encoded_key": {
+      "type": "string"
+    },
+    "participants": {
+      "type": "object",
+      "properties": {
+        "funding": {
+          "type": "number"
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default"
+          ]
+        }
+      },
+      "required": [
+        "funding",
+        "label"
+      ]
+    },
+    "patents": {
+      "type": "object",
+      "properties": {
+        "applicationDate": {
+          "type": "string"
+        },
+        "applicationNumber": {
+          "type": "string"
+        },
+        "espacenetUrl": {
+          "type": "string"
+        },
+        "grantedDate": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "internatApplicationNumber": {
+          "type": "string"
+        },
+        "ipType": {
+          "type": "string"
+        },
+        "isGranted": {
+          "type": "boolean"
+        },
+        "isPriority": {
+          "type": "boolean"
+        },
+        "office": {
+          "type": "string"
+        },
+        "publicationDate": {
+          "type": "string"
+        },
+        "publicationNumber": {
+          "type": "string"
+        },
+        "yearPublication": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "applicationDate",
+        "applicationNumber",
+        "espacenetUrl",
+        "grantedDate",
+        "id",
+        "internatApplicationNumber",
+        "ipType",
+        "isGranted",
+        "isPriority",
+        "office",
+        "publicationDate",
+        "publicationNumber",
+        "yearPublication"
+      ]
+    },
+    "productionType": {
+      "type": "string"
+    },
+    "publicationDate": {
+      "type": "string"
+    },
+    "publications": {
+      "type": "object",
+      "properties": {
+        "authors": {
+          "type": "object",
+          "properties": {
+            "affiliations": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "type": "string"
+                },
+                "ids": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "type"
+                  ]
+                },
+                "name": {
+                  "type": "string"
+                },
+                "typeIns": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "country",
+                "ids",
+                "name",
+                "typeIns"
+              ]
+            },
+            "fullName": {
+              "type": "string"
+            },
+            "ids": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "type"
+              ]
+            },
+            "person": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "affiliations",
+            "fullName",
+            "ids",
+            "person"
+          ]
+        },
+        "doi": {
+          "type": "string"
+        },
+        "hostOrganizationName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "isOa": {
+          "type": "string"
+        },
+        "journals": {
+          "type": "object",
+          "properties": {
+            "ids": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "type"
+              ]
+            },
+            "source": {
+              "type": "object",
+              "properties": {
+                "volume": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "volume"
+              ]
+            }
+          },
+          "required": [
+            "ids",
+            "source"
+          ]
+        },
+        "language": {
+          "type": "string"
+        },
+        "pdfUrl": {
+          "type": "string"
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "isOa": {
+              "type": "string"
+            },
+            "issue": {
+              "type": "string"
+            },
+            "journalIssns": {
+              "type": "string"
+            },
+            "publisher": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "volume": {
+              "type": "string"
+            },
+            "year": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "isOa",
+            "issue",
+            "journalIssns",
+            "publisher",
+            "title",
+            "volume",
+            "year"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "properties": {
+            "default": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default"
+          ]
+        },
+        "type": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "authors",
+        "doi",
+        "hostOrganizationName",
+        "id",
+        "isOa",
+        "journals",
+        "language",
+        "pdfUrl",
+        "source",
+        "title",
+        "type",
+        "year"
+      ]
+    },
+    "startDate": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "title": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "title_abs_text": {
+      "type": "string"
+    },
+    "web_content": {
+      "type": "string"
+    },
+    "year": {
+      "type": "integer"
+    }
+  }
 }

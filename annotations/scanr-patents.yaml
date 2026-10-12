@@ -244,7 +244,7 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Unique identifier combining class code and name for precise referencing.
-      notes: 'Format: ''code — name'' (e.g., ''A01B — Soil working'').'
+      notes: "Format: 'code — name' (e.g., 'A01B — Soil working')."
   cpc.classe.label:
     status: draft
     type: text
@@ -1397,6 +1397,6 @@ fields:
         and analysis.
 resolve:
   search_fields:
-  - title.*
+    - title.*
   source_fields:
-  - title.default
+    - title.default

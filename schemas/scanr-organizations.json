@@ -3,9 +3,250 @@
   "type": "object",
   "description": "Research organizations and laboratories (universities, CNRS units, etc.). One document is one organization.",
   "properties": {
+    "acronym": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "address_detected": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "gps": {
+          "type": "object",
+          "properties": {
+            "lat": {
+              "type": "number"
+            },
+            "lon": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "lat",
+            "lon"
+          ]
+        },
+        "iso2": {
+          "type": "string"
+        },
+        "iso3": {
+          "type": "string"
+        },
+        "main": {
+          "type": "boolean"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "address",
+        "address_detected",
+        "city",
+        "country",
+        "gps",
+        "iso2",
+        "iso3",
+        "main",
+        "postcode",
+        "region"
+      ]
+    },
+    "agreements": {
+      "type": "object",
+      "properties": {
+        "end": {
+          "type": "integer"
+        },
+        "label": {
+          "type": "string"
+        },
+        "start": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        },
+        "years": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "end",
+        "label",
+        "start",
+        "type",
+        "years"
+      ]
+    },
+    "ai_description": {
+      "type": "object",
+      "properties": {
+        "creation_date": {
+          "type": "string"
+        },
+        "description": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "en",
+            "fr"
+          ]
+        },
+        "model": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "creation_date",
+        "description",
+        "model"
+      ]
+    },
+    "alias": {
+      "type": "string"
+    },
+    "applicants": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "autocompleted": {
+      "type": "string"
+    },
+    "autocompletedText": {
+      "type": "string"
+    },
+    "awards": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "label"
+          ]
+        },
+        "label": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "domain",
+        "label",
+        "summary",
+        "year"
+      ]
+    },
+    "categories": {
+      "type": "string"
+    },
     "creationYear": {
       "type": "object",
       "description": "Creation year"
+    },
+    "description": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "domains": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default"
+          ]
+        }
+      },
+      "required": [
+        "label"
+      ]
+    },
+    "encoded_key": {
+      "type": "string"
+    },
+    "endDate": {
+      "type": "string"
+    },
+    "etablissementSiege": {
+      "type": "integer"
     },
     "externalIds": {
       "items": {
@@ -35,24 +276,758 @@
       "type": "array",
       "description": "Lists the known external identifiers"
     },
+    "firstName": {
+      "type": "string"
+    },
+    "fullName": {
+      "type": "string"
+    },
+    "has_ai_description": {
+      "type": "boolean"
+    },
     "id": {
       "type": "object",
       "description": "Main PID of the organizations. For now can be either an RNSR, SIREN, or GRID (should change to RoR)."
+    },
+    "incubateurOf": {
+      "type": "object",
+      "properties": {
+        "denormalized": {
+          "type": "object",
+          "properties": {
+            "acronym": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "categories": {
+              "type": "string"
+            },
+            "encoded_key": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "id_name": {
+              "type": "string"
+            },
+            "id_name_default": {
+              "type": "string"
+            },
+            "isFrench": {
+              "type": "boolean"
+            },
+            "is_main_parent": {
+              "type": "integer"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "label": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "mainAddress": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "gps": {
+                  "type": "object",
+                  "properties": {
+                    "lat": {
+                      "type": "number"
+                    },
+                    "lon": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "lat",
+                    "lon"
+                  ]
+                },
+                "iso3": {
+                  "type": "string"
+                },
+                "postcode": {
+                  "type": "string"
+                },
+                "region": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "address",
+                "city",
+                "country",
+                "gps",
+                "iso3",
+                "postcode",
+                "region"
+              ]
+            },
+            "main_category": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "typologie_1": {
+              "type": "string"
+            },
+            "typologie_2": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "acronym",
+            "categories",
+            "encoded_key",
+            "id",
+            "id_name",
+            "id_name_default",
+            "isFrench",
+            "is_main_parent",
+            "kind",
+            "label",
+            "mainAddress",
+            "main_category",
+            "status",
+            "typologie_1",
+            "typologie_2"
+          ]
+        },
+        "natural_id": {
+          "type": "string"
+        },
+        "structure": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "denormalized",
+        "natural_id",
+        "structure"
+      ]
+    },
+    "incubateurs": {
+      "type": "object",
+      "properties": {
+        "denormalized": {
+          "type": "object",
+          "properties": {
+            "acronym": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "categories": {
+              "type": "string"
+            },
+            "encoded_key": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "id_name": {
+              "type": "string"
+            },
+            "id_name_default": {
+              "type": "string"
+            },
+            "institutions": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "natural_id": {
+                  "type": "string"
+                },
+                "relationType": {
+                  "type": "string"
+                },
+                "structure": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "label",
+                "natural_id",
+                "relationType",
+                "structure"
+              ]
+            },
+            "isFrench": {
+              "type": "boolean"
+            },
+            "is_main_parent": {
+              "type": "integer"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "label": {
+              "type": "object",
+              "properties": {
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fr"
+              ]
+            },
+            "mainAddress": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "gps": {
+                  "type": "object",
+                  "properties": {
+                    "lat": {
+                      "type": "number"
+                    },
+                    "lon": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "lat",
+                    "lon"
+                  ]
+                },
+                "iso3": {
+                  "type": "string"
+                },
+                "postcode": {
+                  "type": "string"
+                },
+                "region": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "address",
+                "city",
+                "country",
+                "gps",
+                "iso3",
+                "postcode",
+                "region"
+              ]
+            },
+            "main_category": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "typologie_1": {
+              "type": "string"
+            },
+            "typologie_2": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "acronym",
+            "categories",
+            "encoded_key",
+            "id",
+            "id_name",
+            "id_name_default",
+            "institutions",
+            "isFrench",
+            "is_main_parent",
+            "kind",
+            "label",
+            "mainAddress",
+            "main_category",
+            "status",
+            "typologie_1",
+            "typologie_2"
+          ]
+        },
+        "structure": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "denormalized",
+        "structure"
+      ]
+    },
+    "institutionOf": {
+      "type": "object",
+      "properties": {
+        "denormalized": {
+          "type": "object",
+          "properties": {
+            "acronym": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "en": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "en",
+                "fr"
+              ]
+            },
+            "categories": {
+              "type": "string"
+            },
+            "encoded_key": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "id_name": {
+              "type": "string"
+            },
+            "id_name_default": {
+              "type": "string"
+            },
+            "institutions": {
+              "type": "object",
+              "properties": {
+                "endDate": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "natural_id": {
+                  "type": "string"
+                },
+                "relationType": {
+                  "type": "string"
+                },
+                "rnsr_key": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "structure": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "endDate",
+                "label",
+                "natural_id",
+                "relationType",
+                "rnsr_key",
+                "startDate",
+                "structure"
+              ]
+            },
+            "isFrench": {
+              "type": "boolean"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "label": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "mainAddress": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "address_detected": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "gps": {
+                  "type": "object",
+                  "properties": {
+                    "lat": {
+                      "type": "number"
+                    },
+                    "lon": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "lat",
+                    "lon"
+                  ]
+                },
+                "iso3": {
+                  "type": "string"
+                },
+                "postcode": {
+                  "type": "string"
+                },
+                "region": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "address",
+                "address_detected",
+                "city",
+                "country",
+                "gps",
+                "iso3",
+                "postcode",
+                "region"
+              ]
+            },
+            "main_category": {
+              "type": "string"
+            },
+            "parents": {
+              "type": "object",
+              "properties": {
+                "endDate": {
+                  "type": "string"
+                },
+                "natural_id": {
+                  "type": "string"
+                },
+                "relationType": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "structure": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "endDate",
+                "natural_id",
+                "relationType",
+                "startDate",
+                "structure"
+              ]
+            },
+            "status": {
+              "type": "string"
+            },
+            "typologie_1": {
+              "type": "string"
+            },
+            "typologie_2": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "acronym",
+            "categories",
+            "encoded_key",
+            "id",
+            "id_name",
+            "id_name_default",
+            "institutions",
+            "isFrench",
+            "kind",
+            "label",
+            "mainAddress",
+            "main_category",
+            "parents",
+            "status",
+            "typologie_1",
+            "typologie_2"
+          ]
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "natural_id": {
+          "type": "string"
+        },
+        "relationType": {
+          "type": "string"
+        },
+        "rnsr_key": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "structure": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "denormalized",
+        "endDate",
+        "label",
+        "natural_id",
+        "relationType",
+        "rnsr_key",
+        "startDate",
+        "structure"
+      ]
     },
     "institutions": {
       "items": {
         "properties": {
           "denormalized": {
             "type": "object",
-            "description": "Denormalized object of the structure"
+            "description": "Denormalized object of the structure",
+            "properties": {
+              "acronym": {
+                "type": "object",
+                "properties": {
+                  "default": {
+                    "type": "string"
+                  },
+                  "en": {
+                    "type": "string"
+                  },
+                  "fr": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "default",
+                  "en",
+                  "fr"
+                ]
+              },
+              "categories": {
+                "type": "string"
+              },
+              "encoded_key": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "id_name": {
+                "type": "string"
+              },
+              "id_name_default": {
+                "type": "string"
+              },
+              "institutions": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "natural_id": {
+                    "type": "string"
+                  },
+                  "relationType": {
+                    "type": "string"
+                  },
+                  "structure": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "label",
+                  "natural_id",
+                  "relationType",
+                  "structure"
+                ]
+              },
+              "isFrench": {
+                "type": "boolean"
+              },
+              "is_main_parent": {
+                "type": "integer"
+              },
+              "kind": {
+                "type": "string"
+              },
+              "label": {
+                "type": "object",
+                "properties": {
+                  "fr": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "fr"
+                ]
+              },
+              "mainAddress": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "gps": {
+                    "type": "object",
+                    "properties": {
+                      "lat": {
+                        "type": "number"
+                      },
+                      "lon": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "lat",
+                      "lon"
+                    ]
+                  },
+                  "iso3": {
+                    "type": "string"
+                  },
+                  "postcode": {
+                    "type": "string"
+                  },
+                  "region": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "address",
+                  "city",
+                  "country",
+                  "gps",
+                  "iso3",
+                  "postcode",
+                  "region"
+                ]
+              },
+              "main_category": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "typologie_1": {
+                "type": "string"
+              },
+              "typologie_2": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "acronym",
+              "categories",
+              "encoded_key",
+              "id",
+              "id_name",
+              "id_name_default",
+              "institutions",
+              "isFrench",
+              "is_main_parent",
+              "kind",
+              "label",
+              "mainAddress",
+              "main_category",
+              "status",
+              "typologie_1",
+              "typologie_2"
+            ]
+          },
+          "endDate": {
+            "type": "string"
           },
           "label": {
             "type": "object",
             "description": "Label of the organization"
           },
+          "natural_id": {
+            "type": "string"
+          },
           "relationType": {
             "type": "object",
             "description": "Type of relation"
+          },
+          "rnsr_key": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string"
           },
           "structure": {
             "type": "object",
@@ -61,17 +1036,85 @@
         },
         "required": [
           "denormalized",
+          "endDate",
           "label",
+          "natural_id",
           "relationType",
+          "rnsr_key",
+          "startDate",
           "structure"
         ]
       },
       "type": "array",
       "description": "Lists the known relationships"
     },
+    "inventors": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "isFrench": {
+      "type": "boolean"
+    },
+    "is_main_parent": {
+      "type": "integer"
+    },
+    "keywords": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "kind": {
+      "type": "string"
+    },
+    "label": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "lastName": {
+      "type": "string"
+    },
     "leaders": {
       "items": {
         "properties": {
+          "endDate": {
+            "type": "string"
+          },
           "firstName": {
             "type": "object",
             "description": "First Name of the person"
@@ -80,24 +1123,72 @@
             "type": "object",
             "description": "Last Name of the person"
           },
+          "natural_id": {
+            "type": "string"
+          },
           "person": {
             "type": "object",
             "description": "Main PID of the person"
           },
+          "rnsr_key": {
+            "type": "string"
+          },
           "role": {
             "type": "object",
             "description": "Role"
+          },
+          "startDate": {
+            "type": "string"
           }
         },
         "required": [
+          "endDate",
           "firstName",
           "lastName",
+          "natural_id",
           "person",
-          "role"
+          "rnsr_key",
+          "role",
+          "startDate"
         ]
       },
       "type": "array",
       "description": "Lists the known leaders (data from RNSR)"
+    },
+    "leaders_all": {
+      "type": "object",
+      "properties": {
+        "endDate": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "person": {
+          "type": "string"
+        },
+        "rnsr_key": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "endDate",
+        "firstName",
+        "lastName",
+        "person",
+        "rnsr_key",
+        "role",
+        "startDate"
+      ]
     },
     "level": {
       "type": "object",
@@ -106,25 +1197,1592 @@
     "links": {
       "items": {
         "properties": {
+          "type": {
+            "type": "string"
+          },
           "url": {
             "type": "object",
             "description": "URL"
+          },
+          "value": {
+            "type": "string"
           }
         },
         "required": [
-          "url"
+          "type",
+          "url",
+          "value"
         ]
       },
       "type": "array",
       "description": "Lists the known links"
     },
+    "main_category": {
+      "type": "string"
+    },
     "nature": {
       "type": "object",
       "description": "Nature"
     },
+    "panels": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "end_date": {
+          "type": "string"
+        },
+        "start_date": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "end_date",
+        "start_date"
+      ]
+    },
+    "parentOf": {
+      "type": "object",
+      "properties": {
+        "denormalized": {
+          "type": "object",
+          "properties": {
+            "acronym": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "categories": {
+              "type": "string"
+            },
+            "encoded_key": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "id_name": {
+              "type": "string"
+            },
+            "id_name_default": {
+              "type": "string"
+            },
+            "institutions": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "natural_id": {
+                  "type": "string"
+                },
+                "relationType": {
+                  "type": "string"
+                },
+                "rnsr_key": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "structure": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "label",
+                "natural_id",
+                "relationType",
+                "rnsr_key",
+                "startDate",
+                "structure"
+              ]
+            },
+            "isFrench": {
+              "type": "boolean"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "label": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "mainAddress": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "address_detected": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "postcode": {
+                  "type": "string"
+                },
+                "region": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "address",
+                "address_detected",
+                "city",
+                "postcode",
+                "region"
+              ]
+            },
+            "parents": {
+              "type": "object",
+              "properties": {
+                "endDate": {
+                  "type": "string"
+                },
+                "natural_id": {
+                  "type": "string"
+                },
+                "relationType": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "structure": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "endDate",
+                "natural_id",
+                "relationType",
+                "startDate",
+                "structure"
+              ]
+            },
+            "status": {
+              "type": "string"
+            },
+            "typologie_1": {
+              "type": "string"
+            },
+            "typologie_2": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "acronym",
+            "categories",
+            "encoded_key",
+            "id",
+            "id_name",
+            "id_name_default",
+            "institutions",
+            "isFrench",
+            "kind",
+            "label",
+            "mainAddress",
+            "parents",
+            "status",
+            "typologie_1",
+            "typologie_2"
+          ]
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "natural_id": {
+          "type": "string"
+        },
+        "relationType": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "structure": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "denormalized",
+        "endDate",
+        "natural_id",
+        "relationType",
+        "startDate",
+        "structure"
+      ]
+    },
+    "parents": {
+      "type": "object",
+      "properties": {
+        "denormalized": {
+          "type": "object",
+          "properties": {
+            "acronym": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "categories": {
+              "type": "string"
+            },
+            "encoded_key": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "id_name": {
+              "type": "string"
+            },
+            "id_name_default": {
+              "type": "string"
+            },
+            "institutions": {
+              "type": "object",
+              "properties": {
+                "endDate": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "natural_id": {
+                  "type": "string"
+                },
+                "relationType": {
+                  "type": "string"
+                },
+                "rnsr_key": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "structure": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "endDate",
+                "label",
+                "natural_id",
+                "relationType",
+                "rnsr_key",
+                "startDate",
+                "structure"
+              ]
+            },
+            "isFrench": {
+              "type": "boolean"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "label": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "mainAddress": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "address_detected": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "postcode": {
+                  "type": "string"
+                },
+                "region": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "address",
+                "address_detected",
+                "city",
+                "postcode",
+                "region"
+              ]
+            },
+            "parents": {
+              "type": "object",
+              "properties": {
+                "endDate": {
+                  "type": "string"
+                },
+                "natural_id": {
+                  "type": "string"
+                },
+                "relationType": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "structure": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "endDate",
+                "natural_id",
+                "relationType",
+                "startDate",
+                "structure"
+              ]
+            },
+            "status": {
+              "type": "string"
+            },
+            "typologie_1": {
+              "type": "string"
+            },
+            "typologie_2": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "acronym",
+            "categories",
+            "encoded_key",
+            "id",
+            "id_name",
+            "id_name_default",
+            "institutions",
+            "isFrench",
+            "kind",
+            "label",
+            "mainAddress",
+            "parents",
+            "status",
+            "typologie_1",
+            "typologie_2"
+          ]
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "natural_id": {
+          "type": "string"
+        },
+        "relationType": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "structure": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "denormalized",
+        "endDate",
+        "natural_id",
+        "relationType",
+        "startDate",
+        "structure"
+      ]
+    },
+    "participant_encoded_key": {
+      "type": "string"
+    },
+    "participants": {
+      "type": "object",
+      "properties": {
+        "funding": {
+          "type": "number"
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default"
+          ]
+        }
+      },
+      "required": [
+        "funding",
+        "label"
+      ]
+    },
+    "patents": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "en",
+            "fr"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "title"
+      ]
+    },
+    "patentsCount": {
+      "type": "integer"
+    },
+    "predecessors": {
+      "type": "object",
+      "properties": {
+        "denormalized": {
+          "type": "object",
+          "properties": {
+            "acronym": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "categories": {
+              "type": "string"
+            },
+            "encoded_key": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "id_name": {
+              "type": "string"
+            },
+            "id_name_default": {
+              "type": "string"
+            },
+            "institutions": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "natural_id": {
+                  "type": "string"
+                },
+                "relationType": {
+                  "type": "string"
+                },
+                "rnsr_key": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "structure": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "label",
+                "natural_id",
+                "relationType",
+                "rnsr_key",
+                "startDate",
+                "structure"
+              ]
+            },
+            "isFrench": {
+              "type": "boolean"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "label": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "mainAddress": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "address_detected": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "postcode": {
+                  "type": "string"
+                },
+                "region": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "address",
+                "address_detected",
+                "city",
+                "postcode",
+                "region"
+              ]
+            },
+            "parents": {
+              "type": "object",
+              "properties": {
+                "endDate": {
+                  "type": "string"
+                },
+                "natural_id": {
+                  "type": "string"
+                },
+                "relationType": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "structure": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "endDate",
+                "natural_id",
+                "relationType",
+                "startDate",
+                "structure"
+              ]
+            },
+            "status": {
+              "type": "string"
+            },
+            "typologie_1": {
+              "type": "string"
+            },
+            "typologie_2": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "acronym",
+            "categories",
+            "encoded_key",
+            "id",
+            "id_name",
+            "id_name_default",
+            "institutions",
+            "isFrench",
+            "kind",
+            "label",
+            "mainAddress",
+            "parents",
+            "status",
+            "typologie_1",
+            "typologie_2"
+          ]
+        },
+        "eventDate": {
+          "type": "string"
+        },
+        "eventType": {
+          "type": "string"
+        },
+        "structure": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "denormalized",
+        "eventDate",
+        "eventType",
+        "structure"
+      ]
+    },
+    "projects": {
+      "type": "object",
+      "properties": {
+        "acronym": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "en",
+            "fr"
+          ]
+        },
+        "type": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "acronym",
+        "id",
+        "label",
+        "type",
+        "year"
+      ]
+    },
+    "projectsCount": {
+      "type": "integer"
+    },
+    "publicationsCount": {
+      "type": "integer"
+    },
+    "reasons_scanr": {
+      "type": "string"
+    },
+    "relationOf": {
+      "type": "object",
+      "properties": {
+        "denormalized": {
+          "type": "object",
+          "properties": {
+            "acronym": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "categories": {
+              "type": "string"
+            },
+            "encoded_key": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "id_name": {
+              "type": "string"
+            },
+            "id_name_default": {
+              "type": "string"
+            },
+            "institutions": {
+              "type": "object",
+              "properties": {
+                "endDate": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "natural_id": {
+                  "type": "string"
+                },
+                "relationType": {
+                  "type": "string"
+                },
+                "rnsr_key": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "structure": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "endDate",
+                "label",
+                "natural_id",
+                "relationType",
+                "rnsr_key",
+                "startDate",
+                "structure"
+              ]
+            },
+            "isFrench": {
+              "type": "boolean"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "label": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "mainAddress": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "address_detected": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "postcode": {
+                  "type": "string"
+                },
+                "region": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "address",
+                "address_detected",
+                "city",
+                "postcode",
+                "region"
+              ]
+            },
+            "parents": {
+              "type": "object",
+              "properties": {
+                "endDate": {
+                  "type": "string"
+                },
+                "natural_id": {
+                  "type": "string"
+                },
+                "relationType": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "structure": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "endDate",
+                "natural_id",
+                "relationType",
+                "startDate",
+                "structure"
+              ]
+            },
+            "status": {
+              "type": "string"
+            },
+            "typologie_1": {
+              "type": "string"
+            },
+            "typologie_2": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "acronym",
+            "categories",
+            "encoded_key",
+            "id",
+            "id_name",
+            "id_name_default",
+            "institutions",
+            "isFrench",
+            "kind",
+            "label",
+            "mainAddress",
+            "parents",
+            "status",
+            "typologie_1",
+            "typologie_2"
+          ]
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "natural_id": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "structure": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "denormalized",
+        "endDate",
+        "natural_id",
+        "startDate",
+        "structure",
+        "type"
+      ]
+    },
+    "relations": {
+      "type": "object",
+      "properties": {
+        "denormalized": {
+          "type": "object",
+          "properties": {
+            "acronym": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "categories": {
+              "type": "string"
+            },
+            "encoded_key": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "id_name": {
+              "type": "string"
+            },
+            "id_name_default": {
+              "type": "string"
+            },
+            "institutions": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "natural_id": {
+                  "type": "string"
+                },
+                "relationType": {
+                  "type": "string"
+                },
+                "structure": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "label",
+                "natural_id",
+                "relationType",
+                "structure"
+              ]
+            },
+            "isFrench": {
+              "type": "boolean"
+            },
+            "is_main_parent": {
+              "type": "integer"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "label": {
+              "type": "object",
+              "properties": {
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fr"
+              ]
+            },
+            "mainAddress": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "gps": {
+                  "type": "object",
+                  "properties": {
+                    "lat": {
+                      "type": "number"
+                    },
+                    "lon": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "lat",
+                    "lon"
+                  ]
+                },
+                "iso3": {
+                  "type": "string"
+                },
+                "postcode": {
+                  "type": "string"
+                },
+                "region": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "address",
+                "city",
+                "country",
+                "gps",
+                "iso3",
+                "postcode",
+                "region"
+              ]
+            },
+            "main_category": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "typologie_1": {
+              "type": "string"
+            },
+            "typologie_2": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "acronym",
+            "categories",
+            "encoded_key",
+            "id",
+            "id_name",
+            "id_name_default",
+            "institutions",
+            "isFrench",
+            "is_main_parent",
+            "kind",
+            "label",
+            "mainAddress",
+            "main_category",
+            "status",
+            "typologie_1",
+            "typologie_2"
+          ]
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "structure": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "denormalized",
+        "endDate",
+        "startDate",
+        "structure",
+        "type"
+      ]
+    },
+    "rnsr_domains": {
+      "type": "string"
+    },
+    "rnsr_themes": {
+      "type": "string"
+    },
+    "ror_infos": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "gps": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number"
+                },
+                "lon": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "lat",
+                "lon"
+              ]
+            },
+            "iso2": {
+              "type": "string"
+            },
+            "main": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "city",
+            "country",
+            "gps",
+            "iso2",
+            "main"
+          ]
+        },
+        "creationYear": {
+          "type": "integer"
+        },
+        "externalIds": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "type"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "isFrench": {
+          "type": "boolean"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "en",
+            "fr"
+          ]
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "url",
+            "value"
+          ]
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "address",
+        "creationYear",
+        "externalIds",
+        "id",
+        "isFrench",
+        "kind",
+        "label",
+        "links",
+        "startDate",
+        "status"
+      ]
+    },
+    "sites": {
+      "type": "object",
+      "properties": {
+        "end_date": {
+          "type": "string"
+        },
+        "end_site": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "site_id": {
+          "type": "string"
+        },
+        "site_type": {
+          "type": "string"
+        },
+        "start_date": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "end_date",
+        "end_site",
+        "label",
+        "site_id",
+        "site_type",
+        "start_date"
+      ]
+    },
     "startDate": {
       "type": "object",
       "description": "Start date"
+    },
+    "startup_linkOf": {
+      "type": "object",
+      "properties": {
+        "denormalized": {
+          "type": "object",
+          "properties": {
+            "acronym": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "fr"
+              ]
+            },
+            "categories": {
+              "type": "string"
+            },
+            "encoded_key": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "id_name": {
+              "type": "string"
+            },
+            "id_name_default": {
+              "type": "string"
+            },
+            "isFrench": {
+              "type": "boolean"
+            },
+            "is_main_parent": {
+              "type": "integer"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "label": {
+              "type": "object",
+              "properties": {
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fr"
+              ]
+            },
+            "mainAddress": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "gps": {
+                  "type": "object",
+                  "properties": {
+                    "lat": {
+                      "type": "number"
+                    },
+                    "lon": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "lat",
+                    "lon"
+                  ]
+                },
+                "iso3": {
+                  "type": "string"
+                },
+                "postcode": {
+                  "type": "string"
+                },
+                "region": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "address",
+                "city",
+                "country",
+                "gps",
+                "iso3",
+                "postcode",
+                "region"
+              ]
+            },
+            "main_category": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "typologie_1": {
+              "type": "string"
+            },
+            "typologie_2": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "acronym",
+            "categories",
+            "encoded_key",
+            "id",
+            "id_name",
+            "id_name_default",
+            "isFrench",
+            "is_main_parent",
+            "kind",
+            "label",
+            "mainAddress",
+            "main_category",
+            "status",
+            "typologie_1",
+            "typologie_2"
+          ]
+        },
+        "natural_id": {
+          "type": "string"
+        },
+        "structure": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "denormalized",
+        "natural_id",
+        "structure"
+      ]
+    },
+    "startup_links": {
+      "type": "object",
+      "properties": {
+        "denormalized": {
+          "type": "object",
+          "properties": {
+            "acronym": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string"
+                },
+                "en": {
+                  "type": "string"
+                },
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "default",
+                "en",
+                "fr"
+              ]
+            },
+            "categories": {
+              "type": "string"
+            },
+            "encoded_key": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "id_name": {
+              "type": "string"
+            },
+            "id_name_default": {
+              "type": "string"
+            },
+            "isFrench": {
+              "type": "boolean"
+            },
+            "is_main_parent": {
+              "type": "integer"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "label": {
+              "type": "object",
+              "properties": {
+                "fr": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fr"
+              ]
+            },
+            "mainAddress": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "gps": {
+                  "type": "object",
+                  "properties": {
+                    "lat": {
+                      "type": "number"
+                    },
+                    "lon": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "lat",
+                    "lon"
+                  ]
+                },
+                "iso3": {
+                  "type": "string"
+                },
+                "postcode": {
+                  "type": "string"
+                },
+                "region": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "address",
+                "city",
+                "country",
+                "gps",
+                "iso3",
+                "postcode",
+                "region"
+              ]
+            },
+            "main_category": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "typologie_1": {
+              "type": "string"
+            },
+            "typologie_2": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "acronym",
+            "categories",
+            "encoded_key",
+            "id",
+            "id_name",
+            "id_name_default",
+            "isFrench",
+            "is_main_parent",
+            "kind",
+            "label",
+            "mainAddress",
+            "main_category",
+            "status",
+            "typologie_1",
+            "typologie_2"
+          ]
+        },
+        "structure": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "denormalized",
+        "structure"
+      ]
     },
     "status": {
       "type": "object",
@@ -133,6 +2791,15 @@
         "active",
         "inactive"
       ]
+    },
+    "title_abs_text": {
+      "type": "string"
+    },
+    "typologie_1": {
+      "type": "string"
+    },
+    "typologie_2": {
+      "type": "string"
     },
     "web_content": {
       "type": "object",

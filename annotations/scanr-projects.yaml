@@ -2,9 +2,9 @@ _meta:
   index: scanr-projects
   description: Funded research projects (ANR, EU, etc.) with budget and partners.
     One document is one project.
-  total_fields: 157
+  total_fields: 168
   approved: 17
-  draft: 140
+  draft: 151
 fields:
   acronym:
     status: approved
@@ -39,6 +39,13 @@ fields:
     type: object
     description: The action associated with the project.
     required: true
+  action.code:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique code identifying the specific action type of the project.
+      notes: Use this to filter or categorize projects by their action type.
   action.id:
     status: draft
     type: text
@@ -191,6 +198,19 @@ fields:
     has_keyword: true
     primary: true
     required: true
+  callIdentifier:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Identifiers of the call under which the project was funded, in
+        multiple formats.
+  callIdentifier.id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Primary text identifier of the funding call associated with the
+        project.
   classification:
     status: draft
     type: object
@@ -474,6 +494,12 @@ fields:
     type: object
     ai_suggestion:
       description: The physical address details of a project participant.
+  participants.address.city:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: City where the participant's organization is located.
   participants.address.country:
     status: draft
     type: text
@@ -542,6 +568,14 @@ fields:
     ai_suggestion:
       description: The type of participation (e.g., 'coordinator', 'partner').
       notes: Standardized values expected; check API docs for allowed terms.
+  participants.pic:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Participant Identification Code (PIC) for the project partner's
+        organization.
+      notes: PIC is a 9-digit number used in EU funding programs.
   participants.role:
     status: draft
     type: text
@@ -682,6 +716,19 @@ fields:
     ai_suggestion:
       description: Flag marking the primary parent structure for the participant (1=true,
         0=false).
+  participants.structure.is_part_of_super_organization:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: ID of the super-organization this participant's structure belongs
+        to.
+      notes: Value is 0 if the structure is not part of a super-organization.
+  participants.structure.is_super_organization:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: Flag indicating if the participant's structure is a super-organization.
+      notes: 1 if true, 0 if false.
   participants.structure.kind:
     status: draft
     type: text
@@ -844,6 +891,35 @@ fields:
       description: Legal or operational status of the participating organization (e.g.,
         public, private).
       notes: Use to filter or categorize partners by their institutional standing.
+  participants.structure.super_organization_children:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: List of child organizations under this super-organization participant.
+  participants.structure.super_organization_children.displayName:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Display name of a child organization under a super-organization
+        participant.
+  participants.structure.super_organization_children.id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique identifier of a child organization under a super-organization
+        participant.
+  participants.structure.super_organization_parent:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: The name of the parent organization overseeing the participant's
+        structure.
+      notes: Use this field to identify hierarchical relationships between organizations,
+        especially when the participant is part of a larger consortium or institutional
+        network.
   participants.structure.typologie_1:
     status: draft
     type: text

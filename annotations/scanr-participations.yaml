@@ -2,7 +2,7 @@ _meta:
   index: scanr-participations
   description: Projects participations by organizations. One document is one project
     participation by an organization.
-  total_fields: 114
+  total_fields: 124
   approved: 0
   draft: 114
 fields:
@@ -463,6 +463,13 @@ fields:
       description: Flag indicating whether funding data for this participation should
         be excluded from calculations.
       notes: When true, ignore this record in any funding-related queries or aggregations.
+  participant_ignore_funding_super_organization:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Flag indicating whether to exclude this participant's funding from
+        super organization totals.
+      notes: Use when aggregating funding across child organizations to avoid double-counting.
   participant_ignore_total_budget:
     status: draft
     type: boolean
@@ -471,6 +478,14 @@ fields:
         excluded from aggregations.
       notes: Set to true for participants with non-standard or undisclosed budget
         contributions.
+  participant_ignore_total_budget_super_organization:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Flag indicating whether to exclude this participant's budget from
+        super organization totals.
+      notes: Use when aggregating budget data to prevent overlapping values in parent
+        organizations.
   participant_institutions:
     status: draft
     type: object
@@ -535,6 +550,18 @@ fields:
         project participation (1 for true, 0 for false).
       notes: Use this field to determine hierarchy; only one participant per project
         should have this set to 1.
+  participant_is_part_of_super_organization:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: ID of the super organization this participant belongs to, if any.
+      notes: Zero or null if the participant is not part of a super organization.
+  participant_is_super_organization:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: ID indicating this participant is a super organization itself.
+      notes: Zero or null if the participant is not a super organization.
   participant_key_id:
     status: draft
     type: text
@@ -606,6 +633,50 @@ fields:
     ai_suggestion:
       description: Current state of the organization's participation in the project
         (e.g., 'active', 'withdrawn').
+  participant_super_organization_children:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Nested object containing child organizations of this super organization
+        participant.
+  participant_super_organization_children.displayName:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Display name of a child organization under this super organization
+        participant.
+  participant_super_organization_children.id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for a child organization under this super organization
+        participant.
+  participant_super_organization_id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the super organization this participant belongs
+        to.
+      notes: Null if the participant is not part of a super organization.
+  participant_super_organization_key_id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Key identifier for the super organization's primary record, if
+        applicable.
+      notes: Used for cross-referencing with external systems or databases.
+  participant_super_organization_parent:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: ID of the parent super organization, if this participant is a child
+        organization.
+      notes: Null if the participant is a top-level super organization.
   participant_type:
     status: draft
     type: text
@@ -813,8 +884,8 @@ fields:
     ai_suggestion:
       description: Official start date of the organization's participation in the
         project.
-      notes: 'Format: strict ISO-8601 (YYYY-MM-DD); may differ from the project''s
-        overall start date.'
+      notes: "Format: strict ISO-8601 (YYYY-MM-DD); may differ from the project's
+        overall start date."
   title_abs_text:
     status: draft
     type: text

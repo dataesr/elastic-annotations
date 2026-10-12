@@ -5,11 +5,121 @@
   "properties": {
     "acronym": {
       "type": "object",
-      "description": "The acronym of the project in multiple languages."
+      "description": "The acronym of the project in multiple languages.",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
     },
     "action": {
       "type": "object",
-      "description": "The action associated with the project."
+      "description": "The action associated with the project.",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default"
+          ]
+        },
+        "level": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "id",
+        "label",
+        "level"
+      ]
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "address",
+        "city",
+        "country"
+      ]
+    },
+    "ai_description": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "en",
+            "fr"
+          ]
+        }
+      },
+      "required": [
+        "description"
+      ]
+    },
+    "alias": {
+      "type": "string"
+    },
+    "applicants": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "autocompleted": {
+      "type": "string"
+    },
+    "autocompletedText": {
+      "type": "string"
     },
     "budgetFinanced": {
       "type": "object",
@@ -18,6 +128,12 @@
     "budgetTotal": {
       "type": "object",
       "description": "The total budget of the project."
+    },
+    "budget_financed": {
+      "type": "integer"
+    },
+    "budget_total": {
+      "type": "integer"
     },
     "call": {
       "type": "object",
@@ -32,46 +148,624 @@
         "id"
       ]
     },
+    "callIdentifier": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "classification": {
+      "type": "object",
+      "properties": {
+        "confidence": {
+          "type": "string"
+        },
+        "justification": {
+          "type": "string"
+        },
+        "primary_field": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "confidence",
+        "justification",
+        "primary_field"
+      ]
+    },
+    "co_domains": {
+      "type": "string"
+    },
+    "co_institutions": {
+      "type": "string"
+    },
+    "co_structures": {
+      "type": "string"
+    },
+    "comite": {
+      "type": "string"
+    },
     "description": {
       "type": "object",
-      "description": "The description of the project in multiple languages."
+      "description": "The description of the project in multiple languages.",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
     },
     "domains": {
+      "items": {
+        "properties": {
+          "label": {
+            "type": "object",
+            "description": "The label of the domain in multiple languages.",
+            "properties": {
+              "default": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "default"
+            ]
+          }
+        },
+        "required": [
+          "label"
+        ]
+      },
+      "type": "array"
+    },
+    "endDate": {
+      "type": "object",
+      "description": "The end date of the project."
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "fullName": {
+      "type": "string"
+    },
+    "id": {
+      "type": "object",
+      "description": "The unique identifier of the project."
+    },
+    "institutions": {
       "type": "object",
       "properties": {
         "label": {
-          "type": "object",
-          "description": "The label of the domain in multiple languages."
+          "type": "string"
         }
       },
       "required": [
         "label"
       ]
     },
-    "endDate": {
-      "type": "object",
-      "description": "The end date of the project."
+    "instrument": {
+      "type": "string"
     },
-    "id": {
+    "inventors": {
       "type": "object",
-      "description": "The unique identifier of the project."
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "isFrench": {
+      "type": "boolean"
     },
     "keywords": {
       "type": "object",
-      "description": "Keywords related to the project in multiple languages."
+      "description": "Keywords related to the project in multiple languages.",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
     },
     "label": {
       "type": "object",
-      "description": "The label of the project in multiple languages."
+      "description": "The label of the project in multiple languages.",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "leaders": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName"
+      ]
+    },
+    "participantCount": {
+      "type": "integer"
+    },
+    "participant_encoded_key": {
+      "type": "string"
     },
     "participants": {
-      "items": {},
+      "items": {
+        "properties": {
+          "address": {
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "country_code": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "city",
+              "country",
+              "country_code"
+            ]
+          },
+          "funding": {
+            "type": "number"
+          },
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "object",
+            "properties": {
+              "default": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "default"
+            ]
+          },
+          "participant_id": {
+            "type": "string"
+          },
+          "participant_key": {
+            "type": "string"
+          },
+          "participant_to_identify": {
+            "type": "string"
+          },
+          "participates_as": {
+            "type": "string"
+          },
+          "pic": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "structure": {
+            "type": "object",
+            "properties": {
+              "acronym": {
+                "type": "object",
+                "properties": {
+                  "default": {
+                    "type": "string"
+                  },
+                  "en": {
+                    "type": "string"
+                  },
+                  "fr": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "default",
+                  "en",
+                  "fr"
+                ]
+              },
+              "categories": {
+                "type": "string"
+              },
+              "encoded_key": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "id_name": {
+                "type": "string"
+              },
+              "id_name_default": {
+                "type": "string"
+              },
+              "institutions": {
+                "type": "object",
+                "properties": {
+                  "endDate": {
+                    "type": "string"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "natural_id": {
+                    "type": "string"
+                  },
+                  "relationType": {
+                    "type": "string"
+                  },
+                  "rnsr_key": {
+                    "type": "string"
+                  },
+                  "startDate": {
+                    "type": "string"
+                  },
+                  "structure": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "endDate",
+                  "label",
+                  "natural_id",
+                  "relationType",
+                  "rnsr_key",
+                  "startDate",
+                  "structure"
+                ]
+              },
+              "isFrench": {
+                "type": "boolean"
+              },
+              "is_main_parent": {
+                "type": "integer"
+              },
+              "is_part_of_super_organization": {
+                "type": "integer"
+              },
+              "is_super_organization": {
+                "type": "integer"
+              },
+              "kind": {
+                "type": "string"
+              },
+              "label": {
+                "type": "object",
+                "properties": {
+                  "default": {
+                    "type": "string"
+                  },
+                  "en": {
+                    "type": "string"
+                  },
+                  "fr": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "default",
+                  "en",
+                  "fr"
+                ]
+              },
+              "mainAddress": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string"
+                  },
+                  "address_detected": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "gps": {
+                    "type": "object",
+                    "properties": {
+                      "lat": {
+                        "type": "number"
+                      },
+                      "lon": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "lat",
+                      "lon"
+                    ]
+                  },
+                  "iso2": {
+                    "type": "string"
+                  },
+                  "iso3": {
+                    "type": "string"
+                  },
+                  "postcode": {
+                    "type": "string"
+                  },
+                  "region": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "address",
+                  "address_detected",
+                  "city",
+                  "country",
+                  "gps",
+                  "iso2",
+                  "iso3",
+                  "postcode",
+                  "region"
+                ]
+              },
+              "main_category": {
+                "type": "string"
+              },
+              "parents": {
+                "type": "object",
+                "properties": {
+                  "endDate": {
+                    "type": "string"
+                  },
+                  "natural_id": {
+                    "type": "string"
+                  },
+                  "relationType": {
+                    "type": "string"
+                  },
+                  "startDate": {
+                    "type": "string"
+                  },
+                  "structure": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "endDate",
+                  "natural_id",
+                  "relationType",
+                  "startDate",
+                  "structure"
+                ]
+              },
+              "status": {
+                "type": "string"
+              },
+              "super_organization_children": {
+                "type": "object",
+                "properties": {
+                  "displayName": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "displayName",
+                  "id"
+                ]
+              },
+              "super_organization_parent": {
+                "type": "string"
+              },
+              "typologie_1": {
+                "type": "string"
+              },
+              "typologie_2": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "acronym",
+              "categories",
+              "encoded_key",
+              "id",
+              "id_name",
+              "id_name_default",
+              "institutions",
+              "isFrench",
+              "is_main_parent",
+              "is_part_of_super_organization",
+              "is_super_organization",
+              "kind",
+              "label",
+              "mainAddress",
+              "main_category",
+              "parents",
+              "status",
+              "super_organization_children",
+              "super_organization_parent",
+              "typologie_1",
+              "typologie_2"
+            ]
+          }
+        },
+        "required": [
+          "address",
+          "funding",
+          "id",
+          "label",
+          "participant_id",
+          "participant_key",
+          "participant_to_identify",
+          "participates_as",
+          "pic",
+          "role",
+          "structure"
+        ]
+      },
       "type": "array",
       "description": "Details of the participants involved in the project."
+    },
+    "participants_id_name_search": {
+      "type": "string"
+    },
+    "participants_id_search": {
+      "type": "string"
+    },
+    "persons": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "firstName",
+        "fullName",
+        "lastName",
+        "role"
+      ]
+    },
+    "pilier_global_name": {
+      "type": "string"
+    },
+    "priorities": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default"
+          ]
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "type"
+      ]
+    },
+    "project_domains": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "id_name": {
+          "type": "string"
+        },
+        "key_name": {
+          "type": "string"
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default"
+          ]
+        },
+        "naturalKey": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "count",
+        "id_name",
+        "key_name",
+        "label",
+        "naturalKey",
+        "type"
+      ]
+    },
+    "publicationsCount": {
+      "type": "integer"
+    },
+    "signatureDate": {
+      "type": "string"
     },
     "startDate": {
       "type": "object",
       "description": "The start date of the project."
+    },
+    "title_abs_text": {
+      "type": "string"
     },
     "type": {
       "type": "object",
@@ -80,6 +774,9 @@
     "url": {
       "type": "object",
       "description": "The URL of the project."
+    },
+    "web_content": {
+      "type": "string"
     },
     "year": {
       "type": "object",

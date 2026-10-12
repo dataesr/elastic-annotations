@@ -3,16 +3,143 @@
   "type": "object",
   "description": "Scientific publications (articles, theses, conference papers). One document is one publication.",
   "properties": {
+    "acknowledgments": {
+      "type": "object",
+      "properties": {
+        "acknowledgments": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "acknowledgments",
+        "lang"
+      ]
+    },
     "affiliations": {
       "items": {
         "properties": {
+          "acronym": {
+            "type": "object",
+            "properties": {
+              "default": {
+                "type": "string"
+              },
+              "en": {
+                "type": "string"
+              },
+              "fr": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "default",
+              "en",
+              "fr"
+            ]
+          },
+          "encoded_key": {
+            "type": "string"
+          },
           "id": {
             "type": "object",
             "description": "PID of an affiliation. Can be the only field of the object if this affiliation is not mapped in the organization index.Otherwise, if present, some fields are denormalized: `mainAddress`, `label`, `acronym`, `kind`, `level`, `status`, `isFrench`, `id_name`. See the documention of the organization index for more details on these fields."
+          },
+          "id_name": {
+            "type": "string"
+          },
+          "id_name_default": {
+            "type": "string"
+          },
+          "isFrench": {
+            "type": "boolean"
+          },
+          "is_main_parent": {
+            "type": "integer"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "label": {
+            "type": "object",
+            "properties": {
+              "default": {
+                "type": "string"
+              },
+              "en": {
+                "type": "string"
+              },
+              "fr": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "default",
+              "en",
+              "fr"
+            ]
+          },
+          "level": {
+            "type": "string"
+          },
+          "mainAddress": {
+            "type": "object",
+            "properties": {
+              "address_detected": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "iso2": {
+                "type": "string"
+              },
+              "iso3": {
+                "type": "string"
+              },
+              "region": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "address_detected",
+              "city",
+              "country",
+              "iso2",
+              "iso3",
+              "region"
+            ]
+          },
+          "status": {
+            "type": "string"
+          },
+          "typologie_1": {
+            "type": "string"
+          },
+          "typologie_2": {
+            "type": "string"
           }
         },
         "required": [
-          "id"
+          "acronym",
+          "encoded_key",
+          "id",
+          "id_name",
+          "id_name_default",
+          "isFrench",
+          "is_main_parent",
+          "kind",
+          "label",
+          "level",
+          "mainAddress",
+          "status",
+          "typologie_1",
+          "typologie_2"
         ]
       },
       "type": "array",
@@ -24,9 +151,100 @@
           "affiliations": {
             "items": {
               "properties": {
+                "BNF": {
+                  "type": "string"
+                },
+                "ISNI": {
+                  "type": "string"
+                },
+                "acronym": {
+                  "type": "string"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "address-line": {
+                  "type": "string"
+                },
+                "addresses": {
+                  "type": "string"
+                },
+                "alias_idref": {
+                  "type": "string"
+                },
+                "aliases": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "comments": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
                 "datasource": {
                   "type": "object",
                   "description": "Source of the raw affiliation string"
+                },
+                "department": {
+                  "type": "string"
+                },
+                "detected_countries": {
+                  "type": "string"
+                },
+                "docid": {
+                  "type": "string"
+                },
+                "ed": {
+                  "type": "string"
+                },
+                "external_ids": {
+                  "type": "object",
+                  "properties": {
+                    "id_type": {
+                      "type": "string"
+                    },
+                    "id_value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id_type",
+                    "id_value"
+                  ]
+                },
+                "grid": {
+                  "type": "string"
+                },
+                "hal_docid": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "object",
+                  "properties": {
+                    "asserted-by": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "id-type": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "asserted-by",
+                    "id",
+                    "id-type"
+                  ]
+                },
+                "id_name_author_labo": {
+                  "type": "string"
+                },
+                "idref": {
+                  "type": "string"
                 },
                 "ids": {
                   "items": {
@@ -35,6 +253,9 @@
                         "type": "object",
                         "description": "PID of the affiliation"
                       },
+                      "source": {
+                        "type": "string"
+                      },
                       "type": {
                         "type": "object",
                         "description": "Type of the affiliation"
@@ -42,6 +263,7 @@
                     },
                     "required": [
                       "id",
+                      "source",
                       "type"
                     ]
                   },
@@ -51,20 +273,132 @@
                 "name": {
                   "type": "object",
                   "description": "Raw affiliation string"
+                },
+                "orgs": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                },
+                "place": {
+                  "type": "string"
+                },
+                "postal-code": {
+                  "type": "string"
+                },
+                "rnsr": {
+                  "type": "string"
+                },
+                "ror": {
+                  "type": "string"
+                },
+                "structId": {
+                  "type": "string"
+                },
+                "toIdentify2": {
+                  "type": "string"
+                },
+                "viaf": {
+                  "type": "string"
+                },
+                "websites": {
+                  "type": "string"
+                },
+                "zipcode": {
+                  "type": "string"
                 }
               },
               "required": [
+                "BNF",
+                "ISNI",
+                "acronym",
+                "address",
+                "address-line",
+                "addresses",
+                "alias_idref",
+                "aliases",
+                "city",
+                "comments",
+                "country",
                 "datasource",
+                "department",
+                "detected_countries",
+                "docid",
+                "ed",
+                "external_ids",
+                "grid",
+                "hal_docid",
+                "id",
+                "id_name_author_labo",
+                "idref",
                 "ids",
-                "name"
+                "name",
+                "orgs",
+                "place",
+                "postal-code",
+                "rnsr",
+                "ror",
+                "structId",
+                "toIdentify2",
+                "viaf",
+                "websites",
+                "zipcode"
               ]
             },
             "type": "array",
             "description": "List of objects object describing the authors's affiliations"
           },
+          "awards": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "structure": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "date",
+              "label",
+              "structure",
+              "url"
+            ]
+          },
           "denormalized": {
             "type": "object",
-            "description": "PID of the author (`id` (with idref prefix), `id_hal`, `orcid`)"
+            "description": "PID of the author (`id` (with idref prefix), `id_hal`, `orcid`)",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "id_hal": {
+                "type": "string"
+              },
+              "idref": {
+                "type": "string"
+              },
+              "orcid": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "id_hal",
+              "idref",
+              "orcid"
+            ]
           },
           "firstName": {
             "type": "object",
@@ -82,19 +416,32 @@
             "type": "object",
             "description": "last name"
           },
+          "person": {
+            "type": "string"
+          },
           "role": {
             "type": "object",
             "description": "Role of the contributor. Default value is `author`. A different value only if present in source (theses.fr or HAL)."
+          },
+          "tags": {
+            "type": "string"
+          },
+          "toIdentify": {
+            "type": "string"
           }
         },
         "required": [
           "affiliations",
+          "awards",
           "denormalized",
           "firstName",
           "fullName",
           "id_name",
           "lastName",
-          "role"
+          "person",
+          "role",
+          "tags",
+          "toIdentify"
         ]
       },
       "type": "array",
@@ -108,6 +455,102 @@
       "items": {},
       "type": "array",
       "description": "array of strings used for autocompletion"
+    },
+    "autocompletedJournal": {
+      "type": "string"
+    },
+    "autocompletedPublisher": {
+      "type": "string"
+    },
+    "bso_local_affiliations": {
+      "type": "string"
+    },
+    "cited_by_counts_by_year": {
+      "type": "object",
+      "properties": {
+        "2012": {
+          "type": "integer"
+        },
+        "2013": {
+          "type": "integer"
+        },
+        "2014": {
+          "type": "integer"
+        },
+        "2015": {
+          "type": "integer"
+        },
+        "2016": {
+          "type": "integer"
+        },
+        "2017": {
+          "type": "integer"
+        },
+        "2018": {
+          "type": "integer"
+        },
+        "2019": {
+          "type": "integer"
+        },
+        "2020": {
+          "type": "integer"
+        },
+        "2021": {
+          "type": "integer"
+        },
+        "2022": {
+          "type": "integer"
+        },
+        "2023": {
+          "type": "integer"
+        },
+        "2024": {
+          "type": "integer"
+        },
+        "2025": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ]
+    },
+    "co_authors": {
+      "type": "string"
+    },
+    "co_countries": {
+      "type": "string"
+    },
+    "co_domains": {
+      "type": "string"
+    },
+    "co_institutions": {
+      "type": "string"
+    },
+    "co_projects": {
+      "type": "string"
+    },
+    "co_software": {
+      "type": "string"
+    },
+    "co_structures": {
+      "type": "string"
+    },
+    "doiUrl": {
+      "type": "string"
     },
     "domains": {
       "items": {
@@ -124,6 +567,9 @@
             "type": "object",
             "description": "Concatenation of code and label, separated by `##`",
             "example": "wikidata##Q13442896"
+          },
+          "key_name": {
+            "type": "string"
           },
           "label": {
             "type": "object",
@@ -150,6 +596,8 @@
           "code",
           "count",
           "id_name",
+          "key_name",
+          "label",
           "naturalKey",
           "type"
         ]
@@ -187,9 +635,131 @@
       "type": "object",
       "description": "Main PID of the production. This id is a concatenation of the id type (e.g `doi` and the id itself)."
     },
+    "institutions": {
+      "type": "object",
+      "properties": {
+        "acronym": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "en",
+            "fr"
+          ]
+        },
+        "encoded_key": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "id_name": {
+          "type": "string"
+        },
+        "id_name_default": {
+          "type": "string"
+        },
+        "isFrench": {
+          "type": "boolean"
+        },
+        "is_main_parent": {
+          "type": "integer"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "en",
+            "fr"
+          ]
+        },
+        "level": {
+          "type": "string"
+        },
+        "mainAddress": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "iso2": {
+              "type": "string"
+            },
+            "iso3": {
+              "type": "string"
+            },
+            "region": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "city",
+            "country",
+            "iso2",
+            "iso3",
+            "region"
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "typologie_1": {
+          "type": "string"
+        },
+        "typologie_2": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "acronym",
+        "encoded_key",
+        "id",
+        "id_name",
+        "id_name_default",
+        "isFrench",
+        "is_main_parent",
+        "kind",
+        "label",
+        "level",
+        "mainAddress",
+        "status",
+        "typologie_1",
+        "typologie_2"
+      ]
+    },
     "isOa": {
       "type": "boolean",
       "description": "Is Open Access? Computed with Unpaywall data if DOI crossref, with HAL and theses.fr otherwise."
+    },
+    "ix": {
+      "type": "integer"
     },
     "keywords": {
       "type": "object",
@@ -252,6 +822,24 @@
         "version"
       ]
     },
+    "pdfUrl": {
+      "type": "string"
+    },
+    "predict_teds": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "probability": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "label",
+        "probability"
+      ]
+    },
     "productionType": {
       "type": "object",
       "description": "String for type of production. Possible values: `publications`, `thesis`.",
@@ -260,15 +848,115 @@
         "thesis"
       ]
     },
+    "project": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default"
+          ]
+        }
+      },
+      "required": [
+        "label"
+      ]
+    },
+    "projects": {
+      "type": "object",
+      "properties": {
+        "acronym": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "id_name": {
+          "type": "string"
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "en",
+            "fr"
+          ]
+        },
+        "type": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "acronym",
+        "id",
+        "id_name",
+        "label",
+        "type",
+        "year"
+      ]
+    },
     "publicationDate": {
       "type": "object",
       "description": "Formatted as YYYY-MM-DDT00:00:00. When available, the `published_date` from Unpaywall is used. When not avaiable (no DOI Crossref), if data comes from HAL, these fields from HAL are used, in this priority order: `publicationDate_s`, `ePublicationDate_s`, `defenseDate_s`, `producedDate_s`.",
       "example": "2020-01-01T00:00:00"
     },
+    "software": {
+      "type": "object",
+      "properties": {
+        "contexts": {
+          "type": "string"
+        },
+        "id_name": {
+          "type": "string"
+        },
+        "softwareName": {
+          "type": "string"
+        },
+        "wikidata": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "contexts",
+        "id_name",
+        "softwareName",
+        "wikidata"
+      ]
+    },
     "source": {
       "type": "object",
       "description": "Describes the source (generally journal) of the production",
       "properties": {
+        "isInDoaj": {
+          "type": "boolean"
+        },
         "isOa": {
           "type": "boolean",
           "description": "Is it an open access journal? (source Unpaywall)"
@@ -290,16 +978,344 @@
         }
       },
       "required": [
+        "isInDoaj",
         "isOa",
         "journalIssns",
         "publisher",
         "title"
       ]
     },
+    "structured_acknowledgments": {
+      "type": "object",
+      "properties": {
+        "funders": {
+          "type": "object",
+          "properties": {
+            "entity": {
+              "type": "string"
+            },
+            "grant_id": {
+              "type": "string"
+            },
+            "program": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "entity",
+            "grant_id",
+            "program",
+            "type"
+          ]
+        },
+        "infrastructures": {
+          "type": "object",
+          "properties": {
+            "entity": {
+              "type": "string"
+            },
+            "grant_id": {
+              "type": "string"
+            },
+            "program": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "entity",
+            "grant_id",
+            "program",
+            "type"
+          ]
+        },
+        "private_companies": {
+          "type": "object",
+          "properties": {
+            "entity": {
+              "type": "string"
+            },
+            "grant_id": {
+              "type": "string"
+            },
+            "program": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "entity",
+            "grant_id",
+            "program",
+            "type"
+          ]
+        },
+        "publication_id": {
+          "type": "string"
+        },
+        "raw_md": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "funders",
+        "infrastructures",
+        "private_companies",
+        "publication_id",
+        "raw_md",
+        "text"
+      ]
+    },
+    "structures": {
+      "type": "object",
+      "properties": {
+        "acronym": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "fr"
+          ]
+        },
+        "encoded_key": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "id_name": {
+          "type": "string"
+        },
+        "id_name_default": {
+          "type": "string"
+        },
+        "isFrench": {
+          "type": "boolean"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "fr"
+          ]
+        },
+        "level": {
+          "type": "string"
+        },
+        "mainAddress": {
+          "type": "object",
+          "properties": {
+            "address_detected": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "region": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "address_detected",
+            "city",
+            "region"
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "typologie_1": {
+          "type": "string"
+        },
+        "typologie_2": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "acronym",
+        "encoded_key",
+        "id",
+        "id_name",
+        "id_name_default",
+        "isFrench",
+        "kind",
+        "label",
+        "level",
+        "mainAddress",
+        "status",
+        "typologie_1",
+        "typologie_2"
+      ]
+    },
     "summary": {
-      "items": {},
+      "items": {
+        "properties": {
+          "default": {
+            "type": "string"
+          },
+          "en": {
+            "type": "string"
+          },
+          "fr": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "default",
+          "en",
+          "fr"
+        ]
+      },
       "type": "array",
       "description": "summary / abstract by language (with `default` only if unknown)"
+    },
+    "tags": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "en",
+            "fr"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "label"
+      ]
+    },
+    "title": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "title_abs_text": {
+      "type": "string"
+    },
+    "topics": {
+      "type": "object",
+      "properties": {
+        "display_name": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "object",
+          "properties": {
+            "display_name": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "display_name",
+            "id"
+          ]
+        },
+        "field": {
+          "type": "object",
+          "properties": {
+            "display_name": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "display_name",
+            "id"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "score": {
+          "type": "number"
+        },
+        "subfield": {
+          "type": "object",
+          "properties": {
+            "display_name": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "display_name",
+            "id"
+          ]
+        }
+      },
+      "required": [
+        "display_name",
+        "domain",
+        "field",
+        "id",
+        "score",
+        "subfield"
+      ]
     },
     "type": {
       "type": "object",

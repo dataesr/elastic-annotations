@@ -268,7 +268,7 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Classifications or tags describing the organization's focus areas.
-      notes: 'Examples: ''public research'', ''higher education'', or ''private lab''.'
+      notes: "Examples: 'public research', 'higher education', or 'private lab'."
   creationYear:
     status: approved
     type: string
@@ -355,12 +355,12 @@ fields:
     has_keyword: true
     primary: true
     enum:
-    - idref
-    - rnsr
-    - sirene
-    - siret
-    - grid
-    - wikidata
+      - idref
+      - rnsr
+      - sirene
+      - siret
+      - grid
+      - wikidata
     required: true
   firstName:
     status: draft
@@ -895,7 +895,7 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Name of the identifier type for the parent institution.
-      notes: 'Examples: ''RNSR'', ''SIREN'', or ''GRID''.'
+      notes: "Examples: 'RNSR', 'SIREN', or 'GRID'."
   institutionOf.denormalized.id_name_default:
     status: draft
     type: text
@@ -1356,14 +1356,14 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Primary category classifying the organization's type or focus.
-      notes: 'Examples: ''University'', ''Research Institute''.'
+      notes: "Examples: 'University', 'Research Institute'."
   institutions.denormalized.status:
     status: draft
     type: text
     has_keyword: true
     ai_suggestion:
       description: Operational or legal status of the organization.
-      notes: 'Examples: ''Active'', ''Closed'', ''Merged''.'
+      notes: "Examples: 'Active', 'Closed', 'Merged'."
   institutions.denormalized.typologie_1:
     status: draft
     type: text
@@ -1906,7 +1906,7 @@ fields:
     type: date
     ai_suggestion:
       description: Start date of the parent-child relationship.
-      notes: 'Format: YYYY-MM-DD. May be null if unknown.'
+      notes: "Format: YYYY-MM-DD. May be null if unknown."
   parentOf.denormalized.parents.structure:
     status: draft
     type: text
@@ -1941,7 +1941,7 @@ fields:
     type: date
     ai_suggestion:
       description: End date of the parent-child relationship, if applicable.
-      notes: 'Format: YYYY-MM-DD. Null if the relationship is ongoing.'
+      notes: "Format: YYYY-MM-DD. Null if the relationship is ongoing."
   parentOf.natural_id:
     status: draft
     type: text
@@ -2065,7 +2065,7 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Type of relationship between the organization and its parent institution.
-      notes: 'Examples: ''administrative'', ''funding'', or ''hierarchical''.'
+      notes: "Examples: 'administrative', 'funding', or 'hierarchical'."
   parents.denormalized.institutions.rnsr_key:
     status: draft
     type: text
@@ -2084,7 +2084,7 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Structural type or category of the parent institution.
-      notes: 'Examples: ''university'', ''research lab'', or ''government agency''.'
+      notes: "Examples: 'university', 'research lab', or 'government agency'."
   parents.denormalized.isFrench:
     status: draft
     type: boolean
@@ -2179,7 +2179,7 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Type of relationship between the organization and its parent.
-      notes: 'Common values: ''administrative'', ''funding'', ''historical''.'
+      notes: "Common values: 'administrative', 'funding', 'historical'."
   parents.denormalized.parents.startDate:
     status: draft
     type: date
@@ -2199,7 +2199,7 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Current operational status of the parent organization.
-      notes: 'Typical values: ''active'', ''inactive'', ''merged''.'
+      notes: "Typical values: 'active', 'inactive', 'merged'."
   parents.denormalized.typologie_1:
     status: draft
     type: text
@@ -2410,7 +2410,7 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Type of relationship between the organization and its predecessor.
-      notes: 'Common values: ''merger'', ''split'', ''renaming'', or ''absorption''.'
+      notes: "Common values: 'merger', 'split', 'renaming', or 'absorption'."
   predecessors.denormalized.institutions.rnsr_key:
     status: draft
     type: text
@@ -2423,7 +2423,7 @@ fields:
     type: date
     ai_suggestion:
       description: Start date when the predecessor institution became active or relevant.
-      notes: 'Format: YYYY-MM-DD. May be approximate for historical records.'
+      notes: "Format: YYYY-MM-DD. May be approximate for historical records."
   predecessors.denormalized.institutions.structure:
     status: draft
     type: text
@@ -2526,7 +2526,7 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Type of relationship between predecessor and its parent.
-      notes: 'Examples: ''administrative'', ''funding'', or ''historical''.'
+      notes: "Examples: 'administrative', 'funding', or 'historical'."
   predecessors.denormalized.parents.startDate:
     status: draft
     type: date
@@ -3243,8 +3243,7 @@ fields:
     status: draft
     type: long
     ai_suggestion:
-      description: Year the organization was established according to ROR.
-      notes: May differ from local records; prefer this for cross-border consistency.
+      description: Year the organization was established according to ROR data.
   ror_infos.externalIds:
     status: draft
     type: object
@@ -3315,8 +3314,7 @@ fields:
     type: text
     has_keyword: true
     ai_suggestion:
-      description: Categorizes the type of link (e.g., website, social media, parent
-        organization).
+      description: Type of the link (e.g., website, social media, parent organization).
   ror_infos.links.url:
     status: draft
     type: text
@@ -3328,15 +3326,13 @@ fields:
     type: text
     has_keyword: true
     ai_suggestion:
-      description: Human-readable label or description for the link.
-      notes: May be empty if the URL is self-explanatory.
+      description: Human-readable label or description for the link, if available.
   ror_infos.startDate:
     status: draft
     type: date
     ai_suggestion:
       description: Date when the organization's ROR record became active or was established.
-      notes: 'Format: YYYY-MM-DD. May differ from the organization''s actual creation
-        date.'
+      notes: Use to validate temporal relevance of the ROR data.
   ror_infos.status:
     status: draft
     type: text
@@ -3344,6 +3340,7 @@ fields:
     ai_suggestion:
       description: Current operational status of the organization in ROR (e.g., active,
         inactive).
+      notes: Inactive status may indicate a defunct or merged organization.
   sites:
     status: draft
     type: object
@@ -3523,13 +3520,13 @@ fields:
     type: float
     ai_suggestion:
       description: Latitude component of the main address GPS coordinates.
-      notes: 'Value range: -90.0 to 90.0; validate before use in spatial queries.'
+      notes: "Value range: -90.0 to 90.0; validate before use in spatial queries."
   startup_linkOf.denormalized.mainAddress.gps.lon:
     status: draft
     type: float
     ai_suggestion:
       description: Longitude component of the main address GPS coordinates.
-      notes: 'Value range: -180.0 to 180.0; validate before use in spatial queries.'
+      notes: "Value range: -180.0 to 180.0; validate before use in spatial queries."
   startup_linkOf.denormalized.mainAddress.iso3:
     status: draft
     type: text
@@ -3801,8 +3798,8 @@ fields:
     has_keyword: true
     primary: true
     enum:
-    - active
-    - inactive
+      - active
+      - inactive
   title_abs_text:
     status: draft
     type: text
@@ -3833,8 +3830,8 @@ fields:
     analyzer: heavy
 resolve:
   search_fields:
-  - label.*
-  - acronym.*
+    - label.*
+    - acronym.*
   source_fields:
-  - label
-  - acronym.default
+    - label
+    - acronym.default

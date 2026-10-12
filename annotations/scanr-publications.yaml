@@ -67,11 +67,11 @@ fields:
   affiliations.id:
     status: approved
     type: string
-    description: 'PID of an affiliation. Can be the only field of the object if this
+    description: "PID of an affiliation. Can be the only field of the object if this
       affiliation is not mapped in the organization index.Otherwise, if present, some
       fields are denormalized: `mainAddress`, `label`, `acronym`, `kind`, `level`,
       `status`, `isFrench`, `id_name`. See the documention of the organization index
-      for more details on these fields.'
+      for more details on these fields."
     has_keyword: true
     primary: true
     required: true
@@ -215,7 +215,7 @@ fields:
   authors:
     status: approved
     type: array
-    description: ' List the authors / contributor'
+    description: " List the authors / contributor"
   authors.affiliations:
     status: approved
     type: array
@@ -593,7 +593,7 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: ORCID identifier for the author, ensuring unique global identification.
-      notes: 'Standardized format: 0000-0000-0000-0000; validate checksum.'
+      notes: "Standardized format: 0000-0000-0000-0000; validate checksum."
   authors.firstName:
     status: approved
     type: string
@@ -877,10 +877,10 @@ fields:
   domains.type:
     status: approved
     type: string
-    description: 'Type of label. Possible values: `wikidata`, `keyword`, `sudoc`.
+    description: "Type of label. Possible values: `wikidata`, `keyword`, `sudoc`.
       Wikidata domains are automatically detected within the title, abstract and keywords.
       Keywords domain are exactly the free-text keywords that have been harvested
-      (not normalized).'
+      (not normalized)."
     has_keyword: true
     required: true
   externalIds:
@@ -897,16 +897,16 @@ fields:
   externalIds.type:
     status: approved
     type: string
-    description: '`nnt` (for French thesis, ''nnt'' stands for ''Numéro National de
-      Thèse''), `doi` (Digital Object Identifier), `hal` (if present in HAL) or ''pmid''
-      (if present in PubMed)'
+    description: "`nnt` (for French thesis, 'nnt' stands for 'Numéro National de
+      Thèse'), `doi` (Digital Object Identifier), `hal` (if present in HAL) or 'pmid'
+      (if present in PubMed)"
     has_keyword: true
     primary: true
     enum:
-    - doi
-    - hal
-    - pmid
-    - nnt
+      - doi
+      - hal
+      - pmid
+      - nnt
     required: true
   id:
     status: approved
@@ -1138,8 +1138,8 @@ fields:
       found in the French Open Science Monitor data (Baromètre de la Science Ouverte).
     has_keyword: true
     enum:
-    - publisher
-    - repository
+      - publisher
+      - repository
     required: true
   oaEvidence.landingPageUrl:
     status: approved
@@ -1194,13 +1194,13 @@ fields:
   productionType:
     status: approved
     type: string
-    description: 'String for type of production. Possible values: `publications`,
-      `thesis`.'
+    description: "String for type of production. Possible values: `publications`,
+      `thesis`."
     has_keyword: true
     primary: true
     enum:
-    - publication
-    - thesis
+      - publication
+      - thesis
     required: true
   project:
     status: draft
@@ -1257,8 +1257,8 @@ fields:
     ai_suggestion:
       description: Normalized identifier combining project ID and name for consistent
         referencing.
-      notes: 'Format: ''ID_NAME''; useful for exact matching or cross-referencing
-        with external project registries.'
+      notes: "Format: 'ID_NAME'; useful for exact matching or cross-referencing
+        with external project registries."
   projects.label:
     status: draft
     type: object
@@ -1299,12 +1299,12 @@ fields:
   publicationDate:
     status: approved
     type: string
-    description: 'Formatted as YYYY-MM-DDT00:00:00. When available, the `published_date`
+    description: "Formatted as YYYY-MM-DDT00:00:00. When available, the `published_date`
       from Unpaywall is used. When not avaiable (no DOI Crossref), if data comes from
       HAL, these fields from HAL are used, in this priority order: `publicationDate_s`,
-      `ePublicationDate_s`, `defenseDate_s`, `producedDate_s`.'
+      `ePublicationDate_s`, `defenseDate_s`, `producedDate_s`."
     required: true
-    example: '2020-01-01T00:00:00'
+    example: "2020-01-01T00:00:00"
   software:
     status: draft
     type: object
@@ -1815,13 +1815,13 @@ fields:
     has_keyword: true
     primary: true
     enum:
-    - journal-article
-    - book
-    - book-chapter
-    - proceedings
-    - preprint
-    - thesis
-    - other
+      - journal-article
+      - book
+      - book-chapter
+      - proceedings
+      - preprint
+      - thesis
+      - other
     required: true
   year:
     status: approved
@@ -1831,6 +1831,6 @@ fields:
     required: true
 resolve:
   search_fields:
-  - title.*
+    - title.*
   source_fields:
-  - title.default
+    - title.default

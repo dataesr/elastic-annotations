@@ -2,5 +2,515 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "description": "Projects participations by organizations. One document is one project participation by an organization.",
-  "properties": {}
+  "properties": {
+    "acronym": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "gps": {
+          "type": "object",
+          "properties": {
+            "lat": {
+              "type": "number"
+            },
+            "lon": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "lat",
+            "lon"
+          ]
+        },
+        "gps_id_name": {
+          "type": "string"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "address",
+        "city",
+        "country",
+        "gps",
+        "gps_id_name",
+        "postcode",
+        "region"
+      ]
+    },
+    "ai_description": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "fr": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default",
+            "en",
+            "fr"
+          ]
+        }
+      },
+      "required": [
+        "description"
+      ]
+    },
+    "alias": {
+      "type": "string"
+    },
+    "applicants": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "autocompleted": {
+      "type": "string"
+    },
+    "autocompletedText": {
+      "type": "string"
+    },
+    "co_partners_foreign_inst": {
+      "type": "string"
+    },
+    "co_partners_fr_inst": {
+      "type": "string"
+    },
+    "co_partners_fr_labs": {
+      "type": "string"
+    },
+    "co_partners_fr_labs_all": {
+      "type": "string"
+    },
+    "description": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "domains": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default"
+          ]
+        }
+      },
+      "required": [
+        "label"
+      ]
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "fullName": {
+      "type": "string"
+    },
+    "institutions": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "label"
+      ]
+    },
+    "inventors": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "isFrench": {
+      "type": "boolean"
+    },
+    "keywords": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "label": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "leaders": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName"
+      ]
+    },
+    "nb_regions": {
+      "type": "integer"
+    },
+    "participant_acronym": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "participant_encoded_key": {
+      "type": "string"
+    },
+    "participant_id": {
+      "type": "string"
+    },
+    "participant_id_name": {
+      "type": "string"
+    },
+    "participant_id_name_default": {
+      "type": "string"
+    },
+    "participant_ignore_funding": {
+      "type": "boolean"
+    },
+    "participant_ignore_funding_super_organization": {
+      "type": "boolean"
+    },
+    "participant_ignore_total_budget": {
+      "type": "boolean"
+    },
+    "participant_ignore_total_budget_super_organization": {
+      "type": "boolean"
+    },
+    "participant_institutions": {
+      "type": "object",
+      "properties": {
+        "endDate": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "natural_id": {
+          "type": "string"
+        },
+        "relationType": {
+          "type": "string"
+        },
+        "rnsr_key": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "structure": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "endDate",
+        "label",
+        "natural_id",
+        "relationType",
+        "rnsr_key",
+        "startDate",
+        "structure"
+      ]
+    },
+    "participant_isFrench": {
+      "type": "boolean"
+    },
+    "participant_is_main_parent": {
+      "type": "integer"
+    },
+    "participant_is_part_of_super_organization": {
+      "type": "integer"
+    },
+    "participant_is_super_organization": {
+      "type": "integer"
+    },
+    "participant_key_id": {
+      "type": "string"
+    },
+    "participant_kind": {
+      "type": "string"
+    },
+    "participant_label": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "default",
+        "en",
+        "fr"
+      ]
+    },
+    "participant_main_category": {
+      "type": "string"
+    },
+    "participant_region": {
+      "type": "string"
+    },
+    "participant_region_with_labs": {
+      "type": "string"
+    },
+    "participant_status": {
+      "type": "string"
+    },
+    "participant_super_organization_children": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "displayName",
+        "id"
+      ]
+    },
+    "participant_super_organization_id": {
+      "type": "string"
+    },
+    "participant_super_organization_key_id": {
+      "type": "string"
+    },
+    "participant_super_organization_parent": {
+      "type": "string"
+    },
+    "participant_type": {
+      "type": "string"
+    },
+    "participant_typologie_1": {
+      "type": "string"
+    },
+    "participant_typologie_2": {
+      "type": "string"
+    },
+    "participants": {
+      "type": "object",
+      "properties": {
+        "funding": {
+          "type": "number"
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "default"
+          ]
+        }
+      },
+      "required": [
+        "funding",
+        "label"
+      ]
+    },
+    "participation_funding": {
+      "type": "number"
+    },
+    "participation_id": {
+      "type": "string"
+    },
+    "participation_is_coordinator": {
+      "type": "boolean"
+    },
+    "participation_structure_accueil": {
+      "type": "boolean"
+    },
+    "project_action": {
+      "type": "string"
+    },
+    "project_budgetFinanced": {
+      "type": "number"
+    },
+    "project_budgetTotal": {
+      "type": "number"
+    },
+    "project_classification": {
+      "type": "object",
+      "properties": {
+        "confidence": {
+          "type": "string"
+        },
+        "justification": {
+          "type": "string"
+        },
+        "primary_field": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "confidence",
+        "justification",
+        "primary_field"
+      ]
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "project_instrument": {
+      "type": "string"
+    },
+    "project_label": {
+      "type": "string"
+    },
+    "project_pilier_global_name": {
+      "type": "string"
+    },
+    "project_type": {
+      "type": "string"
+    },
+    "project_year": {
+      "type": "integer"
+    },
+    "region_ignore_funding": {
+      "type": "boolean"
+    },
+    "region_ignore_total_budget": {
+      "type": "boolean"
+    },
+    "startDate": {
+      "type": "string"
+    },
+    "title_abs_text": {
+      "type": "string"
+    },
+    "web_content": {
+      "type": "string"
+    }
+  }
 }

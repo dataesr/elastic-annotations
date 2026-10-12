@@ -42,8 +42,8 @@ jobs:
           if [ "${{ github.event_name }}" == "schedule" ]; then
             echo "index=scanr-all"   >> $GITHUB_OUTPUT
             echo "skip_enrich=false"           >> $GITHUB_OUTPUT
-            echo "include_draft=false"         >> $GITHUB_OUTPUT
-            echo "include_ai_suggestion=false" >> $GITHUB_OUTPUT
+            echo "include_draft=true"         >> $GITHUB_OUTPUT
+            echo "include_ai_suggestion=true" >> $GITHUB_OUTPUT
           else
             echo "index=${{ inputs.index }}"                         >> $GITHUB_OUTPUT
             echo "skip_enrich=${{ inputs.skip_enrich }}"             >> $GITHUB_OUTPUT
