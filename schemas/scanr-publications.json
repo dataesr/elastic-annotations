@@ -501,32 +501,53 @@
       }
     },
     "co_authors": {
-      "type": "string",
-      "description": "List of co-authors associated with the publication."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two authors as text"
     },
     "co_countries": {
-      "type": "string",
-      "description": "List of countries represented by the publication's co-authors."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two affiliated countries as text"
     },
     "co_domains": {
-      "type": "string",
-      "description": "Broad scientific domains associated with collaborating entities in the publication."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two mentioned domain as text"
     },
     "co_institutions": {
-      "type": "string",
-      "description": "Institutions that collaborated on the publication, listed as free text."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two institutions as text"
     },
     "co_projects": {
-      "type": "string",
-      "description": "Names of collaborative projects associated with the publication."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two projects as text"
     },
     "co_software": {
-      "type": "string",
-      "description": "Software tools or platforms mentioned in collaboration contexts for the publication."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two mentioned software as text"
     },
     "co_structures": {
-      "type": "string",
-      "description": "Organizational structures (e.g., labs, departments) involved in the publication."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two affiliated structures as text"
     },
     "doiUrl": {
       "type": "string",

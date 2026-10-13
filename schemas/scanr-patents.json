@@ -116,24 +116,39 @@
       "description": "Human-readable text derived from 'autocompleted' for display purposes."
     },
     "co_cpc_classe": {
-      "type": "string",
-      "description": "Cooperative Patent Classification (CPC) class code for the patent."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two cpc classe as text"
     },
     "co_cpc_section": {
-      "type": "string",
-      "description": "Cooperative Patent Classification (CPC) section code for the patent."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two cpc section as text"
     },
     "co_cpc_ss_classe": {
-      "type": "string",
-      "description": "Cooperative Patent Classification (CPC) subclass code for the patent."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two cpc sous classe as text"
     },
     "co_organizations": {
-      "type": "string",
-      "description": "Names of collaborating organizations listed on the patent."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two affiliated organizations as text"
     },
     "co_persons": {
-      "type": "string",
-      "description": "Names of collaborating individuals listed on the patent."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two contributors as text"
     },
     "cpc": {
       "type": "object",

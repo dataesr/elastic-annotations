@@ -3,8 +3,9 @@ _meta:
   description: Patents filed by French research institutions. One document is one
     patent.
   total_fields: 201
-  approved: 0
-  draft: 201
+  approved: 5
+  draft: 196
+  pending_review: 196
 fields:
   acronym:
     status: draft
@@ -187,39 +188,30 @@ fields:
     ai_suggestion:
       description: Human-readable text derived from 'autocompleted' for display purposes.
   co_cpc_classe:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: Cooperative Patent Classification (CPC) class code for the patent.
-      notes: Use with 'co_cpc_section' and 'co_cpc_ss_classe' for precise classification.
+    description: List of all combinations of two cpc classe as text
   co_cpc_section:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: Cooperative Patent Classification (CPC) section code for the patent.
+    description: List of all combinations of two cpc section as text
   co_cpc_ss_classe:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: Cooperative Patent Classification (CPC) subclass code for the patent.
-      notes: Subclass provides finer granularity than class or section.
+    description: List of all combinations of two cpc sous classe as text
   co_organizations:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: Names of collaborating organizations listed on the patent.
-      notes: May overlap with 'applicants.name' if organizations are also applicants.
+    description: List of all combinations of two affiliated organizations as text
   co_persons:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: Names of collaborating individuals listed on the patent.
-      notes: May include inventors or contributors not listed as applicants.
+    description: List of all combinations of two contributors as text
   cpc:
     status: draft
     type: object

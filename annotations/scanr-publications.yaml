@@ -3,8 +3,9 @@ _meta:
   description: Scientific publications (articles, theses, conference papers). One
     document is one publication.
   total_fields: 274
-  approved: 49
-  draft: 225
+  approved: 56
+  draft: 218
+  pending_review: 218
 fields:
   acknowledgments:
     status: draft
@@ -661,7 +662,7 @@ fields:
     required: true
   autocompleted:
     status: approved
-    type: string-array
+    type: text-array
     description: array of strings used for autocompletion
     analyzer: autocomplete
     exclude: true
@@ -773,56 +774,40 @@ fields:
       description: Number of citations received by the publication in 2025.
       notes: Data is likely incomplete or projected; avoid relying on this for analysis.
   co_authors:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: List of co-authors associated with the publication.
-      notes: Useful for identifying collaboration networks or author relationships.
+    description: List of all combinations of two authors as text
   co_countries:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: List of countries represented by the publication's co-authors.
-      notes: Helps assess international collaboration or geographic distribution of
-        research.
+    description: List of all combinations of two affiliated countries as text
   co_domains:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: Broad scientific domains associated with collaborating entities
-        in the publication.
+    description: List of all combinations of two mentioned domain as text
   co_institutions:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: Institutions that collaborated on the publication, listed as free
-        text.
+    description: List of all combinations of two institutions as text
   co_projects:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: Names of collaborative projects associated with the publication.
-      notes: May include acronyms or full project titles; use for filtering or linking
-        to project databases.
+    description: List of all combinations of two projects as text
   co_software:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: Software tools or platforms mentioned in collaboration contexts
-        for the publication.
+    description: List of all combinations of two mentioned software as text
   co_structures:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: Organizational structures (e.g., labs, departments) involved in
-        the publication.
+    description: List of all combinations of two affiliated structures as text
   doiUrl:
     status: draft
     type: text
@@ -1118,7 +1103,7 @@ fields:
         present.
   keywords.default:
     status: approved
-    type: string-array
+    type: text-array
     description: List of string. Keywords (not normalized) chosen by the authors.
       These keywords are also present in the `domains` with type=`keyword`.
     has_keyword: true
@@ -1359,7 +1344,7 @@ fields:
     description: Is it an open access journal? (source Unpaywall)
   source.journalIssns:
     status: approved
-    type: string-array
+    type: text-array
     description: Arrays of ISSNs (print, electronic ...)
     has_keyword: true
     primary: true

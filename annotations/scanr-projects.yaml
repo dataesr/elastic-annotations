@@ -3,8 +3,9 @@ _meta:
   description: Funded research projects (ANR, EU, etc.) with budget and partners.
     One document is one project.
   total_fields: 171
-  approved: 18
-  draft: 153
+  approved: 21
+  draft: 150
+  pending_review: 148
 fields:
   acronym:
     status: approved
@@ -240,27 +241,20 @@ fields:
       description: Primary research field or domain assigned to the project.
       notes: May differ from 'co_domains' if multiple fields are relevant.
   co_domains:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: Secondary research domains associated with the project.
-      notes: Often used for interdisciplinary projects; may be comma-separated.
+    description: List of all combinations of two mentioned domain as text
   co_institutions:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: Institutions involved in the project as partners or collaborators.
-      notes: May include universities, labs, or private entities; format varies by
-        source.
+    description: List of all combinations of two affiliated institutions as text
   co_structures:
-    status: draft
-    type: text
+    status: approved
+    type: text-array
     has_keyword: true
-    ai_suggestion:
-      description: Internal structures or departments contributing to the project.
-      notes: Typically refers to subdivisions within 'co_institutions'.
+    description: List of all combinations of two affiliated structures as text
   comite:
     status: draft
     type: text
@@ -1086,7 +1080,7 @@ fields:
       notes: Order reflects contribution hierarchy; may include non-partner contributors.
   publications.source.journalIssns:
     status: approved
-    type: string-array
+    type: text-array
     description: The ISSNs of the journal.
   publicationsCount:
     status: draft

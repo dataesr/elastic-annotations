@@ -163,16 +163,25 @@
       }
     },
     "co_domains": {
-      "type": "string",
-      "description": "Secondary research domains associated with the project."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two mentioned domain as text"
     },
     "co_institutions": {
-      "type": "string",
-      "description": "Institutions involved in the project as partners or collaborators."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two affiliated institutions as text"
     },
     "co_structures": {
-      "type": "string",
-      "description": "Internal structures or departments contributing to the project."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of all combinations of two affiliated structures as text"
     },
     "comite": {
       "type": "string",
