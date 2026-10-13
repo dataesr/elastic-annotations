@@ -5,512 +5,541 @@
   "properties": {
     "acronym": {
       "type": "object",
+      "description": "Container for the project's acronym in multiple languages.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default or fallback acronym for the project when no language-specific version is available."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English version of the project's acronym."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French version of the project's acronym."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "address": {
       "type": "object",
+      "description": "Container for the organization's physical address details during the project participation.",
       "properties": {
         "address": {
-          "type": "string"
+          "type": "string",
+          "description": "Full street address of the organization's location during the project participation."
         },
         "city": {
-          "type": "string"
+          "type": "string",
+          "description": "City of the organization's address during the project participation."
         },
         "country": {
-          "type": "string"
+          "type": "string",
+          "description": "Country of the organization's address during the project participation."
         },
         "gps": {
           "type": "object",
+          "description": "Container for the geographic coordinates (GPS) of the organization's address.",
           "properties": {
             "lat": {
-              "type": "number"
+              "type": "number",
+              "description": "Latitude coordinate of the organization's address location."
             },
             "lon": {
-              "type": "number"
+              "type": "number",
+              "description": "Longitude coordinate of the organization's address in decimal degrees."
             }
-          },
-          "required": [
-            "lat",
-            "lon"
-          ]
+          }
         },
         "gps_id_name": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable identifier for the GPS coordinates of the address."
         },
         "postcode": {
-          "type": "string"
+          "type": "string",
+          "description": "Postal code of the organization's address, formatted per local standards."
         },
         "region": {
-          "type": "string"
+          "type": "string",
+          "description": "Administrative region (e.g., state, province) of the organization's address."
         }
-      },
-      "required": [
-        "address",
-        "city",
-        "country",
-        "gps",
-        "gps_id_name",
-        "postcode",
-        "region"
-      ]
+      }
     },
     "ai_description": {
       "type": "object",
+      "description": "Container for AI-generated descriptions of the project participation in multiple languages.",
       "properties": {
         "description": {
           "type": "object",
+          "description": "Nested object holding language-specific AI-generated descriptions.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default AI-generated description of the project participation, language-agnostic."
             },
             "en": {
-              "type": "string"
+              "type": "string",
+              "description": "AI-generated description of the project participation in English."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "AI-generated description of the project participation in French."
             }
-          },
-          "required": [
-            "default",
-            "en",
-            "fr"
-          ]
+          }
         }
-      },
-      "required": [
-        "description"
-      ]
+      }
     },
     "alias": {
-      "type": "string"
+      "type": "string",
+      "description": "Alternative name or shorthand for the organization's participation in the project."
     },
     "applicants": {
       "type": "object",
+      "description": "Nested object containing details about all organizations applying for the project participation.",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Full name of an applying organization as provided in the application form."
         }
-      },
-      "required": [
-        "name"
-      ]
+      }
     },
     "autocompleted": {
-      "type": "string"
+      "type": "string",
+      "description": "System-generated completion status indicating if the participation record was auto-filled."
     },
     "autocompletedText": {
-      "type": "string"
+      "type": "string",
+      "description": "Human-readable text describing the auto-completion status of the participation record."
     },
     "co_partners_foreign_inst": {
-      "type": "string"
+      "type": "string",
+      "description": "Names of foreign academic or research institutions collaborating as co-partners in the project."
     },
     "co_partners_fr_inst": {
-      "type": "string"
+      "type": "string",
+      "description": "Names of French academic or research institutions collaborating as co-partners in the project."
     },
     "co_partners_fr_labs": {
-      "type": "string"
+      "type": "string",
+      "description": "Names of French laboratories collaborating as co-partners in the project."
     },
     "co_partners_fr_labs_all": {
-      "type": "string"
+      "type": "string",
+      "description": "French lab names of all co-partners involved in the project participation."
     },
     "description": {
       "type": "object",
+      "description": "Container for project description text in multiple languages or formats.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default language version of the project description, used when no language-specific version exists."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English translation of the project description, if available."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French-language narrative of the organization's role and contributions in the project."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "domains": {
       "type": "object",
+      "description": "Hierarchical container for the scientific or technical fields the project addresses.",
       "properties": {
         "label": {
           "type": "object",
+          "description": "Localized display names for each domain, keyed by ISO 639-1 language code.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Fallback English label for the domain when no localized label exists."
             }
-          },
-          "required": [
-            "default"
-          ]
+          }
         }
-      },
-      "required": [
-        "label"
-      ]
+      }
     },
     "firstName": {
-      "type": "string"
+      "type": "string",
+      "description": "First name of the primary contact person for the organization's participation."
     },
     "fullName": {
-      "type": "string"
+      "type": "string",
+      "description": "Complete name of the primary contact person, combining first and last names."
     },
     "institutions": {
       "type": "object",
+      "description": "Container for all academic or research bodies involved in the project.",
       "properties": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable name of the institution as it should appear in reports."
         }
-      },
-      "required": [
-        "label"
-      ]
+      }
     },
     "inventors": {
       "type": "object",
+      "description": "Container for individuals credited with key innovations in the project.",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Full name of an inventor as it appears on patents or publications."
         }
-      },
-      "required": [
-        "name"
-      ]
+      }
     },
     "isFrench": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Indicates whether the organization's participation is linked to a French project or entity."
     },
     "keywords": {
       "type": "object",
+      "description": "Container for keyword sets associated with the project participation in multiple languages.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default language keywords describing the project participation when no language-specific version exists."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English-language keywords describing the project participation."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French-language keywords describing the project participation."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "label": {
       "type": "object",
+      "description": "Container for display labels of the project participation in multiple languages.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default language label for the project participation when no language-specific version exists."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English-language display label for the project participation."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French-language display label for the project participation."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "lastName": {
-      "type": "string"
+      "type": "string",
+      "description": "Last name of the individual representing the organization in the project participation."
     },
     "leaders": {
       "type": "object",
+      "description": "Container for key individuals leading the organization's participation in the project.",
       "properties": {
         "firstName": {
-          "type": "string"
+          "type": "string",
+          "description": "First name of a project leader associated with the participating organization."
         },
         "lastName": {
-          "type": "string"
+          "type": "string",
+          "description": "Last name of a project leader associated with the participating organization."
         }
-      },
-      "required": [
-        "firstName",
-        "lastName"
-      ]
+      }
     },
     "nb_regions": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Number of distinct geographic regions the organization operates in for this project participation."
     },
     "participant_acronym": {
       "type": "object",
+      "description": "Container for acronyms of the participating organization in multiple languages.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default acronym of the participating organization, used when language is unspecified."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English acronym of the participating organization."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French acronym of the participating organization."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "participant_encoded_key": {
-      "type": "string"
+      "type": "string",
+      "description": "Unique, URL-safe identifier for the participating organization."
     },
     "participant_id": {
-      "type": "string"
+      "type": "string",
+      "description": "External identifier for the participating organization, references scanr-organizations index."
     },
     "participant_id_name": {
-      "type": "string"
+      "type": "string",
+      "description": "Full name of the participating organization as referenced by its participant_id."
     },
     "participant_id_name_default": {
-      "type": "string"
+      "type": "string",
+      "description": "Default display name of the participating organization in this project."
     },
     "participant_ignore_funding": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Flag indicating whether funding data for this participation should be excluded from calculations."
     },
     "participant_ignore_funding_super_organization": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Flag indicating whether to exclude this participant's funding from super organization totals."
     },
     "participant_ignore_total_budget": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Flag indicating whether the participant's total budget should be excluded from aggregations."
     },
     "participant_ignore_total_budget_super_organization": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Flag indicating whether to exclude this participant's budget from super organization totals."
     },
     "participant_institutions": {
       "type": "object",
+      "description": "Nested object containing all institutions linked to the participant for this project.",
       "properties": {
         "endDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Date when the institution’s involvement in the project ended."
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable name of the institution associated with the participant."
         },
         "natural_id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique persistent identifier for the institution within the system."
         },
         "relationType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of relationship between the participant and the institution (e.g., 'parent', 'affiliate')."
         },
         "rnsr_key": {
-          "type": "string"
+          "type": "string",
+          "description": "RNSR key uniquely identifying the institution in the French research system."
         },
         "startDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Date when the institution’s involvement in the project began."
         },
         "structure": {
-          "type": "string"
+          "type": "string",
+          "description": "Classification of the institution’s organizational type (e.g., 'university', 'lab')."
         }
-      },
-      "required": [
-        "endDate",
-        "label",
-        "natural_id",
-        "relationType",
-        "rnsr_key",
-        "startDate",
-        "structure"
-      ]
+      }
     },
     "participant_isFrench": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Indicates whether the participating organization is based in France."
     },
     "participant_is_main_parent": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Indicates if the organization is the primary parent entity in this project participation (1 for true, 0 for false)."
     },
     "participant_is_part_of_super_organization": {
-      "type": "integer"
+      "type": "integer",
+      "description": "ID of the super organization this participant belongs to, if any."
     },
     "participant_is_super_organization": {
-      "type": "integer"
+      "type": "integer",
+      "description": "ID indicating this participant is a super organization itself."
     },
     "participant_key_id": {
-      "type": "string"
+      "type": "string",
+      "description": "Unique identifier for the organization's participation record in this project."
     },
     "participant_kind": {
-      "type": "string"
+      "type": "string",
+      "description": "Categorizes the type of participant (e.g., 'company', 'research_institute', 'government')."
     },
     "participant_label": {
       "type": "object",
+      "description": "Localized labels for the participating organization, keyed by language code.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default name of the participating organization when no language-specific label is available."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English name of the participating organization."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French name of the participating organization."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "participant_main_category": {
-      "type": "string"
+      "type": "string",
+      "description": "High-level category classifying the participant's role or sector (e.g., 'academia', 'industry')."
     },
     "participant_region": {
-      "type": "string"
+      "type": "string",
+      "description": "Primary geographic region of the participating organization."
     },
     "participant_region_with_labs": {
-      "type": "string"
+      "type": "string",
+      "description": "Participant's region including associated labs, if applicable."
     },
     "participant_status": {
-      "type": "string"
+      "type": "string",
+      "description": "Current state of the organization's participation in the project (e.g., 'active', 'withdrawn')."
     },
     "participant_super_organization_children": {
       "type": "object",
+      "description": "Nested object containing child organizations of this super organization participant.",
       "properties": {
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "Display name of a child organization under this super organization participant."
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier for a child organization under this super organization participant."
         }
-      },
-      "required": [
-        "displayName",
-        "id"
-      ]
+      }
     },
     "participant_super_organization_id": {
-      "type": "string"
+      "type": "string",
+      "description": "Unique identifier for the super organization this participant belongs to."
     },
     "participant_super_organization_key_id": {
-      "type": "string"
+      "type": "string",
+      "description": "Key identifier for the super organization's primary record, if applicable."
     },
     "participant_super_organization_parent": {
-      "type": "string"
+      "type": "string",
+      "description": "ID of the parent super organization, if this participant is a child organization."
     },
     "participant_type": {
-      "type": "string"
+      "type": "string",
+      "description": "Specific role or function of the participant in the project (e.g., 'lead', 'contributor')."
     },
     "participant_typologie_1": {
-      "type": "string"
+      "type": "string",
+      "description": "Primary classification type of the participating organization in the project."
     },
     "participant_typologie_2": {
-      "type": "string"
+      "type": "string",
+      "description": "Secondary classification type of the participating organization in the project."
     },
     "participants": {
       "type": "object",
+      "description": "Nested object containing details about the participating organization in the project.",
       "properties": {
         "funding": {
-          "type": "number"
+          "type": "number",
+          "description": "Amount of funding allocated to this participant for the project."
         },
         "label": {
           "type": "object",
+          "description": "Localized labels for the participant's role or organization name.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default label for the participant's role or organization name in English."
             }
-          },
-          "required": [
-            "default"
-          ]
+          }
         }
-      },
-      "required": [
-        "funding",
-        "label"
-      ]
+      }
     },
     "participation_funding": {
-      "type": "number"
+      "type": "number",
+      "description": "Total funding amount allocated to this project participation."
     },
     "participation_id": {
-      "type": "string"
+      "type": "string",
+      "description": "Unique identifier for this organization's participation in the project."
     },
     "participation_is_coordinator": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Indicates if the participant is the project coordinator (true) or not (false)."
     },
     "participation_structure_accueil": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Indicates if the participation involves hosting the project's physical structure (true) or not (false)."
     },
     "project_action": {
-      "type": "string"
+      "type": "string",
+      "description": "Primary action or activity type the organization performs in the project."
     },
     "project_budgetFinanced": {
-      "type": "number"
+      "type": "number",
+      "description": "Amount of the project budget financed by the participating organization."
     },
     "project_budgetTotal": {
-      "type": "number"
+      "type": "number",
+      "description": "Total declared budget of the project, including all funding sources."
     },
     "project_classification": {
       "type": "object",
+      "description": "Automated classification of the project's thematic or scientific domain.",
       "properties": {
         "confidence": {
-          "type": "string"
+          "type": "string",
+          "description": "Model confidence score for the project's primary classification (e.g., 'high', 'medium')."
         },
         "justification": {
-          "type": "string"
+          "type": "string",
+          "description": "Explanation of why the project was classified under its primary field."
         },
         "primary_field": {
-          "type": "string"
+          "type": "string",
+          "description": "Main thematic or scientific field assigned to the project."
         }
-      },
-      "required": [
-        "confidence",
-        "justification",
-        "primary_field"
-      ]
+      }
     },
     "project_id": {
-      "type": "string"
+      "type": "string",
+      "description": "Unique identifier of the project in the scanr-projects index."
     },
     "project_instrument": {
-      "type": "string"
+      "type": "string",
+      "description": "Funding instrument or mechanism used for the project (e.g., 'grant', 'contract')."
     },
     "project_label": {
-      "type": "string"
+      "type": "string",
+      "description": "Human-readable name or identifier of the project, used for display and search."
     },
     "project_pilier_global_name": {
-      "type": "string"
+      "type": "string",
+      "description": "Name of the global pillar under which the project is categorized or aligned."
     },
     "project_type": {
-      "type": "string"
+      "type": "string",
+      "description": "Classification of the project (e.g., research, development, outreach) for categorization."
     },
     "project_year": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Year when the project was initiated or officially recognized in the system."
     },
     "region_ignore_funding": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Flag indicating whether funding data for the region should be excluded from calculations."
     },
     "region_ignore_total_budget": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Flag indicating whether the region's total budget should be excluded from aggregations."
     },
     "startDate": {
-      "type": "string"
+      "type": "string",
+      "description": "Official start date of the organization's participation in the project."
     },
     "title_abs_text": {
-      "type": "string"
+      "type": "string",
+      "description": "Abstract or summary of the project in plain text, optimized for full-text search."
     },
     "web_content": {
-      "type": "string"
+      "type": "string",
+      "description": "Public-facing content about the project, such as web pages or press releases."
     }
   }
 }

@@ -30,7 +30,7 @@ TYPE_MAP = {
     "geo_point": "object",
 }
 
-def _build_nested_properties(properties: dict, keys: list[str], infos: dict) -> dict:
+def _build_nested_properties(properties: dict, keys: list[str], infos: dict, parent_schema: dict) -> dict:
     """
     Helper to recursively build nested properties.
 
@@ -51,6 +51,10 @@ def _build_nested_properties(properties: dict, keys: list[str], infos: dict) -> 
                 properties[current_key]["items"].update({"type": "string"})
         props = infos_to_schema(infos)
         properties[current_key].update(props)
+        if infos.get("required"):
+            required = parent_schema.setdefault("required", [])
+            if current_key not in required:
+                required.append(current_key)
     else:
         node = properties[current_key]
         if node.get("type") == "array":
@@ -59,22 +63,14 @@ def _build_nested_properties(properties: dict, keys: list[str], infos: dict) -> 
                 node["items"] = {"type": "object"}
             if "properties" not in node["items"]:
                 node["items"]["properties"] = {}
-            if "required" not in node["items"]:
-                node["items"]["required"] = []
-            if len(remaining_keys) == 1:
-                node["items"]["required"].append(remaining_keys[0])
-            _build_nested_properties(node["items"]["properties"], remaining_keys, infos)
+            _build_nested_properties(node["items"]["properties"], remaining_keys, infos, node["items"])
         else:
             # Object type (default): children go into properties
             if "type" not in node:
                 node["type"] = "object"
             if "properties" not in node:
                 node["properties"] = {}
-            if "required" not in node:
-                node["required"] = []
-            if len(remaining_keys) == 1:
-                node["required"].append(remaining_keys[0])
-            _build_nested_properties(node["properties"], remaining_keys, infos)
+            _build_nested_properties(node["properties"], remaining_keys, infos, node)
 
     return properties
 
@@ -99,10 +95,12 @@ def build_json_schema(index, annotations: dict, include_draft: bool = False, inc
     fields = annotations.get("fields", {})
 
     # Filter fields
+    excluded_paths = [path for path, info in fields.items() if info.get("exclude") is True]
     selected = {
         path: info
         for path, info in fields.items()
-        if info.get("status") == "approved" or (include_draft and info.get("status") == "draft")
+        if (info.get("status") == "approved" or (include_draft and info.get("status") == "draft"))
+        and not any(path == excluded or path.startswith(f"{excluded}.") for excluded in excluded_paths)
     }
 
     # Add ai_suggestion to description if include_ai_suggestion is True
@@ -112,18 +110,16 @@ def build_json_schema(index, annotations: dict, include_draft: bool = False, inc
                 info["description"] = info["ai_suggestion"]["description"]
 
     # Build top-level JSON Schema
-    properties = {}
-    for dotted_key, infos in sorted(selected.items()):
-        keys = dotted_key.split(".")
-        properties.update(_build_nested_properties(properties, keys, infos))
-
     config = get_config(index)
     schema = {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
         "description": config["content"],
-        "properties": properties,
+        "properties": {},
     }
+    for dotted_key, infos in sorted(selected.items()):
+        keys = dotted_key.split(".")
+        _build_nested_properties(schema["properties"], keys, infos, schema)
 
     return schema
 

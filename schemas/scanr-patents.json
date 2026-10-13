@@ -5,930 +5,891 @@
   "properties": {
     "acronym": {
       "type": "object",
+      "description": "Container for institution acronyms in multiple languages or formats.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default or primary acronym of the research institution."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English version of the institution's acronym."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French version of the institution's acronym."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "address": {
       "type": "object",
+      "description": "Container for the physical address details of the institution.",
       "properties": {
         "address": {
-          "type": "string"
+          "type": "string",
+          "description": "Full street address of the research institution."
         },
         "city": {
-          "type": "string"
+          "type": "string",
+          "description": "City where the research institution is located."
         },
         "country": {
-          "type": "string"
+          "type": "string",
+          "description": "Country where the research institution is located."
         }
-      },
-      "required": [
-        "address",
-        "city",
-        "country"
-      ]
+      }
     },
     "ai_description": {
       "type": "object",
+      "description": "Container for AI-generated descriptions of the patent.",
       "properties": {
         "description": {
           "type": "object",
+          "description": "Container for multi-language AI-generated descriptions of the patent.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Neutral-language summary of the patent's technical content and purpose."
             },
             "en": {
-              "type": "string"
+              "type": "string",
+              "description": "English-language summary of the patent's technical content and purpose."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French-language summary of the patent's technical content and purpose."
             }
-          },
-          "required": [
-            "default",
-            "en",
-            "fr"
-          ]
+          }
         }
-      },
-      "required": [
-        "description"
-      ]
+      }
     },
     "alias": {
-      "type": "string"
+      "type": "string",
+      "description": "Alternative name(s) or shorthand commonly used to refer to this patent."
     },
     "applicants": {
       "type": "object",
+      "description": "Organizations or individuals who filed the patent application.",
       "properties": {
         "country": {
-          "type": "string"
+          "type": "string",
+          "description": "Country where the applicant is legally registered or resides."
         },
         "id_name": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier combining applicant's name and normalized identifier."
         },
         "ids": {
           "type": "object",
+          "description": "Collection of external identifiers for the applicant, e.g., ROR, SIREN.",
           "properties": {
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "External identifier for the applicant, linking to the scanr-organizations index."
             },
             "type": {
-              "type": "string"
+              "type": "string",
+              "description": "Type of external identifier (e.g., ROR, SIREN, VAT)."
             }
-          },
-          "required": [
-            "id",
-            "type"
-          ]
+          }
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Full name of the entity or individual listed as a patent applicant."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Classification of the applicant as 'person' or 'organization'."
         }
-      },
-      "required": [
-        "country",
-        "id_name",
-        "ids",
-        "name",
-        "type"
-      ]
+      }
     },
     "applicationDate": {
-      "type": "string"
+      "type": "string",
+      "description": "Official filing date of the patent application in YYYY-MM-DD format."
     },
     "autocompleted": {
-      "type": "string"
+      "type": "string",
+      "description": "System-generated keywords or tags for search optimization."
     },
     "autocompletedText": {
-      "type": "string"
+      "type": "string",
+      "description": "Human-readable text derived from 'autocompleted' for display purposes."
     },
     "co_cpc_classe": {
-      "type": "string"
+      "type": "string",
+      "description": "Cooperative Patent Classification (CPC) class code for the patent."
     },
     "co_cpc_section": {
-      "type": "string"
+      "type": "string",
+      "description": "Cooperative Patent Classification (CPC) section code for the patent."
     },
     "co_cpc_ss_classe": {
-      "type": "string"
+      "type": "string",
+      "description": "Cooperative Patent Classification (CPC) subclass code for the patent."
     },
     "co_organizations": {
-      "type": "string"
+      "type": "string",
+      "description": "Names of collaborating organizations listed on the patent."
     },
     "co_persons": {
-      "type": "string"
+      "type": "string",
+      "description": "Names of collaborating individuals listed on the patent."
     },
     "cpc": {
       "type": "object",
+      "description": "Cooperative Patent Classification (CPC) metadata for the patent.",
       "properties": {
         "classe": {
           "type": "object",
+          "description": "Container for CPC class-level details of the patent.",
           "properties": {
             "code": {
-              "type": "string"
+              "type": "string",
+              "description": "Alphanumeric code identifying the CPC class (e.g., 'A01B')."
             },
             "id_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique identifier combining class code and name for precise referencing."
             },
             "label": {
-              "type": "string"
+              "type": "string",
+              "description": "Human-readable label describing the CPC class (e.g., 'Soil working')."
             }
-          },
-          "required": [
-            "code",
-            "id_name",
-            "label"
-          ]
+          }
         },
         "groupe": {
           "type": "object",
+          "description": "Container for CPC group-level details of the patent.",
           "properties": {
             "code": {
-              "type": "string"
+              "type": "string",
+              "description": "Alphanumeric code identifying the CPC group (e.g., 'A01B1/00')."
             },
             "label": {
-              "type": "string"
+              "type": "string",
+              "description": "Human-readable label describing the CPC group (e.g., 'Hand tools')."
             }
-          },
-          "required": [
-            "code",
-            "label"
-          ]
+          }
         },
         "section": {
           "type": "object",
+          "description": "Container for CPC section-level details of the patent.",
           "properties": {
             "code": {
-              "type": "string"
+              "type": "string",
+              "description": "Single-letter code identifying the CPC section (e.g., 'A')."
             },
             "id_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Top-level CPC section identifier and name (e.g., 'A Human Necessities')."
             },
             "label": {
-              "type": "string"
+              "type": "string",
+              "description": "Human-readable label of the CPC section (e.g., 'Human Necessities')."
             }
-          },
-          "required": [
-            "code",
-            "id_name",
-            "label"
-          ]
+          }
         },
         "ss_classe": {
           "type": "object",
+          "description": "Container for CPC subclass details, including code, ID, and label.",
           "properties": {
             "code": {
-              "type": "string"
+              "type": "string",
+              "description": "CPC subclass code (e.g., 'A01B') for precise technical classification."
             },
             "id_name": {
-              "type": "string"
+              "type": "string",
+              "description": "CPC subclass identifier and name (e.g., 'A01B PLOUGHS OR PLOWING')."
             },
             "label": {
-              "type": "string"
+              "type": "string",
+              "description": "Human-readable label of the CPC subclass (e.g., 'PLOUGHS OR PLOWING')."
             }
-          },
-          "required": [
-            "code",
-            "id_name",
-            "label"
-          ]
+          }
         }
-      },
-      "required": [
-        "classe",
-        "groupe",
-        "section",
-        "ss_classe"
-      ]
+      }
     },
     "denormalized_structures": {
       "type": "object",
+      "description": "Denormalized data about research institutions linked to the patent.",
       "properties": {
         "acronym": {
           "type": "object",
+          "description": "Container for acronyms of the institution in multiple languages.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default language acronym of the research institution (e.g., 'CNRS')."
             },
             "en": {
-              "type": "string"
+              "type": "string",
+              "description": "English translation of the institution's acronym, if available."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French acronym of the research structure associated with the patent."
             }
-          },
-          "required": [
-            "default",
-            "en",
-            "fr"
-          ]
+          }
         },
         "categories": {
-          "type": "string"
+          "type": "string",
+          "description": "Hierarchical classification tags (e.g., IPC/CPC codes) assigned to the patent."
         },
         "encoded_key": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique hash identifier for the denormalized research structure record."
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier for the research structure linked to the patent."
         },
         "id_name": {
-          "type": "string"
+          "type": "string",
+          "description": "Combined ID and name of the research structure for human-readable identification."
         },
         "id_name_default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default display name and internal ID concatenated for the research structure."
         },
         "institutions": {
           "type": "object",
+          "description": "Nested object containing historical and relational data about affiliated institutions.",
           "properties": {
             "label": {
-              "type": "string"
+              "type": "string",
+              "description": "Official name of the institution at the time of the patent filing."
             },
             "natural_id": {
-              "type": "string"
+              "type": "string",
+              "description": "Persistent identifier for the institution, independent of name changes."
             },
             "relationType": {
-              "type": "string"
+              "type": "string",
+              "description": "Type of relationship between the institution and the research structure (e.g., 'parent', 'subsidiary')."
             },
             "rnsr_key": {
-              "type": "string"
+              "type": "string",
+              "description": "RNSR (Répertoire National des Structures de Recherche) identifier for the institution."
             },
             "startDate": {
-              "type": "string"
+              "type": "string",
+              "description": "Official date when the institution was established or recognized."
             },
             "structure": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique identifier of the specific structure within the institution."
             }
-          },
-          "required": [
-            "label",
-            "natural_id",
-            "relationType",
-            "rnsr_key",
-            "startDate",
-            "structure"
-          ]
+          }
         },
         "isFrench": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Flag indicating whether the research structure is based in France."
         },
         "is_main_parent": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Binary flag (1/0) indicating if this is the primary parent structure of the patent."
         },
         "kind": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of research structure (e.g., university, lab) associated with the patent."
         },
         "label": {
           "type": "object",
+          "description": "Multilingual labels for the research structure, keyed by language code.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default name of the research structure if no language-specific label exists."
             },
             "en": {
-              "type": "string"
+              "type": "string",
+              "description": "English name of the research structure."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French name of the research structure."
             }
-          },
-          "required": [
-            "default",
-            "en",
-            "fr"
-          ]
+          }
         },
         "mainAddress": {
           "type": "object",
+          "description": "Primary address details for the research structure.",
           "properties": {
             "address": {
-              "type": "string"
+              "type": "string",
+              "description": "Full street address of the research structure."
             },
             "address_detected": {
-              "type": "string"
+              "type": "string",
+              "description": "Full raw address string extracted from the patent’s applicant data."
             },
             "city": {
-              "type": "string"
+              "type": "string",
+              "description": "City where the research structure is located."
             },
             "country": {
-              "type": "string"
+              "type": "string",
+              "description": "Country where the research structure is located."
             },
             "gps": {
               "type": "object",
+              "description": "Geographic coordinates (latitude/longitude) of the research structure.",
               "properties": {
                 "lat": {
-                  "type": "number"
+                  "type": "number",
+                  "description": "Latitude coordinate of the patent applicant's main address in decimal degrees."
                 },
                 "lon": {
-                  "type": "number"
+                  "type": "number",
+                  "description": "Longitude coordinate of the patent applicant's main address in decimal degrees."
                 }
-              },
-              "required": [
-                "lat",
-                "lon"
-              ]
+              }
             },
             "iso2": {
-              "type": "string"
+              "type": "string",
+              "description": "ISO 3166-1 alpha-2 country code of the institution’s main address."
             },
             "iso3": {
-              "type": "string"
+              "type": "string",
+              "description": "ISO 3166-1 alpha-3 country code of the institution’s main address."
             },
             "postcode": {
-              "type": "string"
+              "type": "string",
+              "description": "Postal code of the patent applicant's main address in France."
             },
             "region": {
-              "type": "string"
+              "type": "string",
+              "description": "Administrative region (e.g., département) of the institution’s main address."
             }
-          },
-          "required": [
-            "address",
-            "address_detected",
-            "city",
-            "country",
-            "gps",
-            "iso2",
-            "iso3",
-            "postcode",
-            "region"
-          ]
+          }
         },
         "main_category": {
-          "type": "string"
+          "type": "string",
+          "description": "Primary classification category of the patent's research domain."
         },
         "parents": {
           "type": "object",
+          "description": "Hierarchical relationships of the patent applicant's parent organizations.",
           "properties": {
             "endDate": {
-              "type": "string"
+              "type": "string",
+              "description": "End date of the parent project or structure associated with the patent."
             },
             "natural_id": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique identifier for the parent organization in external systems."
             },
             "relationType": {
-              "type": "string"
+              "type": "string",
+              "description": "Type of relationship between the applicant and parent organization (e.g., 'subsidiary')."
             },
             "startDate": {
-              "type": "string"
+              "type": "string",
+              "description": "Start date of the parent project or structure associated with the patent."
             },
             "structure": {
-              "type": "string"
+              "type": "string",
+              "description": "Name of the parent organization associated with the patent applicant."
             }
-          },
-          "required": [
-            "endDate",
-            "natural_id",
-            "relationType",
-            "startDate",
-            "structure"
-          ]
+          }
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "description": "Current operational status of the patent applicant (e.g., 'active', 'dissolved')."
         },
         "typologie_1": {
-          "type": "string"
+          "type": "string",
+          "description": "Primary typology classification of the patent (e.g., 'Brevet', 'Demande')."
         },
         "typologie_2": {
-          "type": "string"
+          "type": "string",
+          "description": "Secondary typology classification of the patent, if applicable."
         }
-      },
-      "required": [
-        "acronym",
-        "categories",
-        "encoded_key",
-        "id",
-        "id_name",
-        "id_name_default",
-        "institutions",
-        "isFrench",
-        "is_main_parent",
-        "kind",
-        "label",
-        "mainAddress",
-        "main_category",
-        "parents",
-        "status",
-        "typologie_1",
-        "typologie_2"
-      ]
+      }
     },
     "description": {
       "type": "object",
+      "description": "Container for multilingual descriptions of the patent's technical content and claims.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Fallback text describing the patent's technical content and claims if no language-specific version exists."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English version of the patent's technical description and claims."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French version of the patent's technical description and claims."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "domains": {
       "type": "object",
+      "description": "Container for the scientific or technical domains associated with the patent.",
       "properties": {
         "label": {
           "type": "object",
+          "description": "Container for multilingual labels of the patent's associated domains.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Fallback label for the patent's domain if no language-specific version exists."
             }
-          },
-          "required": [
-            "default"
-          ]
+          }
         }
-      },
-      "required": [
-        "label"
-      ]
+      }
     },
     "firstName": {
-      "type": "string"
+      "type": "string",
+      "description": "First name of the primary inventor or patent applicant."
     },
     "fullName": {
-      "type": "string"
+      "type": "string",
+      "description": "Full name of the primary inventor or patent applicant, combining first and last names."
     },
     "grantedDate": {
-      "type": "string"
+      "type": "string",
+      "description": "Date when the patent was officially granted by the patent office."
     },
     "id": {
-      "type": "string"
+      "type": "string",
+      "description": "Unique identifier for the patent document, used for direct retrieval and reference."
     },
     "inpadocFamily": {
-      "type": "string"
+      "type": "string",
+      "description": "INPADOC family identifier grouping related patents across jurisdictions."
     },
     "institutions": {
       "type": "object",
+      "description": "List of French research institutions that filed or co-filed the patent.",
       "properties": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "description": "Official name of the research institution associated with the patent filing."
         }
-      },
-      "required": [
-        "label"
-      ]
+      }
     },
     "inventionKind": {
-      "type": "string"
+      "type": "string",
+      "description": "Classification of the invention type (e.g., device, method, composition)."
     },
     "inventors": {
       "type": "object",
+      "description": "List of individuals credited as inventors on the patent.",
       "properties": {
         "country": {
-          "type": "string"
+          "type": "string",
+          "description": "Country of residence or affiliation for the inventor at filing time."
         },
         "ids": {
           "type": "object",
+          "description": "Container for external identifiers associated with an inventor.",
           "properties": {
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "External identifier value (e.g., ORCID, internal researcher ID) for the inventor."
             },
             "type": {
-              "type": "string"
+              "type": "string",
+              "description": "Type of external identifier (e.g., ORCID, internal) for the inventor's ID."
             }
-          },
-          "required": [
-            "id",
-            "type"
-          ]
+          }
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Full name of each individual credited as an inventor on the patent."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Categorical role of the inventor (e.g., 'academic', 'industrial', 'student')."
         }
-      },
-      "required": [
-        "country",
-        "ids",
-        "name",
-        "type"
-      ]
+      }
     },
     "isFrench": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Indicates whether the patent is filed under French jurisdiction (true/false)."
     },
     "isInternational": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Indicates if the patent was filed under the Patent Cooperation Treaty (PCT)."
     },
     "isOa": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Indicates if the patent is published under an open-access license."
     },
     "isOeb": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Indicates if the patent was filed with the European Patent Office (EPO)."
     },
     "keywords": {
       "type": "object",
+      "description": "Collection of keyword sets associated with the patent’s technical or scientific focus.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default language keywords describing the patent’s subject matter."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English-language keywords for the patent’s technical or scientific content."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French-language keywords for the patent’s technical or scientific content."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "label": {
       "type": "object",
+      "description": "Localized display names or titles for the patent in multiple languages.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Primary name of the patent in a language-agnostic format for display."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English translation of the patent's name for international accessibility."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French name of the patent as originally filed or officially translated."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "lastName": {
-      "type": "string"
+      "type": "string",
+      "description": "Family name of the primary inventor or patent holder."
     },
     "leaders": {
       "type": "object",
+      "description": "Container for individuals or entities leading the patent's development.",
       "properties": {
         "firstName": {
-          "type": "string"
+          "type": "string",
+          "description": "First name of a leader associated with the patent's development."
         },
         "lastName": {
-          "type": "string"
+          "type": "string",
+          "description": "Last name of a leader associated with the patent's development."
         }
-      },
-      "required": [
-        "firstName",
-        "lastName"
-      ]
+      }
     },
     "participant_encoded_key": {
-      "type": "string"
+      "type": "string",
+      "description": "Unique encoded identifier for a participant in the patent filing."
     },
     "participants": {
       "type": "object",
+      "description": "Container for all contributors or entities involved in the patent.",
       "properties": {
         "funding": {
-          "type": "number"
+          "type": "number",
+          "description": "Funding amount (in EUR) allocated to a participant for the patent."
         },
         "label": {
           "type": "object",
+          "description": "Container for display names of participants in multiple languages.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default display name for a participant when no language-specific label exists."
             }
-          },
-          "required": [
-            "default"
-          ]
+          }
         }
-      },
-      "required": [
-        "funding",
-        "label"
-      ]
+      }
     },
     "patents": {
       "type": "object",
+      "description": "Container object for all metadata related to a single patent document.",
       "properties": {
         "applicationDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Date when the patent application was officially filed with the patent office."
         },
         "applicationNumber": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier assigned to the patent application by the filing office."
         },
         "espacenetUrl": {
-          "type": "string"
+          "type": "string",
+          "description": "Direct URL to the patent's record on the Espacenet database for public access."
         },
         "grantedDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Date when the patent was officially granted by the patent office."
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier for the patent, often used for internal or external references."
         },
         "internatApplicationNumber": {
-          "type": "string"
+          "type": "string",
+          "description": "International application number if the patent was filed under the PCT system."
         },
         "ipType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of intellectual property, such as patent, utility model, or design."
         },
         "isGranted": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Boolean flag indicating whether the patent has been granted or is still pending."
         },
         "isPriority": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Boolean flag indicating if this application claims priority from an earlier filing."
         },
         "office": {
-          "type": "string"
+          "type": "string",
+          "description": "National or regional patent office that granted the patent, e.g., INPI or EPO."
         },
         "publicationDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Official date when the patent was published by the issuing office."
         },
         "publicationNumber": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier assigned by the patent office upon publication, e.g., FR3098765."
         },
         "yearPublication": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Year extracted from the publication date for easier annual trend analysis."
         }
-      },
-      "required": [
-        "applicationDate",
-        "applicationNumber",
-        "espacenetUrl",
-        "grantedDate",
-        "id",
-        "internatApplicationNumber",
-        "ipType",
-        "isGranted",
-        "isPriority",
-        "office",
-        "publicationDate",
-        "publicationNumber",
-        "yearPublication"
-      ]
+      }
     },
     "productionType": {
-      "type": "string"
+      "type": "string",
+      "description": "Indicates whether the patent is a standard filing, provisional application, or utility model."
     },
     "publicationDate": {
-      "type": "string"
+      "type": "string",
+      "description": "Alias for patents.publicationDate; use for consistency with other document types."
     },
     "publications": {
       "type": "object",
+      "description": "Container for all publication records linked to the patent.",
       "properties": {
         "authors": {
           "type": "object",
+          "description": "List of authors associated with a linked publication.",
           "properties": {
             "affiliations": {
               "type": "object",
+              "description": "List of organizations associated with an author for a patent publication.",
               "properties": {
                 "country": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Country where the author's affiliated institution is located."
                 },
                 "ids": {
                   "type": "object",
+                  "description": "Collection of unique identifiers for the author's affiliated institution.",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Unique identifier for the author's affiliated institution."
                     },
                     "type": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Type of identifier used for the affiliated institution (e.g., ROR, GRID)."
                     }
-                  },
-                  "required": [
-                    "id",
-                    "type"
-                  ]
+                  }
                 },
                 "name": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Official name of the author's affiliated institution."
                 },
                 "typeIns": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of institution (e.g., university, research lab, corporation)."
                 }
-              },
-              "required": [
-                "country",
-                "ids",
-                "name",
-                "typeIns"
-              ]
+              }
             },
             "fullName": {
-              "type": "string"
+              "type": "string",
+              "description": "Full name of the author as it appears in the patent publication."
             },
             "ids": {
               "type": "object",
+              "description": "Collection of unique identifiers for an author of the patent.",
               "properties": {
                 "id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Unique identifier for an author (e.g., ORCID, internal ID)."
                 },
                 "type": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of identifier used for the author (e.g., ORCID, internal ID)."
                 }
-              },
-              "required": [
-                "id",
-                "type"
-              ]
+              }
             },
             "person": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique identifier or normalized name for the author, linking to a person record."
             }
-          },
-          "required": [
-            "affiliations",
-            "fullName",
-            "ids",
-            "person"
-          ]
+          }
         },
         "doi": {
-          "type": "string"
+          "type": "string",
+          "description": "Digital Object Identifier (DOI) assigned to the patent publication."
         },
         "hostOrganizationName": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the organization hosting or publishing the patent."
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier for the patent publication within the index."
         },
         "isOa": {
-          "type": "string"
+          "type": "string",
+          "description": "Boolean flag indicating if the publication is open access (true/false)."
         },
         "journals": {
           "type": "object",
+          "description": "Container object for metadata about journals associated with the publication.",
           "properties": {
             "ids": {
               "type": "object",
+              "description": "Container object for unique identifiers of the journal.",
               "properties": {
                 "id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Value of the journal identifier (e.g., ISSN number)."
                 },
                 "type": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of journal identifier (e.g., 'issn', 'doi', 'publisher_id')."
                 }
-              },
-              "required": [
-                "id",
-                "type"
-              ]
+              }
             },
             "source": {
               "type": "object",
+              "description": "Metadata about the journal where the patent was published, if applicable.",
               "properties": {
                 "volume": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Volume number of the journal where the patent was published."
                 }
-              },
-              "required": [
-                "volume"
-              ]
+              }
             }
-          },
-          "required": [
-            "ids",
-            "source"
-          ]
+          }
         },
         "language": {
-          "type": "string"
+          "type": "string",
+          "description": "Primary language of the patent publication as an ISO 639-1 code."
         },
         "pdfUrl": {
-          "type": "string"
+          "type": "string",
+          "description": "URL linking to the PDF version of the patent publication."
         },
         "source": {
           "type": "object",
+          "description": "Metadata about the source of the patent publication.",
           "properties": {
             "isOa": {
-              "type": "string"
+              "type": "string",
+              "description": "Boolean flag indicating if the publication source is open access."
             },
             "issue": {
-              "type": "string"
+              "type": "string",
+              "description": "Issue number of the journal where the patent was published."
             },
             "journalIssns": {
-              "type": "string"
+              "type": "string",
+              "description": "ISSN identifiers for the journal where the patent was published."
             },
             "publisher": {
-              "type": "string"
+              "type": "string",
+              "description": "Name of the publisher responsible for the patent publication."
             },
             "title": {
-              "type": "string"
+              "type": "string",
+              "description": "Title of the journal, conference, or publication venue where the patent was published."
             },
             "volume": {
-              "type": "string"
+              "type": "string",
+              "description": "Volume number of the publication source where the patent details appear."
             },
             "year": {
-              "type": "integer"
+              "type": "integer",
+              "description": "Year the publication source (e.g., journal or conference proceedings) was published."
             }
-          },
-          "required": [
-            "isOa",
-            "issue",
-            "journalIssns",
-            "publisher",
-            "title",
-            "volume",
-            "year"
-          ]
+          }
         },
         "title": {
           "type": "string",
+          "description": "Official title of the patent publication as registered.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default title of the patent as published in the source, in its original language."
             }
-          },
-          "required": [
-            "default"
-          ]
+          }
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of patent publication (e.g., application, granted patent)."
         },
         "year": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Year the patent was officially published or made publicly available."
         }
-      },
-      "required": [
-        "authors",
-        "doi",
-        "hostOrganizationName",
-        "id",
-        "isOa",
-        "journals",
-        "language",
-        "pdfUrl",
-        "source",
-        "title",
-        "type",
-        "year"
-      ]
+      }
     },
     "startDate": {
-      "type": "string"
+      "type": "string",
+      "description": "Date when the patent application process was initiated."
     },
     "summary": {
       "type": "object",
+      "description": "Container for multilingual summaries of the patent’s technical claims and innovations.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Fallback summary in English if no language-specific version is available."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "Summary of the patent’s claims and innovations written in English."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "Summary of the patent’s claims and innovations written in French."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "title": {
       "type": "object",
+      "description": "Multilingual container for the patent's official title in different languages.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Fallback text field for the patent's title when no language preference is specified."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English version of the patent's official title for international accessibility."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French version of the patent's official title, the primary language of the document."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "title_abs_text": {
-      "type": "string"
+      "type": "string",
+      "description": "Full-text abstract of the patent, optimized for search and semantic analysis."
     },
     "web_content": {
-      "type": "string"
+      "type": "string",
+      "description": "Unstructured text content scraped from web sources related to the patent."
     },
     "year": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Year the patent was officially filed, used for temporal filtering and analysis."
     }
   }
 }

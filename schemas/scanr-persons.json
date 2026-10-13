@@ -5,41 +5,39 @@
   "properties": {
     "acronym": {
       "type": "object",
+      "description": "Contains acronyms of the person's primary affiliations in multiple languages",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default acronym of the person's primary affiliation when language is unspecified"
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English acronym of the person's primary affiliation"
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French acronym of the person's primary affiliation"
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "address": {
       "type": "object",
+      "description": "Physical address details of the person's primary affiliation",
       "properties": {
         "address": {
-          "type": "string"
+          "type": "string",
+          "description": "Full street address of the person's primary affiliation"
         },
         "city": {
-          "type": "string"
+          "type": "string",
+          "description": "City of the person's primary affiliation address"
         },
         "country": {
-          "type": "string"
+          "type": "string",
+          "description": "Country of the person's primary affiliation address"
         }
-      },
-      "required": [
-        "address",
-        "city",
-        "country"
-      ]
+      }
     },
     "affiliations": {
       "items": {
@@ -49,7 +47,8 @@
             "description": "Last publication year found with this affiliation"
           },
           "publicationsCount": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Total number of publications associated with this affiliation"
           },
           "sources": {
             "items": {
@@ -62,11 +61,7 @@
                   "type": "integer",
                   "description": "Publication year"
                 }
-              },
-              "required": [
-                "id",
-                "year"
-              ]
+              }
             },
             "type": "array",
             "description": "List the publications of the author with the current affiliation"
@@ -81,202 +76,184 @@
             "properties": {
               "acronym": {
                 "type": "object",
+                "description": "Acronyms of the affiliated structure in multiple languages",
                 "properties": {
                   "default": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Default acronym of the affiliated organization, if available"
                   },
                   "fr": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "French acronym of the affiliated organization"
                   }
-                },
-                "required": [
-                  "default",
-                  "fr"
-                ]
+                }
               },
               "categories": {
-                "type": "string"
+                "type": "string",
+                "description": "Research domain labels assigned to the affiliated organization"
               },
               "encoded_key": {
-                "type": "string"
+                "type": "string",
+                "description": "Unique internal identifier for the organizational structure"
               },
               "id": {
-                "type": "string"
+                "type": "string",
+                "description": "Unique identifier for the affiliated organization in the scanr-organizations index"
               },
               "id_name": {
-                "type": "string"
+                "type": "string",
+                "description": "Human-readable name associated with the organization's identifier"
               },
               "id_name_default": {
-                "type": "string"
+                "type": "string",
+                "description": "Preferred display name of the affiliated organization"
               },
               "institutions": {
                 "type": "object",
+                "description": "Nested object containing historical or hierarchical institution data for the affiliation",
                 "properties": {
                   "endDate": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Last year the institution was referenced in publications"
                   },
                   "label": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Display name of the institution within the structure"
                   },
                   "natural_id": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Persistent internal identifier for the institution, independent of name changes"
                   },
                   "relationType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Type of relationship between the institution and the structure (e.g., 'parent', 'child')"
                   },
                   "rnsr_key": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "French RNSR identifier for the research institution"
                   },
                   "startDate": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "First year the institution was referenced in publications"
                   },
                   "structure": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Hierarchical path of parent institutions for this affiliation"
                   }
-                },
-                "required": [
-                  "endDate",
-                  "label",
-                  "natural_id",
-                  "relationType",
-                  "rnsr_key",
-                  "startDate",
-                  "structure"
-                ]
+                }
               },
               "isFrench": {
-                "type": "boolean"
+                "type": "boolean",
+                "description": "Indicates if the affiliation is with a French institution"
               },
               "is_main_parent": {
-                "type": "integer"
+                "type": "integer",
+                "description": "Flag indicating if this structure is the primary parent organization"
               },
               "kind": {
-                "type": "string"
+                "type": "string",
+                "description": "Type of institution (e.g., university, research lab, company)"
               },
               "label": {
                 "type": "object",
+                "description": "Multilingual labels for the affiliation structure",
                 "properties": {
                   "default": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Default name of the institution if no language preference is set"
                   },
                   "fr": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "French name of the institution"
                   }
-                },
-                "required": [
-                  "default",
-                  "fr"
-                ]
+                }
               },
               "mainAddress": {
                 "type": "object",
+                "description": "Primary physical address details for the affiliation",
                 "properties": {
                   "address": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Full formatted address of the institution"
                   },
                   "address_detected": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Raw address string extracted from publication metadata"
                   },
                   "city": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "City where the institution is primarily located"
                   },
                   "country": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Country of the affiliation's main address in ISO 3166-1 alpha-2 format"
                   },
                   "gps": {
                     "type": "object",
+                    "description": "Geographic coordinates (latitude and longitude) of the affiliation's main address",
                     "properties": {
                       "lat": {
-                        "type": "number"
+                        "type": "number",
+                        "description": "Latitude coordinate of the affiliation's main address for mapping purposes"
                       },
                       "lon": {
-                        "type": "number"
+                        "type": "number",
+                        "description": "Longitude coordinate of the affiliation's main address for mapping purposes"
                       }
-                    },
-                    "required": [
-                      "lat",
-                      "lon"
-                    ]
+                    }
                   },
                   "postcode": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Postal code of the affiliation's main address for precise location filtering"
                   },
                   "region": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Administrative region of the organization's main address"
                   }
-                },
-                "required": [
-                  "address",
-                  "address_detected",
-                  "city",
-                  "country",
-                  "gps",
-                  "postcode",
-                  "region"
-                ]
+                }
               },
               "parents": {
                 "type": "object",
+                "description": "Hierarchical parent organizations of the current affiliation with temporal context",
                 "properties": {
                   "endDate": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Last year the parent organization was referenced in publications"
                   },
                   "natural_id": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Persistent identifier of the parent organization for cross-referencing"
                   },
                   "relationType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Type of relationship between the affiliation and its parent (e.g., department, faculty)"
                   },
                   "startDate": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Earliest date when the parent organization relationship began"
                   },
                   "structure": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the parent organization in the affiliation hierarchy"
                   }
-                },
-                "required": [
-                  "endDate",
-                  "natural_id",
-                  "relationType",
-                  "startDate",
-                  "structure"
-                ]
+                }
               },
               "status": {
-                "type": "string"
+                "type": "string",
+                "description": "Current operational status of the affiliated structure (e.g., active, closed)"
               },
               "typologie_1": {
-                "type": "string"
+                "type": "string",
+                "description": "Primary classification of the affiliated organization"
               },
               "typologie_2": {
-                "type": "string"
+                "type": "string",
+                "description": "Secondary classification of the affiliated organization"
               }
-            },
-            "required": [
-              "acronym",
-              "categories",
-              "encoded_key",
-              "id",
-              "id_name",
-              "id_name_default",
-              "institutions",
-              "isFrench",
-              "is_main_parent",
-              "kind",
-              "label",
-              "mainAddress",
-              "parents",
-              "status",
-              "typologie_1",
-              "typologie_2"
-            ]
+            }
           }
         },
         "required": [
-          "endDate",
-          "publicationsCount",
-          "sources",
-          "startDate",
           "structure"
         ]
       },
@@ -285,52 +262,41 @@
     },
     "ai_description": {
       "type": "object",
+      "description": "Container for AI-generated descriptive metadata about the person",
       "properties": {
         "description": {
           "type": "object",
+          "description": "Multilingual descriptions of the person's research focus or expertise",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default language description of the person's research focus or expertise"
             },
             "en": {
-              "type": "string"
+              "type": "string",
+              "description": "English description of the person's research focus or expertise"
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French description of the person's research focus or expertise"
             }
-          },
-          "required": [
-            "default",
-            "en",
-            "fr"
-          ]
+          }
         }
-      },
-      "required": [
-        "description"
-      ]
+      }
     },
     "alias": {
-      "type": "string"
+      "type": "string",
+      "description": "Alternate names or spellings associated with the person"
     },
     "applicants": {
       "type": "object",
+      "description": "Container for entities that applied for or hold patents linked to the person",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the applicant entity for patents linked to the person"
         }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "autocompleted": {
-      "items": {},
-      "type": "array",
-      "description": "array of strings used for autocompletion"
-    },
-    "autocompletedText": {
-      "type": "string"
+      }
     },
     "awards": {
       "items": {
@@ -347,12 +313,7 @@
             "type": "object",
             "description": "Award URL"
           }
-        },
-        "required": [
-          "date",
-          "label",
-          "url"
-        ]
+        }
       },
       "type": "array",
       "description": "Lists the known awards"
@@ -368,33 +329,28 @@
             "type": "object",
             "description": "Main PID of the cocontributor"
           }
-        },
-        "required": [
-          "fullName",
-          "person"
-        ]
+        }
       },
       "type": "array",
       "description": "Lists the known cocontributors. Co-authors only are listed, not jury members."
     },
     "description": {
       "type": "object",
+      "description": "Structured biographical or professional summary of the person",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default language version of the person's biographical summary"
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English version of the person's biographical summary"
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French version of the person's biographical summary"
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "domains": {
       "items": {
@@ -412,12 +368,10 @@
             "description": "Label of the scientific domain",
             "properties": {
               "default": {
-                "type": "string"
+                "type": "string",
+                "description": "Default language label for the person's primary research domain"
               }
-            },
-            "required": [
-              "default"
-            ]
+            }
           },
           "type": {
             "type": "object",
@@ -425,8 +379,6 @@
           }
         },
         "required": [
-          "code",
-          "count",
           "label",
           "type"
         ]
@@ -457,8 +409,7 @@
         },
         "required": [
           "id",
-          "type",
-          "url"
+          "type"
         ]
       },
       "type": "array",
@@ -473,7 +424,8 @@
       "description": "Full Name (concatenation of the first name and last name)"
     },
     "gender": {
-      "type": "string"
+      "type": "string",
+      "description": "Inferred or declared gender of the person"
     },
     "id": {
       "type": "object",
@@ -489,66 +441,63 @@
     },
     "institutions": {
       "type": "object",
+      "description": "Structured data about organizations the person is associated with",
       "properties": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the institution as it appears in source records"
         }
-      },
-      "required": [
-        "label"
-      ]
+      }
     },
     "inventors": {
       "type": "object",
+      "description": "Structured data about patent-related inventor roles",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Full name of the person as recorded in inventor documents"
         }
-      },
-      "required": [
-        "name"
-      ]
+      }
     },
     "isFrench": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Indicates if the person has at least one French affiliation"
     },
     "keywords": {
       "type": "object",
+      "description": "Research topics or expertise areas associated with the person, by language",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default language keywords when no language-specific version is provided"
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English-language keywords describing the person's research focus"
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French-language keywords describing the person's research focus"
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "label": {
       "type": "object",
+      "description": "Preferred display name variants for the person, by language",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default display name when no language-specific variant is available"
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English-language preferred display name for the person"
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French-language preferred display name for the person"
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "lastName": {
       "type": "object",
@@ -556,48 +505,45 @@
     },
     "leaders": {
       "type": "object",
+      "description": "Structured names of research group leaders or supervisors associated with the person",
       "properties": {
         "firstName": {
-          "type": "string"
+          "type": "string",
+          "description": "First name component of the research leader's full name"
         },
         "lastName": {
-          "type": "string"
+          "type": "string",
+          "description": "Author's last name as recorded in leadership or authority records"
         }
-      },
-      "required": [
-        "firstName",
-        "lastName"
-      ]
+      }
     },
     "orcid": {
       "type": "object",
       "description": "ORCID"
     },
     "participant_encoded_key": {
-      "type": "string"
+      "type": "string",
+      "description": "Unique encoded identifier for a participant in a project or publication"
     },
     "participants": {
       "type": "object",
+      "description": "Nested object containing all project or team participants associated with the author",
       "properties": {
         "funding": {
-          "type": "number"
+          "type": "number",
+          "description": "Total funding amount associated with the participant in a project"
         },
         "label": {
           "type": "object",
+          "description": "Localized display names for the participant role or position",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default display name for the participant role in English"
             }
-          },
-          "required": [
-            "default"
-          ]
+          }
         }
-      },
-      "required": [
-        "funding",
-        "label"
-      ]
+      }
     },
     "publications": {
       "items": {
@@ -615,7 +561,8 @@
             "description": "Describes the source (generally journal) of the production",
             "properties": {
               "isInDoaj": {
-                "type": "boolean"
+                "type": "boolean",
+                "description": "Indicates if the publication's source journal is listed in the DOAJ"
               },
               "isOa": {
                 "type": "boolean",
@@ -636,14 +583,7 @@
                 "type": "object",
                 "description": "Title of the source"
               }
-            },
-            "required": [
-              "isInDoaj",
-              "isOa",
-              "journalIssns",
-              "publisher",
-              "title"
-            ]
+            }
           },
           "title": {
             "type": "object",
@@ -654,30 +594,20 @@
                 "description": "Default title"
               },
               "en": {
-                "type": "string"
+                "type": "string",
+                "description": "English title of the publication"
               },
               "fr": {
-                "type": "string"
+                "type": "string",
+                "description": "French title of the publication"
               }
-            },
-            "required": [
-              "default",
-              "en",
-              "fr"
-            ]
+            }
           },
           "year": {
             "type": "integer",
             "description": "Year part of the publication Date"
           }
-        },
-        "required": [
-          "publication",
-          "role",
-          "source",
-          "title",
-          "year"
-        ]
+        }
       },
       "type": "array",
       "description": "Lists the known publications of the author"
@@ -690,251 +620,239 @@
       "items": {
         "properties": {
           "endDate": {
-            "type": "string"
+            "type": "string",
+            "description": "Most recent date the author was affiliated with the institution"
           },
           "publicationsCount": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Total number of publications linked to this recent affiliation"
           },
           "sources": {
             "type": "object",
+            "description": "Metadata about publications supporting this recent affiliation",
             "properties": {
               "id": {
-                "type": "string"
+                "type": "string",
+                "description": "Main PID of the publication linked to the recent affiliation"
               },
               "year": {
-                "type": "string"
+                "type": "string",
+                "description": "Publication year for the source linked to the recent affiliation"
               }
-            },
-            "required": [
-              "id",
-              "year"
-            ]
+            }
           },
           "startDate": {
-            "type": "string"
+            "type": "string",
+            "description": "Earliest publication year found with this recent affiliation"
           },
           "structure": {
             "type": "object",
+            "description": "Organizational details of the recent affiliation",
             "properties": {
               "acronym": {
                 "type": "object",
+                "description": "Acronym variations of the affiliated structure",
                 "properties": {
                   "default": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Default acronym of the affiliated structure if no language preference is specified"
                   },
                   "fr": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "French acronym of the affiliated structure"
                   }
-                },
-                "required": [
-                  "default",
-                  "fr"
-                ]
+                }
               },
               "categories": {
-                "type": "string"
+                "type": "string",
+                "description": "Categorical tags for the recent affiliation's organizational type"
               },
               "encoded_key": {
-                "type": "string"
+                "type": "string",
+                "description": "Unique encoded key for the recent affiliation's organizational record"
               },
               "id": {
-                "type": "string"
+                "type": "string",
+                "description": "Unique identifier for the affiliated structure"
               },
               "id_name": {
-                "type": "string"
+                "type": "string",
+                "description": "Human-readable name of the identifier for the affiliated structure"
               },
               "id_name_default": {
-                "type": "string"
+                "type": "string",
+                "description": "Default display name and identifier for the recent affiliation"
               },
               "institutions": {
                 "type": "object",
+                "description": "Hierarchical institutions linked to the author's recent affiliation",
                 "properties": {
                   "endDate": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Last date of association with an institution under the recent affiliation"
                   },
                   "label": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Human-readable name of the institution"
                   },
                   "natural_id": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Persistent identifier for the institution"
                   },
                   "relationType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Type of relationship between the author and institution (e.g., 'employee')"
                   },
                   "rnsr_key": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "RNSR identifier for the institution in the affiliation structure"
                   },
                   "startDate": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Earliest date the author was affiliated with this institution"
                   },
                   "structure": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Detailed sub-unit or department name within the institution"
                   }
-                },
-                "required": [
-                  "endDate",
-                  "label",
-                  "natural_id",
-                  "relationType",
-                  "rnsr_key",
-                  "startDate",
-                  "structure"
-                ]
+                }
               },
               "isFrench": {
-                "type": "boolean"
+                "type": "boolean",
+                "description": "Indicates if the affiliation is with a French institution"
               },
               "kind": {
-                "type": "string"
+                "type": "string",
+                "description": "Categorizes the affiliation type (e.g., 'university', 'research_lab')"
               },
               "label": {
                 "type": "object",
+                "description": "Localized labels for the affiliation structure",
                 "properties": {
                   "default": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Default display name for the affiliation structure"
                   },
                   "fr": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "French label of the affiliated organization or research structure"
                   }
-                },
-                "required": [
-                  "default",
-                  "fr"
-                ]
+                }
               },
               "mainAddress": {
                 "type": "object",
+                "description": "Primary postal address details of the affiliated organization",
                 "properties": {
                   "address": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Full street address of the affiliated organization's main location"
                   },
                   "address_detected": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Detected full address of the main institution location"
                   },
                   "city": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "City of the affiliated organization's main address"
                   },
                   "postcode": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Postal code of the primary address for the affiliated institution"
                   },
                   "region": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Administrative region of the main institution address"
                   }
-                },
-                "required": [
-                  "address",
-                  "address_detected",
-                  "city",
-                  "postcode",
-                  "region"
-                ]
+                }
               },
               "parents": {
                 "type": "object",
+                "description": "Hierarchical parent organizations of the affiliated structure",
                 "properties": {
                   "endDate": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Last date the parent structure was part of the affiliation"
                   },
                   "natural_id": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Unique identifier for the parent organization in external systems"
                   },
                   "relationType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Type of relationship between the structure and its parent (e.g., 'department')"
                   },
                   "startDate": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Earliest date the parent structure was part of the affiliation"
                   },
                   "structure": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the parent organization at the time of affiliation"
                   }
-                },
-                "required": [
-                  "endDate",
-                  "natural_id",
-                  "relationType",
-                  "startDate",
-                  "structure"
-                ]
+                }
               },
               "status": {
-                "type": "string"
+                "type": "string",
+                "description": "Current operational status of the affiliated structure (e.g., 'active')"
               },
               "typologie_1": {
-                "type": "string"
+                "type": "string",
+                "description": "Primary classification type of the affiliation structure"
               },
               "typologie_2": {
-                "type": "string"
+                "type": "string",
+                "description": "Secondary classification type of the affiliation structure"
               }
-            },
-            "required": [
-              "acronym",
-              "categories",
-              "encoded_key",
-              "id",
-              "id_name",
-              "id_name_default",
-              "institutions",
-              "isFrench",
-              "kind",
-              "label",
-              "mainAddress",
-              "parents",
-              "status",
-              "typologie_1",
-              "typologie_2"
-            ]
+            }
           }
-        },
-        "required": [
-          "endDate",
-          "publicationsCount",
-          "sources",
-          "startDate",
-          "structure"
-        ]
+        }
       },
       "type": "array",
       "description": "Lists all detected affiliations, recents only (still active in the last 3 years)"
     },
     "startDate": {
-      "type": "string"
+      "type": "string",
+      "description": "Earliest detected publication year for this author"
     },
     "title_abs_text": {
-      "type": "string"
+      "type": "string",
+      "description": "Full-text abstracts of the author's most cited works"
     },
     "top_domains": {
       "type": "object",
+      "description": "Top-level research domains associated with the author's work",
       "properties": {
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "Standardized code for the research domain (e.g., '01' for Mathematics)"
         },
         "count": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Total occurrences of this domain across the author's publications"
         },
         "label": {
           "type": "object",
+          "description": "Localized display names for the domain in multiple languages",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default, untranslated name of the domain"
             }
-          },
-          "required": [
-            "default"
-          ]
+          }
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Categorizes the domain (e.g., 'institution', 'company', 'government')"
         }
-      },
-      "required": [
-        "code",
-        "count",
-        "label",
-        "type"
-      ]
+      }
     },
     "web_content": {
-      "type": "string"
+      "type": "string",
+      "description": "Raw HTML or text scraped from the author's public web profile"
     }
-  }
+  },
+  "required": [
+    "fullName",
+    "id"
+  ]
 }

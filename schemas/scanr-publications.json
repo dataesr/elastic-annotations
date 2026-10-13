@@ -5,141 +5,134 @@
   "properties": {
     "acknowledgments": {
       "type": "object",
+      "description": "Contains acknowledgment-related information for the publication.",
       "properties": {
         "acknowledgments": {
-          "type": "string"
+          "type": "string",
+          "description": "Full text of acknowledgments as written in the publication."
         },
         "lang": {
-          "type": "string"
+          "type": "string",
+          "description": "Language code (ISO 639-1) of the acknowledgments text."
         }
-      },
-      "required": [
-        "acknowledgments",
-        "lang"
-      ]
+      }
     },
     "affiliations": {
       "items": {
         "properties": {
           "acronym": {
             "type": "object",
+            "description": "Acronym variations of the affiliation in multiple languages.",
             "properties": {
               "default": {
-                "type": "string"
+                "type": "string",
+                "description": "Default acronym of the affiliation if no language-specific version exists."
               },
               "en": {
-                "type": "string"
+                "type": "string",
+                "description": "English acronym of the affiliation."
               },
               "fr": {
-                "type": "string"
+                "type": "string",
+                "description": "French acronym of the affiliation."
               }
-            },
-            "required": [
-              "default",
-              "en",
-              "fr"
-            ]
+            }
           },
           "encoded_key": {
-            "type": "string"
+            "type": "string",
+            "description": "Internal encoded key for the affiliation, used for deduplication or reference."
           },
           "id": {
             "type": "object",
             "description": "PID of an affiliation. Can be the only field of the object if this affiliation is not mapped in the organization index.Otherwise, if present, some fields are denormalized: `mainAddress`, `label`, `acronym`, `kind`, `level`, `status`, `isFrench`, `id_name`. See the documention of the organization index for more details on these fields."
           },
           "id_name": {
-            "type": "string"
+            "type": "string",
+            "description": "Human-readable name of the affiliation derived from its PID."
           },
           "id_name_default": {
-            "type": "string"
+            "type": "string",
+            "description": "Default name of the affiliation, used when no language-specific label is available."
           },
           "isFrench": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Indicates whether the affiliation is based in France (true/false)."
           },
           "is_main_parent": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Boolean flag (0/1) indicating if this affiliation is the primary parent organization."
           },
           "kind": {
-            "type": "string"
+            "type": "string",
+            "description": "Classification of the affiliation (e.g., university, research institute, company)."
           },
           "label": {
             "type": "object",
+            "description": "Multilingual labels for the affiliation's name, keyed by language code.",
             "properties": {
               "default": {
-                "type": "string"
+                "type": "string",
+                "description": "Default name of the affiliation when no language-specific label is available."
               },
               "en": {
-                "type": "string"
+                "type": "string",
+                "description": "English name of the affiliation, if available."
               },
               "fr": {
-                "type": "string"
+                "type": "string",
+                "description": "French name of the affiliation, if available."
               }
-            },
-            "required": [
-              "default",
-              "en",
-              "fr"
-            ]
+            }
           },
           "level": {
-            "type": "string"
+            "type": "string",
+            "description": "Hierarchical level of the affiliation (e.g., department, faculty, institution)."
           },
           "mainAddress": {
             "type": "object",
+            "description": "Primary address details for the affiliation, including city and country.",
             "properties": {
               "address_detected": {
-                "type": "string"
+                "type": "string",
+                "description": "Raw detected address string for the affiliation’s main location, unnormalized."
               },
               "city": {
-                "type": "string"
+                "type": "string",
+                "description": "City where the affiliation's main address is located."
               },
               "country": {
-                "type": "string"
+                "type": "string",
+                "description": "Country where the affiliation's main address is located."
               },
               "iso2": {
-                "type": "string"
+                "type": "string",
+                "description": "ISO 3166-1 alpha-2 country code for the affiliation’s main address."
               },
               "iso3": {
-                "type": "string"
+                "type": "string",
+                "description": "ISO 3166-1 alpha-3 country code for the affiliation’s main address."
               },
               "region": {
-                "type": "string"
+                "type": "string",
+                "description": "Administrative region (e.g., state/province) of the affiliation’s main address."
               }
-            },
-            "required": [
-              "address_detected",
-              "city",
-              "country",
-              "iso2",
-              "iso3",
-              "region"
-            ]
+            }
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "description": "Current operational status of the affiliation (e.g., active, closed)."
           },
           "typologie_1": {
-            "type": "string"
+            "type": "string",
+            "description": "Primary classification type for the affiliation (e.g., 'University', 'Company')."
           },
           "typologie_2": {
-            "type": "string"
+            "type": "string",
+            "description": "Secondary classification type for the affiliation, refining `typologie_1`."
           }
         },
         "required": [
-          "acronym",
-          "encoded_key",
-          "id",
-          "id_name",
-          "id_name_default",
-          "isFrench",
-          "is_main_parent",
-          "kind",
-          "label",
-          "level",
-          "mainAddress",
-          "status",
-          "typologie_1",
-          "typologie_2"
+          "id"
         ]
       },
       "type": "array",
@@ -152,99 +145,116 @@
             "items": {
               "properties": {
                 "BNF": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Bibliothèque Nationale de France identifier for the author's affiliation."
                 },
                 "ISNI": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "International Standard Name Identifier for the author's affiliation."
                 },
                 "acronym": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Short form or abbreviation of the author's affiliation name."
                 },
                 "address": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Full formatted address of the author's affiliation."
                 },
                 "address-line": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Individual line of the author's affiliation address (e.g., street, city)."
                 },
                 "addresses": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Full address text of the author's affiliation, as extracted from the source."
                 },
                 "alias_idref": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Alternative identifier for the affiliation from the IdRef authority database."
                 },
                 "aliases": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "List of alternative names or variants for the affiliation."
                 },
                 "city": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "City where the author's affiliation is located, as extracted from the address."
                 },
                 "comments": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Human or machine-generated notes about the affiliation's extraction or disambiguation."
                 },
                 "country": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Country where the author's affiliation is located, as extracted from the address."
                 },
                 "datasource": {
                   "type": "object",
                   "description": "Source of the raw affiliation string"
                 },
                 "department": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Specific department, lab, or sub-unit within the author's affiliation."
                 },
                 "detected_countries": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "List of countries detected in the affiliation string, including potential false positives."
                 },
                 "docid": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Internal document identifier linking the affiliation to its source record."
                 },
                 "ed": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Education or institutional designation (e.g., 'PhD program') associated with the affiliation."
                 },
                 "external_ids": {
                   "type": "object",
+                  "description": "External identifiers for the affiliation, keyed by identifier type.",
                   "properties": {
                     "id_type": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Type of the external identifier (e.g., GRID, ROR, ISNI)."
                     },
                     "id_value": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Value of the external identifier for the affiliation."
                     }
-                  },
-                  "required": [
-                    "id_type",
-                    "id_value"
-                  ]
+                  }
                 },
                 "grid": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "GRID identifier for the affiliation, if available."
                 },
                 "hal_docid": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "HAL document identifier for the affiliation, if applicable."
                 },
                 "id": {
                   "type": "object",
+                  "description": "Reference to the organization in the scanr-organizations index.",
                   "properties": {
                     "asserted-by": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Indicates which system asserted the affiliation ID (e.g., publisher, author)."
                     },
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Unique identifier for the affiliation in the referenced system."
                     },
                     "id-type": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Type of the identifier (e.g., RNSR, GRID, ROR)."
                     }
-                  },
-                  "required": [
-                    "asserted-by",
-                    "id",
-                    "id-type"
-                  ]
+                  }
                 },
                 "id_name_author_labo": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Normalized name of the affiliation as used by the author in the publication."
                 },
                 "idref": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "IdRef identifier for the author's affiliation, used for disambiguation and linking."
                 },
                 "ids": {
                   "items": {
@@ -254,7 +264,8 @@
                         "description": "PID of the affiliation"
                       },
                       "source": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Source of the affiliation identifier (e.g., 'RNSR', 'ROR') in the `ids` object."
                       },
                       "type": {
                         "type": "object",
@@ -263,7 +274,6 @@
                     },
                     "required": [
                       "id",
-                      "source",
                       "type"
                     ]
                   },
@@ -276,78 +286,55 @@
                 },
                 "orgs": {
                   "type": "object",
+                  "description": "Normalized organization details extracted from the raw affiliation string.",
                   "properties": {
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Name of the organization as extracted from the raw affiliation string."
                     }
-                  },
-                  "required": [
-                    "name"
-                  ]
+                  }
                 },
                 "place": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Geographic location or city associated with the author's affiliation."
                 },
                 "postal-code": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Postal code associated with the author's affiliation, if available."
                 },
                 "rnsr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "RNSR identifier for the author's affiliation, used for French research organizations."
                 },
                 "ror": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "ROR identifier for the author's affiliation, used for global research organizations."
                 },
                 "structId": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Internal structure identifier for the author's affiliation, if applicable."
                 },
                 "toIdentify2": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Raw affiliation string flagged for manual identification or disambiguation."
                 },
                 "viaf": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "VIAF identifier for the author's affiliation, linking to the Virtual International Authority File."
                 },
                 "websites": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Websites associated with the author's affiliation, typically institutional URLs."
                 },
                 "zipcode": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Postal zip code of the author's affiliation, aiding in geographic identification."
                 }
               },
               "required": [
-                "BNF",
-                "ISNI",
-                "acronym",
-                "address",
-                "address-line",
-                "addresses",
-                "alias_idref",
-                "aliases",
-                "city",
-                "comments",
-                "country",
                 "datasource",
-                "department",
-                "detected_countries",
-                "docid",
-                "ed",
-                "external_ids",
-                "grid",
-                "hal_docid",
-                "id",
-                "id_name_author_labo",
-                "idref",
                 "ids",
-                "name",
-                "orgs",
-                "place",
-                "postal-code",
-                "rnsr",
-                "ror",
-                "structId",
-                "toIdentify2",
-                "viaf",
-                "websites",
-                "zipcode"
+                "name"
               ]
             },
             "type": "array",
@@ -355,50 +342,47 @@
           },
           "awards": {
             "type": "object",
+            "description": "Object containing awards or honors associated with the author.",
             "properties": {
               "date": {
-                "type": "string"
+                "type": "string",
+                "description": "Date when the author received the award, formatted as YYYY-MM-DD."
               },
               "label": {
-                "type": "string"
+                "type": "string",
+                "description": "Human-readable name or title of the award given to the author."
               },
               "structure": {
-                "type": "string"
+                "type": "string",
+                "description": "Name of the organization or body that granted the award to the author."
               },
               "url": {
-                "type": "string"
+                "type": "string",
+                "description": "URL linking to details about the award or its granting institution."
               }
-            },
-            "required": [
-              "date",
-              "label",
-              "structure",
-              "url"
-            ]
+            }
           },
           "denormalized": {
             "type": "object",
             "description": "PID of the author (`id` (with idref prefix), `id_hal`, `orcid`)",
             "properties": {
               "id": {
-                "type": "string"
+                "type": "string",
+                "description": "Unique internal identifier for the denormalized author record."
               },
               "id_hal": {
-                "type": "string"
+                "type": "string",
+                "description": "HAL (Hyper Articles en Ligne) identifier for the author, if available."
               },
               "idref": {
-                "type": "string"
+                "type": "string",
+                "description": "IdRef identifier for the author, linking to the French authority database."
               },
               "orcid": {
-                "type": "string"
+                "type": "string",
+                "description": "ORCID identifier for the author, ensuring unique global identification."
               }
-            },
-            "required": [
-              "id",
-              "id_hal",
-              "idref",
-              "orcid"
-            ]
+            }
           },
           "firstName": {
             "type": "object",
@@ -417,31 +401,26 @@
             "description": "last name"
           },
           "person": {
-            "type": "string"
+            "type": "string",
+            "description": "Reference to the author's detailed record in the scanr-persons index."
           },
           "role": {
             "type": "object",
             "description": "Role of the contributor. Default value is `author`. A different value only if present in source (theses.fr or HAL)."
           },
           "tags": {
-            "type": "string"
+            "type": "string",
+            "description": "Tags or keywords associated with the author, often for classification."
           },
           "toIdentify": {
-            "type": "string"
+            "type": "string",
+            "description": "Flag indicating if the author's identity requires further verification."
           }
         },
         "required": [
-          "affiliations",
-          "awards",
-          "denormalized",
           "firstName",
           "fullName",
-          "id_name",
-          "lastName",
-          "person",
-          "role",
-          "tags",
-          "toIdentify"
+          "lastName"
         ]
       },
       "type": "array",
@@ -457,100 +436,110 @@
       "description": "array of strings used for autocompletion"
     },
     "autocompletedJournal": {
-      "type": "string"
+      "type": "string",
+      "description": "Normalized journal name for search autocompletion and display."
     },
     "autocompletedPublisher": {
-      "type": "string"
+      "type": "string",
+      "description": "Normalized publisher name for search autocompletion and display."
     },
     "bso_local_affiliations": {
-      "type": "string"
+      "type": "string",
+      "description": "Affiliations identified by the BSO (Bibliometric System for Organizations) algorithm."
     },
     "cited_by_counts_by_year": {
       "type": "object",
+      "description": "Annual citation counts for the publication, keyed by year.",
       "properties": {
         "2012": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of times the publication was cited in 2012."
         },
         "2013": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of times the publication was cited in 2013."
         },
         "2014": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of times the publication was cited in 2014."
         },
         "2015": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of times the publication was cited in 2015."
         },
         "2016": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of times the publication was cited in 2016."
         },
         "2017": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of times the publication was cited in 2017."
         },
         "2018": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of citations received by the publication in 2018."
         },
         "2019": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of citations received by the publication in 2019."
         },
         "2020": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of citations received by the publication in 2020."
         },
         "2021": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of citations received by the publication in 2021."
         },
         "2022": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of citations received by the publication in 2022."
         },
         "2023": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of citations received by the publication in 2023."
         },
         "2024": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of citations received by the publication in 2024."
         },
         "2025": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of citations received by the publication in 2025."
         }
-      },
-      "required": [
-        "2012",
-        "2013",
-        "2014",
-        "2015",
-        "2016",
-        "2017",
-        "2018",
-        "2019",
-        "2020",
-        "2021",
-        "2022",
-        "2023",
-        "2024",
-        "2025"
-      ]
+      }
     },
     "co_authors": {
-      "type": "string"
+      "type": "string",
+      "description": "List of co-authors associated with the publication."
     },
     "co_countries": {
-      "type": "string"
+      "type": "string",
+      "description": "List of countries represented by the publication's co-authors."
     },
     "co_domains": {
-      "type": "string"
+      "type": "string",
+      "description": "Broad scientific domains associated with collaborating entities in the publication."
     },
     "co_institutions": {
-      "type": "string"
+      "type": "string",
+      "description": "Institutions that collaborated on the publication, listed as free text."
     },
     "co_projects": {
-      "type": "string"
+      "type": "string",
+      "description": "Names of collaborative projects associated with the publication."
     },
     "co_software": {
-      "type": "string"
+      "type": "string",
+      "description": "Software tools or platforms mentioned in collaboration contexts for the publication."
     },
     "co_structures": {
-      "type": "string"
+      "type": "string",
+      "description": "Organizational structures (e.g., labs, departments) involved in the publication."
     },
     "doiUrl": {
-      "type": "string"
+      "type": "string",
+      "description": "Resolvable URL for the publication's DOI, enabling direct access to the record."
     },
     "domains": {
       "items": {
@@ -569,10 +558,12 @@
             "example": "wikidata##Q13442896"
           },
           "key_name": {
-            "type": "string"
+            "type": "string",
+            "description": "Machine-readable key for the scientific domain (e.g., 'cs.AI' for Computer Science)."
           },
           "label": {
             "type": "object",
+            "description": "Human-readable name of the scientific domain in multiple languages.",
             "properties": {
               "default": {
                 "type": "object",
@@ -593,12 +584,6 @@
           }
         },
         "required": [
-          "code",
-          "count",
-          "id_name",
-          "key_name",
-          "label",
-          "naturalKey",
           "type"
         ]
       },
@@ -637,132 +622,127 @@
     },
     "institutions": {
       "type": "object",
+      "description": "Denormalized metadata about institutions linked to the publication.",
       "properties": {
         "acronym": {
           "type": "object",
+          "description": "Acronyms associated with the institution, available in multiple languages.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary or default acronym of the institution if no language preference is specified."
             },
             "en": {
-              "type": "string"
+              "type": "string",
+              "description": "English-language acronym of the institution."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French-language acronym of the institution."
             }
-          },
-          "required": [
-            "default",
-            "en",
-            "fr"
-          ]
+          }
         },
         "encoded_key": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique internal identifier for the institution, used for system references."
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Persistent identifier for the institution, typically a ROR or GRID ID."
         },
         "id_name": {
-          "type": "string"
+          "type": "string",
+          "description": "Normalized name of the institution, used for display and search."
         },
         "id_name_default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default display name for the institution when no language preference is specified."
         },
         "isFrench": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates whether the institution is based in France (true) or not (false)."
         },
         "is_main_parent": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Flag marking the institution as the primary parent in a hierarchical structure (1=true, 0=false)."
         },
         "kind": {
-          "type": "string"
+          "type": "string",
+          "description": "Categorizes the institution type (e.g., university, research institute, company)."
         },
         "label": {
           "type": "object",
+          "description": "Multilingual labels for the institution, keyed by language code.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default institution name when no language-specific label is available."
             },
             "en": {
-              "type": "string"
+              "type": "string",
+              "description": "English-language label for the institution."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French-language label for the institution."
             }
-          },
-          "required": [
-            "default",
-            "en",
-            "fr"
-          ]
+          }
         },
         "level": {
-          "type": "string"
+          "type": "string",
+          "description": "Hierarchical level of the institution (e.g., university, faculty, department)."
         },
         "mainAddress": {
           "type": "object",
+          "description": "Primary address details of the institution, including city, country, and region.",
           "properties": {
             "city": {
-              "type": "string"
+              "type": "string",
+              "description": "Name of the city where the institution's main address is located."
             },
             "country": {
-              "type": "string"
+              "type": "string",
+              "description": "Name of the country where the institution's main address is located."
             },
             "iso2": {
-              "type": "string"
+              "type": "string",
+              "description": "ISO 3166-1 alpha-2 country code for the institution's main address."
             },
             "iso3": {
-              "type": "string"
+              "type": "string",
+              "description": "ISO 3166-1 alpha-3 country code for the institution's main address."
             },
             "region": {
-              "type": "string"
+              "type": "string",
+              "description": "Administrative region (e.g., state, province) of the institution's main address."
             }
-          },
-          "required": [
-            "city",
-            "country",
-            "iso2",
-            "iso3",
-            "region"
-          ]
+          }
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "description": "Current operational status of the institution (e.g., active, closed, merged)."
         },
         "typologie_1": {
-          "type": "string"
+          "type": "string",
+          "description": "Broad classification of the institution (e.g., public, private, research)."
         },
         "typologie_2": {
-          "type": "string"
+          "type": "string",
+          "description": "Detailed classification of the institution (e.g., engineering school, medical school)."
         }
-      },
-      "required": [
-        "acronym",
-        "encoded_key",
-        "id",
-        "id_name",
-        "id_name_default",
-        "isFrench",
-        "is_main_parent",
-        "kind",
-        "label",
-        "level",
-        "mainAddress",
-        "status",
-        "typologie_1",
-        "typologie_2"
-      ]
+      }
     },
     "isOa": {
       "type": "boolean",
       "description": "Is Open Access? Computed with Unpaywall data if DOI crossref, with HAL and theses.fr otherwise."
     },
     "ix": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Internal index identifier for the publication, used for sorting or pagination."
     },
     "keywords": {
       "type": "object",
+      "description": "Author-provided or extracted keywords describing the publication's topics.",
       "properties": {
         "default": {
           "items": {
@@ -771,10 +751,7 @@
           "type": "array",
           "description": "List of string. Keywords (not normalized) chosen by the authors. These keywords are also present in the `domains` with type=`keyword`."
         }
-      },
-      "required": [
-        "default"
-      ]
+      }
     },
     "landingPage": {
       "type": "object",
@@ -814,31 +791,26 @@
         }
       },
       "required": [
-        "hostType",
-        "landingPageUrl",
-        "license",
-        "pdfUrl",
-        "url",
-        "version"
+        "hostType"
       ]
     },
     "pdfUrl": {
-      "type": "string"
+      "type": "string",
+      "description": "URL pointing to the full-text PDF of the publication, if available."
     },
     "predict_teds": {
       "type": "object",
+      "description": "Predicted TED (Technology, Engineering, Design) categories for the publication.",
       "properties": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "description": "Predicted TED category label (e.g., 'Artificial Intelligence')."
         },
         "probability": {
-          "type": "number"
+          "type": "number",
+          "description": "Confidence score (0.0 to 1.0) for the predicted TED category label."
         }
-      },
-      "required": [
-        "label",
-        "probability"
-      ]
+      }
     },
     "productionType": {
       "type": "object",
@@ -850,77 +822,69 @@
     },
     "project": {
       "type": "object",
+      "description": "Metadata about the primary research project associated with the publication.",
       "properties": {
         "label": {
           "type": "object",
+          "description": "Localized labels for the primary research project.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default label for the primary research project in the publication's primary language."
             }
-          },
-          "required": [
-            "default"
-          ]
+          }
         }
-      },
-      "required": [
-        "label"
-      ]
+      }
     },
     "projects": {
       "type": "object",
+      "description": "Metadata about all research projects associated with the publication.",
       "properties": {
         "acronym": {
           "type": "object",
+          "description": "Localized acronyms for a research project in the `projects` object.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default acronym for a research project in the publication's primary language."
             }
-          },
-          "required": [
-            "default"
-          ]
+          }
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier for a research project associated with the publication."
         },
         "id_name": {
-          "type": "string"
+          "type": "string",
+          "description": "Normalized identifier combining project ID and name for consistent referencing."
         },
         "label": {
           "type": "object",
+          "description": "Localized labels for the project, structured by language codes.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default label of the project associated with the publication."
             },
             "en": {
-              "type": "string"
+              "type": "string",
+              "description": "English label for the project, used for display and filtering."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French label for the project, used for display and filtering."
             }
-          },
-          "required": [
-            "default",
-            "en",
-            "fr"
-          ]
+          }
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Categorizes the project (e.g., 'EU-funded', 'national', 'industry')."
         },
         "year": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Year the project was initiated or funded, for temporal filtering."
         }
-      },
-      "required": [
-        "acronym",
-        "id",
-        "id_name",
-        "label",
-        "type",
-        "year"
-      ]
+      }
     },
     "publicationDate": {
       "type": "object",
@@ -929,33 +893,33 @@
     },
     "software": {
       "type": "object",
+      "description": "Metadata about software mentioned or used in the publication.",
       "properties": {
         "contexts": {
-          "type": "string"
+          "type": "string",
+          "description": "Describes the role or usage of the software in the publication (e.g., 'data analysis', 'simulation')."
         },
         "id_name": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable name of the software, derived from its identifier."
         },
         "softwareName": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the software mentioned in the publication."
         },
         "wikidata": {
-          "type": "string"
+          "type": "string",
+          "description": "Wikidata identifier for the software, enabling cross-referencing."
         }
-      },
-      "required": [
-        "contexts",
-        "id_name",
-        "softwareName",
-        "wikidata"
-      ]
+      }
     },
     "source": {
       "type": "object",
       "description": "Describes the source (generally journal) of the production",
       "properties": {
         "isInDoaj": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates if the publication's source journal is listed in the DOAJ."
         },
         "isOa": {
           "type": "boolean",
@@ -976,346 +940,313 @@
           "type": "object",
           "description": "Title of the source"
         }
-      },
-      "required": [
-        "isInDoaj",
-        "isOa",
-        "journalIssns",
-        "publisher",
-        "title"
-      ]
+      }
     },
     "structured_acknowledgments": {
       "type": "object",
+      "description": "Structured data for acknowledgments, including funders and infrastructures.",
       "properties": {
         "funders": {
           "type": "object",
+          "description": "Details about funding organizations acknowledged in the publication.",
           "properties": {
             "entity": {
-              "type": "string"
+              "type": "string",
+              "description": "Name or identifier of the funding entity (e.g., agency, institution)."
             },
             "grant_id": {
-              "type": "string"
+              "type": "string",
+              "description": "Grant or award identifier associated with the funding."
             },
             "program": {
-              "type": "string"
+              "type": "string",
+              "description": "Program or initiative under which the funding was awarded."
             },
             "type": {
-              "type": "string"
+              "type": "string",
+              "description": "Type of funding entity (e.g., 'government', 'private', 'nonprofit')."
             }
-          },
-          "required": [
-            "entity",
-            "grant_id",
-            "program",
-            "type"
-          ]
+          }
         },
         "infrastructures": {
           "type": "object",
+          "description": "Details about research infrastructures (e.g., facilities, equipment) acknowledged.",
           "properties": {
             "entity": {
-              "type": "string"
+              "type": "string",
+              "description": "Name or identifier of the infrastructure acknowledged in the publication."
             },
             "grant_id": {
-              "type": "string"
+              "type": "string",
+              "description": "Grant or funding ID associated with the acknowledged infrastructure."
             },
             "program": {
-              "type": "string"
+              "type": "string",
+              "description": "Program name under which the infrastructure was funded or operated."
             },
             "type": {
-              "type": "string"
+              "type": "string",
+              "description": "Category or classification of the acknowledged infrastructure (e.g., 'research facility')."
             }
-          },
-          "required": [
-            "entity",
-            "grant_id",
-            "program",
-            "type"
-          ]
+          }
         },
         "private_companies": {
           "type": "object",
+          "description": "Details of private companies acknowledged for contributions to the publication.",
           "properties": {
             "entity": {
-              "type": "string"
+              "type": "string",
+              "description": "Name or identifier of the private company acknowledged in the publication."
             },
             "grant_id": {
-              "type": "string"
+              "type": "string",
+              "description": "Grant or funding ID associated with the acknowledged private company."
             },
             "program": {
-              "type": "string"
+              "type": "string",
+              "description": "Program name under which the private company's contribution was funded."
             },
             "type": {
-              "type": "string"
+              "type": "string",
+              "description": "Category or classification of the acknowledged private company (e.g., 'sponsor')."
             }
-          },
-          "required": [
-            "entity",
-            "grant_id",
-            "program",
-            "type"
-          ]
+          }
         },
         "publication_id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier linking acknowledgments to the publication record."
         },
         "raw_md": {
-          "type": "string"
+          "type": "string",
+          "description": "Markdown-formatted raw acknowledgments text as extracted from the source."
         },
         "text": {
-          "type": "string"
+          "type": "string",
+          "description": "Plain-text version of acknowledgments, normalized for readability."
         }
-      },
-      "required": [
-        "funders",
-        "infrastructures",
-        "private_companies",
-        "publication_id",
-        "raw_md",
-        "text"
-      ]
+      }
     },
     "structures": {
       "type": "object",
+      "description": "Contains metadata about research structures linked to the publication.",
       "properties": {
         "acronym": {
           "type": "object",
+          "description": "Acronyms of the structure in multiple languages.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default acronym of the structure when no language preference is specified."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French acronym of the structure, if available."
             }
-          },
-          "required": [
-            "default",
-            "fr"
-          ]
+          }
         },
         "encoded_key": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique encoded key identifying the structure in external systems."
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Persistent identifier (PID) of the structure."
         },
         "id_name": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable identifier of the structure, combining ID and name."
         },
         "id_name_default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default human-readable identifier when no language preference is specified."
         },
         "isFrench": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates whether the structure is based in France (true/false)."
         },
         "kind": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of the research structure (e.g., laboratory, department, institute)."
         },
         "label": {
           "type": "object",
+          "description": "Localized name of the research structure in multiple languages.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default name of the research structure in its primary language."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French name of the research structure, if available."
             }
-          },
-          "required": [
-            "default",
-            "fr"
-          ]
+          }
         },
         "level": {
-          "type": "string"
+          "type": "string",
+          "description": "Hierarchical level of the structure (e.g., UMR, UPR, EA)."
         },
         "mainAddress": {
           "type": "object",
+          "description": "Primary address details of the research structure.",
           "properties": {
             "address_detected": {
-              "type": "string"
+              "type": "string",
+              "description": "Raw address string as detected from the source data."
             },
             "city": {
-              "type": "string"
+              "type": "string",
+              "description": "City where the research structure is primarily located."
             },
             "region": {
-              "type": "string"
+              "type": "string",
+              "description": "Region or administrative division of the structure's main address."
             }
-          },
-          "required": [
-            "address_detected",
-            "city",
-            "region"
-          ]
+          }
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "description": "Current operational status of the research structure (e.g., active, closed)."
         },
         "typologie_1": {
-          "type": "string"
+          "type": "string",
+          "description": "Primary classification of the research structure, e.g., 'UMR', 'UAR', 'LabEx'."
         },
         "typologie_2": {
-          "type": "string"
+          "type": "string",
+          "description": "Secondary classification of the research structure, e.g., 'FRE', 'FR', 'GIS'."
         }
-      },
-      "required": [
-        "acronym",
-        "encoded_key",
-        "id",
-        "id_name",
-        "id_name_default",
-        "isFrench",
-        "kind",
-        "label",
-        "level",
-        "mainAddress",
-        "status",
-        "typologie_1",
-        "typologie_2"
-      ]
+      }
     },
     "summary": {
       "items": {
         "properties": {
           "default": {
-            "type": "string"
+            "type": "string",
+            "description": "Default language summary of the publication’s key points and findings."
           },
           "en": {
-            "type": "string"
+            "type": "string",
+            "description": "English-language summary of the publication’s key points and findings."
           },
           "fr": {
-            "type": "string"
+            "type": "string",
+            "description": "French-language summary of the publication’s key points and findings."
           }
-        },
-        "required": [
-          "default",
-          "en",
-          "fr"
-        ]
+        }
       },
       "type": "array",
       "description": "summary / abstract by language (with `default` only if unknown)"
     },
     "tags": {
       "type": "object",
+      "description": "Categorized metadata tags associated with the publication.",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier for the tag, used for cross-referencing or filtering."
         },
         "label": {
           "type": "object",
+          "description": "Human-readable label for the tag, localized by language.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default language display label for the tag."
             },
             "en": {
-              "type": "string"
+              "type": "string",
+              "description": "English-language display label for the tag."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French label of a tag associated with the publication."
             }
-          },
-          "required": [
-            "default",
-            "en",
-            "fr"
-          ]
+          }
         }
-      },
-      "required": [
-        "id",
-        "label"
-      ]
+      }
     },
     "title": {
       "type": "object",
+      "description": "Container for multilingual versions of the publication's title.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default or fallback title of the publication if no language-specific version exists."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English version of the publication's title, if available."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French version of the publication's title, if available."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "title_abs_text": {
-      "type": "string"
+      "type": "string",
+      "description": "Abstract text extracted from the publication, often used for full-text search."
     },
     "topics": {
       "type": "object",
+      "description": "Container for hierarchical topic classifications associated with the publication.",
       "properties": {
         "display_name": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable name of the topic, used for display or filtering."
         },
         "domain": {
           "type": "object",
+          "description": "Container for domain-specific metadata within a topic classification.",
           "properties": {
             "display_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Human-readable name of the topic's domain, used for display or filtering."
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique identifier for the scientific domain associated with a topic."
             }
-          },
-          "required": [
-            "display_name",
-            "id"
-          ]
+          }
         },
         "field": {
           "type": "object",
+          "description": "Object containing details about the scientific field related to a topic.",
           "properties": {
             "display_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Human-readable name of the scientific field for display purposes."
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique identifier for the scientific field associated with a topic."
             }
-          },
-          "required": [
-            "display_name",
-            "id"
-          ]
+          }
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier for a topic extracted from the publication."
         },
         "score": {
-          "type": "number"
+          "type": "number",
+          "description": "Confidence score (0-1) indicating relevance of the topic to the publication."
         },
         "subfield": {
           "type": "object",
+          "description": "Object containing details about the scientific subfield related to a topic.",
           "properties": {
             "display_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Human-readable name of the scientific subfield for display purposes."
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique identifier for the scientific subfield associated with a topic."
             }
-          },
-          "required": [
-            "display_name",
-            "id"
-          ]
+          }
         }
-      },
-      "required": [
-        "display_name",
-        "domain",
-        "field",
-        "id",
-        "score",
-        "subfield"
-      ]
+      }
     },
     "type": {
       "type": "object",
@@ -1334,5 +1265,13 @@
       "type": "integer",
       "description": "Year part of the publication Date"
     }
-  }
+  },
+  "required": [
+    "authorsCount",
+    "id",
+    "productionType",
+    "publicationDate",
+    "type",
+    "year"
+  ]
 }

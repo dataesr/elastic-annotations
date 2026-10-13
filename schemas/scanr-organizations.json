@@ -5,197 +5,181 @@
   "properties": {
     "acronym": {
       "type": "object",
+      "description": "Acronyms or abbreviations associated with the organization.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default acronym or abbreviation for the organization."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English-language acronym or abbreviation for the organization."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French-language acronym or abbreviation for the organization."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "address": {
       "type": "object",
+      "description": "Physical location details of the organization.",
       "properties": {
         "address": {
-          "type": "string"
+          "type": "string",
+          "description": "Full postal address of the organization."
         },
         "address_detected": {
-          "type": "string"
+          "type": "string",
+          "description": "Automatically detected or normalized version of the address."
         },
         "city": {
-          "type": "string"
+          "type": "string",
+          "description": "City where the organization is located."
         },
         "country": {
-          "type": "string"
+          "type": "string",
+          "description": "Country where the organization is located."
         },
         "gps": {
           "type": "object",
+          "description": "Geographic coordinates (latitude and longitude) of the organization.",
           "properties": {
             "lat": {
-              "type": "number"
+              "type": "number",
+              "description": "Latitude coordinate of the organization's address in decimal degrees."
             },
             "lon": {
-              "type": "number"
+              "type": "number",
+              "description": "Longitude coordinate of the organization's address in decimal degrees."
             }
-          },
-          "required": [
-            "lat",
-            "lon"
-          ]
+          }
         },
         "iso2": {
-          "type": "string"
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code for the organization's address."
         },
         "iso3": {
-          "type": "string"
+          "type": "string",
+          "description": "ISO 3166-1 alpha-3 country code for the organization's address."
         },
         "main": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates if this is the primary address for the organization."
         },
         "postcode": {
-          "type": "string"
+          "type": "string",
+          "description": "Postal code of the organization's address."
         },
         "region": {
-          "type": "string"
+          "type": "string",
+          "description": "Administrative region (e.g., state, province) of the organization's address."
         }
-      },
-      "required": [
-        "address",
-        "address_detected",
-        "city",
-        "country",
-        "gps",
-        "iso2",
-        "iso3",
-        "main",
-        "postcode",
-        "region"
-      ]
+      }
     },
     "agreements": {
       "type": "object",
+      "description": "Collection of formal agreements or partnerships involving the organization.",
       "properties": {
         "end": {
-          "type": "integer"
+          "type": "integer",
+          "description": "End date of the agreement in Unix epoch milliseconds."
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable name or title of the agreement."
         },
         "start": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Start timestamp (epoch milliseconds) of the agreement's validity period."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable label for the type of agreement (e.g., collaboration, funding)."
         },
         "years": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Duration of the agreement in years, if applicable."
         }
-      },
-      "required": [
-        "end",
-        "label",
-        "start",
-        "type",
-        "years"
-      ]
+      }
     },
     "ai_description": {
       "type": "object",
+      "description": "Container for AI-generated metadata about the organization.",
       "properties": {
         "creation_date": {
-          "type": "string"
+          "type": "string",
+          "description": "Date when the AI-generated description was created or last updated."
         },
         "description": {
           "type": "object",
+          "description": "Multilingual descriptions of the organization generated by AI.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default language version of the AI-generated organization description."
             },
             "en": {
-              "type": "string"
+              "type": "string",
+              "description": "English version of the AI-generated organization description."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French version of the AI-generated organization description."
             }
-          },
-          "required": [
-            "default",
-            "en",
-            "fr"
-          ]
+          }
         },
         "model": {
-          "type": "string"
+          "type": "string",
+          "description": "Identifier of the AI model used to generate the description."
         }
-      },
-      "required": [
-        "creation_date",
-        "description",
-        "model"
-      ]
+      }
     },
     "alias": {
-      "type": "string"
+      "type": "string",
+      "description": "Alternative names or acronyms by which the organization is known."
     },
     "applicants": {
       "type": "object",
+      "description": "Entities or individuals who applied for or manage the organization's records.",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Full name of the applicant entity or individual."
         }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "autocompleted": {
-      "type": "string"
-    },
-    "autocompletedText": {
-      "type": "string"
+      }
     },
     "awards": {
       "type": "object",
+      "description": "Recognitions, certifications, or prizes received by the organization.",
       "properties": {
         "domain": {
           "type": "object",
+          "description": "Scientific or thematic area associated with the award.",
           "properties": {
             "label": {
-              "type": "string"
+              "type": "string",
+              "description": "Human-readable label describing the award's domain."
             }
-          },
-          "required": [
-            "label"
-          ]
+          }
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "description": "Official title or name of the award received by the organization."
         },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "description": "Brief description of the award's purpose or significance."
         },
         "year": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Year when the award was granted to the organization."
         }
-      },
-      "required": [
-        "domain",
-        "label",
-        "summary",
-        "year"
-      ]
+      }
     },
     "categories": {
-      "type": "string"
+      "type": "string",
+      "description": "Classifications or tags describing the organization's focus areas."
     },
     "creationYear": {
       "type": "object",
@@ -203,50 +187,45 @@
     },
     "description": {
       "type": "object",
+      "description": "Detailed narrative about the organization, structured by language.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default language description of the organization if no language-specific version exists."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English-language description of the organization."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French-language description of the organization."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "domains": {
       "type": "object",
+      "description": "Scientific or administrative domains associated with the organization.",
       "properties": {
         "label": {
           "type": "object",
+          "description": "Human-readable labels for the organization's domains, structured by language.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default language label for the organization's domain if no language-specific version exists."
             }
-          },
-          "required": [
-            "default"
-          ]
+          }
         }
-      },
-      "required": [
-        "label"
-      ]
-    },
-    "encoded_key": {
-      "type": "string"
+      }
     },
     "endDate": {
-      "type": "string"
+      "type": "string",
+      "description": "Official closure or dissolution date of the organization, if applicable."
     },
     "etablissementSiege": {
-      "type": "integer"
+      "type": "integer",
+      "description": "SIREN identifier of the parent or headquarter establishment for this organization."
     },
     "externalIds": {
       "items": {
@@ -277,13 +256,16 @@
       "description": "Lists the known external identifiers"
     },
     "firstName": {
-      "type": "string"
+      "type": "string",
+      "description": "First name of the organization's primary contact or representative."
     },
     "fullName": {
-      "type": "string"
+      "type": "string",
+      "description": "Full official name of the organization as registered in its founding documents."
     },
     "has_ai_description": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Indicates whether the organization has an AI-generated description available."
     },
     "id": {
       "type": "object",
@@ -291,560 +273,521 @@
     },
     "incubateurOf": {
       "type": "object",
+      "description": "Details about startups or projects incubated by the organization.",
       "properties": {
         "denormalized": {
           "type": "object",
+          "description": "Denormalized metadata about incubated entities for faster retrieval.",
           "properties": {
             "acronym": {
               "type": "object",
+              "description": "Acronyms associated with the incubated entity, keyed by language or type.",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default acronym of the incubated entity if no language-specific version exists."
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French-language acronym of the incubated entity, if available."
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "categories": {
-              "type": "string"
+              "type": "string",
+              "description": "High-level categories or sectors the incubated entity belongs to."
             },
             "encoded_key": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique encoded key for the incubated entity, often from an external system."
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary identifier of the incubated entity within the incubating organization."
             },
             "id_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Combined identifier and name of the incubator this organization belongs to, for display purposes."
             },
             "id_name_default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default display string combining identifier and name of the incubator."
             },
             "isFrench": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Indicates whether the incubator is located in France."
             },
             "is_main_parent": {
-              "type": "integer"
+              "type": "integer",
+              "description": "Flag marking the primary parent incubator relationship (1 for main, 0 otherwise)."
             },
             "kind": {
-              "type": "string"
+              "type": "string",
+              "description": "Categorizes the type of incubator (e.g., public, private, university-affiliated)."
             },
             "label": {
               "type": "object",
+              "description": "Multilingual labels for the incubator this organization belongs to.",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default label for the incubator, used when no language is specified."
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French label for the incubator this organization belongs to."
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "mainAddress": {
               "type": "object",
+              "description": "Primary address details for the incubator this organization belongs to.",
               "properties": {
                 "address": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Full formatted address of the incubator's main location."
                 },
                 "city": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "City of the incubator's main address."
                 },
                 "country": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Country of the incubator's main address."
                 },
                 "gps": {
                   "type": "object",
+                  "description": "Geographic coordinates of the incubator's main address.",
                   "properties": {
                     "lat": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Latitude coordinate of the incubator's main address."
                     },
                     "lon": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Longitude coordinate of the incubator's main address."
                     }
-                  },
-                  "required": [
-                    "lat",
-                    "lon"
-                  ]
+                  }
                 },
                 "iso3": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "ISO3 country code of the incubator's main address."
                 },
                 "postcode": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Postal code of the incubator's main address."
                 },
                 "region": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Region or state of the incubator's main address."
                 }
-              },
-              "required": [
-                "address",
-                "city",
-                "country",
-                "gps",
-                "iso3",
-                "postcode",
-                "region"
-              ]
+              }
             },
             "main_category": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary category classifying the incubator's focus or type."
             },
             "status": {
-              "type": "string"
+              "type": "string",
+              "description": "Operational status of the incubator (e.g., active, closed)."
             },
             "typologie_1": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary classification label for the incubator linked to the organization."
             },
             "typologie_2": {
-              "type": "string"
+              "type": "string",
+              "description": "Secondary classification label for the incubator linked to the organization."
             }
-          },
-          "required": [
-            "acronym",
-            "categories",
-            "encoded_key",
-            "id",
-            "id_name",
-            "id_name_default",
-            "isFrench",
-            "is_main_parent",
-            "kind",
-            "label",
-            "mainAddress",
-            "main_category",
-            "status",
-            "typologie_1",
-            "typologie_2"
-          ]
+          }
         },
         "natural_id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier for the incubator associated with the organization."
         },
         "structure": {
-          "type": "string"
+          "type": "string",
+          "description": "Name or title of the incubator linked to the organization."
         }
-      },
-      "required": [
-        "denormalized",
-        "natural_id",
-        "structure"
-      ]
+      }
     },
     "incubateurs": {
       "type": "object",
+      "description": "Container for all incubator-related metadata associated with the organization.",
       "properties": {
         "denormalized": {
           "type": "object",
+          "description": "Pre-computed, flattened representation of incubator data for faster queries.",
           "properties": {
             "acronym": {
               "type": "object",
+              "description": "Acronyms of incubators linked to the organization, denormalized for quick access.",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default acronym of the incubator in unspecified or fallback language."
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French acronym of the incubator associated with the organization."
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "categories": {
-              "type": "string"
+              "type": "string",
+              "description": "High-level grouping labels for the incubator (e.g., public, private)."
             },
             "encoded_key": {
-              "type": "string"
+              "type": "string",
+              "description": "System-generated unique key for the incubator record."
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique identifier for the incubator in its source system."
             },
             "id_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Human-readable identifier combining the incubator's ID and name."
             },
             "id_name_default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default name and identifier of the incubator linked to the organization."
             },
             "institutions": {
               "type": "object",
+              "description": "Institutions associated with the incubator, including their details and relationships.",
               "properties": {
                 "label": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Human-readable name of the institution linked to the incubator."
                 },
                 "natural_id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Persistent identifier (PID) of the institution linked to the incubator."
                 },
                 "relationType": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of relationship between the incubator and the associated institution."
                 },
                 "structure": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Structural classification or type of the institution linked to the incubator."
                 }
-              },
-              "required": [
-                "label",
-                "natural_id",
-                "relationType",
-                "structure"
-              ]
+              }
             },
             "isFrench": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Indicates whether the incubator is based in France (true) or abroad (false)."
             },
             "is_main_parent": {
-              "type": "integer"
+              "type": "integer",
+              "description": "Numeric flag indicating if this incubator is the primary parent organization."
             },
             "kind": {
-              "type": "string"
+              "type": "string",
+              "description": "Categorization of the incubator (e.g., public, private, academic)."
             },
             "label": {
               "type": "object",
+              "description": "Localized names of the incubator in multiple languages.",
               "properties": {
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French label of the incubator associated with the organization."
                 }
-              },
-              "required": [
-                "fr"
-              ]
+              }
             },
             "mainAddress": {
               "type": "object",
+              "description": "Primary address details of the incubator associated with the organization.",
               "properties": {
                 "address": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Full street address of the incubator’s main location."
                 },
                 "city": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "City where the incubator’s main address is located."
                 },
                 "country": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Country where the incubator’s main address is located."
                 },
                 "gps": {
                   "type": "object",
+                  "description": "Geographic coordinates (latitude and longitude) of the incubator’s main address.",
                   "properties": {
                     "lat": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Latitude coordinate of the incubator’s main address."
                     },
                     "lon": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Longitude coordinate of the incubator’s main address."
                     }
-                  },
-                  "required": [
-                    "lat",
-                    "lon"
-                  ]
+                  }
                 },
                 "iso3": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "ISO 3-letter country code for the incubator’s main address."
                 },
                 "postcode": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Postal code of the incubator's main address."
                 },
                 "region": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Administrative region of the incubator's main address."
                 }
-              },
-              "required": [
-                "address",
-                "city",
-                "country",
-                "gps",
-                "iso3",
-                "postcode",
-                "region"
-              ]
+              }
             },
             "main_category": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary category classifying the incubator's focus or specialization."
             },
             "status": {
-              "type": "string"
+              "type": "string",
+              "description": "Operational status of the incubator (e.g., active, closed)."
             },
             "typologie_1": {
-              "type": "string"
+              "type": "string",
+              "description": "First-level typology tag describing the incubator's model or scope."
             },
             "typologie_2": {
-              "type": "string"
+              "type": "string",
+              "description": "Second-level typology tag refining the incubator's classification."
             }
-          },
-          "required": [
-            "acronym",
-            "categories",
-            "encoded_key",
-            "id",
-            "id_name",
-            "id_name_default",
-            "institutions",
-            "isFrench",
-            "is_main_parent",
-            "kind",
-            "label",
-            "mainAddress",
-            "main_category",
-            "status",
-            "typologie_1",
-            "typologie_2"
-          ]
+          }
         },
         "structure": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the incubator structure associated with the organization."
         }
-      },
-      "required": [
-        "denormalized",
-        "structure"
-      ]
+      }
     },
     "institutionOf": {
       "type": "object",
+      "description": "Links to organizations for which this entity serves as an institutional parent.",
       "properties": {
         "denormalized": {
           "type": "object",
+          "description": "Pre-resolved details of the parent institution to avoid repeated lookups.",
           "properties": {
             "acronym": {
               "type": "object",
+              "description": "Acronym of the parent institution, if available.",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default acronym of the parent institution in its preferred language."
                 },
                 "en": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "English acronym of the parent institution."
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French acronym of the parent institution."
                 }
-              },
-              "required": [
-                "default",
-                "en",
-                "fr"
-              ]
+              }
             },
             "categories": {
-              "type": "string"
+              "type": "string",
+              "description": "Classification categories assigned to the parent institution."
             },
             "encoded_key": {
-              "type": "string"
+              "type": "string",
+              "description": "Internal encoded key for the parent institution's record."
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique identifier of the parent institution."
             },
             "id_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Name of the identifier type for the parent institution."
             },
             "id_name_default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default name of the identifier type for the parent institution."
             },
             "institutions": {
               "type": "object",
+              "description": "Nested object containing hierarchical parent institutions.",
               "properties": {
                 "endDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Date when the parent institution's affiliation ended."
                 },
                 "label": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Human-readable name of the linked institution"
                 },
                 "natural_id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Stable, unique identifier for the linked institution"
                 },
                 "relationType": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of affiliation between the organization and the linked institution"
                 },
                 "rnsr_key": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "RNSR identifier of the linked institution if it exists"
                 },
                 "startDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Date when the affiliation with the linked institution began"
                 },
                 "structure": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Internal classification of the linked institution’s organizational type"
                 }
-              },
-              "required": [
-                "endDate",
-                "label",
-                "natural_id",
-                "relationType",
-                "rnsr_key",
-                "startDate",
-                "structure"
-              ]
+              }
             },
             "isFrench": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Indicates whether the linked institution is based in France"
             },
             "kind": {
-              "type": "string"
+              "type": "string",
+              "description": "Broad category of the affiliation (e.g., 'parent', 'member', 'partner')"
             },
             "label": {
               "type": "object",
+              "description": "Localized names of the affiliation context",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default, unlocalized name of the affiliation context"
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French label of the parent institution this organization belongs to, denormalized for quick access."
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "mainAddress": {
               "type": "object",
+              "description": "Primary address details of the parent institution, denormalized for direct retrieval.",
               "properties": {
                 "address": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Full formatted address of the parent institution's main location."
                 },
                 "address_detected": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Automatically detected address components from the parent institution's main address."
                 },
                 "city": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "City of the parent institution's main address."
                 },
                 "country": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Country of the parent institution's main address."
                 },
                 "gps": {
                   "type": "object",
+                  "description": "Geographic coordinates (latitude/longitude) of the parent institution's main address.",
                   "properties": {
                     "lat": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Latitude coordinate of the parent institution's main address location."
                     },
                     "lon": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Longitude coordinate of the parent institution's main address location."
                     }
-                  },
-                  "required": [
-                    "lat",
-                    "lon"
-                  ]
+                  }
                 },
                 "iso3": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "ISO 3166-1 alpha-3 country code of the parent institution's main address."
                 },
                 "postcode": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Postal code of the organization's main address, denormalized for quick access."
                 },
                 "region": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Region of the organization's main address, denormalized for filtering or display."
                 }
-              },
-              "required": [
-                "address",
-                "address_detected",
-                "city",
-                "country",
-                "gps",
-                "iso3",
-                "postcode",
-                "region"
-              ]
+              }
             },
             "main_category": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary category classifying the organization, denormalized from its parent institution."
             },
             "parents": {
               "type": "object",
+              "description": "Hierarchical parent organizations and their relationship details, denormalized for context.",
               "properties": {
                 "endDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Date when the parent organization relationship ended, if applicable."
                 },
                 "natural_id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Persistent identifier (PID) of the parent organization in the hierarchy."
                 },
                 "relationType": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of relationship between this organization and its parent (e.g., 'subsidiary')."
                 },
                 "startDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Date when the parent organization relationship began."
                 },
                 "structure": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Name or label of the parent organization in the hierarchy."
                 }
-              },
-              "required": [
-                "endDate",
-                "natural_id",
-                "relationType",
-                "startDate",
-                "structure"
-              ]
+              }
             },
             "status": {
-              "type": "string"
+              "type": "string",
+              "description": "Operational status of the organization (e.g., 'active', 'closed'), denormalized for queries."
             },
             "typologie_1": {
-              "type": "string"
+              "type": "string",
+              "description": "Top-level classification of the parent institution (e.g., 'University', 'EPST')."
             },
             "typologie_2": {
-              "type": "string"
+              "type": "string",
+              "description": "Detailed classification of the parent institution (e.g., 'Public Scientific and Technological Institution')."
             }
-          },
-          "required": [
-            "acronym",
-            "categories",
-            "encoded_key",
-            "id",
-            "id_name",
-            "id_name_default",
-            "institutions",
-            "isFrench",
-            "kind",
-            "label",
-            "mainAddress",
-            "main_category",
-            "parents",
-            "status",
-            "typologie_1",
-            "typologie_2"
-          ]
+          }
         },
         "endDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Date when the organization ceased to be part of the parent institution."
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable name of the parent institution the organization belongs to."
         },
         "natural_id": {
-          "type": "string"
+          "type": "string",
+          "description": "Internal identifier used by the parent institution for this organization."
         },
         "relationType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of relationship between the organization and its parent institution (e.g., 'member', 'affiliate')."
         },
         "rnsr_key": {
-          "type": "string"
+          "type": "string",
+          "description": "RNSR identifier of the parent institution, if available."
         },
         "startDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Date when the organization became part of the parent institution."
         },
         "structure": {
-          "type": "string"
+          "type": "string",
+          "description": "Internal code or reference for the parent institution's structure (e.g., department, faculty)."
         }
-      },
-      "required": [
-        "denormalized",
-        "endDate",
-        "label",
-        "natural_id",
-        "relationType",
-        "rnsr_key",
-        "startDate",
-        "structure"
-      ]
+      }
     },
     "institutions": {
       "items": {
@@ -855,179 +798,171 @@
             "properties": {
               "acronym": {
                 "type": "object",
+                "description": "Acronyms associated with the organization's parent institutions, keyed by language or source.",
                 "properties": {
                   "default": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Default acronym of the denormalized institution."
                   },
                   "en": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "English acronym of the denormalized institution."
                   },
                   "fr": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "French acronym of the denormalized institution."
                   }
-                },
-                "required": [
-                  "default",
-                  "en",
-                  "fr"
-                ]
+                }
               },
               "categories": {
-                "type": "string"
+                "type": "string",
+                "description": "Categories or types associated with the denormalized institution."
               },
               "encoded_key": {
-                "type": "string"
+                "type": "string",
+                "description": "Internal encoded key for the denormalized institution."
               },
               "id": {
-                "type": "string"
+                "type": "string",
+                "description": "Unique identifier for the denormalized institution."
               },
               "id_name": {
-                "type": "string"
+                "type": "string",
+                "description": "Identifier and name pair for the denormalized institution."
               },
               "id_name_default": {
-                "type": "string"
+                "type": "string",
+                "description": "Default identifier and name pair for the denormalized institution."
               },
               "institutions": {
                 "type": "object",
+                "description": "Nested object containing related institutions or sub-entities.",
                 "properties": {
                   "label": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Label or name of a related institution within the nested structure."
                   },
                   "natural_id": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Natural identifier of the related institution in its original system."
                   },
                   "relationType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Type of relationship between the organization and the related institution."
                   },
                   "structure": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Structural code or classification of the related institution."
                   }
-                },
-                "required": [
-                  "label",
-                  "natural_id",
-                  "relationType",
-                  "structure"
-                ]
+                }
               },
               "isFrench": {
-                "type": "boolean"
+                "type": "boolean",
+                "description": "Indicates if the related institution is based in France."
               },
               "is_main_parent": {
-                "type": "integer"
+                "type": "integer",
+                "description": "Flag marking the primary parent institution of the organization."
               },
               "kind": {
-                "type": "string"
+                "type": "string",
+                "description": "Categorizes the type of institution (e.g., university, research lab)."
               },
               "label": {
                 "type": "object",
+                "description": "Localized name of the related institution in multiple languages.",
                 "properties": {
                   "fr": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "French label of the related institution."
                   }
-                },
-                "required": [
-                  "fr"
-                ]
+                }
               },
               "mainAddress": {
                 "type": "object",
+                "description": "Primary address details of the related institution.",
                 "properties": {
                   "address": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Full address string of the related institution's main location."
                   },
                   "city": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "City of the organization's main address."
                   },
                   "country": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Country of the organization's main address."
                   },
                   "gps": {
                     "type": "object",
+                    "description": "Geographic coordinates of the organization's main address.",
                     "properties": {
                       "lat": {
-                        "type": "number"
+                        "type": "number",
+                        "description": "Latitude coordinate of the organization's main address."
                       },
                       "lon": {
-                        "type": "number"
+                        "type": "number",
+                        "description": "Longitude coordinate of the organization's main address."
                       }
-                    },
-                    "required": [
-                      "lat",
-                      "lon"
-                    ]
+                    }
                   },
                   "iso3": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "ISO 3166-1 alpha-3 country code for the main address."
                   },
                   "postcode": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Postal code of the organization's main address."
                   },
                   "region": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Administrative region (e.g., state, province) of the main address."
                   }
-                },
-                "required": [
-                  "address",
-                  "city",
-                  "country",
-                  "gps",
-                  "iso3",
-                  "postcode",
-                  "region"
-                ]
+                }
               },
               "main_category": {
-                "type": "string"
+                "type": "string",
+                "description": "Primary category classifying the organization's type or focus."
               },
               "status": {
-                "type": "string"
+                "type": "string",
+                "description": "Operational or legal status of the organization."
               },
               "typologie_1": {
-                "type": "string"
+                "type": "string",
+                "description": "Primary classification label for the organization's institutional type."
               },
               "typologie_2": {
-                "type": "string"
+                "type": "string",
+                "description": "Secondary classification label refining the organization's institutional type."
               }
-            },
-            "required": [
-              "acronym",
-              "categories",
-              "encoded_key",
-              "id",
-              "id_name",
-              "id_name_default",
-              "institutions",
-              "isFrench",
-              "is_main_parent",
-              "kind",
-              "label",
-              "mainAddress",
-              "main_category",
-              "status",
-              "typologie_1",
-              "typologie_2"
-            ]
+            }
           },
           "endDate": {
-            "type": "string"
+            "type": "string",
+            "description": "Official end date of the institution's affiliation or existence."
           },
           "label": {
             "type": "object",
             "description": "Label of the organization"
           },
           "natural_id": {
-            "type": "string"
+            "type": "string",
+            "description": "Persistent internal identifier for the institution within the source system."
           },
           "relationType": {
             "type": "object",
             "description": "Type of relation"
           },
           "rnsr_key": {
-            "type": "string"
+            "type": "string",
+            "description": "RNSR key uniquely identifying the institution in the French research system."
           },
           "startDate": {
-            "type": "string"
+            "type": "string",
+            "description": "Official start date of the institution's affiliation or existence."
           },
           "structure": {
             "type": "object",
@@ -1035,13 +970,6 @@
           }
         },
         "required": [
-          "denormalized",
-          "endDate",
-          "label",
-          "natural_id",
-          "relationType",
-          "rnsr_key",
-          "startDate",
           "structure"
         ]
       },
@@ -1050,70 +978,72 @@
     },
     "inventors": {
       "type": "object",
+      "description": "Container for inventor-related metadata associated with the organization.",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Full name of an inventor affiliated with the organization."
         }
-      },
-      "required": [
-        "name"
-      ]
+      }
     },
     "isFrench": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Flag indicating whether the organization is based in France."
     },
     "is_main_parent": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Numeric rank indicating the organization's primary parent relationship."
     },
     "keywords": {
       "type": "object",
+      "description": "Structured keywords describing the organization's research focus or activities.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default language keywords for the organization."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English-language keywords for the organization."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French-language keywords for the organization."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "kind": {
-      "type": "string"
+      "type": "string",
+      "description": "Categorizes the organization type (e.g., university, research lab, private R&D)."
     },
     "label": {
       "type": "object",
+      "description": "Structured name of the organization in multiple languages.",
       "properties": {
         "default": {
-          "type": "string"
+          "type": "string",
+          "description": "Default language name of the organization."
         },
         "en": {
-          "type": "string"
+          "type": "string",
+          "description": "English-language name of the organization."
         },
         "fr": {
-          "type": "string"
+          "type": "string",
+          "description": "French-language name of the organization."
         }
-      },
-      "required": [
-        "default",
-        "en",
-        "fr"
-      ]
+      }
     },
     "lastName": {
-      "type": "string"
+      "type": "string",
+      "description": "Family name or surname of a key contact or representative."
     },
     "leaders": {
       "items": {
         "properties": {
           "endDate": {
-            "type": "string"
+            "type": "string",
+            "description": "End date of the leader's term in the organization."
           },
           "firstName": {
             "type": "object",
@@ -1124,71 +1054,63 @@
             "description": "Last Name of the person"
           },
           "natural_id": {
-            "type": "string"
+            "type": "string",
+            "description": "Unique identifier for the leader in external systems."
           },
           "person": {
             "type": "object",
             "description": "Main PID of the person"
           },
           "rnsr_key": {
-            "type": "string"
+            "type": "string",
+            "description": "RNSR key linking the leader to their affiliated organization."
           },
           "role": {
             "type": "object",
             "description": "Role"
           },
           "startDate": {
-            "type": "string"
+            "type": "string",
+            "description": "Start date of the leader's term in the organization."
           }
-        },
-        "required": [
-          "endDate",
-          "firstName",
-          "lastName",
-          "natural_id",
-          "person",
-          "rnsr_key",
-          "role",
-          "startDate"
-        ]
+        }
       },
       "type": "array",
       "description": "Lists the known leaders (data from RNSR)"
     },
     "leaders_all": {
       "type": "object",
+      "description": "Comprehensive list of all leaders, past and present, with detailed attributes.",
       "properties": {
         "endDate": {
-          "type": "string"
+          "type": "string",
+          "description": "End date of the individual's leadership role in the organization."
         },
         "firstName": {
-          "type": "string"
+          "type": "string",
+          "description": "First name of the individual holding a leadership position."
         },
         "lastName": {
-          "type": "string"
+          "type": "string",
+          "description": "Last name of the individual holding a leadership position."
         },
         "person": {
-          "type": "string"
+          "type": "string",
+          "description": "Full name or identifier of the person in leadership records."
         },
         "rnsr_key": {
-          "type": "string"
+          "type": "string",
+          "description": "RNSR key linking the individual to their primary organization."
         },
         "role": {
-          "type": "string"
+          "type": "string",
+          "description": "Role held by an individual in the organization's leadership team."
         },
         "startDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Start date of the individual's tenure in the specified leadership role."
         }
-      },
-      "required": [
-        "endDate",
-        "firstName",
-        "lastName",
-        "person",
-        "rnsr_key",
-        "role",
-        "startDate"
-      ]
+      }
     },
     "level": {
       "type": "object",
@@ -1198,27 +1120,25 @@
       "items": {
         "properties": {
           "type": {
-            "type": "string"
+            "type": "string",
+            "description": "Type of relationship or link between this organization and another entity."
           },
           "url": {
             "type": "object",
             "description": "URL"
           },
           "value": {
-            "type": "string"
+            "type": "string",
+            "description": "Value or identifier representing the linked entity or resource."
           }
-        },
-        "required": [
-          "type",
-          "url",
-          "value"
-        ]
+        }
       },
       "type": "array",
       "description": "Lists the known links"
     },
     "main_category": {
-      "type": "string"
+      "type": "string",
+      "description": "Primary classification or category of the organization (e.g., university, lab)."
     },
     "nature": {
       "type": "object",
@@ -1226,1265 +1146,1179 @@
     },
     "panels": {
       "type": "object",
+      "description": "Collection of evaluation or assessment panels the organization participates in.",
       "properties": {
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "Code identifying the specific panel within the evaluation framework."
         },
         "end_date": {
-          "type": "string"
+          "type": "string",
+          "description": "End date of the organization's participation in the panel."
         },
         "start_date": {
-          "type": "string"
+          "type": "string",
+          "description": "Start date of the organization's participation in the panel."
         }
-      },
-      "required": [
-        "code",
-        "end_date",
-        "start_date"
-      ]
+      }
     },
     "parentOf": {
       "type": "object",
+      "description": "Child organizations or sub-units directly affiliated with this organization.",
       "properties": {
         "denormalized": {
           "type": "object",
+          "description": "Denormalized data of child organizations to optimize hierarchical queries.",
           "properties": {
             "acronym": {
               "type": "object",
+              "description": "Container for acronyms of the child organization in multiple languages.",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default acronym of the child organization if no language preference is specified."
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French acronym of the child organization when available."
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "categories": {
-              "type": "string"
+              "type": "string",
+              "description": "Textual categories or tags describing the child organization's focus areas."
             },
             "encoded_key": {
-              "type": "string"
+              "type": "string",
+              "description": "Internal encoded key for the child organization, used for system references."
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary persistent identifier of the child organization."
             },
             "id_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Human-readable name of the identifier type used for the child organization."
             },
             "id_name_default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default human-readable name of the identifier type if no language preference."
             },
             "institutions": {
               "type": "object",
+              "description": "Container for nested institutions under the child organization.",
               "properties": {
                 "label": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Human-readable name of the child institution"
                 },
                 "natural_id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Persistent identifier of the child institution"
                 },
                 "relationType": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of hierarchical relationship (e.g., 'parent', 'affiliate')"
                 },
                 "rnsr_key": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "RNSR key of the child institution, if available"
                 },
                 "startDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Start date of the parent-child institutional relationship"
                 },
                 "structure": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Internal classification of the child institution (e.g., 'university', 'lab')"
                 }
-              },
-              "required": [
-                "label",
-                "natural_id",
-                "relationType",
-                "rnsr_key",
-                "startDate",
-                "structure"
-              ]
+              }
             },
             "isFrench": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Flag indicating if the child institution is French"
             },
             "kind": {
-              "type": "string"
+              "type": "string",
+              "description": "Broad category of the parent relationship (e.g., 'academic', 'government')"
             },
             "label": {
               "type": "object",
+              "description": "Localized names of the parent relationship",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default label of a child organization, denormalized for quick access"
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French label of a child organization, denormalized for quick access"
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "mainAddress": {
               "type": "object",
+              "description": "Main address object of a child organization, denormalized for quick access",
               "properties": {
                 "address": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Full address text of a child organization's main location"
                 },
                 "address_detected": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Machine-detected address components from the full address text"
                 },
                 "city": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "City of a child organization's main address"
                 },
                 "postcode": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Postal code of a child organization's main address"
                 },
                 "region": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Region or administrative area of a child organization's main address"
                 }
-              },
-              "required": [
-                "address",
-                "address_detected",
-                "city",
-                "postcode",
-                "region"
-              ]
+              }
             },
             "parents": {
               "type": "object",
+              "description": "Hierarchical parent relationships of a child organization, denormalized for quick access",
               "properties": {
                 "endDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "End date of a child organization's parent relationship, if no longer active"
                 },
                 "natural_id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Natural identifier of the parent organization in this hierarchical relationship."
                 },
                 "relationType": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of relationship between the organization and its parent (e.g., 'administrative', 'scientific')."
                 },
                 "startDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Start date of the parent-child relationship."
                 },
                 "structure": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Name or label of the parent organization's structure."
                 }
-              },
-              "required": [
-                "endDate",
-                "natural_id",
-                "relationType",
-                "startDate",
-                "structure"
-              ]
+              }
             },
             "status": {
-              "type": "string"
+              "type": "string",
+              "description": "Current status of the parent-child relationship (e.g., 'active', 'inactive')."
             },
             "typologie_1": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary typology classification of the parent organization (e.g., 'university', 'research lab')."
             },
             "typologie_2": {
-              "type": "string"
+              "type": "string",
+              "description": "Secondary typology classification of the parent organization (e.g., 'public', 'private')."
             }
-          },
-          "required": [
-            "acronym",
-            "categories",
-            "encoded_key",
-            "id",
-            "id_name",
-            "id_name_default",
-            "institutions",
-            "isFrench",
-            "kind",
-            "label",
-            "mainAddress",
-            "parents",
-            "status",
-            "typologie_1",
-            "typologie_2"
-          ]
+          }
         },
         "endDate": {
-          "type": "string"
+          "type": "string",
+          "description": "End date of the parent-child relationship, if applicable."
         },
         "natural_id": {
-          "type": "string"
+          "type": "string",
+          "description": "Natural identifier of the child organization in this hierarchical relationship."
         },
         "relationType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of relationship between the organization and its child (e.g., 'administrative', 'scientific')."
         },
         "startDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Start date of the parent-child relationship between organizations"
         },
         "structure": {
-          "type": "string"
+          "type": "string",
+          "description": "Name or identifier of the child organization linked to this parent"
         }
-      },
-      "required": [
-        "denormalized",
-        "endDate",
-        "natural_id",
-        "relationType",
-        "startDate",
-        "structure"
-      ]
+      }
     },
     "parents": {
       "type": "object",
+      "description": "Hierarchical relationships where this organization is the child",
       "properties": {
         "denormalized": {
           "type": "object",
+          "description": "Pre-resolved parent organization details to avoid repeated lookups",
           "properties": {
             "acronym": {
               "type": "object",
+              "description": "Acronyms associated with the denormalized parent organization",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default acronym for the denormalized parent organization"
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French-language acronym for the denormalized parent organization"
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "categories": {
-              "type": "string"
+              "type": "string",
+              "description": "Classification categories of the denormalized parent organization"
             },
             "encoded_key": {
-              "type": "string"
+              "type": "string",
+              "description": "Internal encoded key for the denormalized parent organization"
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Persistent identifier of the denormalized parent organization"
             },
             "id_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Concatenated identifier and name of a parent organization for display purposes."
             },
             "id_name_default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default display name for the parent organization, combining ID and name."
             },
             "institutions": {
               "type": "object",
+              "description": "Collection of institutional affiliations linking to parent organizations.",
               "properties": {
                 "endDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Date when the parent institution affiliation ended."
                 },
                 "label": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Human-readable name of the parent institution in the affiliation."
                 },
                 "natural_id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Unique natural identifier for the parent institution in the affiliation."
                 },
                 "relationType": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of relationship between the organization and its parent institution."
                 },
                 "rnsr_key": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "RNSR key of the parent institution if available."
                 },
                 "startDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Date when the parent institution affiliation began."
                 },
                 "structure": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Structural type or category of the parent institution."
                 }
-              },
-              "required": [
-                "endDate",
-                "label",
-                "natural_id",
-                "relationType",
-                "rnsr_key",
-                "startDate",
-                "structure"
-              ]
+              }
             },
             "isFrench": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Indicates if the parent organization is based in France."
             },
             "kind": {
-              "type": "string"
+              "type": "string",
+              "description": "Categorizes the type of parent organization (e.g., university, CNRS unit)."
             },
             "label": {
               "type": "object",
+              "description": "Contains multilingual labels for the parent organization's name.",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default name of the parent organization, used when no language preference is specified."
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French name of the parent organization."
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "mainAddress": {
               "type": "object",
+              "description": "Primary address details of the parent organization.",
               "properties": {
                 "address": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Full formatted address of the parent organization."
                 },
                 "address_detected": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Machine-detected address components from the full address."
                 },
                 "city": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "City of the parent organization's main address."
                 },
                 "postcode": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Postal code of the parent organization's main address."
                 },
                 "region": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Region of the parent organization's primary address."
                 }
-              },
-              "required": [
-                "address",
-                "address_detected",
-                "city",
-                "postcode",
-                "region"
-              ]
+              }
             },
             "parents": {
               "type": "object",
+              "description": "Hierarchical ancestors of the parent organization.",
               "properties": {
                 "endDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Date when the parent-child relationship ended."
                 },
                 "natural_id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Unique identifier for the parent organization in its original system."
                 },
                 "relationType": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of relationship between the organization and its parent."
                 },
                 "startDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Date when the parent-child relationship began."
                 },
                 "structure": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Name of the parent organization in its original language."
                 }
-              },
-              "required": [
-                "endDate",
-                "natural_id",
-                "relationType",
-                "startDate",
-                "structure"
-              ]
+              }
             },
             "status": {
-              "type": "string"
+              "type": "string",
+              "description": "Current operational status of the parent organization."
             },
             "typologie_1": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary classification of the parent organization's type."
             },
             "typologie_2": {
-              "type": "string"
+              "type": "string",
+              "description": "Secondary classification of the parent organization's type."
             }
-          },
-          "required": [
-            "acronym",
-            "categories",
-            "encoded_key",
-            "id",
-            "id_name",
-            "id_name_default",
-            "institutions",
-            "isFrench",
-            "kind",
-            "label",
-            "mainAddress",
-            "parents",
-            "status",
-            "typologie_1",
-            "typologie_2"
-          ]
+          }
         },
         "endDate": {
-          "type": "string"
+          "type": "string",
+          "description": "End date of the parent organization relationship, if applicable."
         },
         "natural_id": {
-          "type": "string"
+          "type": "string",
+          "description": "Natural identifier of the parent organization in its original system."
         },
         "relationType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of relationship between the organization and its parent (e.g., 'administrative', 'hierarchical')."
         },
         "startDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Start date of the parent organization relationship."
         },
         "structure": {
-          "type": "string"
+          "type": "string",
+          "description": "Name or identifier of the parent organization."
         }
-      },
-      "required": [
-        "denormalized",
-        "endDate",
-        "natural_id",
-        "relationType",
-        "startDate",
-        "structure"
-      ]
+      }
     },
     "participant_encoded_key": {
-      "type": "string"
+      "type": "string",
+      "description": "Unique encoded key for a participant in a project or collaboration."
     },
     "participants": {
       "type": "object",
+      "description": "Details about organizations or entities participating in projects with this organization.",
       "properties": {
         "funding": {
-          "type": "number"
+          "type": "number",
+          "description": "Amount of funding provided by the participant for a project or collaboration."
         },
         "label": {
           "type": "object",
+          "description": "Localized labels or names for the participant.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default name or label of the participant, used when no localization is specified."
             }
-          },
-          "required": [
-            "default"
-          ]
+          }
         }
-      },
-      "required": [
-        "funding",
-        "label"
-      ]
+      }
     },
     "patents": {
       "type": "object",
+      "description": "Container for all patents associated with the organization.",
       "properties": {
         "id": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Unique numeric identifier for a patent."
         },
         "title": {
           "type": "object",
+          "description": "Multilingual titles of the patent.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default title of the patent if no language preference is specified."
             },
             "en": {
-              "type": "string"
+              "type": "string",
+              "description": "English title of the patent."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French title of the patent."
             }
-          },
-          "required": [
-            "default",
-            "en",
-            "fr"
-          ]
+          }
         }
-      },
-      "required": [
-        "id",
-        "title"
-      ]
+      }
     },
     "patentsCount": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Total count of patents held by the organization."
     },
     "predecessors": {
       "type": "object",
+      "description": "Details about organizations that preceded the current one.",
       "properties": {
         "denormalized": {
           "type": "object",
+          "description": "Precomputed, flattened data of predecessors for easier querying.",
           "properties": {
             "acronym": {
               "type": "object",
+              "description": "Acronyms of predecessor organizations in multiple languages.",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default acronym of the predecessor organization."
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French acronym of the predecessor organization."
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "categories": {
-              "type": "string"
+              "type": "string",
+              "description": "Categories associated with the predecessor organization."
             },
             "encoded_key": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique encoded key for the predecessor organization."
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary identifier of the predecessor organization."
             },
             "id_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Identifier and name pair for the predecessor organization."
             },
             "id_name_default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default identifier and name pair for the predecessor organization."
             },
             "institutions": {
               "type": "object",
+              "description": "Institutions linked to the predecessor organization.",
               "properties": {
                 "label": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Label or name of the predecessor institution."
                 },
                 "natural_id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Natural identifier of the predecessor institution in its original system."
                 },
                 "relationType": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of relationship between the organization and its predecessor."
                 },
                 "rnsr_key": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "RNSR key of the predecessor institution if it was a French research unit."
                 },
                 "startDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Start date when the predecessor institution became active or relevant."
                 },
                 "structure": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Structural classification of the predecessor institution (e.g., 'university', 'lab')."
                 }
-              },
-              "required": [
-                "label",
-                "natural_id",
-                "relationType",
-                "rnsr_key",
-                "startDate",
-                "structure"
-              ]
+              }
             },
             "isFrench": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Indicates if the predecessor institution was French."
             },
             "kind": {
-              "type": "string"
+              "type": "string",
+              "description": "Categorizes the predecessor entity type (e.g., 'institution', 'department')."
             },
             "label": {
               "type": "object",
+              "description": "Localized names of the predecessor institution.",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default name of the predecessor institution, typically in English."
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French name of the predecessor institution if available."
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "mainAddress": {
               "type": "object",
+              "description": "Denormalized main address object of the predecessor organization.",
               "properties": {
                 "address": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Full postal address of the predecessor's main location."
                 },
                 "address_detected": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Machine-detected version of the predecessor's main address."
                 },
                 "city": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "City of the predecessor's main address."
                 },
                 "postcode": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Postal code of the predecessor's main address."
                 },
                 "region": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Region or state of the predecessor's main address."
                 }
-              },
-              "required": [
-                "address",
-                "address_detected",
-                "city",
-                "postcode",
-                "region"
-              ]
+              }
             },
             "parents": {
               "type": "object",
+              "description": "Denormalized parent organizations of the predecessor.",
               "properties": {
                 "endDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "End date of the predecessor's relationship with its parent."
                 },
                 "natural_id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Persistent identifier of the predecessor's parent organization."
                 },
                 "relationType": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of relationship between predecessor and its parent."
                 },
                 "startDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Start date of the parent organization's relationship with the predecessor"
                 },
                 "structure": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Name or identifier of the parent organization linked to the predecessor"
                 }
-              },
-              "required": [
-                "endDate",
-                "natural_id",
-                "relationType",
-                "startDate",
-                "structure"
-              ]
+              }
             },
             "status": {
-              "type": "string"
+              "type": "string",
+              "description": "Current or historical status of the predecessor organization"
             },
             "typologie_1": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary classification type of the predecessor organization"
             },
             "typologie_2": {
-              "type": "string"
+              "type": "string",
+              "description": "Secondary classification type of the predecessor organization"
             }
-          },
-          "required": [
-            "acronym",
-            "categories",
-            "encoded_key",
-            "id",
-            "id_name",
-            "id_name_default",
-            "institutions",
-            "isFrench",
-            "kind",
-            "label",
-            "mainAddress",
-            "parents",
-            "status",
-            "typologie_1",
-            "typologie_2"
-          ]
+          }
         },
         "eventDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Date when the predecessor event (e.g., merger, split) occurred"
         },
         "eventType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of event affecting the predecessor (e.g., merger, closure)"
         },
         "structure": {
-          "type": "string"
+          "type": "string",
+          "description": "Name or identifier of the predecessor organization"
         }
-      },
-      "required": [
-        "denormalized",
-        "eventDate",
-        "eventType",
-        "structure"
-      ]
+      }
     },
     "projects": {
       "type": "object",
+      "description": "Container for projects associated with the organization",
       "properties": {
         "acronym": {
           "type": "object",
+          "description": "Acronyms of projects linked to the organization",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default acronym of the project, used when no language preference is specified."
             }
-          },
-          "required": [
-            "default"
-          ]
+          }
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier for the project within the organization."
         },
         "label": {
           "type": "object",
+          "description": "Localized labels for the project name, keyed by language code.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default project name, used when no language preference is specified."
             },
             "en": {
-              "type": "string"
+              "type": "string",
+              "description": "English version of the project name."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French version of the project name."
             }
-          },
-          "required": [
-            "default",
-            "en",
-            "fr"
-          ]
+          }
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Categorization of the project (e.g., research, development, collaboration)."
         },
         "year": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Year the project was initiated or officially recognized."
         }
-      },
-      "required": [
-        "acronym",
-        "id",
-        "label",
-        "type",
-        "year"
-      ]
+      }
     },
     "projectsCount": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Total number of active and completed projects associated with the organization."
     },
     "publicationsCount": {
-      "type": "integer"
-    },
-    "reasons_scanr": {
-      "type": "string"
+      "type": "integer",
+      "description": "Total number of publications produced by the organization."
     },
     "relationOf": {
       "type": "object",
+      "description": "Hierarchical relationships between this organization and others (e.g., parent/child).",
       "properties": {
         "denormalized": {
           "type": "object",
+          "description": "Cached, flattened view of related organizations for faster queries.",
           "properties": {
             "acronym": {
               "type": "object",
+              "description": "Acronyms of the related organization in multiple languages.",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default acronym of the related organization if no language preference is set."
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French acronym of the related organization."
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "categories": {
-              "type": "string"
+              "type": "string",
+              "description": "Comma-separated list of high-level categories describing the related organization."
             },
             "encoded_key": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique internal identifier for the denormalized related organization record."
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary identifier of the related organization (e.g., RNSR, SIREN)."
             },
             "id_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Human-readable name of the identifier type (e.g., 'RNSR')."
             },
             "id_name_default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default name of the identifier type if no language preference is set."
             },
             "institutions": {
               "type": "object",
+              "description": "Denormalized list of institutions related to this organization.",
               "properties": {
                 "endDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "End date of the relationship between the organization and this institution."
                 },
                 "label": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Human-readable name of the related institution."
                 },
                 "natural_id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Unique identifier for the related institution in its original system."
                 },
                 "relationType": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of relationship between the organization and this institution (e.g., parent, child)."
                 },
                 "rnsr_key": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "RNSR identifier for the related institution, if applicable."
                 },
                 "startDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Start date of the relationship between the organization and this institution."
                 },
                 "structure": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Structural classification of the related institution (e.g., faculty, department)."
                 }
-              },
-              "required": [
-                "endDate",
-                "label",
-                "natural_id",
-                "relationType",
-                "rnsr_key",
-                "startDate",
-                "structure"
-              ]
+              }
             },
             "isFrench": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Indicates whether the related organization is French."
             },
             "kind": {
-              "type": "string"
+              "type": "string",
+              "description": "Categorizes the type of relationship (e.g., academic, administrative)."
             },
             "label": {
               "type": "object",
+              "description": "Denormalized labels for related organizations, keyed by language code.",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default label for the related organization when no language preference is specified."
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French label for the related organization."
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "mainAddress": {
               "type": "object",
+              "description": "Denormalized main address details of the related organization.",
               "properties": {
                 "address": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Full address text of the related organization's main location."
                 },
                 "address_detected": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Machine-detected address components from the full address text."
                 },
                 "city": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "City of the related organization's main address."
                 },
                 "postcode": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Postal code of the related organization's main address."
                 },
                 "region": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Region or administrative area of the related organization's main address."
                 }
-              },
-              "required": [
-                "address",
-                "address_detected",
-                "city",
-                "postcode",
-                "region"
-              ]
+              }
             },
             "parents": {
               "type": "object",
+              "description": "Denormalized parent organizations of the related entity.",
               "properties": {
                 "endDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "End date of the parent organization relationship, if applicable."
                 },
                 "natural_id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Persistent identifier of the parent organization in the relationship."
                 },
                 "relationType": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of relationship between the organization and its parent (e.g., 'subsidiary')."
                 },
                 "startDate": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Start date of the parent organization relationship, if applicable."
                 },
                 "structure": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Name or identifier of the parent organization in the relationship."
                 }
-              },
-              "required": [
-                "endDate",
-                "natural_id",
-                "relationType",
-                "startDate",
-                "structure"
-              ]
+              }
             },
             "status": {
-              "type": "string"
+              "type": "string",
+              "description": "Current operational status of the organization (e.g., 'active', 'closed')."
             },
             "typologie_1": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary classification category for the organization (e.g., 'public', 'private')."
             },
             "typologie_2": {
-              "type": "string"
+              "type": "string",
+              "description": "Secondary classification category for the organization (e.g., 'research lab', 'university')."
             }
-          },
-          "required": [
-            "acronym",
-            "categories",
-            "encoded_key",
-            "id",
-            "id_name",
-            "id_name_default",
-            "institutions",
-            "isFrench",
-            "kind",
-            "label",
-            "mainAddress",
-            "parents",
-            "status",
-            "typologie_1",
-            "typologie_2"
-          ]
+          }
         },
         "endDate": {
-          "type": "string"
+          "type": "string",
+          "description": "End date of the organizational relationship, if terminated."
         },
         "natural_id": {
-          "type": "string"
+          "type": "string",
+          "description": "Persistent identifier for the related organization in the relationship."
         },
         "startDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Start date of the relationship between organizations."
         },
         "structure": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the related organization or structure."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of relationship (e.g., parent, child, collaboration)."
         }
-      },
-      "required": [
-        "denormalized",
-        "endDate",
-        "natural_id",
-        "startDate",
-        "structure",
-        "type"
-      ]
+      }
     },
     "relations": {
       "type": "object",
+      "description": "Container for all relationships this organization holds.",
       "properties": {
         "denormalized": {
           "type": "object",
+          "description": "Pre-computed snapshot of key fields from related organizations.",
           "properties": {
             "acronym": {
               "type": "object",
+              "description": "Acronyms associated with the related organization.",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default or primary acronym of the related organization."
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French-language acronym of the related organization."
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "categories": {
-              "type": "string"
+              "type": "string",
+              "description": "High-level categories assigned to the related organization."
             },
             "encoded_key": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique identifier for the denormalized relationship record."
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Denormalized identifier of a related organization, used for quick lookups."
             },
             "id_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Human-readable name associated with the denormalized relation identifier."
             },
             "id_name_default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default name for the denormalized relation identifier when no specific name exists."
             },
             "institutions": {
               "type": "object",
+              "description": "Container for institutional relationships with denormalized details.",
               "properties": {
                 "label": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Display label for the related institution in this denormalized relation."
                 },
                 "natural_id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Persistent identifier (e.g., RNSR, SIREN) for the related institution."
                 },
                 "relationType": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Type of relationship (e.g., 'parent', 'partner', 'affiliate') between organizations."
                 },
                 "structure": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Structural classification (e.g., 'university', 'lab') of the related institution."
                 }
-              },
-              "required": [
-                "label",
-                "natural_id",
-                "relationType",
-                "structure"
-              ]
+              }
             },
             "isFrench": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Flag indicating if the related organization is based in France."
             },
             "is_main_parent": {
-              "type": "integer"
+              "type": "integer",
+              "description": "Numeric flag (1/0) marking the primary parent organization in hierarchies."
             },
             "kind": {
-              "type": "string"
+              "type": "string",
+              "description": "Type of relationship between organizations (e.g., parent, partner)."
             },
             "label": {
               "type": "object",
+              "description": "Human-readable labels for the relationship, keyed by language code.",
               "properties": {
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French label describing the relationship between organizations."
                 }
-              },
-              "required": [
-                "fr"
-              ]
+              }
             },
             "mainAddress": {
               "type": "object",
+              "description": "Primary address details of the related organization.",
               "properties": {
                 "address": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Full street address of the related organization."
                 },
                 "city": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "City where the related organization is located."
                 },
                 "country": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Country where the related organization is located."
                 },
                 "gps": {
                   "type": "object",
+                  "description": "Geographic coordinates of the related organization's address.",
                   "properties": {
                     "lat": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Latitude coordinate of the related organization's address."
                     },
                     "lon": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Longitude coordinate of the related organization's address."
                     }
-                  },
-                  "required": [
-                    "lat",
-                    "lon"
-                  ]
+                  }
                 },
                 "iso3": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "ISO 3166-1 alpha-3 country code of the organization's main address."
                 },
                 "postcode": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Postal code of the organization's main address."
                 },
                 "region": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Administrative region (e.g., state, province) of the main address."
                 }
-              },
-              "required": [
-                "address",
-                "city",
-                "country",
-                "gps",
-                "iso3",
-                "postcode",
-                "region"
-              ]
+              }
             },
             "main_category": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary category classifying the organization's research focus."
             },
             "status": {
-              "type": "string"
+              "type": "string",
+              "description": "Current operational status of the organization (e.g., active, closed)."
             },
             "typologie_1": {
-              "type": "string"
+              "type": "string",
+              "description": "Top-level typology (e.g., university, research institute) of the organization."
             },
             "typologie_2": {
-              "type": "string"
+              "type": "string",
+              "description": "Secondary typology refining the organization's classification."
             }
-          },
-          "required": [
-            "acronym",
-            "categories",
-            "encoded_key",
-            "id",
-            "id_name",
-            "id_name_default",
-            "institutions",
-            "isFrench",
-            "is_main_parent",
-            "kind",
-            "label",
-            "mainAddress",
-            "main_category",
-            "status",
-            "typologie_1",
-            "typologie_2"
-          ]
+          }
         },
         "endDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Date when the organizational relationship ended."
         },
         "startDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Date when the organizational relationship began."
         },
         "structure": {
-          "type": "string"
+          "type": "string",
+          "description": "Name or identifier of the related organizational structure."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of relationship between this organization and another entity."
         }
-      },
-      "required": [
-        "denormalized",
-        "endDate",
-        "startDate",
-        "structure",
-        "type"
-      ]
+      }
     },
     "rnsr_domains": {
-      "type": "string"
+      "type": "string",
+      "description": "Scientific domains assigned to the organization in the RNSR registry."
     },
     "rnsr_themes": {
-      "type": "string"
+      "type": "string",
+      "description": "Thematic research areas assigned to the organization in the RNSR registry."
     },
     "ror_infos": {
       "type": "object",
+      "description": "Structured ROR (Research Organization Registry) metadata for the organization.",
       "properties": {
         "address": {
           "type": "object",
+          "description": "Physical address details from ROR.",
           "properties": {
             "city": {
-              "type": "string"
+              "type": "string",
+              "description": "City name from the ROR address record."
             },
             "country": {
-              "type": "string"
+              "type": "string",
+              "description": "Country name from the ROR address record."
             },
             "gps": {
               "type": "object",
+              "description": "Geographic coordinates for the ROR address.",
               "properties": {
                 "lat": {
-                  "type": "number"
+                  "type": "number",
+                  "description": "Latitude coordinate of the ROR address location."
                 },
                 "lon": {
-                  "type": "number"
+                  "type": "number",
+                  "description": "Longitude coordinate of the ROR address location."
                 }
-              },
-              "required": [
-                "lat",
-                "lon"
-              ]
+              }
             },
             "iso2": {
-              "type": "string"
+              "type": "string",
+              "description": "ISO 3166-1 alpha-2 country code from ROR."
             },
             "main": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Indicates if this is the primary address in ROR."
             }
-          },
-          "required": [
-            "city",
-            "country",
-            "gps",
-            "iso2",
-            "main"
-          ]
+          }
         },
         "creationYear": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Year the organization was established according to ROR data."
         },
         "externalIds": {
           "type": "object",
+          "description": "External identifiers associated with the ROR record.",
           "properties": {
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Identifier value for the external ID in the ROR record."
             },
             "type": {
-              "type": "string"
+              "type": "string",
+              "description": "Type of external identifier (e.g., GRID, ISNI)."
             }
-          },
-          "required": [
-            "id",
-            "type"
-          ]
+          }
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique ROR identifier for the organization."
         },
         "isFrench": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates if the organization is based in France."
         },
         "kind": {
-          "type": "string"
+          "type": "string",
+          "description": "Classification of the organization (e.g., education, healthcare)."
         },
         "label": {
           "type": "object",
+          "description": "Localized name(s) of the organization in the ROR record.",
           "properties": {
             "default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default name of the organization if no language preference is specified."
             },
             "en": {
-              "type": "string"
+              "type": "string",
+              "description": "English name of the organization."
             },
             "fr": {
-              "type": "string"
+              "type": "string",
+              "description": "French name of the organization."
             }
-          },
-          "required": [
-            "default",
-            "en",
-            "fr"
-          ]
+          }
         },
         "links": {
           "type": "object",
+          "description": "Collection of related links for the organization from ROR data.",
           "properties": {
             "type": {
-              "type": "string"
+              "type": "string",
+              "description": "Type of the link (e.g., website, social media, parent organization)."
             },
             "url": {
-              "type": "string"
+              "type": "string",
+              "description": "URL pointing to the resource described by the link."
             },
             "value": {
-              "type": "string"
+              "type": "string",
+              "description": "Human-readable label or description for the link, if available."
             }
-          },
-          "required": [
-            "type",
-            "url",
-            "value"
-          ]
+          }
         },
         "startDate": {
-          "type": "string"
+          "type": "string",
+          "description": "Date when the organization's ROR record became active or was established."
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "description": "Current operational status of the organization in ROR (e.g., active, inactive)."
         }
-      },
-      "required": [
-        "address",
-        "creationYear",
-        "externalIds",
-        "id",
-        "isFrench",
-        "kind",
-        "label",
-        "links",
-        "startDate",
-        "status"
-      ]
+      }
     },
     "sites": {
       "type": "object",
+      "description": "Collection of physical or virtual locations associated with the organization.",
       "properties": {
         "end_date": {
-          "type": "string"
+          "type": "string",
+          "description": "Date when the site ceased to be active or associated with the organization."
         },
         "end_site": {
-          "type": "string"
+          "type": "string",
+          "description": "Identifier of the site that replaced or succeeded this site."
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable name or label for the site."
         },
         "site_id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier for the site within the organization's context."
         },
         "site_type": {
-          "type": "string"
+          "type": "string",
+          "description": "Categorization of the site (e.g., 'headquarters', 'laboratory', 'campus')."
         },
         "start_date": {
-          "type": "string"
+          "type": "string",
+          "description": "Date when the site became active or associated with the organization."
         }
-      },
-      "required": [
-        "end_date",
-        "end_site",
-        "label",
-        "site_id",
-        "site_type",
-        "start_date"
-      ]
+      }
     },
     "startDate": {
       "type": "object",
@@ -2492,297 +2326,275 @@
     },
     "startup_linkOf": {
       "type": "object",
+      "description": "Links to organizations that spawned this startup, with denormalized details for quick access.",
       "properties": {
         "denormalized": {
           "type": "object",
+          "description": "Denormalized snapshot of the parent organization's key fields.",
           "properties": {
             "acronym": {
               "type": "object",
+              "description": "Acronyms of the parent organization in multiple languages.",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default acronym of the parent organization."
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French acronym of the parent organization."
                 }
-              },
-              "required": [
-                "default",
-                "fr"
-              ]
+              }
             },
             "categories": {
-              "type": "string"
+              "type": "string",
+              "description": "Categories or tags associated with the parent organization."
             },
             "encoded_key": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique encoded key of the parent organization in its source system."
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Identifier of the parent organization in its source system."
             },
             "id_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Name of the identifier type used for the parent organization."
             },
             "id_name_default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default name of the identifier type for the parent organization."
             },
             "isFrench": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Indicates if the linked startup is French"
             },
             "is_main_parent": {
-              "type": "integer"
+              "type": "integer",
+              "description": "Rank of the parent organization in the startup's hierarchy"
             },
             "kind": {
-              "type": "string"
+              "type": "string",
+              "description": "Categorizes the type of linked startup (e.g., incubator, spin-off)"
             },
             "label": {
               "type": "object",
+              "description": "Multilingual labels for the linked startup",
               "properties": {
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French name of the linked startup"
                 }
-              },
-              "required": [
-                "fr"
-              ]
+              }
             },
             "mainAddress": {
               "type": "object",
+              "description": "Primary physical address details of the linked startup",
               "properties": {
                 "address": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Street address of the linked startup's main location"
                 },
                 "city": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "City of the linked startup's main address"
                 },
                 "country": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Country of the linked startup's main address"
                 },
                 "gps": {
                   "type": "object",
+                  "description": "Geographic coordinates of the organization's main address.",
                   "properties": {
                     "lat": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Latitude component of the main address GPS coordinates."
                     },
                     "lon": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Longitude component of the main address GPS coordinates."
                     }
-                  },
-                  "required": [
-                    "lat",
-                    "lon"
-                  ]
+                  }
                 },
                 "iso3": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "ISO 3166-1 alpha-3 country code for the organization's main address."
                 },
                 "postcode": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Postal code of the organization's main address."
                 },
                 "region": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Administrative region (e.g., state, province) of the main address."
                 }
-              },
-              "required": [
-                "address",
-                "city",
-                "country",
-                "gps",
-                "iso3",
-                "postcode",
-                "region"
-              ]
+              }
             },
             "main_category": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary category classification of the linked startup organization."
             },
             "status": {
-              "type": "string"
+              "type": "string",
+              "description": "Operational or legal status of the linked startup organization."
             },
             "typologie_1": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary typology classification for the linked startup organization."
             },
             "typologie_2": {
-              "type": "string"
+              "type": "string",
+              "description": "Secondary typology classification for the linked startup organization."
             }
-          },
-          "required": [
-            "acronym",
-            "categories",
-            "encoded_key",
-            "id",
-            "id_name",
-            "id_name_default",
-            "isFrench",
-            "is_main_parent",
-            "kind",
-            "label",
-            "mainAddress",
-            "main_category",
-            "status",
-            "typologie_1",
-            "typologie_2"
-          ]
+          }
         },
         "natural_id": {
-          "type": "string"
+          "type": "string",
+          "description": "Natural identifier of the linked parent organization in the startup context."
         },
         "structure": {
-          "type": "string"
+          "type": "string",
+          "description": "Name or label of the parent organization linked to the startup."
         }
-      },
-      "required": [
-        "denormalized",
-        "natural_id",
-        "structure"
-      ]
+      }
     },
     "startup_links": {
       "type": "object",
+      "description": "Aggregates all startup-related links and denormalized metadata for this organization.",
       "properties": {
         "denormalized": {
           "type": "object",
+          "description": "Pre-computed, flattened representation of linked startup data for faster queries.",
           "properties": {
             "acronym": {
               "type": "object",
+              "description": "Container for multilingual acronyms of the linked startup.",
               "properties": {
                 "default": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Default acronym of the linked startup if no language-specific version exists."
                 },
                 "en": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "English acronym of the linked startup, denormalized for direct retrieval."
                 },
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French-language acronym of the linked startup."
                 }
-              },
-              "required": [
-                "default",
-                "en",
-                "fr"
-              ]
+              }
             },
             "categories": {
-              "type": "string"
+              "type": "string",
+              "description": "Comma-separated list of categories/tags describing the linked startup's domain."
             },
             "encoded_key": {
-              "type": "string"
+              "type": "string",
+              "description": "Internal encoded key for the linked startup, used for system references."
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Unique identifier of the linked startup within the denormalized structure."
             },
             "id_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Combined identifier and name of linked startups for display purposes."
             },
             "id_name_default": {
-              "type": "string"
+              "type": "string",
+              "description": "Default display name for linked startups when no specific name exists."
             },
             "isFrench": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Indicates if the linked startup is French (true) or foreign (false)."
             },
             "is_main_parent": {
-              "type": "integer"
+              "type": "integer",
+              "description": "Numeric flag (1) marking the primary parent organization of the startup."
             },
             "kind": {
-              "type": "string"
+              "type": "string",
+              "description": "Categorizes the type of relationship between the organization and the startup."
             },
             "label": {
               "type": "object",
+              "description": "Multilingual display name of the linked startup or organization.",
               "properties": {
                 "fr": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "French localized name of the linked startup or organization."
                 }
-              },
-              "required": [
-                "fr"
-              ]
+              }
             },
             "mainAddress": {
               "type": "object",
+              "description": "Primary physical address details of the linked startup or organization.",
               "properties": {
                 "address": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Full formatted address string of the linked startup or organization."
                 },
                 "city": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "City name extracted from the main address of the linked entity."
                 },
                 "country": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Country name of the organization's main address."
                 },
                 "gps": {
                   "type": "object",
+                  "description": "Geographic coordinates of the organization's main address.",
                   "properties": {
                     "lat": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Latitude coordinate of the organization's main address."
                     },
                     "lon": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Longitude coordinate of the organization's main address."
                     }
-                  },
-                  "required": [
-                    "lat",
-                    "lon"
-                  ]
+                  }
                 },
                 "iso3": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "ISO 3166-1 alpha-3 country code for the organization's main address."
                 },
                 "postcode": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Postal code of the organization's main address."
                 },
                 "region": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Administrative region (e.g., state, province) of the organization's main address."
                 }
-              },
-              "required": [
-                "address",
-                "city",
-                "country",
-                "gps",
-                "iso3",
-                "postcode",
-                "region"
-              ]
+              }
             },
             "main_category": {
-              "type": "string"
+              "type": "string",
+              "description": "Primary category classification of the linked startup entity."
             },
             "status": {
-              "type": "string"
+              "type": "string",
+              "description": "Operational status of the linked startup entity (e.g., active, closed)."
             },
             "typologie_1": {
-              "type": "string"
+              "type": "string",
+              "description": "Top-level typology classification of the linked startup entity."
             },
             "typologie_2": {
-              "type": "string"
+              "type": "string",
+              "description": "Second-level typology label for startups linked to the organization, denormalized for search."
             }
-          },
-          "required": [
-            "acronym",
-            "categories",
-            "encoded_key",
-            "id",
-            "id_name",
-            "id_name_default",
-            "isFrench",
-            "is_main_parent",
-            "kind",
-            "label",
-            "mainAddress",
-            "main_category",
-            "status",
-            "typologie_1",
-            "typologie_2"
-          ]
+          }
         },
         "structure": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the parent structure associated with a linked startup."
         }
-      },
-      "required": [
-        "denormalized",
-        "structure"
-      ]
+      }
     },
     "status": {
       "type": "object",
@@ -2793,17 +2605,23 @@
       ]
     },
     "title_abs_text": {
-      "type": "string"
+      "type": "string",
+      "description": "Full-text abstract or description of the organization's research focus."
     },
     "typologie_1": {
-      "type": "string"
+      "type": "string",
+      "description": "Primary typology label categorizing the organization's type (e.g., 'University')."
     },
     "typologie_2": {
-      "type": "string"
+      "type": "string",
+      "description": "Secondary typology label refining the organization's category (e.g., 'Public Research')."
     },
     "web_content": {
       "type": "object",
       "description": "Crawl of the web pages"
     }
-  }
+  },
+  "required": [
+    "id"
+  ]
 }
