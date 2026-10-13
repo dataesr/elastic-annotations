@@ -28,6 +28,8 @@ TYPE_MAP = {
     "nested": "array",
     "ip": "string",
     "geo_point": "object",
+    "string": "string",
+    "number": "number",
 }
 
 def _build_nested_properties(properties: dict, keys: list[str], infos: dict, parent_schema: dict) -> dict:
@@ -78,9 +80,15 @@ def _build_nested_properties(properties: dict, keys: list[str], infos: dict, par
 def infos_to_schema(info: dict) -> dict:
     type = info.get("type", "object")
     description = info.get("description", "")
-    json_type = TYPE_MAP.get(type, "object")
+    if isinstance(type, str) and type.endswith("-array"):
+        item_type = type.removesuffix("-array")
+        if item_type not in TYPE_MAP:
+            raise ValueError(f"Unsupported array item type in annotation: {item_type}")
+        schema = {"type": "array", "items": {"type": TYPE_MAP[item_type]}}
+    else:
+        json_type = TYPE_MAP.get(type, "object")
+        schema = {"type": json_type}
 
-    schema = {"type": json_type}
     if description:
         schema["description"] = description
     if info.get("enum"):

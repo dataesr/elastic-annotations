@@ -106,11 +106,11 @@
       }
     },
     "budgetFinanced": {
-      "type": "object",
+      "type": "number",
       "description": "The financed budget of the project."
     },
     "budgetTotal": {
-      "type": "object",
+      "type": "number",
       "description": "The total budget of the project."
     },
     "budget_financed": {
@@ -126,7 +126,7 @@
       "description": "Details of the call associated with the project.",
       "properties": {
         "id": {
-          "type": "object",
+          "type": "string",
           "description": "The identifier of the call."
         }
       },
@@ -197,7 +197,9 @@
       }
     },
     "domains": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "label": {
             "type": "object",
@@ -214,11 +216,10 @@
           "label"
         ]
       },
-      "type": "array",
       "description": "List of research domains or disciplines the project covers."
     },
     "endDate": {
-      "type": "object",
+      "type": "string",
       "description": "The end date of the project."
     },
     "firstName": {
@@ -230,7 +231,7 @@
       "description": "Full name of a person associated with the project (e.g., coordinator)."
     },
     "id": {
-      "type": "object",
+      "type": "string",
       "description": "The unique identifier of the project."
     },
     "institutions": {
@@ -713,6 +714,37 @@
         }
       }
     },
+    "publications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "authors": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Authors credited in a specific publication."
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "journalIssns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "The ISSNs of the journal."
+              }
+            }
+          }
+        },
+        "required": [
+          "authors"
+        ]
+      },
+      "description": "List of publications resulting from the project."
+    },
     "publicationsCount": {
       "type": "integer",
       "description": "Total count of publications linked to the project."
@@ -722,7 +754,7 @@
       "description": "The date when the project agreement was formally signed."
     },
     "startDate": {
-      "type": "object",
+      "type": "string",
       "description": "The start date of the project."
     },
     "title_abs_text": {
@@ -730,11 +762,11 @@
       "description": "Abstract or summary of the project in plain text for full-text search."
     },
     "type": {
-      "type": "object",
+      "type": "string",
       "description": "The type of the project."
     },
     "url": {
-      "type": "object",
+      "type": "string",
       "description": "The URL of the project."
     },
     "web_content": {
@@ -742,7 +774,7 @@
       "description": "Public-facing web content or description of the project."
     },
     "year": {
-      "type": "object",
+      "type": "number",
       "description": "The year of the project."
     }
   },
@@ -755,6 +787,7 @@
     "keywords",
     "label",
     "participants",
+    "publications",
     "type",
     "year"
   ]

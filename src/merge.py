@@ -13,6 +13,22 @@ from src.elastic import es_get_flat_mapping
 from src.utils import load_annotations, save_annotations, load_schema, match_patterns, get_config
 
 
+def _schema_field_type(field_def: dict) -> str | None:
+    """Return an annotation type, preserving an array's item type."""
+    field_type = field_def.get("type")
+    if field_type != "array":
+        return field_type
+
+    items = field_def.get("items", {})
+    if not isinstance(items, dict):
+        return "array"
+
+    item_type = items.get("type")
+    if item_type is None and "properties" in items:
+        item_type = "object"
+    return f"{item_type}-array" if item_type else "array"
+
+
 def flatten_json_schema(schema: dict, prefix: str = "") -> dict:
     """
     Walk a JSON Schema and return {dotted_path: {"description": ..., "enum": ...}}.
@@ -26,7 +42,7 @@ def flatten_json_schema(schema: dict, prefix: str = "") -> dict:
         path = f"{prefix}.{field_name}" if prefix else field_name
         entry = {}
         if "type" in field_def:
-            entry["type"] = field_def["type"]
+            entry["type"] = _schema_field_type(field_def)
         if "description" in field_def:
             entry["description"] = field_def["description"]
         if "enum" in field_def:
@@ -54,12 +70,18 @@ def build_annotations(index: str, es_fields: dict, schema_fields: dict, existing
     """
     Merge all three sources on ES fields.
     Priority:
-      1. existing annotations (never overwrite approved/rejected)
-      2. JSON schema descriptions
+      1. existing annotation metadata (except array types, which come from the JSON schema)
+      2. JSON schema types and descriptions
       3. blank → status: draft (needs enrichment)
     """
     fields = {}
-    all_paths = sorted(set(es_fields))
+    schema_array_paths = {
+        path
+        for path, info in schema_fields.items()
+        if info.get("type") == "array"
+        or (isinstance(info.get("type"), str) and info["type"].endswith("-array"))
+    }
+    all_paths = sorted(set(es_fields) | schema_array_paths)
 
     for path in all_paths:
         ex = existing.get(path, {})
@@ -67,7 +89,14 @@ def build_annotations(index: str, es_fields: dict, schema_fields: dict, existing
         sc = schema_fields.get(path, {})
 
         status = ex.get("status", "")
-        type = ex.get("type", sc.get("type", es.get("type", "unknown")))
+        # Elasticsearch mappings do not distinguish scalar fields from arrays.
+        schema_type = sc.get("type")
+        is_schema_array = schema_type == "array" or (
+            isinstance(schema_type, str) and schema_type.endswith("-array")
+        )
+        type = schema_type if is_schema_array else ex.get(
+            "type", schema_type or es.get("type", "unknown")
+        )
         description = ex.get("description", sc.get("description"))
         status = "approved" if description else "draft"
         entry = {"status": status, "type": type}

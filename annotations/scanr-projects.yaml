@@ -2,9 +2,9 @@ _meta:
   index: scanr-projects
   description: Funded research projects (ANR, EU, etc.) with budget and partners.
     One document is one project.
-  total_fields: 168
-  approved: 17
-  draft: 151
+  total_fields: 171
+  approved: 18
+  draft: 153
 fields:
   acronym:
     status: approved
@@ -300,7 +300,7 @@ fields:
         goals and scope.
   domains:
     status: draft
-    type: array
+    type: object-array
     required: true
     ai_suggestion:
       description: List of research domains or disciplines the project covers.
@@ -1069,6 +1069,25 @@ fields:
     ai_suggestion:
       description: The classification type of the project's scientific or thematic
         domain.
+  publications:
+    status: draft
+    type: object-array
+    required: true
+    ai_suggestion:
+      description: List of publications resulting from the project.
+      notes: May include preprints, journal articles, or conference papers; empty
+        if no publications yet.
+  publications.authors:
+    status: draft
+    type: object-array
+    required: true
+    ai_suggestion:
+      description: Authors credited in a specific publication.
+      notes: Order reflects contribution hierarchy; may include non-partner contributors.
+  publications.source.journalIssns:
+    status: approved
+    type: string-array
+    description: The ISSNs of the journal.
   publicationsCount:
     status: draft
     type: long

@@ -2,8 +2,8 @@ _meta:
   index: scanr-organizations
   description: Research organizations and laboratories (universities, CNRS units,
     etc.). One document is one organization.
-  total_fields: 597
-  approved: 22
+  total_fields: 598
+  approved: 23
   draft: 575
 fields:
   acronym:
@@ -339,7 +339,7 @@ fields:
       notes: Only populated when the organization is a subsidiary or branch.
   externalIds:
     status: approved
-    type: array
+    type: object-array
     description: Lists the known external identifiers
   externalIds.id:
     status: approved
@@ -1165,8 +1165,12 @@ fields:
         (e.g., department, faculty).
   institutions:
     status: approved
-    type: array
+    type: object-array
     description: Lists the known relationships
+  institutions.autocompleted:
+    status: approved
+    type: text-array
+    description: array of strings used for autocompletion
   institutions.denormalized:
     status: approved
     type: object
@@ -1526,7 +1530,7 @@ fields:
       notes: Only populated for organizations where a single representative is tracked.
   leaders:
     status: approved
-    type: array
+    type: object-array
     description: Lists the known leaders (data from RNSR)
   leaders.endDate:
     status: draft
@@ -1633,7 +1637,7 @@ fields:
     has_keyword: true
   links:
     status: approved
-    type: array
+    type: object-array
     description: Lists the known links
   links.type:
     status: draft

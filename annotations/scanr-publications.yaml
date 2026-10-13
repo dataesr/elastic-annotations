@@ -2,8 +2,8 @@ _meta:
   index: scanr-publications
   description: Scientific publications (articles, theses, conference papers). One
     document is one publication.
-  total_fields: 273
-  approved: 48
+  total_fields: 274
+  approved: 49
   draft: 225
 fields:
   acknowledgments:
@@ -28,7 +28,7 @@ fields:
       notes: Default to 'en' if unspecified; may be missing for non-standardized sources.
   affiliations:
     status: approved
-    type: array
+    type: object-array
     description: Lists all detected affiliations
   affiliations.acronym:
     status: draft
@@ -214,12 +214,12 @@ fields:
       description: Secondary classification type for the affiliation, refining `typologie_1`.
   authors:
     status: approved
-    type: array
-    description: ' List the authors / contributor'
+    type: object-array
+    description: List the authors / contributors
   authors.affiliations:
     status: approved
-    type: array
-    description: List of objects object describing the authors's affiliations
+    type: object-array
+    description: List of authors's affiliations
   authors.affiliations.BNF:
     status: draft
     type: text
@@ -423,7 +423,7 @@ fields:
         during processing.
   authors.affiliations.ids:
     status: approved
-    type: array
+    type: object-array
     description: List of automatic match PIDS (object with field `id` and `type`)
     required: true
   authors.affiliations.ids.id:
@@ -661,13 +661,15 @@ fields:
     required: true
   autocompleted:
     status: approved
-    type: array
+    type: string-array
     description: array of strings used for autocompletion
     analyzer: autocomplete
+    exclude: true
   autocompletedJournal:
     status: draft
     type: text
     has_keyword: true
+    exclude: true
     ai_suggestion:
       description: Normalized journal name for search autocompletion and display.
       notes: May differ from the original journal field if canonicalization was applied.
@@ -675,6 +677,7 @@ fields:
     status: draft
     type: text
     has_keyword: true
+    exclude: true
     ai_suggestion:
       description: Normalized publisher name for search autocompletion and display.
       notes: May differ from the original publisher field if canonicalization was
@@ -829,7 +832,7 @@ fields:
         to the record.
   domains:
     status: approved
-    type: array
+    type: object-array
     description: Lists detected scientific domains
   domains.code:
     status: approved
@@ -885,7 +888,7 @@ fields:
     required: true
   externalIds:
     status: approved
-    type: array
+    type: object-array
     description: Lists the known external identifiers
   externalIds.id:
     status: approved
@@ -1115,7 +1118,7 @@ fields:
         present.
   keywords.default:
     status: approved
-    type: array
+    type: string-array
     description: List of string. Keywords (not normalized) chosen by the authors.
       These keywords are also present in the `domains` with type=`keyword`.
     has_keyword: true
@@ -1356,7 +1359,7 @@ fields:
     description: Is it an open access journal? (source Unpaywall)
   source.journalIssns:
     status: approved
-    type: array
+    type: string-array
     description: Arrays of ISSNs (print, electronic ...)
     has_keyword: true
     primary: true
@@ -1636,7 +1639,7 @@ fields:
         is sufficient for the use case.
   summary:
     status: approved
-    type: array
+    type: object-array
     description: summary / abstract by language (with `default` only if unknown)
   summary.default:
     status: draft
@@ -1823,6 +1826,12 @@ fields:
     - thesis
     - other
     required: true
+  vector_text:
+    status: approved
+    type: number-array
+    description: Embeddings of the `domains` labels with the `distiluse-base-multilingual-cased-v1`
+      model (dim 512)
+    exclude: true
   year:
     status: approved
     type: integer

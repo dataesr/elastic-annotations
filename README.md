@@ -146,6 +146,12 @@ fields:
       join_field: id
 ```
 
+Array fields use a type suffix that records the item type, such as `text-array`,
+`integer-array`, `number-array`, `boolean-array`, or `object-array`. `merge.py`
+derives this from the backup schema, and `export.py` converts it to JSON Schema
+with the corresponding `items.type`; nested fields of an `object-array` remain
+under its item schema.
+
 ## Triggering Pipeline Externally
 
 Since the pipeline is exposed via a GitHub Actions `workflow_dispatch` event, you can trigger it programmatically from other repositories or scripts.

@@ -182,7 +182,7 @@
       "description": "Classifications or tags describing the organization's focus areas."
     },
     "creationYear": {
-      "type": "object",
+      "type": "string",
       "description": "Creation year"
     },
     "description": {
@@ -228,14 +228,16 @@
       "description": "SIREN identifier of the parent or headquarter establishment for this organization."
     },
     "externalIds": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "id": {
-            "type": "object",
+            "type": "string",
             "description": "Corresponding PID"
           },
           "type": {
-            "type": "object",
+            "type": "string",
             "description": "other known PID",
             "enum": [
               "idref",
@@ -252,7 +254,6 @@
           "type"
         ]
       },
-      "type": "array",
       "description": "Lists the known external identifiers"
     },
     "firstName": {
@@ -268,7 +269,7 @@
       "description": "Indicates whether the organization has an AI-generated description available."
     },
     "id": {
-      "type": "object",
+      "type": "string",
       "description": "Main PID of the organizations. For now can be either an RNSR, SIREN, or GRID (should change to RoR)."
     },
     "incubateurOf": {
@@ -790,8 +791,17 @@
       }
     },
     "institutions": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
+          "autocompleted": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "array of strings used for autocompletion"
+          },
           "denormalized": {
             "type": "object",
             "description": "Denormalized object of the structure",
@@ -953,7 +963,7 @@
             "description": "Persistent internal identifier for the institution within the source system."
           },
           "relationType": {
-            "type": "object",
+            "type": "string",
             "description": "Type of relation"
           },
           "rnsr_key": {
@@ -965,7 +975,7 @@
             "description": "Official start date of the institution's affiliation or existence."
           },
           "structure": {
-            "type": "object",
+            "type": "string",
             "description": "Main PID of the structure"
           }
         },
@@ -973,7 +983,6 @@
           "structure"
         ]
       },
-      "type": "array",
       "description": "Lists the known relationships"
     },
     "inventors": {
@@ -1039,18 +1048,20 @@
       "description": "Family name or surname of a key contact or representative."
     },
     "leaders": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "endDate": {
             "type": "string",
             "description": "End date of the leader's term in the organization."
           },
           "firstName": {
-            "type": "object",
+            "type": "string",
             "description": "First Name of the person"
           },
           "lastName": {
-            "type": "object",
+            "type": "string",
             "description": "Last Name of the person"
           },
           "natural_id": {
@@ -1058,7 +1069,7 @@
             "description": "Unique identifier for the leader in external systems."
           },
           "person": {
-            "type": "object",
+            "type": "string",
             "description": "Main PID of the person"
           },
           "rnsr_key": {
@@ -1066,7 +1077,7 @@
             "description": "RNSR key linking the leader to their affiliated organization."
           },
           "role": {
-            "type": "object",
+            "type": "string",
             "description": "Role"
           },
           "startDate": {
@@ -1075,7 +1086,6 @@
           }
         }
       },
-      "type": "array",
       "description": "Lists the known leaders (data from RNSR)"
     },
     "leaders_all": {
@@ -1113,18 +1123,20 @@
       }
     },
     "level": {
-      "type": "object",
+      "type": "string",
       "description": "Level"
     },
     "links": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "type": {
             "type": "string",
             "description": "Type of relationship or link between this organization and another entity."
           },
           "url": {
-            "type": "object",
+            "type": "string",
             "description": "URL"
           },
           "value": {
@@ -1133,7 +1145,6 @@
           }
         }
       },
-      "type": "array",
       "description": "Lists the known links"
     },
     "main_category": {
@@ -1141,7 +1152,7 @@
       "description": "Primary classification or category of the organization (e.g., university, lab)."
     },
     "nature": {
-      "type": "object",
+      "type": "string",
       "description": "Nature"
     },
     "panels": {
@@ -2321,7 +2332,7 @@
       }
     },
     "startDate": {
-      "type": "object",
+      "type": "string",
       "description": "Start date"
     },
     "startup_linkOf": {
@@ -2597,7 +2608,7 @@
       }
     },
     "status": {
-      "type": "object",
+      "type": "string",
       "description": "Status",
       "enum": [
         "active",
@@ -2617,7 +2628,7 @@
       "description": "Secondary typology label refining the organization's category (e.g., 'Public Research')."
     },
     "web_content": {
-      "type": "object",
+      "type": "string",
       "description": "Crawl of the web pages"
     }
   },

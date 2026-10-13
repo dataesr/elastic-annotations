@@ -40,10 +40,12 @@
       }
     },
     "affiliations": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "endDate": {
-            "type": "object",
+            "type": "string",
             "description": "Last publication year found with this affiliation"
           },
           "publicationsCount": {
@@ -51,10 +53,12 @@
             "description": "Total number of publications associated with this affiliation"
           },
           "sources": {
+            "type": "array",
             "items": {
+              "type": "object",
               "properties": {
                 "id": {
-                  "type": "object",
+                  "type": "string",
                   "description": "Main PID of the publication"
                 },
                 "year": {
@@ -63,15 +67,14 @@
                 }
               }
             },
-            "type": "array",
             "description": "List the publications of the author with the current affiliation"
           },
           "startDate": {
-            "type": "object",
+            "type": "string",
             "description": "First publication year found with this affiliation"
           },
           "structure": {
-            "type": "object",
+            "type": "string",
             "description": "PID of an affiliation. Can be the only field of the object if this affiliation is not mapped in the organization index.Otherwise, if present, some fields are denormalized: `mainAddress`, `label`, `acronym`, `kind`, `level`, `status`, `isFrench`, `id_name`. See the documentation of the organization index for more details on these fields.",
             "properties": {
               "acronym": {
@@ -257,7 +260,6 @@
           "structure"
         ]
       },
-      "type": "array",
       "description": "Lists all detected affiliations"
     },
     "ai_description": {
@@ -299,39 +301,41 @@
       }
     },
     "awards": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "date": {
-            "type": "object",
+            "type": "string",
             "description": "Award date"
           },
           "label": {
-            "type": "object",
+            "type": "string",
             "description": "Award label"
           },
           "url": {
-            "type": "object",
+            "type": "string",
             "description": "Award URL"
           }
         }
       },
-      "type": "array",
       "description": "Lists the known awards"
     },
     "coContributors": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "fullName": {
-            "type": "object",
+            "type": "string",
             "description": "Full Name of the cocontributor"
           },
           "person": {
-            "type": "object",
+            "type": "string",
             "description": "Main PID of the cocontributor"
           }
         }
       },
-      "type": "array",
       "description": "Lists the known cocontributors. Co-authors only are listed, not jury members."
     },
     "description": {
@@ -353,10 +357,12 @@
       }
     },
     "domains": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "code": {
-            "type": "object",
+            "type": "string",
             "description": "Code ID of this domain, if any (depends on `type`)"
           },
           "count": {
@@ -364,7 +370,7 @@
             "description": "Number of times this code has been detected"
           },
           "label": {
-            "type": "object",
+            "type": "string",
             "description": "Label of the scientific domain",
             "properties": {
               "default": {
@@ -374,7 +380,7 @@
             }
           },
           "type": {
-            "type": "object",
+            "type": "string",
             "description": "Type of label. Possible values: `wikidata`, `keyword`, `sudoc`. Wikidata domains are automatically detected within the title, abstract and keywords. Keywords domain are exactly the free-text keywords that have been harvested (not normalized)."
           }
         },
@@ -383,18 +389,19 @@
           "type"
         ]
       },
-      "type": "array",
       "description": "Lists detected scientific domains - detected and aggregated from the publications"
     },
     "externalIds": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "id": {
-            "type": "object",
+            "type": "string",
             "description": "Corresponding PID"
           },
           "type": {
-            "type": "object",
+            "type": "string",
             "description": "other known PID",
             "enum": [
               "idref",
@@ -403,7 +410,7 @@
             ]
           },
           "url": {
-            "type": "object",
+            "type": "string",
             "description": "Corresponding URL"
           }
         },
@@ -412,15 +419,14 @@
           "type"
         ]
       },
-      "type": "array",
       "description": "Lists the known external identifiers"
     },
     "firstName": {
-      "type": "object",
+      "type": "string",
       "description": "First Name"
     },
     "fullName": {
-      "type": "object",
+      "type": "string",
       "description": "Full Name (concatenation of the first name and last name)"
     },
     "gender": {
@@ -428,15 +434,15 @@
       "description": "Inferred or declared gender of the person"
     },
     "id": {
-      "type": "object",
+      "type": "string",
       "description": "Main PID of the person. For now, the idref id is used. Concatenation of the string `idref` and the idref id itself."
     },
     "id_hal": {
-      "type": "object",
+      "type": "string",
       "description": "idHAL (string)"
     },
     "idref": {
-      "type": "object",
+      "type": "string",
       "description": "idref"
     },
     "institutions": {
@@ -500,7 +506,7 @@
       }
     },
     "lastName": {
-      "type": "object",
+      "type": "string",
       "description": "Last Name (family name)"
     },
     "leaders": {
@@ -518,7 +524,7 @@
       }
     },
     "orcid": {
-      "type": "object",
+      "type": "string",
       "description": "ORCID"
     },
     "participant_encoded_key": {
@@ -546,14 +552,16 @@
       }
     },
     "publications": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "publication": {
-            "type": "object",
+            "type": "string",
             "description": "Main PID of the publication"
           },
           "role": {
-            "type": "object",
+            "type": "string",
             "description": "Role of the person"
           },
           "source": {
@@ -569,18 +577,18 @@
                 "description": "Is it an open access journal? (source Unpaywall)"
               },
               "journalIssns": {
+                "type": "array",
                 "items": {
                   "type": "string"
                 },
-                "type": "array",
                 "description": "Arrays of ISSNs (print, electronic ...)"
               },
               "publisher": {
-                "type": "object",
+                "type": "string",
                 "description": "Normalized version of the publisher."
               },
               "title": {
-                "type": "object",
+                "type": "string",
                 "description": "Title of the source"
               }
             }
@@ -590,7 +598,7 @@
             "description": "Title of the publication",
             "properties": {
               "default": {
-                "type": "object",
+                "type": "string",
                 "description": "Default title"
               },
               "en": {
@@ -609,7 +617,6 @@
           }
         }
       },
-      "type": "array",
       "description": "Lists the known publications of the author"
     },
     "publicationsCount": {
@@ -817,6 +824,11 @@
     "title_abs_text": {
       "type": "string",
       "description": "Full-text abstracts of the author's most cited works"
+    },
+    "topDomains": {
+      "items": {},
+      "type": "array",
+      "description": "Top 20 of the domains"
     },
     "top_domains": {
       "type": "object",

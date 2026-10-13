@@ -18,7 +18,9 @@
       }
     },
     "affiliations": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "acronym": {
             "type": "object",
@@ -43,7 +45,7 @@
             "description": "Internal encoded key for the affiliation, used for deduplication or reference."
           },
           "id": {
-            "type": "object",
+            "type": "string",
             "description": "PID of an affiliation. Can be the only field of the object if this affiliation is not mapped in the organization index.Otherwise, if present, some fields are denormalized: `mainAddress`, `label`, `acronym`, `kind`, `level`, `status`, `isFrench`, `id_name`. See the documention of the organization index for more details on these fields."
           },
           "id_name": {
@@ -135,14 +137,17 @@
           "id"
         ]
       },
-      "type": "array",
       "description": "Lists all detected affiliations"
     },
     "authors": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "affiliations": {
+            "type": "array",
             "items": {
+              "type": "object",
               "properties": {
                 "BNF": {
                   "type": "string",
@@ -189,7 +194,7 @@
                   "description": "Country where the author's affiliation is located, as extracted from the address."
                 },
                 "datasource": {
-                  "type": "object",
+                  "type": "string",
                   "description": "Source of the raw affiliation string"
                 },
                 "department": {
@@ -257,10 +262,12 @@
                   "description": "IdRef identifier for the author's affiliation, used for disambiguation and linking."
                 },
                 "ids": {
+                  "type": "array",
                   "items": {
+                    "type": "object",
                     "properties": {
                       "id": {
-                        "type": "object",
+                        "type": "string",
                         "description": "PID of the affiliation"
                       },
                       "source": {
@@ -268,7 +275,7 @@
                         "description": "Source of the affiliation identifier (e.g., 'RNSR', 'ROR') in the `ids` object."
                       },
                       "type": {
-                        "type": "object",
+                        "type": "string",
                         "description": "Type of the affiliation"
                       }
                     },
@@ -277,11 +284,10 @@
                       "type"
                     ]
                   },
-                  "type": "array",
                   "description": "List of automatic match PIDS (object with field `id` and `type`)"
                 },
                 "name": {
-                  "type": "object",
+                  "type": "string",
                   "description": "Raw affiliation string"
                 },
                 "orgs": {
@@ -337,8 +343,7 @@
                 "name"
               ]
             },
-            "type": "array",
-            "description": "List of objects object describing the authors's affiliations"
+            "description": "List of authors's affiliations"
           },
           "awards": {
             "type": "object",
@@ -385,19 +390,19 @@
             }
           },
           "firstName": {
-            "type": "object",
+            "type": "string",
             "description": "first name"
           },
           "fullName": {
-            "type": "object",
+            "type": "string",
             "description": "full name"
           },
           "id_name": {
-            "type": "object",
+            "type": "string",
             "description": "Concatenation of the `id` and `fullName` separated by `###`."
           },
           "lastName": {
-            "type": "object",
+            "type": "string",
             "description": "last name"
           },
           "person": {
@@ -405,7 +410,7 @@
             "description": "Reference to the author's detailed record in the scanr-persons index."
           },
           "role": {
-            "type": "object",
+            "type": "string",
             "description": "Role of the contributor. Default value is `author`. A different value only if present in source (theses.fr or HAL)."
           },
           "tags": {
@@ -423,25 +428,11 @@
           "lastName"
         ]
       },
-      "type": "array",
-      "description": " List the authors / contributor"
+      "description": "List the authors / contributors"
     },
     "authorsCount": {
       "type": "integer",
       "description": "Number of authors."
-    },
-    "autocompleted": {
-      "items": {},
-      "type": "array",
-      "description": "array of strings used for autocompletion"
-    },
-    "autocompletedJournal": {
-      "type": "string",
-      "description": "Normalized journal name for search autocompletion and display."
-    },
-    "autocompletedPublisher": {
-      "type": "string",
-      "description": "Normalized publisher name for search autocompletion and display."
     },
     "bso_local_affiliations": {
       "type": "string",
@@ -542,10 +533,12 @@
       "description": "Resolvable URL for the publication's DOI, enabling direct access to the record."
     },
     "domains": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "code": {
-            "type": "object",
+            "type": "string",
             "description": "Code ID of this domain, if any (depends on `type`)"
           },
           "count": {
@@ -553,7 +546,7 @@
             "description": "Number of times this code has been detected within the title, abstract and keywords."
           },
           "id_name": {
-            "type": "object",
+            "type": "string",
             "description": "Concatenation of code and label, separated by `##`",
             "example": "wikidata##Q13442896"
           },
@@ -566,7 +559,7 @@
             "description": "Human-readable name of the scientific domain in multiple languages.",
             "properties": {
               "default": {
-                "type": "object",
+                "type": "string",
                 "description": "Label of the scientific domain"
               }
             },
@@ -575,11 +568,11 @@
             ]
           },
           "naturalKey": {
-            "type": "object",
+            "type": "string",
             "description": "Normalized version of the label string (no accent, no space ...)"
           },
           "type": {
-            "type": "object",
+            "type": "string",
             "description": "Type of label. Possible values: `wikidata`, `keyword`, `sudoc`. Wikidata domains are automatically detected within the title, abstract and keywords. Keywords domain are exactly the free-text keywords that have been harvested (not normalized)."
           }
         },
@@ -587,18 +580,19 @@
           "type"
         ]
       },
-      "type": "array",
       "description": "Lists detected scientific domains"
     },
     "externalIds": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "id": {
-            "type": "object",
+            "type": "string",
             "description": "Corresponding PID"
           },
           "type": {
-            "type": "object",
+            "type": "string",
             "description": "`nnt` (for French thesis, 'nnt' stands for 'Numéro National de Thèse'), `doi` (Digital Object Identifier), `hal` (if present in HAL) or 'pmid' (if present in PubMed)",
             "enum": [
               "doi",
@@ -613,11 +607,10 @@
           "type"
         ]
       },
-      "type": "array",
       "description": "Lists the known external identifiers"
     },
     "id": {
-      "type": "object",
+      "type": "string",
       "description": "Main PID of the production. This id is a concatenation of the id type (e.g `doi` and the id itself)."
     },
     "institutions": {
@@ -745,16 +738,16 @@
       "description": "Author-provided or extracted keywords describing the publication's topics.",
       "properties": {
         "default": {
+          "type": "array",
           "items": {
             "type": "string"
           },
-          "type": "array",
           "description": "List of string. Keywords (not normalized) chosen by the authors. These keywords are also present in the `domains` with type=`keyword`."
         }
       }
     },
     "landingPage": {
-      "type": "object",
+      "type": "string",
       "description": "URL of the landing page"
     },
     "oaEvidence": {
@@ -762,7 +755,7 @@
       "description": "Describes the open access version (if any)",
       "properties": {
         "hostType": {
-          "type": "object",
+          "type": "string",
           "description": "Only one hostType is given, with a priority to the publisher, just like in the Unpaywall data. More complete data on open access routes can be found in the French Open Science Monitor data (Baromètre de la Science Ouverte).",
           "enum": [
             "publisher",
@@ -770,23 +763,23 @@
           ]
         },
         "landingPageUrl": {
-          "type": "object",
+          "type": "string",
           "description": "Landing page URL (from Unpaywall data)"
         },
         "license": {
-          "type": "object",
+          "type": "string",
           "description": "Open Access license (from Unpaywall data or HAL)"
         },
         "pdfUrl": {
-          "type": "object",
+          "type": "string",
           "description": "PDF URL (from Unpaywall data)"
         },
         "url": {
-          "type": "object",
+          "type": "string",
           "description": "Open Access URL (from Unpaywall data or HAL)"
         },
         "version": {
-          "type": "object",
+          "type": "string",
           "description": "Open Access version (from Unpaywall data)"
         }
       },
@@ -813,7 +806,7 @@
       }
     },
     "productionType": {
-      "type": "object",
+      "type": "string",
       "description": "String for type of production. Possible values: `publications`, `thesis`.",
       "enum": [
         "publication",
@@ -887,7 +880,7 @@
       }
     },
     "publicationDate": {
-      "type": "object",
+      "type": "string",
       "description": "Formatted as YYYY-MM-DDT00:00:00. When available, the `published_date` from Unpaywall is used. When not avaiable (no DOI Crossref), if data comes from HAL, these fields from HAL are used, in this priority order: `publicationDate_s`, `ePublicationDate_s`, `defenseDate_s`, `producedDate_s`.",
       "example": "2020-01-01T00:00:00"
     },
@@ -926,18 +919,18 @@
           "description": "Is it an open access journal? (source Unpaywall)"
         },
         "journalIssns": {
+          "type": "array",
           "items": {
             "type": "string"
           },
-          "type": "array",
           "description": "Arrays of ISSNs (print, electronic ...)"
         },
         "publisher": {
-          "type": "object",
+          "type": "string",
           "description": "Normalized version of the publisher."
         },
         "title": {
-          "type": "object",
+          "type": "string",
           "description": "Title of the source"
         }
       }
@@ -1119,7 +1112,9 @@
       }
     },
     "summary": {
+      "type": "array",
       "items": {
+        "type": "object",
         "properties": {
           "default": {
             "type": "string",
@@ -1135,7 +1130,6 @@
           }
         }
       },
-      "type": "array",
       "description": "summary / abstract by language (with `default` only if unknown)"
     },
     "tags": {
@@ -1249,7 +1243,7 @@
       }
     },
     "type": {
-      "type": "object",
+      "type": "string",
       "description": "String for more fine-grained type.",
       "enum": [
         "journal-article",

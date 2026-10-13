@@ -2,8 +2,8 @@ _meta:
   index: scanr-persons
   description: Researchers and authors with their affiliations and identifiers (ORCID,
     IdRef). One document is one person.
-  total_fields: 185
-  approved: 44
+  total_fields: 186
+  approved: 45
   draft: 141
 fields:
   acronym:
@@ -61,7 +61,7 @@ fields:
       description: Country of the person's primary affiliation address
   affiliations:
     status: approved
-    type: array
+    type: object-array
     description: Lists all detected affiliations
   affiliations.endDate:
     status: approved
@@ -74,7 +74,7 @@ fields:
       description: Total number of publications associated with this affiliation
   affiliations.sources:
     status: approved
-    type: array
+    type: object-array
     description: List the publications of the author with the current affiliation
   affiliations.sources.id:
     status: approved
@@ -437,7 +437,7 @@ fields:
       notes: May include organizations or individuals; not always the author.
   autocompleted:
     status: approved
-    type: array
+    type: text-array
     description: array of strings used for autocompletion
     analyzer: autocomplete
     exclude: true
@@ -448,7 +448,7 @@ fields:
     exclude: true
   awards:
     status: approved
-    type: array
+    type: object-array
     description: Lists the known awards
   awards.date:
     status: approved
@@ -467,7 +467,7 @@ fields:
     has_keyword: true
   coContributors:
     status: approved
-    type: array
+    type: object-array
     description: Lists the known cocontributors. Co-authors only are listed, not jury
       members.
   coContributors.fullName:
@@ -506,7 +506,7 @@ fields:
       description: French version of the person's biographical summary
   domains:
     status: approved
-    type: array
+    type: object-array
     description: Lists detected scientific domains - detected and aggregated from
       the publications
     primary: true
@@ -542,7 +542,7 @@ fields:
     required: true
   externalIds:
     status: approved
-    type: array
+    type: object-array
     description: Lists the known external identifiers
   externalIds.id:
     status: approved
@@ -762,7 +762,7 @@ fields:
       notes: Fallback when no language-specific label is available.
   publications:
     status: approved
-    type: array
+    type: object-array
     description: Lists the known publications of the author
   publications.publication:
     status: approved
@@ -795,7 +795,7 @@ fields:
     description: Is it an open access journal? (source Unpaywall)
   publications.source.journalIssns:
     status: approved
-    type: array
+    type: text-array
     description: Arrays of ISSNs (print, electronic ...)
     has_keyword: true
   publications.source.publisher:
@@ -1131,6 +1131,10 @@ fields:
     ai_suggestion:
       description: Full-text abstracts of the author's most cited works
       notes: Truncated to 5000 chars; prioritize recent/impactful works.
+  topDomains:
+    status: approved
+    type: array
+    description: Top 20 of the domains
   top_domains:
     status: draft
     type: object

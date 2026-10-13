@@ -22,6 +22,11 @@ scanr-publications:
     - domains.label.default
   excludes:
     - title.*
+    - autocompleted
+    - autocompletedJournal
+    - autocompletedPublisher
+    - autocompletedText
+    - vector_text
   includes:
     - title.default
     - title.en
