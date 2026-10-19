@@ -5,7 +5,6 @@ _meta:
   total_fields: 201
   approved: 5
   draft: 196
-  pending_review: 196
 fields:
   acronym:
     status: draft
@@ -190,28 +189,28 @@ fields:
   co_cpc_classe:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two cpc classe as text
+    has_keyword: true
   co_cpc_section:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two cpc section as text
+    has_keyword: true
   co_cpc_ss_classe:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two cpc sous classe as text
+    has_keyword: true
   co_organizations:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two affiliated organizations as text
+    has_keyword: true
   co_persons:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two contributors as text
+    has_keyword: true
   cpc:
     status: draft
     type: object

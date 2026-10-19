@@ -437,7 +437,7 @@ fields:
       notes: May include organizations or individuals; not always the author.
   autocompleted:
     status: approved
-    type: text-array
+    type: string-array
     description: array of strings used for autocompletion
     analyzer: autocomplete
     exclude: true
@@ -795,7 +795,7 @@ fields:
     description: Is it an open access journal? (source Unpaywall)
   publications.source.journalIssns:
     status: approved
-    type: text-array
+    type: string-array
     description: Arrays of ISSNs (print, electronic ...)
     has_keyword: true
   publications.source.publisher:

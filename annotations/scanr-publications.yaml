@@ -2,10 +2,10 @@ _meta:
   index: scanr-publications
   description: Scientific publications (articles, theses, conference papers). One
     document is one publication.
-  total_fields: 274
+  total_fields: 423
   approved: 56
-  draft: 218
-  pending_review: 218
+  draft: 367
+  pending_review: 367
 fields:
   acknowledgments:
     status: draft
@@ -662,7 +662,7 @@ fields:
     required: true
   autocompleted:
     status: approved
-    type: text-array
+    type: string-array
     description: array of strings used for autocompletion
     analyzer: autocomplete
     exclude: true
@@ -773,41 +773,47 @@ fields:
     ai_suggestion:
       description: Number of citations received by the publication in 2025.
       notes: Data is likely incomplete or projected; avoid relying on this for analysis.
+  cited_by_counts_by_year.2026:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: Number of citations received by the publication in the year 2026.
+      notes: Used for citation trend analysis; may be zero or absent if data is unavailable.
   co_authors:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two authors as text
+    has_keyword: true
   co_countries:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two affiliated countries as text
+    has_keyword: true
   co_domains:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two mentioned domain as text
+    has_keyword: true
   co_institutions:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two institutions as text
+    has_keyword: true
   co_projects:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two projects as text
+    has_keyword: true
   co_software:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two mentioned software as text
+    has_keyword: true
   co_structures:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two affiliated structures as text
+    has_keyword: true
   doiUrl:
     status: draft
     type: text
@@ -1103,7 +1109,7 @@ fields:
         present.
   keywords.default:
     status: approved
-    type: text-array
+    type: string-array
     description: List of string. Keywords (not normalized) chosen by the authors.
       These keywords are also present in the `domains` with type=`keyword`.
     has_keyword: true
@@ -1344,7 +1350,7 @@ fields:
     description: Is it an open access journal? (source Unpaywall)
   source.journalIssns:
     status: approved
-    type: text-array
+    type: string-array
     description: Arrays of ISSNs (print, electronic ...)
     has_keyword: true
     primary: true
@@ -1367,11 +1373,129 @@ fields:
       description: Structured data for acknowledgments, including funders and infrastructures.
       notes: Use this to analyze funding sources or resource contributions mentioned
         in the publication.
+  structured_acknowledgments.adiniebel:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Text acknowledging ADINIEBEL funding or support in the publication.
+      notes: Rare field; only present if explicitly parsed from acknowledgments section.
+  structured_acknowledgments.affiliation:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Raw affiliation text extracted from acknowledgments.
+      notes: May contain unstructured data; use `canonical_name` for normalized affiliation
+        names.
+  structured_acknowledgments.attribution_style:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Style used to attribute acknowledgments (e.g., 'grant', 'in-kind').
+      notes: Helps disambiguate the nature of the acknowledged contribution.
+  structured_acknowledgments.canonical_name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Normalized name of the acknowledged entity or funder.
+      notes: Preferred over raw text for matching against controlled vocabularies.
+  structured_acknowledgments.collective_entities:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Details about collective entities (e.g., consortia) acknowledged.
+      notes: Useful for grouping non-individual contributors like research teams.
+  structured_acknowledgments.collective_entities.mention:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Exact text mention of the collective entity in acknowledgments.
+      notes: May differ from `name` due to abbreviations or typos.
+  structured_acknowledgments.collective_entities.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Standardized name of the acknowledged collective entity.
+      notes: Use for consistent entity resolution across publications.
+  structured_acknowledgments.collective_entities.role:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Role of the collective entity in the acknowledgment (e.g., 'funder').
+  structured_acknowledgments.content_type:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Type of content acknowledged (e.g., 'funding', 'technical support').
+  structured_acknowledgments.country:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Country associated with the acknowledgment, typically where funding
+        originated.
+      notes: May be empty if the country could not be determined from the source.
+  structured_acknowledgments.error:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Error message if parsing or processing the acknowledgment failed.
+  structured_acknowledgments.funder:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Full name of the funding organization as stated in the acknowledgment.
+  structured_acknowledgments.funder_short:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Short or abbreviated name of the funding organization.
   structured_acknowledgments.funders:
     status: draft
     type: object
     ai_suggestion:
       description: Details about funding organizations acknowledged in the publication.
+  structured_acknowledgments.funders.award_id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Identifier for the funding award or grant associated with the funder.
+  structured_acknowledgments.funders.canonical:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Standardized identifier for the funder, used for disambiguation.
+  structured_acknowledgments.funders.canonical_name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Canonical name of the funder, normalized for consistency.
+  structured_acknowledgments.funders.country:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Country of the funder, derived from the funding organization's
+        location.
+  structured_acknowledgments.funders.country_code:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: ISO country code of the funder's country, if available.
   structured_acknowledgments.funders.entity:
     status: draft
     type: text
@@ -1380,6 +1504,19 @@ fields:
     ai_suggestion:
       description: Name or identifier of the funding entity (e.g., agency, institution).
       notes: May include abbreviations or official names; normalize for consistency.
+  structured_acknowledgments.funders.funder_short:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Short or abbreviated name of the funder, normalized for consistency.
+  structured_acknowledgments.funders.funders:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: List of funding organizations extracted from acknowledgments.
+      notes: May include multiple funders per publication; empty if no funding detected.
   structured_acknowledgments.funders.grant_id:
     status: draft
     type: text
@@ -1387,6 +1524,100 @@ fields:
     ai_suggestion:
       description: Grant or award identifier associated with the funding.
       notes: Useful for tracking specific funded projects or initiatives.
+  structured_acknowledgments.funders.grant_ids:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Grant identifiers associated with the funding organization.
+      notes: Values may be partial or missing if not explicitly stated in the source.
+  structured_acknowledgments.funders.infrastructure:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Details about research infrastructure linked to the funding.
+  structured_acknowledgments.funders.infrastructure.mention:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Raw text mentioning the infrastructure in acknowledgments.
+  structured_acknowledgments.funders.infrastructure.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Normalized name of the research infrastructure.
+  structured_acknowledgments.funders.infrastructure.type:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Type or category of the research infrastructure (e.g., lab, facility).
+  structured_acknowledgments.funders.is_acknowledgement:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the entry is a direct funding acknowledgment.
+      notes: False for indirect mentions like infrastructure or person acknowledgments.
+  structured_acknowledgments.funders.mention:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Raw text mentioning the funder in acknowledgments.
+  structured_acknowledgments.funders.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Normalized name of the funding organization.
+  structured_acknowledgments.funders.persons:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Details about individuals acknowledged in relation to funding.
+  structured_acknowledgments.funders.persons.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Full name of a person acknowledged as a funder in the publication.
+      notes: May include titles or honorifics if present in the source text.
+  structured_acknowledgments.funders.persons.role:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Role or contribution of a person acknowledged as a funder.
+      notes: Common roles include 'Principal Investigator' or 'Project Manager'; may
+        be empty if unspecified.
+  structured_acknowledgments.funders.private_companies:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Container for private company entities acknowledged as funders.
+      notes: Includes both structured fields (e.g., name) and raw mentions if available.
+  structured_acknowledgments.funders.private_companies.mention:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Raw text mention of a private company acknowledged as a funder.
+      notes: Useful for disambiguation if the name field is missing or ambiguous.
+  structured_acknowledgments.funders.private_companies.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Normalized name of a private company acknowledged as a funder.
+  structured_acknowledgments.funders.private_companies.role:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Role or contribution of a private company acknowledged as a funder.
+      notes: May describe funding type (e.g., 'sponsor') or specific involvement.
   structured_acknowledgments.funders.program:
     status: draft
     type: text
@@ -1394,18 +1625,278 @@ fields:
     ai_suggestion:
       description: Program or initiative under which the funding was awarded.
       notes: Helps contextualize the funding source (e.g., 'Horizon 2020').
-  structured_acknowledgments.funders.type:
+  structured_acknowledgments.funders.programme:
     status: draft
     type: text
     has_keyword: true
     ai_suggestion:
-      description: Type of funding entity (e.g., 'government', 'private', 'nonprofit').
+      description: Name of a funding programme associated with the publication.
+      notes: Prefer this field over plural variants if only one programme is listed.
+  structured_acknowledgments.funders.programmes:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: List of funding programme names (plural form).
+      notes: Use when multiple programmes are acknowledged; may contain duplicates
+        of 'programme'.
+  structured_acknowledgments.funders.programs:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Alternative spelling for funding programmes (plural form).
+      notes: Treat as equivalent to 'programmes'; prioritize consistency with other
+        fields.
+  structured_acknowledgments.funders.project:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name of a funded project associated with the publication.
+      notes: May include project codes or identifiers if specified in the source.
+  structured_acknowledgments.funders.projects:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Details of projects funded by the acknowledged funder.
+      notes: May include multiple nested fields like `funders`, `grant_id`, or `name`
+        for granular project tracking.
+  structured_acknowledgments.funders.projects.funders:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name or identifier of the entity funding the project.
+      notes: Can be a raw string or normalized name depending on reconciliation status.
+  structured_acknowledgments.funders.projects.grant_id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the grant associated with the project.
+      notes: Use to link publications to specific funding awards or programs.
+  structured_acknowledgments.funders.projects.mention:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Exact text of the funding acknowledgment as it appears in the publication.
+  structured_acknowledgments.funders.projects.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the funded project as stated in the acknowledgment section.
+  structured_acknowledgments.funders.reconciled_name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Normalized or standardized name of the funder after reconciliation.
+  structured_acknowledgments.funders.role:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Role or capacity in which the funder is acknowledged (e.g., sponsor,
+        collaborator).
+  structured_acknowledgments.funders.short_name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Abbreviated or commonly used name of the funder.
+  structured_acknowledgments.funders.style:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Styling conventions or metadata for the funder's acknowledgment.
+      notes: Useful for reconstructing original acknowledgment formatting.
+  structured_acknowledgments.funders.style.attribution_style:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Preferred citation style for attributing the funder in acknowledgments.
+  structured_acknowledgments.funders.style.content_type:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Type of content in the funder acknowledgment section (e.g., grant,
+        sponsorship).
+  structured_acknowledgments.funders.style.has_coi:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the funder acknowledgment includes a conflict-of-interest
+        statement.
+      notes: Use to filter or flag acknowledgments requiring transparency checks.
+  structured_acknowledgments.funders.style.has_disclaimer:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the funder acknowledgment includes a disclaimer statement.
+  structured_acknowledgments.funders.style.has_header:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the funder acknowledgment includes a header (e.g.,
+        section title).
+  structured_acknowledgments.funders.style.is_acknowledgement:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the text is a dedicated acknowledgment of funders
+        (vs. general notes).
+      notes: Helps distinguish formal funding statements from incidental mentions.
+  structured_acknowledgments.funders.style.is_truncated:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the acknowledgment text was truncated during processing.
+  structured_acknowledgments.funders.style.language:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Language code (ISO 639-1) of the funder acknowledgment text.
+  structured_acknowledgments.funders.style.opening_style:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Stylistic opening phrase of the acknowledgment (e.g., 'We thank',
+        'Supported by').
+  structured_acknowledgments.funders.style.quality:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Quality assessment of the parsed acknowledgment (e.g., 'high',
+        'medium', 'low').
+      notes: Use to prioritize or validate extracted funding data.
+  structured_acknowledgments.funders.style.register:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Register or tone of the acknowledgment (e.g., 'formal', 'informal').
+  structured_acknowledgments.funders.style.truncation_note:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Note indicating if the funder's name was truncated for display.
+      notes: Use to warn users when the full funder name exceeds display limits.
+  structured_acknowledgments.funders.wikidata_qid:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Wikidata QID identifier for the funding organization.
+      notes: Use to link funders to external knowledge bases or resolve ambiguous
+        names.
+  structured_acknowledgments.grant_id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for a single grant associated with the publication.
+      notes: Prefer `grant_ids` if multiple grants are acknowledged; this field may
+        be deprecated.
+  structured_acknowledgments.grant_ids:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: List of grant identifiers associated with the publication, separated
+        by a delimiter.
+      notes: Parse this field to extract individual grant IDs for funding analysis.
+  structured_acknowledgments.has_coi:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Flag indicating if the publication includes a conflict-of-interest
+        statement.
+  structured_acknowledgments.has_disclaimer:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Flag indicating if the publication includes a disclaimer statement.
+  structured_acknowledgments.has_header:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Flag indicating if the acknowledgments section has a header.
+  structured_acknowledgments.ifeṭa:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: IFEṬA (Institutional Framework for Ethical Text Analysis) classification
+        for acknowledgments.
+      notes: Use to assess compliance with ethical guidelines in funding disclosures.
+  structured_acknowledgments.infrastructure:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Details about research infrastructure acknowledged in the publication.
+  structured_acknowledgments.infrastructure.mention:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Raw text mentioning the research infrastructure in acknowledgments.
+      notes: Normalize or parse this field to identify specific facilities or resources.
+  structured_acknowledgments.infrastructure.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Human-readable name of the research infrastructure mentioned in
+        acknowledgments.
+      notes: May differ from canonical_name if the infrastructure is referenced by
+        an alias or variant.
+  structured_acknowledgments.infrastructure.resource_id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Persistent identifier (e.g., ROR, GRID) for the infrastructure,
+        if available.
+  structured_acknowledgments.infrastructure.type:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Category or class of the infrastructure (e.g., 'telescope', 'supercomputer').
   structured_acknowledgments.infrastructures:
     status: draft
     type: object
     ai_suggestion:
       description: Details about research infrastructures (e.g., facilities, equipment)
         acknowledged.
+  structured_acknowledgments.infrastructures.accession_id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique accession ID assigned to the infrastructure in a specific
+        registry.
+  structured_acknowledgments.infrastructures.canonical_name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Standardized, official name of the infrastructure for disambiguation.
+  structured_acknowledgments.infrastructures.country:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Country where the infrastructure is primarily located or registered.
   structured_acknowledgments.infrastructures.entity:
     status: draft
     type: text
@@ -1413,6 +1904,19 @@ fields:
     analyzer: light
     ai_suggestion:
       description: Name or identifier of the infrastructure acknowledged in the publication.
+  structured_acknowledgments.infrastructures.funder_short:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Abbreviated name of the primary funding organization for the infrastructure.
+  structured_acknowledgments.infrastructures.funders:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: List of all funding organizations supporting the infrastructure,
+        if multiple.
   structured_acknowledgments.infrastructures.grant_id:
     status: draft
     type: text
@@ -1420,12 +1924,123 @@ fields:
     ai_suggestion:
       description: Grant or funding ID associated with the acknowledged infrastructure.
       notes: May be empty if the infrastructure was not funded by a specific grant.
-  structured_acknowledgments.infrastructures.program:
+  structured_acknowledgments.infrastructures.mention:
     status: draft
     type: text
     has_keyword: true
     ai_suggestion:
-      description: Program name under which the infrastructure was funded or operated.
+      description: Exact text snippet from the publication acknowledging the infrastructure.
+  structured_acknowledgments.infrastructures.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Raw or unnormalized name of the infrastructure as it appears in
+        acknowledgments.
+      notes: Use canonical_name for consistent lookups; this field preserves original
+        phrasing.
+  structured_acknowledgments.infrastructures.programs:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Lists funding programs associated with the acknowledged infrastructure.
+      notes: May contain multiple entries if the infrastructure is supported by several
+        programs.
+  structured_acknowledgments.infrastructures.reconciled_name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Standardized name of the infrastructure after reconciliation with
+        a reference database.
+  structured_acknowledgments.infrastructures.resource_id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the infrastructure in an external reference
+        system.
+  structured_acknowledgments.infrastructures.role:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Describes the function or contribution of the infrastructure in
+        the publication.
+  structured_acknowledgments.infrastructures.style:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Metadata about how the infrastructure acknowledgment is formatted
+        or presented.
+  structured_acknowledgments.infrastructures.style.attribution_style:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Specifies the citation style used for attributing the infrastructure.
+  structured_acknowledgments.infrastructures.style.content_type:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Indicates the type of content (e.g., grant, facility) being acknowledged.
+  structured_acknowledgments.infrastructures.style.has_coi:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: True if the acknowledgment includes a conflict-of-interest statement.
+  structured_acknowledgments.infrastructures.style.has_disclaimer:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: True if the acknowledgment includes a disclaimer about the infrastructure.
+  structured_acknowledgments.infrastructures.style.has_header:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: True if the acknowledgment includes a header (e.g., section title).
+  structured_acknowledgments.infrastructures.style.is_acknowledgement:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the infrastructure mention is an acknowledgement.
+      notes: Use to filter or highlight acknowledged infrastructures in analyses.
+  structured_acknowledgments.infrastructures.style.is_truncated:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the infrastructure mention text was truncated during
+        processing.
+  structured_acknowledgments.infrastructures.style.language:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Language code (ISO 639-1) of the infrastructure acknowledgement
+        text.
+  structured_acknowledgments.infrastructures.style.opening_style:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Opening phrase or style used to introduce the infrastructure acknowledgement.
+  structured_acknowledgments.infrastructures.style.quality:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Quality assessment of the parsed infrastructure acknowledgement
+        (e.g., 'high', 'medium', 'low').
+      notes: Use to prioritize or validate infrastructure mentions in downstream tasks.
+  structured_acknowledgments.infrastructures.style.register:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Linguistic register of the infrastructure acknowledgement (e.g.,
+        'formal', 'informal').
   structured_acknowledgments.infrastructures.type:
     status: draft
     type: text
@@ -1433,12 +2048,156 @@ fields:
     ai_suggestion:
       description: Category or classification of the acknowledged infrastructure (e.g.,
         'research facility').
+  structured_acknowledgments.is_acknowledgement:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the entire acknowledgements section is an acknowledgement.
+  structured_acknowledgments.is_truncated:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the acknowledgements section text was truncated during
+        processing.
+  structured_acknowledgments.language:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Language code (ISO 639-1) of the acknowledgements section text.
+  structured_acknowledgments.mention:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Raw text of the acknowledgements section before parsing.
+      notes: Use for fallback or reprocessing if structured fields are incomplete.
+  structured_acknowledgments.mention - is_truncated:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the acknowledgment mention was truncated due to length.
+      notes: Use to warn users when full text may not be available.
+  structured_acknowledgments.misclassified_as:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Specifies the correct classification if the acknowledgment was
+        misclassified.
+  structured_acknowledgments.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name or identifier of the entity being acknowledged.
+  structured_acknowledgments.opening_style:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Style used to introduce the acknowledgment (e.g., 'We thank', 'Acknowledges').
+  structured_acknowledgments.persons:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Details about persons mentioned in the acknowledgment section.
+  structured_acknowledgments.persons.affiliation:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Affiliation of the acknowledged person, if provided.
+  structured_acknowledgments.persons.department:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Department of the acknowledged person, if specified.
+  structured_acknowledgments.persons.mention:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Exact text mentioning the person in the acknowledgment.
+  structured_acknowledgments.persons.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the person acknowledged, if explicitly stated.
+  structured_acknowledgments.persons.role:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Role or contribution of the acknowledged person (e.g., 'reviewer',
+        'collaborator').
+  structured_acknowledgments.persons.service:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Service or department associated with a person acknowledged in
+        the publication.
+      notes: May be empty if the service is not explicitly mentioned in the acknowledgments.
+  structured_acknowledgments.persons.university:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: University or academic institution associated with a person acknowledged
+        in the publication.
+  structured_acknowledgments.persons_thanked:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Details of individuals explicitly thanked in the publication's
+        acknowledgments.
+  structured_acknowledgments.persons_thanked.affiliation:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Affiliation of a person thanked in the publication, as mentioned
+        in the acknowledgments.
+  structured_acknowledgments.persons_thanked.country:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Country associated with the affiliation of a person thanked in
+        the publication.
+  structured_acknowledgments.persons_thanked.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Full name of a person thanked in the publication's acknowledgments.
+  structured_acknowledgments.persons_thanked.role:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Role or contribution of a person thanked in the publication's acknowledgments.
   structured_acknowledgments.private_companies:
     status: draft
     type: object
     ai_suggestion:
       description: Details of private companies acknowledged for contributions to
         the publication.
+  structured_acknowledgments.private_companies.affiliation:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Affiliation string for a private company mentioned in the acknowledgments.
+  structured_acknowledgments.private_companies.canonical_name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Standardized name of a private company acknowledged in the publication.
   structured_acknowledgments.private_companies.entity:
     status: draft
     type: text
@@ -1446,20 +2205,25 @@ fields:
     analyzer: light
     ai_suggestion:
       description: Name or identifier of the private company acknowledged in the publication.
-  structured_acknowledgments.private_companies.grant_id:
+  structured_acknowledgments.private_companies.mention:
     status: draft
     type: text
     has_keyword: true
     ai_suggestion:
-      description: Grant or funding ID associated with the acknowledged private company.
-      notes: May be omitted if no grant was involved.
-  structured_acknowledgments.private_companies.program:
+      description: Exact text snippet mentioning a private company in the acknowledgments.
+  structured_acknowledgments.private_companies.name:
     status: draft
     type: text
     has_keyword: true
     ai_suggestion:
-      description: Program name under which the private company's contribution was
-        funded.
+      description: Name of the private company acknowledged in the publication.
+      notes: May include variations or abbreviations; not normalized.
+  structured_acknowledgments.private_companies.role:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Role or contribution of the private company in the publication.
   structured_acknowledgments.private_companies.type:
     status: draft
     type: text
@@ -1467,6 +2231,137 @@ fields:
     ai_suggestion:
       description: Category or classification of the acknowledged private company
         (e.g., 'sponsor').
+  structured_acknowledgments.programs:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Funding programs acknowledged in the publication.
+      notes: May include multiple programs with distinct funders or names.
+  structured_acknowledgments.programs.funder:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the organization funding the acknowledged program.
+  structured_acknowledgments.programs.mention:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Exact text of the funding program acknowledgment as cited in the
+        publication.
+  structured_acknowledgments.programs.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the funding program as referenced in the publication.
+  structured_acknowledgments.projects:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Research projects acknowledged in the publication.
+      notes: Projects may include multiple funders or countries.
+  structured_acknowledgments.projects.canonical_name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Standardized or official name of the acknowledged research project.
+  structured_acknowledgments.projects.country:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Country associated with the acknowledged research project.
+  structured_acknowledgments.projects.funder:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the organization funding the acknowledged research project.
+  structured_acknowledgments.projects.funder_short:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Short name or acronym of the funding organization for the project.
+      notes: Use this for concise display; prefer `funders` for full names or multiple
+        funders.
+  structured_acknowledgments.projects.funders:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Full name(s) of the funding organization(s) supporting the project.
+  structured_acknowledgments.projects.grant_id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Unique identifier for the grant associated with the project.
+      notes: May appear alongside `grant_ids` if multiple identifiers exist for the
+        same grant.
+  structured_acknowledgments.projects.grant_ids:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: List of grant identifiers associated with the project, if multiple
+        exist.
+  structured_acknowledgments.projects.mention:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Exact text snippet from the publication acknowledging the project.
+  structured_acknowledgments.projects.name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the project as stated in the publication's acknowledgments.
+  structured_acknowledgments.projects.programme:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Specific funding program under which the project was supported.
+      notes: Use `programs` if multiple programs are mentioned.
+  structured_acknowledgments.projects.programs:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: List of funding programs associated with the project, if multiple
+        exist.
+  structured_acknowledgments.projects.reconciled_name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Normalized or standardized name of the project for cross-referencing.
+      notes: Prefer this over `name` for linking to external databases or matching.
+  structured_acknowledgments.projects.role:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Role or contribution of the project in the context of the publication.
+  structured_acknowledgments.projects.type:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Classification of the acknowledged project (e.g., grant, initiative).
+      notes: Use this to filter or group projects by their funding or organizational
+        type.
+  structured_acknowledgments.projects.wikidata_qid:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Wikidata QID linking the project to its Wikidata entry for disambiguation.
   structured_acknowledgments.publication_id:
     status: draft
     type: text
@@ -1474,21 +2369,82 @@ fields:
     ai_suggestion:
       description: Unique identifier linking acknowledgments to the publication record.
       notes: Useful for cross-referencing with other metadata.
-  structured_acknowledgments.raw_md:
+  structured_acknowledgments.quality:
     status: draft
     type: text
     has_keyword: true
     ai_suggestion:
-      description: Markdown-formatted raw acknowledgments text as extracted from the
-        source.
-      notes: May contain formatting artifacts or unparsed sections; prefer `text`
-        for clean content.
+      description: Confidence score or quality assessment of the structured acknowledgment
+        data.
+  structured_acknowledgments.raw_output:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Original unprocessed acknowledgment text from which structured
+        data was derived.
+  structured_acknowledgments.reconciled_name:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Standardized name of the acknowledged entity after reconciliation.
+  structured_acknowledgments.register:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Official registry or database where the acknowledged entity is
+        recorded.
+  structured_acknowledgments.role:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Function or contribution of the acknowledged entity (e.g., funder,
+        collaborator).
   structured_acknowledgments.text:
     status: draft
     type: text
     analyzer: heavy
     ai_suggestion:
       description: Plain-text version of acknowledgments, normalized for readability.
+  structured_acknowledgments.truncated:
+    status: draft
+    type: boolean
+    ai_suggestion:
+      description: Indicates if the acknowledgment text was truncated during processing.
+  structured_acknowledgments.truncation_note:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Explanation or context for why the acknowledgment text was truncated.
+  structured_acknowledgments.type:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Category of the acknowledged entity (e.g., project, organization,
+        individual).
+  structured_acknowledgments.wikidata_qid:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Wikidata QID identifying the acknowledged entity in structured
+        acknowledgments.
+      notes: Use this field to link to external Wikidata records for funding bodies,
+        institutions, or individuals.
+  structured_acknowledgments.ṭīṭ:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Raw acknowledgment text in its original script, including non-Latin
+        characters.
+      notes: Preserved verbatim; may require Unicode-aware processing for display
+        or analysis.
   structures:
     status: draft
     type: object
@@ -1591,6 +2547,21 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: City where the research structure is primarily located.
+  structures.mainAddress.country:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Full name of the country where the structure's main address is
+        located.
+  structures.mainAddress.iso3:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: ISO 3166-1 alpha-3 country code for the structure's main address.
+      notes: Standardized 3-letter code; use for geolocation or cross-referencing
+        with other datasets.
   structures.mainAddress.region:
     status: draft
     type: text

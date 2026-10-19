@@ -1169,7 +1169,7 @@ fields:
     description: Lists the known relationships
   institutions.autocompleted:
     status: approved
-    type: text-array
+    type: string-array
     description: array of strings used for autocompletion
   institutions.denormalized:
     status: approved

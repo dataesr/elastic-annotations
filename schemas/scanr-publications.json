@@ -497,6 +497,10 @@
         "2025": {
           "type": "integer",
           "description": "Number of citations received by the publication in 2025."
+        },
+        "2026": {
+          "type": "integer",
+          "description": "Number of citations received by the publication in the year 2026."
         }
       }
     },
@@ -960,25 +964,323 @@
       "type": "object",
       "description": "Structured data for acknowledgments, including funders and infrastructures.",
       "properties": {
+        "adiniebel": {
+          "type": "string",
+          "description": "Text acknowledging ADINIEBEL funding or support in the publication."
+        },
+        "affiliation": {
+          "type": "string",
+          "description": "Raw affiliation text extracted from acknowledgments."
+        },
+        "attribution_style": {
+          "type": "string",
+          "description": "Style used to attribute acknowledgments (e.g., 'grant', 'in-kind')."
+        },
+        "canonical_name": {
+          "type": "string",
+          "description": "Normalized name of the acknowledged entity or funder."
+        },
+        "collective_entities": {
+          "type": "object",
+          "description": "Details about collective entities (e.g., consortia) acknowledged.",
+          "properties": {
+            "mention": {
+              "type": "string",
+              "description": "Exact text mention of the collective entity in acknowledgments."
+            },
+            "name": {
+              "type": "string",
+              "description": "Standardized name of the acknowledged collective entity."
+            },
+            "role": {
+              "type": "string",
+              "description": "Role of the collective entity in the acknowledgment (e.g., 'funder')."
+            }
+          }
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Type of content acknowledged (e.g., 'funding', 'technical support')."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country associated with the acknowledgment, typically where funding originated."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error message if parsing or processing the acknowledgment failed."
+        },
+        "funder": {
+          "type": "string",
+          "description": "Full name of the funding organization as stated in the acknowledgment."
+        },
+        "funder_short": {
+          "type": "string",
+          "description": "Short or abbreviated name of the funding organization."
+        },
         "funders": {
           "type": "object",
           "description": "Details about funding organizations acknowledged in the publication.",
           "properties": {
+            "award_id": {
+              "type": "string",
+              "description": "Identifier for the funding award or grant associated with the funder."
+            },
+            "canonical": {
+              "type": "string",
+              "description": "Standardized identifier for the funder, used for disambiguation."
+            },
+            "canonical_name": {
+              "type": "string",
+              "description": "Canonical name of the funder, normalized for consistency."
+            },
+            "country": {
+              "type": "string",
+              "description": "Country of the funder, derived from the funding organization's location."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "ISO country code of the funder's country, if available."
+            },
             "entity": {
               "type": "string",
               "description": "Name or identifier of the funding entity (e.g., agency, institution)."
+            },
+            "funder_short": {
+              "type": "string",
+              "description": "Short or abbreviated name of the funder, normalized for consistency."
+            },
+            "funders": {
+              "type": "string",
+              "description": "List of funding organizations extracted from acknowledgments."
             },
             "grant_id": {
               "type": "string",
               "description": "Grant or award identifier associated with the funding."
             },
+            "grant_ids": {
+              "type": "string",
+              "description": "Grant identifiers associated with the funding organization."
+            },
+            "infrastructure": {
+              "type": "object",
+              "description": "Details about research infrastructure linked to the funding.",
+              "properties": {
+                "mention": {
+                  "type": "string",
+                  "description": "Raw text mentioning the infrastructure in acknowledgments."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Normalized name of the research infrastructure."
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Type or category of the research infrastructure (e.g., lab, facility)."
+                }
+              }
+            },
+            "is_acknowledgement": {
+              "type": "boolean",
+              "description": "Indicates if the entry is a direct funding acknowledgment."
+            },
+            "mention": {
+              "type": "string",
+              "description": "Raw text mentioning the funder in acknowledgments."
+            },
+            "name": {
+              "type": "string",
+              "description": "Normalized name of the funding organization."
+            },
+            "persons": {
+              "type": "object",
+              "description": "Details about individuals acknowledged in relation to funding.",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Full name of a person acknowledged as a funder in the publication."
+                },
+                "role": {
+                  "type": "string",
+                  "description": "Role or contribution of a person acknowledged as a funder."
+                }
+              }
+            },
+            "private_companies": {
+              "type": "object",
+              "description": "Container for private company entities acknowledged as funders.",
+              "properties": {
+                "mention": {
+                  "type": "string",
+                  "description": "Raw text mention of a private company acknowledged as a funder."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Normalized name of a private company acknowledged as a funder."
+                },
+                "role": {
+                  "type": "string",
+                  "description": "Role or contribution of a private company acknowledged as a funder."
+                }
+              }
+            },
             "program": {
               "type": "string",
               "description": "Program or initiative under which the funding was awarded."
             },
+            "programme": {
+              "type": "string",
+              "description": "Name of a funding programme associated with the publication."
+            },
+            "programmes": {
+              "type": "string",
+              "description": "List of funding programme names (plural form)."
+            },
+            "programs": {
+              "type": "string",
+              "description": "Alternative spelling for funding programmes (plural form)."
+            },
+            "project": {
+              "type": "string",
+              "description": "Name of a funded project associated with the publication."
+            },
+            "projects": {
+              "type": "object",
+              "description": "Details of projects funded by the acknowledged funder.",
+              "properties": {
+                "funders": {
+                  "type": "string",
+                  "description": "Name or identifier of the entity funding the project."
+                },
+                "grant_id": {
+                  "type": "string",
+                  "description": "Unique identifier for the grant associated with the project."
+                },
+                "mention": {
+                  "type": "string",
+                  "description": "Exact text of the funding acknowledgment as it appears in the publication."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Name of the funded project as stated in the acknowledgment section."
+                }
+              }
+            },
+            "reconciled_name": {
+              "type": "string",
+              "description": "Normalized or standardized name of the funder after reconciliation."
+            },
+            "role": {
+              "type": "string",
+              "description": "Role or capacity in which the funder is acknowledged (e.g., sponsor, collaborator)."
+            },
+            "short_name": {
+              "type": "string",
+              "description": "Abbreviated or commonly used name of the funder."
+            },
+            "style": {
+              "type": "object",
+              "description": "Styling conventions or metadata for the funder's acknowledgment.",
+              "properties": {
+                "attribution_style": {
+                  "type": "string",
+                  "description": "Preferred citation style for attributing the funder in acknowledgments."
+                },
+                "content_type": {
+                  "type": "string",
+                  "description": "Type of content in the funder acknowledgment section (e.g., grant, sponsorship)."
+                },
+                "has_coi": {
+                  "type": "boolean",
+                  "description": "Indicates if the funder acknowledgment includes a conflict-of-interest statement."
+                },
+                "has_disclaimer": {
+                  "type": "boolean",
+                  "description": "Indicates if the funder acknowledgment includes a disclaimer statement."
+                },
+                "has_header": {
+                  "type": "boolean",
+                  "description": "Indicates if the funder acknowledgment includes a header (e.g., section title)."
+                },
+                "is_acknowledgement": {
+                  "type": "boolean",
+                  "description": "Indicates if the text is a dedicated acknowledgment of funders (vs. general notes)."
+                },
+                "is_truncated": {
+                  "type": "boolean",
+                  "description": "Indicates if the acknowledgment text was truncated during processing."
+                },
+                "language": {
+                  "type": "string",
+                  "description": "Language code (ISO 639-1) of the funder acknowledgment text."
+                },
+                "opening_style": {
+                  "type": "string",
+                  "description": "Stylistic opening phrase of the acknowledgment (e.g., 'We thank', 'Supported by')."
+                },
+                "quality": {
+                  "type": "string",
+                  "description": "Quality assessment of the parsed acknowledgment (e.g., 'high', 'medium', 'low')."
+                },
+                "register": {
+                  "type": "string",
+                  "description": "Register or tone of the acknowledgment (e.g., 'formal', 'informal')."
+                },
+                "truncation_note": {
+                  "type": "string",
+                  "description": "Note indicating if the funder's name was truncated for display."
+                }
+              }
+            },
+            "wikidata_qid": {
+              "type": "string",
+              "description": "Wikidata QID identifier for the funding organization."
+            }
+          }
+        },
+        "grant_id": {
+          "type": "string",
+          "description": "Unique identifier for a single grant associated with the publication."
+        },
+        "grant_ids": {
+          "type": "string",
+          "description": "List of grant identifiers associated with the publication, separated by a delimiter."
+        },
+        "has_coi": {
+          "type": "boolean",
+          "description": "Flag indicating if the publication includes a conflict-of-interest statement."
+        },
+        "has_disclaimer": {
+          "type": "boolean",
+          "description": "Flag indicating if the publication includes a disclaimer statement."
+        },
+        "has_header": {
+          "type": "boolean",
+          "description": "Flag indicating if the acknowledgments section has a header."
+        },
+        "ifeṭa": {
+          "type": "string",
+          "description": "IFEṬA (Institutional Framework for Ethical Text Analysis) classification for acknowledgments."
+        },
+        "infrastructure": {
+          "type": "object",
+          "description": "Details about research infrastructure acknowledged in the publication.",
+          "properties": {
+            "mention": {
+              "type": "string",
+              "description": "Raw text mentioning the research infrastructure in acknowledgments."
+            },
+            "name": {
+              "type": "string",
+              "description": "Human-readable name of the research infrastructure mentioned in acknowledgments."
+            },
+            "resource_id": {
+              "type": "string",
+              "description": "Persistent identifier (e.g., ROR, GRID) for the infrastructure, if available."
+            },
             "type": {
               "type": "string",
-              "description": "Type of funding entity (e.g., 'government', 'private', 'nonprofit')."
+              "description": "Category or class of the infrastructure (e.g., 'telescope', 'supercomputer')."
             }
           }
         },
@@ -986,17 +1288,107 @@
           "type": "object",
           "description": "Details about research infrastructures (e.g., facilities, equipment) acknowledged.",
           "properties": {
+            "accession_id": {
+              "type": "string",
+              "description": "Unique accession ID assigned to the infrastructure in a specific registry."
+            },
+            "canonical_name": {
+              "type": "string",
+              "description": "Standardized, official name of the infrastructure for disambiguation."
+            },
+            "country": {
+              "type": "string",
+              "description": "Country where the infrastructure is primarily located or registered."
+            },
             "entity": {
               "type": "string",
               "description": "Name or identifier of the infrastructure acknowledged in the publication."
+            },
+            "funder_short": {
+              "type": "string",
+              "description": "Abbreviated name of the primary funding organization for the infrastructure."
+            },
+            "funders": {
+              "type": "string",
+              "description": "List of all funding organizations supporting the infrastructure, if multiple."
             },
             "grant_id": {
               "type": "string",
               "description": "Grant or funding ID associated with the acknowledged infrastructure."
             },
-            "program": {
+            "mention": {
               "type": "string",
-              "description": "Program name under which the infrastructure was funded or operated."
+              "description": "Exact text snippet from the publication acknowledging the infrastructure."
+            },
+            "name": {
+              "type": "string",
+              "description": "Raw or unnormalized name of the infrastructure as it appears in acknowledgments."
+            },
+            "programs": {
+              "type": "string",
+              "description": "Lists funding programs associated with the acknowledged infrastructure."
+            },
+            "reconciled_name": {
+              "type": "string",
+              "description": "Standardized name of the infrastructure after reconciliation with a reference database."
+            },
+            "resource_id": {
+              "type": "string",
+              "description": "Unique identifier for the infrastructure in an external reference system."
+            },
+            "role": {
+              "type": "string",
+              "description": "Describes the function or contribution of the infrastructure in the publication."
+            },
+            "style": {
+              "type": "object",
+              "description": "Metadata about how the infrastructure acknowledgment is formatted or presented.",
+              "properties": {
+                "attribution_style": {
+                  "type": "string",
+                  "description": "Specifies the citation style used for attributing the infrastructure."
+                },
+                "content_type": {
+                  "type": "string",
+                  "description": "Indicates the type of content (e.g., grant, facility) being acknowledged."
+                },
+                "has_coi": {
+                  "type": "boolean",
+                  "description": "True if the acknowledgment includes a conflict-of-interest statement."
+                },
+                "has_disclaimer": {
+                  "type": "boolean",
+                  "description": "True if the acknowledgment includes a disclaimer about the infrastructure."
+                },
+                "has_header": {
+                  "type": "boolean",
+                  "description": "True if the acknowledgment includes a header (e.g., section title)."
+                },
+                "is_acknowledgement": {
+                  "type": "boolean",
+                  "description": "Indicates if the infrastructure mention is an acknowledgement."
+                },
+                "is_truncated": {
+                  "type": "boolean",
+                  "description": "Indicates if the infrastructure mention text was truncated during processing."
+                },
+                "language": {
+                  "type": "string",
+                  "description": "Language code (ISO 639-1) of the infrastructure acknowledgement text."
+                },
+                "opening_style": {
+                  "type": "string",
+                  "description": "Opening phrase or style used to introduce the infrastructure acknowledgement."
+                },
+                "quality": {
+                  "type": "string",
+                  "description": "Quality assessment of the parsed infrastructure acknowledgement (e.g., 'high', 'medium', 'low')."
+                },
+                "register": {
+                  "type": "string",
+                  "description": "Linguistic register of the infrastructure acknowledgement (e.g., 'formal', 'informal')."
+                }
+              }
             },
             "type": {
               "type": "string",
@@ -1004,21 +1396,121 @@
             }
           }
         },
+        "is_acknowledgement": {
+          "type": "boolean",
+          "description": "Indicates if the entire acknowledgements section is an acknowledgement."
+        },
+        "is_truncated": {
+          "type": "boolean",
+          "description": "Indicates if the acknowledgements section text was truncated during processing."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language code (ISO 639-1) of the acknowledgements section text."
+        },
+        "mention": {
+          "type": "string",
+          "description": "Raw text of the acknowledgements section before parsing."
+        },
+        "mention - is_truncated": {
+          "type": "boolean",
+          "description": "Indicates if the acknowledgment mention was truncated due to length."
+        },
+        "misclassified_as": {
+          "type": "string",
+          "description": "Specifies the correct classification if the acknowledgment was misclassified."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name or identifier of the entity being acknowledged."
+        },
+        "opening_style": {
+          "type": "string",
+          "description": "Style used to introduce the acknowledgment (e.g., 'We thank', 'Acknowledges')."
+        },
+        "persons": {
+          "type": "object",
+          "description": "Details about persons mentioned in the acknowledgment section.",
+          "properties": {
+            "affiliation": {
+              "type": "string",
+              "description": "Affiliation of the acknowledged person, if provided."
+            },
+            "department": {
+              "type": "string",
+              "description": "Department of the acknowledged person, if specified."
+            },
+            "mention": {
+              "type": "string",
+              "description": "Exact text mentioning the person in the acknowledgment."
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the person acknowledged, if explicitly stated."
+            },
+            "role": {
+              "type": "string",
+              "description": "Role or contribution of the acknowledged person (e.g., 'reviewer', 'collaborator')."
+            },
+            "service": {
+              "type": "string",
+              "description": "Service or department associated with a person acknowledged in the publication."
+            },
+            "university": {
+              "type": "string",
+              "description": "University or academic institution associated with a person acknowledged in the publication."
+            }
+          }
+        },
+        "persons_thanked": {
+          "type": "object",
+          "description": "Details of individuals explicitly thanked in the publication's acknowledgments.",
+          "properties": {
+            "affiliation": {
+              "type": "string",
+              "description": "Affiliation of a person thanked in the publication, as mentioned in the acknowledgments."
+            },
+            "country": {
+              "type": "string",
+              "description": "Country associated with the affiliation of a person thanked in the publication."
+            },
+            "name": {
+              "type": "string",
+              "description": "Full name of a person thanked in the publication's acknowledgments."
+            },
+            "role": {
+              "type": "string",
+              "description": "Role or contribution of a person thanked in the publication's acknowledgments."
+            }
+          }
+        },
         "private_companies": {
           "type": "object",
           "description": "Details of private companies acknowledged for contributions to the publication.",
           "properties": {
+            "affiliation": {
+              "type": "string",
+              "description": "Affiliation string for a private company mentioned in the acknowledgments."
+            },
+            "canonical_name": {
+              "type": "string",
+              "description": "Standardized name of a private company acknowledged in the publication."
+            },
             "entity": {
               "type": "string",
               "description": "Name or identifier of the private company acknowledged in the publication."
             },
-            "grant_id": {
+            "mention": {
               "type": "string",
-              "description": "Grant or funding ID associated with the acknowledged private company."
+              "description": "Exact text snippet mentioning a private company in the acknowledgments."
             },
-            "program": {
+            "name": {
               "type": "string",
-              "description": "Program name under which the private company's contribution was funded."
+              "description": "Name of the private company acknowledged in the publication."
+            },
+            "role": {
+              "type": "string",
+              "description": "Role or contribution of the private company in the publication."
             },
             "type": {
               "type": "string",
@@ -1026,17 +1518,137 @@
             }
           }
         },
+        "programs": {
+          "type": "object",
+          "description": "Funding programs acknowledged in the publication.",
+          "properties": {
+            "funder": {
+              "type": "string",
+              "description": "Name of the organization funding the acknowledged program."
+            },
+            "mention": {
+              "type": "string",
+              "description": "Exact text of the funding program acknowledgment as cited in the publication."
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the funding program as referenced in the publication."
+            }
+          }
+        },
+        "projects": {
+          "type": "object",
+          "description": "Research projects acknowledged in the publication.",
+          "properties": {
+            "canonical_name": {
+              "type": "string",
+              "description": "Standardized or official name of the acknowledged research project."
+            },
+            "country": {
+              "type": "string",
+              "description": "Country associated with the acknowledged research project."
+            },
+            "funder": {
+              "type": "string",
+              "description": "Name of the organization funding the acknowledged research project."
+            },
+            "funder_short": {
+              "type": "string",
+              "description": "Short name or acronym of the funding organization for the project."
+            },
+            "funders": {
+              "type": "string",
+              "description": "Full name(s) of the funding organization(s) supporting the project."
+            },
+            "grant_id": {
+              "type": "string",
+              "description": "Unique identifier for the grant associated with the project."
+            },
+            "grant_ids": {
+              "type": "string",
+              "description": "List of grant identifiers associated with the project, if multiple exist."
+            },
+            "mention": {
+              "type": "string",
+              "description": "Exact text snippet from the publication acknowledging the project."
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the project as stated in the publication's acknowledgments."
+            },
+            "programme": {
+              "type": "string",
+              "description": "Specific funding program under which the project was supported."
+            },
+            "programs": {
+              "type": "string",
+              "description": "List of funding programs associated with the project, if multiple exist."
+            },
+            "reconciled_name": {
+              "type": "string",
+              "description": "Normalized or standardized name of the project for cross-referencing."
+            },
+            "role": {
+              "type": "string",
+              "description": "Role or contribution of the project in the context of the publication."
+            },
+            "type": {
+              "type": "string",
+              "description": "Classification of the acknowledged project (e.g., grant, initiative)."
+            },
+            "wikidata_qid": {
+              "type": "string",
+              "description": "Wikidata QID linking the project to its Wikidata entry for disambiguation."
+            }
+          }
+        },
         "publication_id": {
           "type": "string",
           "description": "Unique identifier linking acknowledgments to the publication record."
         },
-        "raw_md": {
+        "quality": {
           "type": "string",
-          "description": "Markdown-formatted raw acknowledgments text as extracted from the source."
+          "description": "Confidence score or quality assessment of the structured acknowledgment data."
+        },
+        "raw_output": {
+          "type": "string",
+          "description": "Original unprocessed acknowledgment text from which structured data was derived."
+        },
+        "reconciled_name": {
+          "type": "string",
+          "description": "Standardized name of the acknowledged entity after reconciliation."
+        },
+        "register": {
+          "type": "string",
+          "description": "Official registry or database where the acknowledged entity is recorded."
+        },
+        "role": {
+          "type": "string",
+          "description": "Function or contribution of the acknowledged entity (e.g., funder, collaborator)."
         },
         "text": {
           "type": "string",
           "description": "Plain-text version of acknowledgments, normalized for readability."
+        },
+        "truncated": {
+          "type": "boolean",
+          "description": "Indicates if the acknowledgment text was truncated during processing."
+        },
+        "truncation_note": {
+          "type": "string",
+          "description": "Explanation or context for why the acknowledgment text was truncated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Category of the acknowledged entity (e.g., project, organization, individual)."
+        },
+        "wikidata_qid": {
+          "type": "string",
+          "description": "Wikidata QID identifying the acknowledged entity in structured acknowledgments."
+        },
+        "ṭīṭ": {
+          "type": "string",
+          "description": "Raw acknowledgment text in its original script, including non-Latin characters."
         }
       }
     },
@@ -1111,6 +1723,14 @@
             "city": {
               "type": "string",
               "description": "City where the research structure is primarily located."
+            },
+            "country": {
+              "type": "string",
+              "description": "Full name of the country where the structure's main address is located."
+            },
+            "iso3": {
+              "type": "string",
+              "description": "ISO 3166-1 alpha-3 country code for the structure's main address."
             },
             "region": {
               "type": "string",

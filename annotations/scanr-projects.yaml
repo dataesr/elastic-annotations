@@ -5,7 +5,6 @@ _meta:
   total_fields: 171
   approved: 21
   draft: 150
-  pending_review: 148
 fields:
   acronym:
     status: approved
@@ -243,18 +242,18 @@ fields:
   co_domains:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two mentioned domain as text
+    has_keyword: true
   co_institutions:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two affiliated institutions as text
+    has_keyword: true
   co_structures:
     status: approved
     type: text-array
-    has_keyword: true
     description: List of all combinations of two affiliated structures as text
+    has_keyword: true
   comite:
     status: draft
     type: text
@@ -1080,7 +1079,7 @@ fields:
       notes: Order reflects contribution hierarchy; may include non-partner contributors.
   publications.source.journalIssns:
     status: approved
-    type: text-array
+    type: string-array
     description: The ISSNs of the journal.
   publicationsCount:
     status: draft
