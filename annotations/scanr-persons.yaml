@@ -2,9 +2,10 @@ _meta:
   index: scanr-persons
   description: Researchers and authors with their affiliations and identifiers (ORCID,
     IdRef). One document is one person.
-  total_fields: 186
+  total_fields: 191
   approved: 45
-  draft: 141
+  draft: 146
+  pending_review: 145
 fields:
   acronym:
     status: draft
@@ -50,12 +51,14 @@ fields:
   address.city:
     status: draft
     type: text
+    has_keyword: true
     analyzer: light
     ai_suggestion:
       description: City of the person's primary affiliation address
   address.country:
     status: draft
     type: text
+    has_keyword: true
     analyzer: light
     ai_suggestion:
       description: Country of the person's primary affiliation address
@@ -249,6 +252,13 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: Default name of the institution if no language preference is set
+  affiliations.structure.label.en:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: English label of the affiliated organization or institution.
+      notes: Use this for display purposes when the interface language is English.
   affiliations.structure.label.fr:
     status: draft
     type: text
@@ -305,6 +315,20 @@ fields:
     ai_suggestion:
       description: Longitude coordinate of the affiliation's main address for mapping
         purposes
+  affiliations.structure.mainAddress.iso2:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: ISO 3166-1 alpha-2 country code of the affiliation's main address.
+      notes: Prefer this for concise country identification in APIs or filters.
+  affiliations.structure.mainAddress.iso3:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: ISO 3166-1 alpha-3 country code of the affiliation's main address.
+      notes: Use when a three-letter country code is required for compatibility.
   affiliations.structure.mainAddress.postcode:
     status: draft
     type: text
@@ -1045,6 +1069,22 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: City of the affiliated organization's main address
+  recentAffiliations.structure.mainAddress.country:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Full country name of the most recent affiliation's main address.
+      notes: Use for human-readable output or when ISO codes are not supported.
+  recentAffiliations.structure.mainAddress.iso3:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: ISO 3166-1 alpha-3 country code of the most recent affiliation's
+        main address.
+      notes: Use this for consistency with other affiliation records when a three-letter
+        code is needed.
   recentAffiliations.structure.mainAddress.postcode:
     status: draft
     type: text

@@ -165,6 +165,10 @@
                     "type": "string",
                     "description": "Default name of the institution if no language preference is set"
                   },
+                  "en": {
+                    "type": "string",
+                    "description": "English label of the affiliated organization or institution."
+                  },
                   "fr": {
                     "type": "string",
                     "description": "French name of the institution"
@@ -204,6 +208,14 @@
                         "description": "Longitude coordinate of the affiliation's main address for mapping purposes"
                       }
                     }
+                  },
+                  "iso2": {
+                    "type": "string",
+                    "description": "ISO 3166-1 alpha-2 country code of the affiliation's main address."
+                  },
+                  "iso3": {
+                    "type": "string",
+                    "description": "ISO 3166-1 alpha-3 country code of the affiliation's main address."
                   },
                   "postcode": {
                     "type": "string",
@@ -761,6 +773,14 @@
                   "city": {
                     "type": "string",
                     "description": "City of the affiliated organization's main address"
+                  },
+                  "country": {
+                    "type": "string",
+                    "description": "Full country name of the most recent affiliation's main address."
+                  },
+                  "iso3": {
+                    "type": "string",
+                    "description": "ISO 3166-1 alpha-3 country code of the most recent affiliation's main address."
                   },
                   "postcode": {
                     "type": "string",
