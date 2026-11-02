@@ -5,7 +5,6 @@ _meta:
   total_fields: 191
   approved: 45
   draft: 146
-  pending_review: 145
 fields:
   acronym:
     status: draft

@@ -2,9 +2,10 @@ _meta:
   index: scanr-organizations
   description: Research organizations and laboratories (universities, CNRS units,
     etc.). One document is one organization.
-  total_fields: 598
+  total_fields: 491
   approved: 23
-  draft: 575
+  draft: 468
+  pending_review: 464
 fields:
   acronym:
     status: draft
@@ -395,438 +396,6 @@ fields:
     has_keyword: true
     primary: true
     required: true
-  incubateurOf:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Details about startups or projects incubated by the organization.
-      notes: Contains nested fields for denormalized data to simplify queries about
-        incubated entities.
-  incubateurOf.denormalized:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Denormalized metadata about incubated entities for faster retrieval.
-      notes: Pre-joined data to avoid costly nested queries; includes acronyms, categories,
-        and IDs.
-  incubateurOf.denormalized.acronym:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Acronyms associated with the incubated entity, keyed by language
-        or type.
-  incubateurOf.denormalized.acronym.default:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Default acronym of the incubated entity if no language-specific
-        version exists.
-  incubateurOf.denormalized.acronym.fr:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: French-language acronym of the incubated entity, if available.
-  incubateurOf.denormalized.categories:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: High-level categories or sectors the incubated entity belongs to.
-      notes: May include terms like 'biotech', 'fintech', or 'cleantech' for filtering.
-  incubateurOf.denormalized.encoded_key:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Unique encoded key for the incubated entity, often from an external
-        system.
-      notes: Use this for cross-referencing with other datasets or APIs.
-  incubateurOf.denormalized.id:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Primary identifier of the incubated entity within the incubating
-        organization.
-      notes: Not a global PID; scoped to the parent organization's system.
-  incubateurOf.denormalized.id_name:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Combined identifier and name of the incubator this organization
-        belongs to, for display purposes.
-  incubateurOf.denormalized.id_name_default:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Default display string combining identifier and name of the incubator.
-      notes: Use when no language preference is specified or when the preferred language
-        version is unavailable.
-  incubateurOf.denormalized.isFrench:
-    status: draft
-    type: boolean
-    ai_suggestion:
-      description: Indicates whether the incubator is located in France.
-  incubateurOf.denormalized.is_main_parent:
-    status: draft
-    type: long
-    ai_suggestion:
-      description: Flag marking the primary parent incubator relationship (1 for main,
-        0 otherwise).
-  incubateurOf.denormalized.kind:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Categorizes the type of incubator (e.g., public, private, university-affiliated).
-  incubateurOf.denormalized.label:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Multilingual labels for the incubator this organization belongs
-        to.
-  incubateurOf.denormalized.label.default:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Default label for the incubator, used when no language is specified.
-      notes: Fallback when the requested language label is missing.
-  incubateurOf.denormalized.label.fr:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: French label for the incubator this organization belongs to.
-  incubateurOf.denormalized.mainAddress:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Primary address details for the incubator this organization belongs
-        to.
-  incubateurOf.denormalized.mainAddress.address:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Full formatted address of the incubator's main location.
-      notes: May include street, city, postal code, and country for geolocation purposes.
-  incubateurOf.denormalized.mainAddress.city:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: City of the incubator's main address.
-      notes: Use for location-based filtering or display purposes.
-  incubateurOf.denormalized.mainAddress.country:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Country of the incubator's main address.
-      notes: Prefer ISO3 code for standardization when available.
-  incubateurOf.denormalized.mainAddress.gps:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Geographic coordinates of the incubator's main address.
-  incubateurOf.denormalized.mainAddress.gps.lat:
-    status: draft
-    type: float
-    ai_suggestion:
-      description: Latitude coordinate of the incubator's main address.
-  incubateurOf.denormalized.mainAddress.gps.lon:
-    status: draft
-    type: float
-    ai_suggestion:
-      description: Longitude coordinate of the incubator's main address.
-  incubateurOf.denormalized.mainAddress.iso3:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: ISO3 country code of the incubator's main address.
-      notes: Use for consistent country identification.
-  incubateurOf.denormalized.mainAddress.postcode:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Postal code of the incubator's main address.
-      notes: Format varies by country.
-  incubateurOf.denormalized.mainAddress.region:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Region or state of the incubator's main address.
-      notes: May be empty for some countries.
-  incubateurOf.denormalized.main_category:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Primary category classifying the incubator's focus or type.
-      notes: Use for thematic filtering or grouping.
-  incubateurOf.denormalized.status:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Operational status of the incubator (e.g., active, closed).
-      notes: Use to filter out inactive incubators.
-  incubateurOf.denormalized.typologie_1:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Primary classification label for the incubator linked to the organization.
-      notes: Used for broad categorization; may overlap with typologie_2.
-  incubateurOf.denormalized.typologie_2:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Secondary classification label for the incubator linked to the
-        organization.
-      notes: Provides finer-grained categorization when typologie_1 is too broad.
-  incubateurOf.natural_id:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Unique identifier for the incubator associated with the organization.
-      notes: Persistent across systems; prefer over encoded_key for stable references.
-  incubateurOf.structure:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Name or title of the incubator linked to the organization.
-  incubateurs:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Container for all incubator-related metadata associated with the
-        organization.
-  incubateurs.denormalized:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Pre-computed, flattened representation of incubator data for faster
-        queries.
-  incubateurs.denormalized.acronym:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Acronyms of incubators linked to the organization, denormalized
-        for quick access.
-      notes: Use this field to display or match incubator acronyms without resolving
-        nested references.
-  incubateurs.denormalized.acronym.default:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Default acronym of the incubator in unspecified or fallback language.
-      notes: Prefer this field when no language-specific acronym is available or required.
-  incubateurs.denormalized.acronym.fr:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: French acronym of the incubator associated with the organization.
-  incubateurs.denormalized.categories:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: High-level grouping labels for the incubator (e.g., public, private).
-  incubateurs.denormalized.encoded_key:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: System-generated unique key for the incubator record.
-      notes: May change across data refreshes; avoid using as a primary reference.
-  incubateurs.denormalized.id:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Unique identifier for the incubator in its source system.
-  incubateurs.denormalized.id_name:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Human-readable identifier combining the incubator's ID and name.
-  incubateurs.denormalized.id_name_default:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Default name and identifier of the incubator linked to the organization.
-      notes: Used for display purposes when no specific language label is available.
-  incubateurs.denormalized.institutions:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Institutions associated with the incubator, including their details
-        and relationships.
-  incubateurs.denormalized.institutions.label:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Human-readable name of the institution linked to the incubator.
-  incubateurs.denormalized.institutions.natural_id:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Persistent identifier (PID) of the institution linked to the incubator.
-  incubateurs.denormalized.institutions.relationType:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Type of relationship between the incubator and the associated institution.
-  incubateurs.denormalized.institutions.structure:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Structural classification or type of the institution linked to
-        the incubator.
-  incubateurs.denormalized.isFrench:
-    status: draft
-    type: boolean
-    ai_suggestion:
-      description: Indicates whether the incubator is based in France (true) or abroad
-        (false).
-  incubateurs.denormalized.is_main_parent:
-    status: draft
-    type: long
-    ai_suggestion:
-      description: Numeric flag indicating if this incubator is the primary parent
-        organization.
-  incubateurs.denormalized.kind:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Categorization of the incubator (e.g., public, private, academic).
-  incubateurs.denormalized.label:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Localized names of the incubator in multiple languages.
-      notes: Use the appropriate language key (e.g., 'en', 'fr') to retrieve the label.
-  incubateurs.denormalized.label.fr:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: French label of the incubator associated with the organization.
-      notes: Use this field when the context or user language is French.
-  incubateurs.denormalized.mainAddress:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Primary address details of the incubator associated with the organization.
-  incubateurs.denormalized.mainAddress.address:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Full street address of the incubator’s main location.
-  incubateurs.denormalized.mainAddress.city:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: City where the incubator’s main address is located.
-  incubateurs.denormalized.mainAddress.country:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Country where the incubator’s main address is located.
-  incubateurs.denormalized.mainAddress.gps:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Geographic coordinates (latitude and longitude) of the incubator’s
-        main address.
-  incubateurs.denormalized.mainAddress.gps.lat:
-    status: draft
-    type: float
-    ai_suggestion:
-      description: Latitude coordinate of the incubator’s main address.
-      notes: Use for mapping or distance calculations.
-  incubateurs.denormalized.mainAddress.gps.lon:
-    status: draft
-    type: float
-    ai_suggestion:
-      description: Longitude coordinate of the incubator’s main address.
-      notes: Use for mapping or distance calculations.
-  incubateurs.denormalized.mainAddress.iso3:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: ISO 3-letter country code for the incubator’s main address.
-      notes: Use for standardized country identification.
-  incubateurs.denormalized.mainAddress.postcode:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Postal code of the incubator's main address.
-      notes: Use for geolocation or filtering by administrative area.
-  incubateurs.denormalized.mainAddress.region:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Administrative region of the incubator's main address.
-      notes: May differ from the organization's primary region if the incubator is
-        off-site.
-  incubateurs.denormalized.main_category:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Primary category classifying the incubator's focus or specialization.
-  incubateurs.denormalized.status:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Operational status of the incubator (e.g., active, closed).
-  incubateurs.denormalized.typologie_1:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: First-level typology tag describing the incubator's model or scope.
-  incubateurs.denormalized.typologie_2:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Second-level typology tag refining the incubator's classification.
-  incubateurs.structure:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Name of the incubator structure associated with the organization.
   institutionOf:
     status: draft
     type: object
@@ -959,6 +528,14 @@ fields:
     type: boolean
     ai_suggestion:
       description: Indicates whether the linked institution is based in France
+  institutionOf.denormalized.is_part_of_super_organization:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: Flag indicating if the organization is part of a larger super-organization
+        (1 for true, 0 for false).
+      notes: Used for hierarchical queries; 1 means the organization has a parent
+        in the hierarchy.
   institutionOf.denormalized.kind:
     status: draft
     type: text
@@ -1100,6 +677,15 @@ fields:
     ai_suggestion:
       description: Operational status of the organization (e.g., 'active', 'closed'),
         denormalized for queries.
+  institutionOf.denormalized.super_organization_parent:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the immediate parent super-organization this organization
+        belongs to.
+      notes: Denormalized for performance; may not reflect real-time updates to parent
+        organization names.
   institutionOf.denormalized.typologie_1:
     status: draft
     type: text
@@ -1277,6 +863,20 @@ fields:
     type: long
     ai_suggestion:
       description: Flag marking the primary parent institution of the organization.
+  institutions.denormalized.is_part_of_super_organization:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: Flag indicating if the institution is part of a larger super-organization
+        (1 for true, 0 for false).
+      notes: Mirror of 'is_part_of_super_organization' for nested institution objects.
+  institutions.denormalized.is_super_organization:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: Flag indicating if the institution acts as a super-organization
+        (1 for true, 0 for false).
+      notes: Super-organizations typically contain child institutions or sub-units.
   institutions.denormalized.kind:
     status: draft
     type: text
@@ -1368,6 +968,34 @@ fields:
     ai_suggestion:
       description: Operational or legal status of the organization.
       notes: 'Examples: ''Active'', ''Closed'', ''Merged''.'
+  institutions.denormalized.super_organization_children:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: List of child organizations under this super-organization.
+      notes: Structure allows querying child organizations without additional lookups.
+  institutions.denormalized.super_organization_children.displayName:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Display name of a child organization under this super-organization.
+      notes: Denormalized for performance; may not match the latest official name.
+  institutions.denormalized.super_organization_children.id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Identifier of a child organization under this super-organization.
+      notes: Use this ID to fetch full details of the child organization.
+  institutions.denormalized.super_organization_parent:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Name of the immediate parent super-organization for this institution.
+      notes: Denormalized for performance; may not reflect real-time updates to parent
+        names.
   institutions.denormalized.typologie_1:
     status: draft
     type: text
@@ -1455,6 +1083,19 @@ fields:
     ai_suggestion:
       description: Numeric rank indicating the organization's primary parent relationship.
       notes: 0 denotes the top-level parent; higher values denote deeper nesting.
+  is_part_of_super_organization:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: Flag indicating if the organization is part of a larger super-organization
+        (1 for true, 0 for false).
+  is_super_organization:
+    status: draft
+    type: long
+    ai_suggestion:
+      description: Flag indicating if the organization acts as a super-organization
+        (1 for true, 0 for false).
+      notes: Super-organizations may have child institutions or sub-units.
   keywords:
     status: draft
     type: object
@@ -1864,6 +1505,20 @@ fields:
     ai_suggestion:
       description: City of a child organization's main address
       notes: Extracted from the full address for filtering or geolocation purposes.
+  parentOf.denormalized.mainAddress.country:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Country name of the child organization's main address.
+      notes: Used for hierarchical relationships; denormalized for performance.
+  parentOf.denormalized.mainAddress.iso3:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: ISO 3166-1 alpha-3 country code of the child organization's main
+        address.
   parentOf.denormalized.mainAddress.postcode:
     status: draft
     type: text
@@ -2145,6 +1800,20 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: City of the parent organization's main address.
+  parents.denormalized.mainAddress.country:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Country name of the parent organization's main address.
+      notes: Denormalized to avoid repeated lookups in parent records.
+  parents.denormalized.mainAddress.iso3:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: ISO 3166-1 alpha-3 country code of the parent organization's main
+        address.
   parents.denormalized.mainAddress.postcode:
     status: draft
     type: text
@@ -2491,6 +2160,20 @@ fields:
     ai_suggestion:
       description: City of the predecessor's main address.
       notes: Normalized where possible; may include historical city names.
+  predecessors.denormalized.mainAddress.country:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Country name of the predecessor organization's main address.
+      notes: Predecessors are former entities merged into or replaced by this organization.
+  predecessors.denormalized.mainAddress.iso3:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: ISO 3166-1 alpha-3 country code of the predecessor organization's
+        main address.
   predecessors.denormalized.mainAddress.postcode:
     status: draft
     type: text
@@ -2833,6 +2516,20 @@ fields:
     has_keyword: true
     ai_suggestion:
       description: City of the related organization's main address.
+  relationOf.denormalized.mainAddress.country:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Country name of the related organization's main address.
+      notes: Relation types (e.g., partnerships) are defined elsewhere in the document.
+  relationOf.denormalized.mainAddress.iso3:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: ISO 3166-1 alpha-3 country code of the related organization's main
+        address.
   relationOf.denormalized.mainAddress.postcode:
     status: draft
     type: text
@@ -3390,411 +3087,6 @@ fields:
     status: approved
     type: string
     description: Start date
-  startup_linkOf:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Links to organizations that spawned this startup, with denormalized
-        details for quick access.
-  startup_linkOf.denormalized:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Denormalized snapshot of the parent organization's key fields.
-      notes: Use this for display or filtering without additional lookups.
-  startup_linkOf.denormalized.acronym:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Acronyms of the parent organization in multiple languages.
-  startup_linkOf.denormalized.acronym.default:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Default acronym of the parent organization.
-      notes: Fallback when no language-specific acronym is available.
-  startup_linkOf.denormalized.acronym.fr:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: French acronym of the parent organization.
-  startup_linkOf.denormalized.categories:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Categories or tags associated with the parent organization.
-      notes: May include research domains, types, or other classifications.
-  startup_linkOf.denormalized.encoded_key:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Unique encoded key of the parent organization in its source system.
-  startup_linkOf.denormalized.id:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Identifier of the parent organization in its source system.
-  startup_linkOf.denormalized.id_name:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Name of the identifier type used for the parent organization.
-      notes: E.g., 'RNSR', 'SIREN', or 'GRID'.
-  startup_linkOf.denormalized.id_name_default:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Default name of the identifier type for the parent organization.
-      notes: Fallback when no specific identifier name is provided.
-  startup_linkOf.denormalized.isFrench:
-    status: draft
-    type: boolean
-    ai_suggestion:
-      description: Indicates if the linked startup is French
-      notes: Use to filter or highlight French startups in queries.
-  startup_linkOf.denormalized.is_main_parent:
-    status: draft
-    type: long
-    ai_suggestion:
-      description: Rank of the parent organization in the startup's hierarchy
-      notes: 1 denotes the primary parent; higher values indicate secondary parents.
-  startup_linkOf.denormalized.kind:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Categorizes the type of linked startup (e.g., incubator, spin-off)
-      notes: Values may include controlled terms like 'incubator' or 'accelerator'.
-  startup_linkOf.denormalized.label:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Multilingual labels for the linked startup
-      notes: Contains localized names; default language is English if unspecified.
-  startup_linkOf.denormalized.label.fr:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: French name of the linked startup
-      notes: Use for French-language contexts or user interfaces.
-  startup_linkOf.denormalized.mainAddress:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Primary physical address details of the linked startup
-      notes: Includes street, city, and country; may be partial or incomplete.
-  startup_linkOf.denormalized.mainAddress.address:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Street address of the linked startup's main location
-      notes: May include building number, street name, and postal code.
-  startup_linkOf.denormalized.mainAddress.city:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: City of the linked startup's main address
-      notes: Normalized to official city names where possible.
-  startup_linkOf.denormalized.mainAddress.country:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Country of the linked startup's main address
-      notes: Stored as full country name (e.g., 'France').
-  startup_linkOf.denormalized.mainAddress.gps:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Geographic coordinates of the organization's main address.
-      notes: Use for mapping or distance-based queries; may be null if address is
-        unverified.
-  startup_linkOf.denormalized.mainAddress.gps.lat:
-    status: draft
-    type: float
-    ai_suggestion:
-      description: Latitude component of the main address GPS coordinates.
-      notes: 'Value range: -90.0 to 90.0; validate before use in spatial queries.'
-  startup_linkOf.denormalized.mainAddress.gps.lon:
-    status: draft
-    type: float
-    ai_suggestion:
-      description: Longitude component of the main address GPS coordinates.
-      notes: 'Value range: -180.0 to 180.0; validate before use in spatial queries.'
-  startup_linkOf.denormalized.mainAddress.iso3:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: ISO 3166-1 alpha-3 country code for the organization's main address.
-  startup_linkOf.denormalized.mainAddress.postcode:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Postal code of the organization's main address.
-      notes: Format varies by country; may include letters or spaces.
-  startup_linkOf.denormalized.mainAddress.region:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Administrative region (e.g., state, province) of the main address.
-  startup_linkOf.denormalized.main_category:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Primary category classification of the linked startup organization.
-  startup_linkOf.denormalized.status:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Operational or legal status of the linked startup organization.
-  startup_linkOf.denormalized.typologie_1:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Primary typology classification for the linked startup organization.
-  startup_linkOf.denormalized.typologie_2:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Secondary typology classification for the linked startup organization.
-      notes: May be null if no secondary classification exists.
-  startup_linkOf.natural_id:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Natural identifier of the linked parent organization in the startup
-        context.
-      notes: Used to resolve relationships between startups and their founding organizations.
-  startup_linkOf.structure:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Name or label of the parent organization linked to the startup.
-  startup_links:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Aggregates all startup-related links and denormalized metadata
-        for this organization.
-  startup_links.denormalized:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Pre-computed, flattened representation of linked startup data for
-        faster queries.
-  startup_links.denormalized.acronym:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Container for multilingual acronyms of the linked startup.
-  startup_links.denormalized.acronym.default:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Default acronym of the linked startup if no language-specific version
-        exists.
-  startup_links.denormalized.acronym.en:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: English acronym of the linked startup, denormalized for direct
-        retrieval.
-      notes: Use this for English-language contexts or when language-specific data
-        is prioritized.
-  startup_links.denormalized.acronym.fr:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: French-language acronym of the linked startup.
-  startup_links.denormalized.categories:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Comma-separated list of categories/tags describing the linked startup's
-        domain.
-  startup_links.denormalized.encoded_key:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Internal encoded key for the linked startup, used for system references.
-  startup_links.denormalized.id:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Unique identifier of the linked startup within the denormalized
-        structure.
-  startup_links.denormalized.id_name:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Combined identifier and name of linked startups for display purposes.
-  startup_links.denormalized.id_name_default:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Default display name for linked startups when no specific name
-        exists.
-      notes: Falls back to a standardized format if 'id_name' is missing or incomplete.
-  startup_links.denormalized.isFrench:
-    status: draft
-    type: boolean
-    ai_suggestion:
-      description: Indicates if the linked startup is French (true) or foreign (false).
-      notes: Use to filter or highlight French startups in queries.
-  startup_links.denormalized.is_main_parent:
-    status: draft
-    type: long
-    ai_suggestion:
-      description: Numeric flag (1) marking the primary parent organization of the
-        startup.
-      notes: Only one parent per startup should have this flag set.
-  startup_links.denormalized.kind:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Categorizes the type of relationship between the organization and
-        the startup.
-  startup_links.denormalized.label:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Multilingual display name of the linked startup or organization.
-  startup_links.denormalized.label.fr:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: French localized name of the linked startup or organization.
-  startup_links.denormalized.mainAddress:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Primary physical address details of the linked startup or organization.
-  startup_links.denormalized.mainAddress.address:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Full formatted address string of the linked startup or organization.
-  startup_links.denormalized.mainAddress.city:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: City name extracted from the main address of the linked entity.
-  startup_links.denormalized.mainAddress.country:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Country name of the organization's main address.
-      notes: Use for location-based filtering or mapping. Prefer 'iso3' for programmatic
-        country matching.
-  startup_links.denormalized.mainAddress.gps:
-    status: draft
-    type: object
-    ai_suggestion:
-      description: Geographic coordinates of the organization's main address.
-  startup_links.denormalized.mainAddress.gps.lat:
-    status: draft
-    type: float
-    ai_suggestion:
-      description: Latitude coordinate of the organization's main address.
-  startup_links.denormalized.mainAddress.gps.lon:
-    status: draft
-    type: float
-    ai_suggestion:
-      description: Longitude coordinate of the organization's main address.
-  startup_links.denormalized.mainAddress.iso3:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: ISO 3166-1 alpha-3 country code for the organization's main address.
-      notes: Use for standardized country identification and cross-referencing with
-        other datasets.
-  startup_links.denormalized.mainAddress.postcode:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Postal code of the organization's main address.
-      notes: Format varies by country; may include letters or spaces.
-  startup_links.denormalized.mainAddress.region:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Administrative region (e.g., state, province) of the organization's
-        main address.
-      notes: Region names are country-specific and may not be standardized.
-  startup_links.denormalized.main_category:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Primary category classification of the linked startup entity.
-      notes: Use to infer the startup's industry or focus area.
-  startup_links.denormalized.status:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Operational status of the linked startup entity (e.g., active,
-        closed).
-      notes: Use to filter or analyze startup lifecycle stages.
-  startup_links.denormalized.typologie_1:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Top-level typology classification of the linked startup entity.
-      notes: May indicate business model, sector, or organizational type.
-  startup_links.denormalized.typologie_2:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Second-level typology label for startups linked to the organization,
-        denormalized for search.
-      notes: Use this field to filter or group startups by their broader category
-        (e.g., 'DeepTech').
-  startup_links.structure:
-    status: draft
-    type: text
-    has_keyword: true
-    ai_suggestion:
-      description: Name of the parent structure associated with a linked startup.
-      notes: May contain duplicates or variations of the organization's own name;
-        normalize before comparison.
   status:
     status: approved
     type: string
@@ -3804,6 +3096,35 @@ fields:
     enum:
     - active
     - inactive
+  super_organization_children:
+    status: draft
+    type: object
+    ai_suggestion:
+      description: Nested objects representing direct subordinate organizations.
+      notes: Used for hierarchical queries; excludes indirect descendants.
+  super_organization_children.displayName:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Human-readable name of the subordinate organization.
+      notes: Preferred over internal IDs for display purposes.
+  super_organization_children.id:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Persistent identifier of a direct child organization within the
+        hierarchy.
+      notes: Use to traverse downward; only populated if the document is a parent
+        (super-organization).
+  super_organization_parent:
+    status: draft
+    type: text
+    has_keyword: true
+    ai_suggestion:
+      description: Persistent identifier of the immediate parent organization.
+      notes: Use to traverse upward; omitted if the organization is top-level.
   title_abs_text:
     status: draft
     type: text

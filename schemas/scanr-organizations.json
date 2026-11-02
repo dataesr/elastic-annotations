@@ -272,300 +272,6 @@
       "type": "string",
       "description": "Main PID of the organizations. For now can be either an RNSR, SIREN, or GRID (should change to RoR)."
     },
-    "incubateurOf": {
-      "type": "object",
-      "description": "Details about startups or projects incubated by the organization.",
-      "properties": {
-        "denormalized": {
-          "type": "object",
-          "description": "Denormalized metadata about incubated entities for faster retrieval.",
-          "properties": {
-            "acronym": {
-              "type": "object",
-              "description": "Acronyms associated with the incubated entity, keyed by language or type.",
-              "properties": {
-                "default": {
-                  "type": "string",
-                  "description": "Default acronym of the incubated entity if no language-specific version exists."
-                },
-                "fr": {
-                  "type": "string",
-                  "description": "French-language acronym of the incubated entity, if available."
-                }
-              }
-            },
-            "categories": {
-              "type": "string",
-              "description": "High-level categories or sectors the incubated entity belongs to."
-            },
-            "encoded_key": {
-              "type": "string",
-              "description": "Unique encoded key for the incubated entity, often from an external system."
-            },
-            "id": {
-              "type": "string",
-              "description": "Primary identifier of the incubated entity within the incubating organization."
-            },
-            "id_name": {
-              "type": "string",
-              "description": "Combined identifier and name of the incubator this organization belongs to, for display purposes."
-            },
-            "id_name_default": {
-              "type": "string",
-              "description": "Default display string combining identifier and name of the incubator."
-            },
-            "isFrench": {
-              "type": "boolean",
-              "description": "Indicates whether the incubator is located in France."
-            },
-            "is_main_parent": {
-              "type": "integer",
-              "description": "Flag marking the primary parent incubator relationship (1 for main, 0 otherwise)."
-            },
-            "kind": {
-              "type": "string",
-              "description": "Categorizes the type of incubator (e.g., public, private, university-affiliated)."
-            },
-            "label": {
-              "type": "object",
-              "description": "Multilingual labels for the incubator this organization belongs to.",
-              "properties": {
-                "default": {
-                  "type": "string",
-                  "description": "Default label for the incubator, used when no language is specified."
-                },
-                "fr": {
-                  "type": "string",
-                  "description": "French label for the incubator this organization belongs to."
-                }
-              }
-            },
-            "mainAddress": {
-              "type": "object",
-              "description": "Primary address details for the incubator this organization belongs to.",
-              "properties": {
-                "address": {
-                  "type": "string",
-                  "description": "Full formatted address of the incubator's main location."
-                },
-                "city": {
-                  "type": "string",
-                  "description": "City of the incubator's main address."
-                },
-                "country": {
-                  "type": "string",
-                  "description": "Country of the incubator's main address."
-                },
-                "gps": {
-                  "type": "object",
-                  "description": "Geographic coordinates of the incubator's main address.",
-                  "properties": {
-                    "lat": {
-                      "type": "number",
-                      "description": "Latitude coordinate of the incubator's main address."
-                    },
-                    "lon": {
-                      "type": "number",
-                      "description": "Longitude coordinate of the incubator's main address."
-                    }
-                  }
-                },
-                "iso3": {
-                  "type": "string",
-                  "description": "ISO3 country code of the incubator's main address."
-                },
-                "postcode": {
-                  "type": "string",
-                  "description": "Postal code of the incubator's main address."
-                },
-                "region": {
-                  "type": "string",
-                  "description": "Region or state of the incubator's main address."
-                }
-              }
-            },
-            "main_category": {
-              "type": "string",
-              "description": "Primary category classifying the incubator's focus or type."
-            },
-            "status": {
-              "type": "string",
-              "description": "Operational status of the incubator (e.g., active, closed)."
-            },
-            "typologie_1": {
-              "type": "string",
-              "description": "Primary classification label for the incubator linked to the organization."
-            },
-            "typologie_2": {
-              "type": "string",
-              "description": "Secondary classification label for the incubator linked to the organization."
-            }
-          }
-        },
-        "natural_id": {
-          "type": "string",
-          "description": "Unique identifier for the incubator associated with the organization."
-        },
-        "structure": {
-          "type": "string",
-          "description": "Name or title of the incubator linked to the organization."
-        }
-      }
-    },
-    "incubateurs": {
-      "type": "object",
-      "description": "Container for all incubator-related metadata associated with the organization.",
-      "properties": {
-        "denormalized": {
-          "type": "object",
-          "description": "Pre-computed, flattened representation of incubator data for faster queries.",
-          "properties": {
-            "acronym": {
-              "type": "object",
-              "description": "Acronyms of incubators linked to the organization, denormalized for quick access.",
-              "properties": {
-                "default": {
-                  "type": "string",
-                  "description": "Default acronym of the incubator in unspecified or fallback language."
-                },
-                "fr": {
-                  "type": "string",
-                  "description": "French acronym of the incubator associated with the organization."
-                }
-              }
-            },
-            "categories": {
-              "type": "string",
-              "description": "High-level grouping labels for the incubator (e.g., public, private)."
-            },
-            "encoded_key": {
-              "type": "string",
-              "description": "System-generated unique key for the incubator record."
-            },
-            "id": {
-              "type": "string",
-              "description": "Unique identifier for the incubator in its source system."
-            },
-            "id_name": {
-              "type": "string",
-              "description": "Human-readable identifier combining the incubator's ID and name."
-            },
-            "id_name_default": {
-              "type": "string",
-              "description": "Default name and identifier of the incubator linked to the organization."
-            },
-            "institutions": {
-              "type": "object",
-              "description": "Institutions associated with the incubator, including their details and relationships.",
-              "properties": {
-                "label": {
-                  "type": "string",
-                  "description": "Human-readable name of the institution linked to the incubator."
-                },
-                "natural_id": {
-                  "type": "string",
-                  "description": "Persistent identifier (PID) of the institution linked to the incubator."
-                },
-                "relationType": {
-                  "type": "string",
-                  "description": "Type of relationship between the incubator and the associated institution."
-                },
-                "structure": {
-                  "type": "string",
-                  "description": "Structural classification or type of the institution linked to the incubator."
-                }
-              }
-            },
-            "isFrench": {
-              "type": "boolean",
-              "description": "Indicates whether the incubator is based in France (true) or abroad (false)."
-            },
-            "is_main_parent": {
-              "type": "integer",
-              "description": "Numeric flag indicating if this incubator is the primary parent organization."
-            },
-            "kind": {
-              "type": "string",
-              "description": "Categorization of the incubator (e.g., public, private, academic)."
-            },
-            "label": {
-              "type": "object",
-              "description": "Localized names of the incubator in multiple languages.",
-              "properties": {
-                "fr": {
-                  "type": "string",
-                  "description": "French label of the incubator associated with the organization."
-                }
-              }
-            },
-            "mainAddress": {
-              "type": "object",
-              "description": "Primary address details of the incubator associated with the organization.",
-              "properties": {
-                "address": {
-                  "type": "string",
-                  "description": "Full street address of the incubator’s main location."
-                },
-                "city": {
-                  "type": "string",
-                  "description": "City where the incubator’s main address is located."
-                },
-                "country": {
-                  "type": "string",
-                  "description": "Country where the incubator’s main address is located."
-                },
-                "gps": {
-                  "type": "object",
-                  "description": "Geographic coordinates (latitude and longitude) of the incubator’s main address.",
-                  "properties": {
-                    "lat": {
-                      "type": "number",
-                      "description": "Latitude coordinate of the incubator’s main address."
-                    },
-                    "lon": {
-                      "type": "number",
-                      "description": "Longitude coordinate of the incubator’s main address."
-                    }
-                  }
-                },
-                "iso3": {
-                  "type": "string",
-                  "description": "ISO 3-letter country code for the incubator’s main address."
-                },
-                "postcode": {
-                  "type": "string",
-                  "description": "Postal code of the incubator's main address."
-                },
-                "region": {
-                  "type": "string",
-                  "description": "Administrative region of the incubator's main address."
-                }
-              }
-            },
-            "main_category": {
-              "type": "string",
-              "description": "Primary category classifying the incubator's focus or specialization."
-            },
-            "status": {
-              "type": "string",
-              "description": "Operational status of the incubator (e.g., active, closed)."
-            },
-            "typologie_1": {
-              "type": "string",
-              "description": "First-level typology tag describing the incubator's model or scope."
-            },
-            "typologie_2": {
-              "type": "string",
-              "description": "Second-level typology tag refining the incubator's classification."
-            }
-          }
-        },
-        "structure": {
-          "type": "string",
-          "description": "Name of the incubator structure associated with the organization."
-        }
-      }
-    },
     "institutionOf": {
       "type": "object",
       "description": "Links to organizations for which this entity serves as an institutional parent.",
@@ -649,6 +355,10 @@
             "isFrench": {
               "type": "boolean",
               "description": "Indicates whether the linked institution is based in France"
+            },
+            "is_part_of_super_organization": {
+              "type": "integer",
+              "description": "Flag indicating if the organization is part of a larger super-organization (1 for true, 0 for false)."
             },
             "kind": {
               "type": "string",
@@ -749,6 +459,10 @@
             "status": {
               "type": "string",
               "description": "Operational status of the organization (e.g., 'active', 'closed'), denormalized for queries."
+            },
+            "super_organization_parent": {
+              "type": "string",
+              "description": "Name of the immediate parent super-organization this organization belongs to."
             },
             "typologie_1": {
               "type": "string",
@@ -874,6 +588,14 @@
                 "type": "integer",
                 "description": "Flag marking the primary parent institution of the organization."
               },
+              "is_part_of_super_organization": {
+                "type": "integer",
+                "description": "Flag indicating if the institution is part of a larger super-organization (1 for true, 0 for false)."
+              },
+              "is_super_organization": {
+                "type": "integer",
+                "description": "Flag indicating if the institution acts as a super-organization (1 for true, 0 for false)."
+              },
               "kind": {
                 "type": "string",
                 "description": "Categorizes the type of institution (e.g., university, research lab)."
@@ -940,6 +662,24 @@
                 "type": "string",
                 "description": "Operational or legal status of the organization."
               },
+              "super_organization_children": {
+                "type": "object",
+                "description": "List of child organizations under this super-organization.",
+                "properties": {
+                  "displayName": {
+                    "type": "string",
+                    "description": "Display name of a child organization under this super-organization."
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "Identifier of a child organization under this super-organization."
+                  }
+                }
+              },
+              "super_organization_parent": {
+                "type": "string",
+                "description": "Name of the immediate parent super-organization for this institution."
+              },
               "typologie_1": {
                 "type": "string",
                 "description": "Primary classification label for the organization's institutional type."
@@ -1002,6 +742,14 @@
     "is_main_parent": {
       "type": "integer",
       "description": "Numeric rank indicating the organization's primary parent relationship."
+    },
+    "is_part_of_super_organization": {
+      "type": "integer",
+      "description": "Flag indicating if the organization is part of a larger super-organization (1 for true, 0 for false)."
+    },
+    "is_super_organization": {
+      "type": "integer",
+      "description": "Flag indicating if the organization acts as a super-organization (1 for true, 0 for false)."
     },
     "keywords": {
       "type": "object",
@@ -1283,6 +1031,14 @@
                   "type": "string",
                   "description": "City of a child organization's main address"
                 },
+                "country": {
+                  "type": "string",
+                  "description": "Country name of the child organization's main address."
+                },
+                "iso3": {
+                  "type": "string",
+                  "description": "ISO 3166-1 alpha-3 country code of the child organization's main address."
+                },
                 "postcode": {
                   "type": "string",
                   "description": "Postal code of a child organization's main address"
@@ -1468,6 +1224,14 @@
                 "city": {
                   "type": "string",
                   "description": "City of the parent organization's main address."
+                },
+                "country": {
+                  "type": "string",
+                  "description": "Country name of the parent organization's main address."
+                },
+                "iso3": {
+                  "type": "string",
+                  "description": "ISO 3166-1 alpha-3 country code of the parent organization's main address."
                 },
                 "postcode": {
                   "type": "string",
@@ -1707,6 +1471,14 @@
                   "type": "string",
                   "description": "City of the predecessor's main address."
                 },
+                "country": {
+                  "type": "string",
+                  "description": "Country name of the predecessor organization's main address."
+                },
+                "iso3": {
+                  "type": "string",
+                  "description": "ISO 3166-1 alpha-3 country code of the predecessor organization's main address."
+                },
                 "postcode": {
                   "type": "string",
                   "description": "Postal code of the predecessor's main address."
@@ -1938,6 +1710,14 @@
                 "city": {
                   "type": "string",
                   "description": "City of the related organization's main address."
+                },
+                "country": {
+                  "type": "string",
+                  "description": "Country name of the related organization's main address."
+                },
+                "iso3": {
+                  "type": "string",
+                  "description": "ISO 3166-1 alpha-3 country code of the related organization's main address."
                 },
                 "postcode": {
                   "type": "string",
@@ -2335,278 +2115,6 @@
       "type": "string",
       "description": "Start date"
     },
-    "startup_linkOf": {
-      "type": "object",
-      "description": "Links to organizations that spawned this startup, with denormalized details for quick access.",
-      "properties": {
-        "denormalized": {
-          "type": "object",
-          "description": "Denormalized snapshot of the parent organization's key fields.",
-          "properties": {
-            "acronym": {
-              "type": "object",
-              "description": "Acronyms of the parent organization in multiple languages.",
-              "properties": {
-                "default": {
-                  "type": "string",
-                  "description": "Default acronym of the parent organization."
-                },
-                "fr": {
-                  "type": "string",
-                  "description": "French acronym of the parent organization."
-                }
-              }
-            },
-            "categories": {
-              "type": "string",
-              "description": "Categories or tags associated with the parent organization."
-            },
-            "encoded_key": {
-              "type": "string",
-              "description": "Unique encoded key of the parent organization in its source system."
-            },
-            "id": {
-              "type": "string",
-              "description": "Identifier of the parent organization in its source system."
-            },
-            "id_name": {
-              "type": "string",
-              "description": "Name of the identifier type used for the parent organization."
-            },
-            "id_name_default": {
-              "type": "string",
-              "description": "Default name of the identifier type for the parent organization."
-            },
-            "isFrench": {
-              "type": "boolean",
-              "description": "Indicates if the linked startup is French"
-            },
-            "is_main_parent": {
-              "type": "integer",
-              "description": "Rank of the parent organization in the startup's hierarchy"
-            },
-            "kind": {
-              "type": "string",
-              "description": "Categorizes the type of linked startup (e.g., incubator, spin-off)"
-            },
-            "label": {
-              "type": "object",
-              "description": "Multilingual labels for the linked startup",
-              "properties": {
-                "fr": {
-                  "type": "string",
-                  "description": "French name of the linked startup"
-                }
-              }
-            },
-            "mainAddress": {
-              "type": "object",
-              "description": "Primary physical address details of the linked startup",
-              "properties": {
-                "address": {
-                  "type": "string",
-                  "description": "Street address of the linked startup's main location"
-                },
-                "city": {
-                  "type": "string",
-                  "description": "City of the linked startup's main address"
-                },
-                "country": {
-                  "type": "string",
-                  "description": "Country of the linked startup's main address"
-                },
-                "gps": {
-                  "type": "object",
-                  "description": "Geographic coordinates of the organization's main address.",
-                  "properties": {
-                    "lat": {
-                      "type": "number",
-                      "description": "Latitude component of the main address GPS coordinates."
-                    },
-                    "lon": {
-                      "type": "number",
-                      "description": "Longitude component of the main address GPS coordinates."
-                    }
-                  }
-                },
-                "iso3": {
-                  "type": "string",
-                  "description": "ISO 3166-1 alpha-3 country code for the organization's main address."
-                },
-                "postcode": {
-                  "type": "string",
-                  "description": "Postal code of the organization's main address."
-                },
-                "region": {
-                  "type": "string",
-                  "description": "Administrative region (e.g., state, province) of the main address."
-                }
-              }
-            },
-            "main_category": {
-              "type": "string",
-              "description": "Primary category classification of the linked startup organization."
-            },
-            "status": {
-              "type": "string",
-              "description": "Operational or legal status of the linked startup organization."
-            },
-            "typologie_1": {
-              "type": "string",
-              "description": "Primary typology classification for the linked startup organization."
-            },
-            "typologie_2": {
-              "type": "string",
-              "description": "Secondary typology classification for the linked startup organization."
-            }
-          }
-        },
-        "natural_id": {
-          "type": "string",
-          "description": "Natural identifier of the linked parent organization in the startup context."
-        },
-        "structure": {
-          "type": "string",
-          "description": "Name or label of the parent organization linked to the startup."
-        }
-      }
-    },
-    "startup_links": {
-      "type": "object",
-      "description": "Aggregates all startup-related links and denormalized metadata for this organization.",
-      "properties": {
-        "denormalized": {
-          "type": "object",
-          "description": "Pre-computed, flattened representation of linked startup data for faster queries.",
-          "properties": {
-            "acronym": {
-              "type": "object",
-              "description": "Container for multilingual acronyms of the linked startup.",
-              "properties": {
-                "default": {
-                  "type": "string",
-                  "description": "Default acronym of the linked startup if no language-specific version exists."
-                },
-                "en": {
-                  "type": "string",
-                  "description": "English acronym of the linked startup, denormalized for direct retrieval."
-                },
-                "fr": {
-                  "type": "string",
-                  "description": "French-language acronym of the linked startup."
-                }
-              }
-            },
-            "categories": {
-              "type": "string",
-              "description": "Comma-separated list of categories/tags describing the linked startup's domain."
-            },
-            "encoded_key": {
-              "type": "string",
-              "description": "Internal encoded key for the linked startup, used for system references."
-            },
-            "id": {
-              "type": "string",
-              "description": "Unique identifier of the linked startup within the denormalized structure."
-            },
-            "id_name": {
-              "type": "string",
-              "description": "Combined identifier and name of linked startups for display purposes."
-            },
-            "id_name_default": {
-              "type": "string",
-              "description": "Default display name for linked startups when no specific name exists."
-            },
-            "isFrench": {
-              "type": "boolean",
-              "description": "Indicates if the linked startup is French (true) or foreign (false)."
-            },
-            "is_main_parent": {
-              "type": "integer",
-              "description": "Numeric flag (1) marking the primary parent organization of the startup."
-            },
-            "kind": {
-              "type": "string",
-              "description": "Categorizes the type of relationship between the organization and the startup."
-            },
-            "label": {
-              "type": "object",
-              "description": "Multilingual display name of the linked startup or organization.",
-              "properties": {
-                "fr": {
-                  "type": "string",
-                  "description": "French localized name of the linked startup or organization."
-                }
-              }
-            },
-            "mainAddress": {
-              "type": "object",
-              "description": "Primary physical address details of the linked startup or organization.",
-              "properties": {
-                "address": {
-                  "type": "string",
-                  "description": "Full formatted address string of the linked startup or organization."
-                },
-                "city": {
-                  "type": "string",
-                  "description": "City name extracted from the main address of the linked entity."
-                },
-                "country": {
-                  "type": "string",
-                  "description": "Country name of the organization's main address."
-                },
-                "gps": {
-                  "type": "object",
-                  "description": "Geographic coordinates of the organization's main address.",
-                  "properties": {
-                    "lat": {
-                      "type": "number",
-                      "description": "Latitude coordinate of the organization's main address."
-                    },
-                    "lon": {
-                      "type": "number",
-                      "description": "Longitude coordinate of the organization's main address."
-                    }
-                  }
-                },
-                "iso3": {
-                  "type": "string",
-                  "description": "ISO 3166-1 alpha-3 country code for the organization's main address."
-                },
-                "postcode": {
-                  "type": "string",
-                  "description": "Postal code of the organization's main address."
-                },
-                "region": {
-                  "type": "string",
-                  "description": "Administrative region (e.g., state, province) of the organization's main address."
-                }
-              }
-            },
-            "main_category": {
-              "type": "string",
-              "description": "Primary category classification of the linked startup entity."
-            },
-            "status": {
-              "type": "string",
-              "description": "Operational status of the linked startup entity (e.g., active, closed)."
-            },
-            "typologie_1": {
-              "type": "string",
-              "description": "Top-level typology classification of the linked startup entity."
-            },
-            "typologie_2": {
-              "type": "string",
-              "description": "Second-level typology label for startups linked to the organization, denormalized for search."
-            }
-          }
-        },
-        "structure": {
-          "type": "string",
-          "description": "Name of the parent structure associated with a linked startup."
-        }
-      }
-    },
     "status": {
       "type": "string",
       "description": "Status",
@@ -2614,6 +2122,24 @@
         "active",
         "inactive"
       ]
+    },
+    "super_organization_children": {
+      "type": "object",
+      "description": "Nested objects representing direct subordinate organizations.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable name of the subordinate organization."
+        },
+        "id": {
+          "type": "string",
+          "description": "Persistent identifier of a direct child organization within the hierarchy."
+        }
+      }
+    },
+    "super_organization_parent": {
+      "type": "string",
+      "description": "Persistent identifier of the immediate parent organization."
     },
     "title_abs_text": {
       "type": "string",
